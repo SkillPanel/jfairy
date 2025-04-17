@@ -27,13 +27,14 @@ public class NetworkProducer {
 	 */
 	public String url(boolean isHttps) {
 		String mergedIP = ipAddress().replaceAll("\\.", "");
-		char[] domainChars = mergedIP.toCharArray();
+		String[] domainChars = mergedIP.split("");
+
 		for (int i = 0; i < domainChars.length; i++) {
-			char c = domainChars[i];
-			domainChars[i] = (char) (c + 97);
+			int c = Integer.parseInt(domainChars[i]);
+			domainChars[i] = ((char) (c + 97)) + "";
 		}
 
-		String domain = String.valueOf(domainChars);
+		String domain = String.join("", domainChars);
 		if (isHttps) {
 			return "https://" + domain + ".com";
 		} else {
