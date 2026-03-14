@@ -4,40 +4,76 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import org.apache.commons.math3.random.JDKRandomGenerator;
-import org.apache.commons.math3.random.RandomDataGenerator;
-
 public class RandomGenerator {
 
-	private final RandomDataGenerator randomDataGenerator;
+	private final Random random;
 
 	public RandomGenerator() {
-		this.randomDataGenerator = new RandomDataGenerator(new JDKRandomGenerator());
+		this.random = new Random();
 	}
 
 	public RandomGenerator(int seed) {
-		this.randomDataGenerator = new RandomDataGenerator(new JDKRandomGenerator(seed));
+		this.random = new Random(seed);
 	}
 
 	public boolean nextBoolean() {
-		return randomDataGenerator.getRandomGenerator().nextBoolean();
+		return random.nextBoolean();
 	}
 
 	public <T> List<T> shuffle(List<T> elements) {
-		Collections.shuffle(elements, (Random) randomDataGenerator.getRandomGenerator());
+		Collections.shuffle(elements, random);
 		return elements;
 	}
 
 	public int nextInt(int min, int max) {
 		if (min == max) return min;
-		return randomDataGenerator.nextInt(min, max);
+		return min + random.nextInt(max - min + 1);
 	}
 
 	public long nextDouble(long min, long max) {
-		return randomDataGenerator.nextLong(min, max);
+		if (min == max) return min;
+		long range = max - min + 1;
+		if (range <= 0) {
+			// Overflow: rejection sampling
+			while (true) {
+				long val = random.nextLong();
+				if (val >= min && val <= max) {
+					return val;
+				}
+			}
+		} else if (range <= Integer.MAX_VALUE) {
+			return min + (long) random.nextInt((int) range);
+		} else {
+			// Large range: use nextBytes-based algorithm matching commons-math3
+			return min + nextLongFromBytes(range);
+		}
+	}
+
+	/**
+	 * Generates a random long in [0, n) using nextBytes(8),
+	 * matching the commons-math3 RandomDataGenerator.nextLong(RandomGenerator, long) algorithm.
+	 */
+	private long nextLongFromBytes(long n) {
+		byte[] bytes = new byte[8];
+		while (true) {
+			random.nextBytes(bytes);
+			long val = 0;
+			for (byte b : bytes) {
+				val = (val << 8) | (b & 0xFFL);
+			}
+			val = val & Long.MAX_VALUE;
+			long result = val % n;
+			if (val - result + (n - 1) >= 0) {
+				return result;
+			}
+		}
 	}
 
 	public double nextDouble(double min, double max) {
-		return randomDataGenerator.nextUniform(min, max);
+		double u = random.nextDouble();
+		while (u <= 0.0) {
+			u = random.nextDouble();
+		}
+		return u * max + (1.0 - u) * min;
 	}
 }
