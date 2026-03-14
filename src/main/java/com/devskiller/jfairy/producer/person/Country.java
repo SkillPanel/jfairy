@@ -19,7 +19,8 @@ public enum Country {
 	Germany("DE", LanguageCode.DE),
 	Sweden("SE", LanguageCode.SV),
 	China("CN", LanguageCode.ZH),
-	Brazil("BR", LanguageCode.BR);
+	Brazil("BR", LanguageCode.BR),
+	Slovakia("SK", LanguageCode.SK);
 
 	//	ISO 3166 code
 	private final String code;

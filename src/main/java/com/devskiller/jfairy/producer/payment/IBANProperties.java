@@ -19,6 +19,7 @@ public final class IBANProperties {
 		COUNTRIES.put(LanguageCode.KA, CountryCode.GE);
 		COUNTRIES.put(LanguageCode.IT, CountryCode.IT);
 		COUNTRIES.put(LanguageCode.DE, CountryCode.DE);
+		COUNTRIES.put(LanguageCode.SK, CountryCode.SK);
 		COUNTRIES.put(LanguageCode.SV, CountryCode.SV);
 		COUNTRIES.put(LanguageCode.ZH, CountryCode.TW);
 	}

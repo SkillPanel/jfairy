@@ -36,6 +36,11 @@ import com.devskiller.jfairy.producer.person.locale.pl.PlNationalIdentificationN
 import com.devskiller.jfairy.producer.person.locale.pl.PlNationalIdentityCardNumberProvider;
 import com.devskiller.jfairy.producer.person.locale.pl.PlPassportNumberProvider;
 import com.devskiller.jfairy.producer.company.locale.pl.PlVATIdentificationNumberProvider;
+import com.devskiller.jfairy.producer.person.locale.sk.SkAddressProvider;
+import com.devskiller.jfairy.producer.person.locale.sk.SkNationalIdentificationNumberFactory;
+import com.devskiller.jfairy.producer.person.locale.sk.SkNationalIdentityCardNumberProvider;
+import com.devskiller.jfairy.producer.person.locale.sk.SkPassportNumberProvider;
+import com.devskiller.jfairy.producer.company.locale.sk.SkVATIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.person.locale.sv.SvAddressProvider;
 import com.devskiller.jfairy.producer.person.locale.sv.SvNationalIdentificationNumberFactory;
 import com.devskiller.jfairy.producer.person.locale.sv.SvNationalIdentityCardNumberProvider;
@@ -75,6 +80,7 @@ class LocaleSpecificProvidersFactory {
 			case ES -> createEsProviders(dataMaster, baseProducer, dateProducer);
 			case FR -> createFrProviders(dataMaster, baseProducer, dateProducer);
 			case IT -> createEnProviders(dataMaster, baseProducer, dateProducer);
+			case SK -> createSkProviders(dataMaster, baseProducer, dateProducer);
 			case SV -> createSvProviders(dataMaster, baseProducer, dateProducer);
 			case ZH -> createZhProviders(dataMaster, baseProducer, dateProducer);
 			case DE -> createDeProviders(dataMaster, baseProducer, dateProducer);
@@ -92,6 +98,19 @@ class LocaleSpecificProvidersFactory {
 				new PlVATIdentificationNumberProvider(baseProducer),
 				new PlAddressProvider(dataMaster, baseProducer),
 				new PlPassportNumberProvider()
+		);
+	}
+
+	private static LocaleSpecificProviders createSkProviders(DataMaster dataMaster,
+	                                                         BaseProducer baseProducer,
+	                                                         DateProducer dateProducer) {
+		NationalIdentificationNumberFactory nationalIdFactory = new SkNationalIdentificationNumberFactory(baseProducer, dateProducer);
+		return new LocaleSpecificProviders(
+				nationalIdFactory,
+				new SkNationalIdentityCardNumberProvider(dateProducer, baseProducer),
+				new SkVATIdentificationNumberProvider(baseProducer),
+				new SkAddressProvider(dataMaster, baseProducer),
+				new SkPassportNumberProvider(baseProducer)
 		);
 	}
 
