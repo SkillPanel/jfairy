@@ -1,5 +1,6 @@
 package com.devskiller.jfairy
 
+import com.devskiller.jfairy.producer.person.PersonProperties
 import spock.lang.Specification
 
 class UniqueFairySpec extends Specification {
@@ -14,6 +15,28 @@ class UniqueFairySpec extends Specification {
 			def emails = persons.collect { it.email }
 		then:
 			emails.toSet().size() == 50
+	}
+
+	def "should generate unique persons with properties"() {
+		given:
+			def unique = fairy.unique()
+		when:
+			def persons = (1..20).collect { unique.person(PersonProperties.male()) }
+			def emails = persons.collect { it.email }
+		then:
+			emails.toSet().size() == 20
+			persons.every { it.male }
+	}
+
+	def "should track uniqueness across parameterized and non-parameterized calls"() {
+		given:
+			def unique = fairy.unique()
+		when:
+			def p1 = unique.person()
+			def p2 = unique.person(PersonProperties.male())
+			def p3 = unique.person()
+		then:
+			[p1, p2, p3].collect { it.email }.toSet().size() == 3
 	}
 
 	def "should generate unique companies by name"() {

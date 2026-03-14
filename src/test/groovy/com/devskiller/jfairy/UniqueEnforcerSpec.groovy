@@ -73,4 +73,44 @@ class UniqueEnforcerSpec extends Specification {
 			def e = thrown(UniqueGenerationException)
 			e.message.contains("5 retries")
 	}
+
+	def "should share seen set between default and custom suppliers"() {
+		given:
+			int counter = 0
+			def unique = UniqueEnforcer.of({ -> counter++ }, { it }, 100)
+		when:
+			unique.next()                          // 0 via default
+			unique.next({ -> counter++ } as java.util.function.Supplier)  // 1 via custom
+			unique.next()                          // 2 via default
+		then:
+			unique.size() == 3
+	}
+
+	def "should reject zero maxRetries"() {
+		when:
+			UniqueEnforcer.of({ -> "x" }, { it }, 0)
+		then:
+			thrown(IllegalArgumentException)
+	}
+
+	def "should reject negative maxRetries"() {
+		when:
+			UniqueEnforcer.of({ -> "x" }, { it }, -1)
+		then:
+			thrown(IllegalArgumentException)
+	}
+
+	def "should reject null generator"() {
+		when:
+			UniqueEnforcer.of(null, { it })
+		then:
+			thrown(NullPointerException)
+	}
+
+	def "should reject null keyExtractor"() {
+		when:
+			UniqueEnforcer.of({ -> "x" }, null)
+		then:
+			thrown(NullPointerException)
+	}
 }

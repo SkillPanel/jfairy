@@ -1,6 +1,7 @@
 package com.devskiller.jfairy;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -8,6 +9,8 @@ import java.util.function.Supplier;
 /**
  * Wraps a generator to ensure unique values based on a key extractor.
  * Throws {@link UniqueGenerationException} after max retries.
+ *
+ * <p>This class is not thread-safe. Each thread should use its own instance.</p>
  *
  * <pre>{@code
  * Fairy fairy = Fairy.create();
@@ -19,18 +22,21 @@ import java.util.function.Supplier;
  *
  * @param <T> type of generated object
  */
-public class UniqueEnforcer<T> {
+public final class UniqueEnforcer<T> {
 
-	private static final int DEFAULT_MAX_RETRIES = 10_000;
+	static final int DEFAULT_MAX_RETRIES = 10_000;
 
-	private final Supplier<T> generator;
+	private final Supplier<T> defaultGenerator;
 	private final Function<T, ?> keyExtractor;
 	private final int maxRetries;
 	private final Set<Object> seen = new HashSet<>();
 
-	private UniqueEnforcer(Supplier<T> generator, Function<T, ?> keyExtractor, int maxRetries) {
-		this.generator = generator;
-		this.keyExtractor = keyExtractor;
+	private UniqueEnforcer(Supplier<T> defaultGenerator, Function<T, ?> keyExtractor, int maxRetries) {
+		this.defaultGenerator = Objects.requireNonNull(defaultGenerator, "generator must not be null");
+		this.keyExtractor = Objects.requireNonNull(keyExtractor, "keyExtractor must not be null");
+		if (maxRetries < 1) {
+			throw new IllegalArgumentException("maxRetries must be positive, got: " + maxRetries);
+		}
 		this.maxRetries = maxRetries;
 	}
 
@@ -43,6 +49,14 @@ public class UniqueEnforcer<T> {
 	}
 
 	public T next() {
+		return next(defaultGenerator);
+	}
+
+	/**
+	 * Generate a unique value using a custom supplier, tracking uniqueness
+	 * in the same seen-set as {@link #next()}.
+	 */
+	public T next(Supplier<T> generator) {
 		for (int i = 0; i < maxRetries; i++) {
 			T value = generator.get();
 			Object key = keyExtractor.apply(value);

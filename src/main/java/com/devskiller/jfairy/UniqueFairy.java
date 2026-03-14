@@ -9,21 +9,25 @@ import com.devskiller.jfairy.producer.person.Person;
 import com.devskiller.jfairy.producer.person.PersonProperties;
 
 /**
- * Convenience wrapper around {@link Fairy} that ensures generated objects
- * are unique by their natural key (email for Person, name for Company, etc.).
+ * Convenience wrapper that ensures generated objects are unique by their
+ * natural key (email for Person, name for Company, etc.).
+ *
+ * <p>Uniqueness is tracked per entity type. A person email will not conflict
+ * with a company name. Call {@link #reset()} to clear all tracked values.</p>
+ *
+ * <p>This class is not thread-safe. Store the reference and reuse it —
+ * calling {@code fairy.unique()} in a loop creates independent instances
+ * with no shared tracking.</p>
  *
  * <pre>{@code
- * Fairy fairy = Fairy.create();
  * UniqueFairy unique = fairy.unique();
- *
  * Person p1 = unique.person();  // unique by email
  * Person p2 = unique.person();  // different email than p1
  * Company c = unique.company(); // unique by name
- *
- * unique.reset(); // clear all tracked values
+ * unique.reset();
  * }</pre>
  */
-public class UniqueFairy {
+public final class UniqueFairy {
 
 	private final Fairy fairy;
 	private final UniqueEnforcer<Person> personEnforcer;
@@ -35,6 +39,7 @@ public class UniqueFairy {
 		this.fairy = fairy;
 		this.personEnforcer = UniqueEnforcer.of(fairy::person, Person::getEmail, maxRetries);
 		this.companyEnforcer = UniqueEnforcer.of(fairy::company, Company::getName, maxRetries);
+		// Lambda needed: fairy::iban is ambiguous (overloaded no-arg and vararg)
 		this.ibanEnforcer = UniqueEnforcer.of(() -> fairy.iban(), IBAN::getIbanNumber, maxRetries);
 		this.creditCardEnforcer = UniqueEnforcer.of(fairy::creditCard, CreditCard::getCardNumber, maxRetries);
 	}
@@ -43,21 +48,21 @@ public class UniqueFairy {
 		if (personProperties.length == 0) {
 			return personEnforcer.next();
 		}
-		return UniqueEnforcer.of(() -> fairy.person(personProperties), Person::getEmail).next();
+		return personEnforcer.next(() -> fairy.person(personProperties));
 	}
 
 	public Company company(CompanyProperties.CompanyProperty... companyProperties) {
 		if (companyProperties.length == 0) {
 			return companyEnforcer.next();
 		}
-		return UniqueEnforcer.of(() -> fairy.company(companyProperties), Company::getName).next();
+		return companyEnforcer.next(() -> fairy.company(companyProperties));
 	}
 
 	public IBAN iban(IBANProperties.Property... properties) {
 		if (properties.length == 0) {
 			return ibanEnforcer.next();
 		}
-		return UniqueEnforcer.of(() -> fairy.iban(properties), IBAN::getIbanNumber).next();
+		return ibanEnforcer.next(() -> fairy.iban(properties));
 	}
 
 	public CreditCard creditCard() {

@@ -140,7 +140,7 @@ public final class Fairy {
 	 * @return A {@link UniqueFairy} instance
 	 */
 	public UniqueFairy unique() {
-		return new UniqueFairy(this, 10_000);
+		return new UniqueFairy(this, UniqueEnforcer.DEFAULT_MAX_RETRIES);
 	}
 
 	/**
