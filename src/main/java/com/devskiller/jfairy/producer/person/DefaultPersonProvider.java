@@ -40,6 +40,7 @@ public class DefaultPersonProvider implements PersonProvider {
 	protected String nationalIdentityCardNumber;
 	protected String nationalIdentificationNumber;
 	protected String passportNumber;
+	protected String jobTitle;
 	protected Country nationality;
 
 	protected final DataMaster dataMaster;
@@ -98,13 +99,14 @@ public class DefaultPersonProvider implements PersonProvider {
 		generateNationalIdentificationNumber();
 		generatePassportNumber();
 		generateAddress();
+		generateJobTitle();
 		generateNationality();
 		generateMobileTelephoneNumber();
 
 		return new Person(firstName, middleName, lastName, address, email,
 			username, password, sex, telephoneNumber, mobileTelephoneNumber, dateOfBirth, age,
 			nationalIdentityCardNumber, nationalIdentificationNumber, passportNumber,
-			company, companyEmail, nationality);
+			company, companyEmail, jobTitle, nationality);
 	}
 
 	@Override
@@ -264,6 +266,14 @@ public class DefaultPersonProvider implements PersonProvider {
 		passportNumber = passportNumberProvider.get();
 	}
 
+	@Override
+	public void generateJobTitle() {
+		if (jobTitle != null) {
+			return;
+		}
+		jobTitle = dataMaster.getRandomValue(JOB_TITLE);
+	}
+
 	private void generateNationality() {
 		List<Country> countries = Country.findCountryForLanguage(dataMaster.getLanguage());
 		nationality = !countries.isEmpty() ? baseProducer.randomElement(countries) : Country.UnitedKingdom;
@@ -362,6 +372,11 @@ public class DefaultPersonProvider implements PersonProvider {
 	@Override
 	public void setPassportNumber(String passportNumber) {
 		this.passportNumber = passportNumber;
+	}
+
+	@Override
+	public void setJobTitle(String jobTitle) {
+		this.jobTitle = jobTitle;
 	}
 }
 

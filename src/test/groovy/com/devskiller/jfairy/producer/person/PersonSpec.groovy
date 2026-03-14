@@ -31,6 +31,7 @@ import static com.devskiller.jfairy.producer.person.PersonProperties.withLastNam
 import static com.devskiller.jfairy.producer.person.PersonProperties.withMiddleName
 import static com.devskiller.jfairy.producer.person.PersonProperties.withNationalIdentificationNumber
 import static com.devskiller.jfairy.producer.person.PersonProperties.withNationalIdentityCardNumber
+import static com.devskiller.jfairy.producer.person.PersonProperties.withJobTitle
 import static com.devskiller.jfairy.producer.person.PersonProperties.withPassportNumber
 import static com.devskiller.jfairy.producer.person.PersonProperties.withPassword
 import static com.devskiller.jfairy.producer.person.PersonProperties.withTelephoneNumber
@@ -366,6 +367,20 @@ class PersonSpec extends Specification {
 			Person person = fairy.person(withPassportNumber("SpecificPassportNumber"))
 		then:
 			person.passportNumber == "SpecificPassportNumber"
+	}
+
+	def "should create person with job title"() {
+		given:
+			Person person = fairy.person()
+		expect:
+			person.jobTitle
+	}
+
+	def "withJobTitle should create person with specific job title"() {
+		when:
+			Person person = fairy.person(withJobTitle("Specific Job Title"))
+		then:
+			person.jobTitle == "Specific Job Title"
 	}
 
 	def "withCompany should create person with specific company"() {

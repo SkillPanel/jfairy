@@ -30,13 +30,14 @@ public class Person {
 	private final String nationalIdentityCardNumber;
 	private final String nationalIdentificationNumber;
 	private final String passportNumber;
+	private final String jobTitle;
 	private final Country nationality;
 
 	public Person(String firstName, String middleName, String lastName, Address address, String email, String username,
 	              String password, Sex sex, String telephoneNumber, String mobileTelephoneNumber,
 				  LocalDate dateOfBirth, Integer age, String nationalIdentityCardNumber,
 				  String nationalIdentificationNumber, String passportNumber, Company company, String companyEmail,
-				  Country nationality) {
+				  String jobTitle, Country nationality) {
 		this.nationalIdentityCardNumber = nationalIdentityCardNumber;
 		this.address = address;
 		this.firstName = firstName;
@@ -54,6 +55,7 @@ public class Person {
 		this.company = company;
 		this.companyEmail = companyEmail;
 		this.passportNumber = passportNumber;
+		this.jobTitle = jobTitle;
 		this.nationality = nationality;
 	}
 
@@ -135,6 +137,10 @@ public class Person {
 
 	public String getPassportNumber() {
 		return passportNumber;
+	}
+
+	public String getJobTitle() {
+		return jobTitle;
 	}
 
 	public Country getNationality() {
