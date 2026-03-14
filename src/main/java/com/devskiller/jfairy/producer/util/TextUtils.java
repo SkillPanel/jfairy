@@ -5,6 +5,8 @@ package com.devskiller.jfairy.producer.util;
 
 import java.util.List;
 
+import org.jspecify.annotations.Nullable;
+
 public final class TextUtils {
 
 	private TextUtils() {
@@ -23,7 +25,7 @@ public final class TextUtils {
 		return s.replace("\u00DF", "ss");
 	}
 
-	public static String escapeNonAscii(String input) {
+	public static @Nullable String escapeNonAscii(@Nullable String input) {
 		if (input == null) {
 			return null;
 		}

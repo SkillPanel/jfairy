@@ -8,6 +8,8 @@ import org.iban4j.CountryCode;
 import org.iban4j.Iban;
 import org.iban4j.UnsupportedCountryException;
 
+import org.jspecify.annotations.Nullable;
+
 import com.devskiller.jfairy.data.DataMaster;
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.person.Country;
@@ -37,7 +39,7 @@ public class DefaultIBANProvider implements IBANProvider {
 	}
 
 	@Override
-	public IBAN get() {
+	public @Nullable IBAN get() {
 		try {
 
 			fillCountryCode();
