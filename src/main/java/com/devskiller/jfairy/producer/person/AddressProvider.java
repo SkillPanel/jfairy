@@ -1,8 +1,8 @@
 package com.devskiller.jfairy.producer.person;
+import java.util.function.Supplier;
 
-import com.google.inject.Provider;
 
-public interface AddressProvider extends Provider<Address> {
+public interface AddressProvider extends Supplier<Address> {
 
 	Address get();
 }

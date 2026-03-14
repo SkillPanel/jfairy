@@ -3,7 +3,6 @@
  */
 package com.devskiller.jfairy.producer.text;
 
-import javax.inject.Inject;
 import java.util.List;
 
 import com.google.common.base.Joiner;
@@ -22,7 +21,7 @@ import static org.apache.commons.lang3.StringUtils.replaceChars;
 import static org.apache.commons.lang3.StringUtils.split;
 import static org.apache.commons.lang3.StringUtils.uncapitalize;
 
-class TextProducerInternal {
+public class TextProducerInternal {
 
 	private static final String LOREM_IPSUM = "loremIpsum";
 
@@ -46,7 +45,7 @@ class TextProducerInternal {
 
 	private final List<String> latinWords;
 
-	@Inject
+
 	public TextProducerInternal(DataMaster dataMaster, BaseProducer baseProducer) {
 		this.baseProducer = baseProducer;
 		loremIpsum = dataMaster.getString(LOREM_IPSUM);

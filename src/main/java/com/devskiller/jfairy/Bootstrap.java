@@ -2,18 +2,26 @@ package com.devskiller.jfairy;
 
 import java.io.IOException;
 import java.util.Locale;
+import java.util.function.Supplier;
 
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.Provider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.devskiller.jfairy.data.DataMaster;
-import com.devskiller.jfairy.data.DataMasterModule;
 import com.devskiller.jfairy.data.MapBasedDataMaster;
+import com.devskiller.jfairy.producer.BaseProducer;
+import com.devskiller.jfairy.producer.DateProducer;
 import com.devskiller.jfairy.producer.RandomGenerator;
-import com.devskiller.jfairy.producer.util.LanguageCode;
+import com.devskiller.jfairy.producer.TimeProvider;
+import com.devskiller.jfairy.producer.company.CompanyFactory;
+import com.devskiller.jfairy.producer.company.CompanyFactoryImpl;
+import com.devskiller.jfairy.producer.net.IPNumberProducer;
+import com.devskiller.jfairy.producer.payment.CreditCardProvider;
+import com.devskiller.jfairy.producer.payment.IBANFactory;
+import com.devskiller.jfairy.producer.payment.IBANFactoryImpl;
+import com.devskiller.jfairy.producer.person.PersonFactory;
+import com.devskiller.jfairy.producer.person.PersonFactoryImpl;
+import com.devskiller.jfairy.producer.text.TextProducerInternal;
 
 /**
  * <p>Using a {@link #builder()}, you can configure the following fields:</p>
@@ -42,13 +50,45 @@ public class Bootstrap {
 	private static final String DATA_FILE_PREFIX = "jfairy";
 
 	public static Fairy createFairy(DataMaster dataMaster, Locale locale, RandomGenerator randomGenerator) {
+		// Create base components
+		BaseProducer baseProducer = new BaseProducer(randomGenerator);
+		TimeProvider timeProvider = new TimeProvider();
+		DateProducer dateProducer = new DateProducer(baseProducer, timeProvider);
+		
+		// Create locale-specific providers
+		LocaleSpecificProviders localeProviders = LocaleSpecificProvidersFactory.createProvidersForLocale(
+				locale, dataMaster, baseProducer, dateProducer);
+		
+		// Create company factory first (needed by PersonFactory)
+		CompanyFactory companyFactory = new CompanyFactoryImpl(
+				baseProducer, dataMaster, localeProviders.vatIdentificationNumberProvider()
+		);
 
-		FairyModule fairyModule = getFairyModuleForLocale(dataMaster, locale, randomGenerator);
-
-		Injector injector = Guice.createInjector(fairyModule);
-
-		FairyFactory fairyFactory = injector.getInstance(FairyFactory.class);
-
+		// Create person factory
+		PersonFactory personFactory = new PersonFactoryImpl(
+				dataMaster, dateProducer, baseProducer,
+				localeProviders.addressProvider(),
+				localeProviders.nationalIdentificationNumberFactory(),
+				localeProviders.nationalIdentityCardNumberProvider(),
+				localeProviders.passportNumberProvider(),
+				timeProvider,
+				companyFactory
+		);
+		
+		IBANFactory ibanFactory = new IBANFactoryImpl(baseProducer, dataMaster);
+		
+		// Create other producers
+		CreditCardProvider creditCardProvider = new CreditCardProvider(dataMaster, baseProducer, dateProducer);
+		TextProducerInternal textProducerInternal = new TextProducerInternal(dataMaster, baseProducer);
+		IPNumberProducer ipNumberProducer = new IPNumberProducer(baseProducer);
+		
+		// Create fairy factory
+		FairyFactory fairyFactory = new FairyFactoryImpl(
+				textProducerInternal, baseProducer, personFactory,
+				ipNumberProducer, dateProducer, creditCardProvider,
+				companyFactory, ibanFactory
+		);
+		
 		return fairyFactory.createFairy();
 	}
 
@@ -107,50 +147,11 @@ public class Bootstrap {
 	}
 
 
-	public static Fairy create(Provider<DataMaster> dataMaster, Locale locale) {
+	public static Fairy create(Supplier<DataMaster> dataMaster, Locale locale) {
 		return builder().withDataMasterProvider(dataMaster).withLocale(locale).build();
 	}
 
-	/**
-	 * Support customized language config
-	 * @param dataMaster master of the config
-	 * @param locale The Locale to set.
-	 * @param randomGenerator specific random generator
-	 * @return FariyModule instance in accordance with locale
-	 */
-	private static FairyModule getFairyModuleForLocale(DataMaster dataMaster, Locale locale, RandomGenerator randomGenerator) {
-
-		LanguageCode code;
-		try {
-			code = LanguageCode.valueOf(locale.getLanguage().toUpperCase());
-		} catch (IllegalArgumentException e) {
-			LOG.warn("Uknown locale " + locale);
-			code = LanguageCode.EN;
-		}
-
-		switch (code) {
-			case PL:
-				return new PlFairyModule(dataMaster, randomGenerator);
-			case EN:
-				return new EnFairyModule(dataMaster, randomGenerator);
-			case ES:
-				return new EsFairyModule(dataMaster, randomGenerator);
-			case FR:
-				return new EsFairyModule(dataMaster, randomGenerator);
-			case SV:
-				return new SvFairyModule(dataMaster, randomGenerator);
-			case ZH:
-				return new ZhFairyModule(dataMaster, randomGenerator);
-			case DE:
-				return new DeFairyModule(dataMaster, randomGenerator);
-			case KA:
-				return new KaFairyModule(dataMaster, randomGenerator);
-			default:
-				LOG.info("No data for your language - using EN");
-				return new EnFairyModule(dataMaster, randomGenerator);
-		}
-	}
-
+	
 	public static class Builder {
 
 		private Locale locale = Locale.ENGLISH;
@@ -159,9 +160,8 @@ public class Bootstrap {
 		private DataMaster dataMaster;
 
 
-		private MapBasedDataMaster getDefaultDataMaster() {
-			Injector injector = Guice.createInjector(new DataMasterModule(randomGenerator));
-			return injector.getInstance(MapBasedDataMaster.class);
+		private MapBasedDataMaster getDefaultDataMaster(BaseProducer baseProducer) {
+			return new MapBasedDataMaster(baseProducer);
 		}
 
 		private Builder() {
@@ -205,10 +205,10 @@ public class Bootstrap {
 		/**
 		 * Sets a custom DataMaster implementation.
 		 *
-		 * @param dataMasterProvider The random seed to use.
+		 * @param dataMasterProvider The DataMaster supplier to use.
 		 * @return the same Builder (for chaining).
 		 */
-		public Builder withDataMasterProvider(Provider<DataMaster> dataMasterProvider) {
+		public Builder withDataMasterProvider(Supplier<DataMaster> dataMasterProvider) {
 			this.dataMaster = dataMasterProvider.get();
 			return this;
 		}
@@ -221,7 +221,8 @@ public class Bootstrap {
 		 */
 		public Fairy build() {
 			if (dataMaster == null) {
-				dataMaster = getDefaultDataMaster();
+				BaseProducer baseProducer = new BaseProducer(randomGenerator);
+				dataMaster = getDefaultDataMaster(baseProducer);
 				fillDefaultDataMaster((MapBasedDataMaster) dataMaster, locale, filePrefix);
 			}
 			return createFairy(dataMaster, locale, randomGenerator);

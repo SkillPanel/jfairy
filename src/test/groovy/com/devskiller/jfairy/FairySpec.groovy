@@ -1,6 +1,6 @@
 package com.devskiller.jfairy
 
-import com.google.inject.Provider
+import java.util.function.Supplier
 import spock.lang.Specification
 
 import com.devskiller.jfairy.data.DataMaster
@@ -17,7 +17,7 @@ class FairySpec extends Specification {
 		getRandomValue(_ as String) >> CUSTOM_STRING
 	}
 
-	Provider<DataMaster> customDataMasterProvider = Stub(Provider) {
+	Supplier<DataMaster> customDataMasterProvider = Stub(Supplier) {
 		get() >> customDataMaster
 	}
 

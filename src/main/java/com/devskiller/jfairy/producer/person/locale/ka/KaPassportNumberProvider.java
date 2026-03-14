@@ -1,6 +1,5 @@
 package com.devskiller.jfairy.producer.person.locale.ka;
 
-import javax.inject.Inject;
 
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.person.PassportNumberProvider;
@@ -9,7 +8,7 @@ public class KaPassportNumberProvider implements PassportNumberProvider {
 
 	private final BaseProducer baseProducer;
 
-	@Inject
+
 	public KaPassportNumberProvider(BaseProducer baseProducer) {
 		this.baseProducer = baseProducer;
 	}

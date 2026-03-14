@@ -1,6 +1,5 @@
 package com.devskiller.jfairy.producer.person.locale.zh;
 
-import javax.inject.Inject;
 
 import com.devskiller.jfairy.data.DataMaster;
 import com.devskiller.jfairy.producer.BaseProducer;
@@ -14,7 +13,7 @@ import com.devskiller.jfairy.producer.person.Address;
  * @since 2017/3/2
  */
 public class ZhAddressProvider extends AbstractAddressProvider {
-	@Inject
+
 	public ZhAddressProvider(DataMaster dataMaster, BaseProducer baseProducer) {
 		super(dataMaster, baseProducer);
 	}

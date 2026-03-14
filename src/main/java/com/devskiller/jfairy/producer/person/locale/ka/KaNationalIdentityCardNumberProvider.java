@@ -1,6 +1,5 @@
 package com.devskiller.jfairy.producer.person.locale.ka;
 
-import javax.inject.Inject;
 import java.util.function.Supplier;
 
 import com.devskiller.jfairy.producer.BaseProducer;
@@ -41,7 +40,7 @@ public class KaNationalIdentityCardNumberProvider implements NationalIdentityCar
 
 	private final Supplier<NationalIdentityCardNumberProvider> formatPicker;
 
-	@Inject
+
 	public KaNationalIdentityCardNumberProvider(BaseProducer baseProducer) {
 		NationalIdentityCardNumberProvider oldCardNumberProvider = new OldCardNumberProvider(baseProducer);
 		NationalIdentityCardNumberProvider newCardNumberProvider = new NewCardNumberProvider(baseProducer);

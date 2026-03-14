@@ -3,42 +3,50 @@ package com.devskiller.jfairy
 import spock.lang.Specification
 
 import com.devskiller.jfairy.data.MapBasedDataMaster
-import com.devskiller.jfairy.producer.RandomGenerator
+import com.devskiller.jfairy.producer.BaseProducer
+import com.devskiller.jfairy.producer.DateProducer
+import com.devskiller.jfairy.producer.person.locale.de.DeAddressProvider
+import com.devskiller.jfairy.producer.person.locale.en.EnAddressProvider
+import com.devskiller.jfairy.producer.person.locale.es.EsAddressProvider
+import com.devskiller.jfairy.producer.person.locale.fr.FrAddressProvider
+import com.devskiller.jfairy.producer.person.locale.ka.KaAddressProvider
+import com.devskiller.jfairy.producer.person.locale.pl.PlAddressProvider
+import com.devskiller.jfairy.producer.person.locale.sv.SvAddressProvider
+import com.devskiller.jfairy.producer.person.locale.zh.ZhAddressProvider
 
-/**
- * @author Olga Maciaszek-Sharma
- @since 15.03.15
- */
 class FairyModuleSpec extends Specification {
 
 	private MapBasedDataMaster mapBasedDataMaster = Stub(MapBasedDataMaster)
+	private BaseProducer baseProducer = Stub(BaseProducer)
+	private DateProducer dateProducer = Stub(DateProducer)
 
-	def "should generate appropriate FairyModule for locale"() {
+	def "should create appropriate locale-specific providers for locale"() {
 		when:
-			FairyModule fairyModule = Bootstrap.getFairyModuleForLocale(mapBasedDataMaster, Locale.forLanguageTag(locale), new RandomGenerator())
+			LocaleSpecificProviders providers = LocaleSpecificProvidersFactory.createProvidersForLocale(
+				Locale.forLanguageTag(locale), mapBasedDataMaster, baseProducer, dateProducer)
 
 		then:
-			fairyModule.getClass() == module
+			providers.addressProvider().getClass() == expectedAddressProvider
 
 		where:
-			locale | module
-			"en"   | EnFairyModule.class
-			"pl"   | PlFairyModule.class
-			"es"   | EsFairyModule.class
+			locale | expectedAddressProvider
+			"en"   | EnAddressProvider.class
+			"pl"   | PlAddressProvider.class
+			"es"   | EsAddressProvider.class
+			"fr"   | FrAddressProvider.class
+			"it"   | EnAddressProvider.class
+			"de"   | DeAddressProvider.class
+			"sv"   | SvAddressProvider.class
+			"ka"   | KaAddressProvider.class
+			"zh"   | ZhAddressProvider.class
 	}
 
-	def "should generate appropriate FairyModule when no locale passed"() {
+	def "should fall back to English providers for unknown locale"() {
 		when:
-			FairyModule fairyModule = Bootstrap.getFairyModuleForLocale(mapBasedDataMaster, Locale.forLanguageTag(locale), new RandomGenerator())
+			LocaleSpecificProviders providers = LocaleSpecificProvidersFactory.createProvidersForLocale(
+				Locale.forLanguageTag("xx"), mapBasedDataMaster, baseProducer, dateProducer)
 
 		then:
-			fairyModule.getClass() == module
-
-		where:
-			locale | module
-			"en"   | EnFairyModule.class
-			"pl"   | PlFairyModule.class
-			"es"   | EsFairyModule.class
+			providers.addressProvider().getClass() == EnAddressProvider.class
 	}
-
 }

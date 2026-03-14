@@ -1,6 +1,5 @@
 package com.devskiller.jfairy.producer.person.locale.sv;
 
-import javax.inject.Inject;
 
 import org.apache.commons.lang3.RandomStringUtils;
 
@@ -16,7 +15,7 @@ public class SvNationalIdentityCardNumberProvider implements NationalIdentityCar
 	private final DateProducer dateProducer;
 	private final BaseProducer baseProducer;
 
-	@Inject
+
 	public SvNationalIdentityCardNumberProvider(DateProducer dateProducer, BaseProducer baseProducer) {
 		this.dateProducer = dateProducer;
 		this.baseProducer = baseProducer;

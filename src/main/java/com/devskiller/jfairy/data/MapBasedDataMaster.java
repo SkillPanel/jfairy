@@ -4,7 +4,6 @@
 
 package com.devskiller.jfairy.data;
 
-import javax.inject.Inject;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -28,7 +27,7 @@ public class MapBasedDataMaster implements DataMaster {
 	private final BaseProducer baseProducer;
 	private Map<String, Object> dataSource = new CaseInsensitiveMap();
 
-	@Inject
+
 	public MapBasedDataMaster(BaseProducer baseProducer) {
 		this.baseProducer = baseProducer;
 	}

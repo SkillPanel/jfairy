@@ -1,13 +1,13 @@
 package com.devskiller.jfairy.producer.person;
+import java.util.function.Supplier;
 
-import com.google.inject.Provider;
 
 import com.devskiller.jfairy.producer.company.Company;
 import com.devskiller.jfairy.producer.util.TextUtils;
 
 import static org.apache.commons.lang3.StringUtils.lowerCase;
 
-public class CompanyEmailProvider implements Provider<String> {
+public class CompanyEmailProvider implements Supplier<String> {
 
 	private final String firstName;
 	private final String lastName;

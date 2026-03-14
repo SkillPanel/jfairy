@@ -3,8 +3,8 @@
  */
 
 package com.devskiller.jfairy.producer;
+import java.util.function.Supplier;
 
-import com.google.inject.Provider;
 
 /**
  * VAT identification number (VATIN)
@@ -12,7 +12,7 @@ import com.google.inject.Provider;
  * @author mariuszs
  * @since 02.11.13.
  */
-public interface VATIdentificationNumberProvider extends Provider<String> {
+public interface VATIdentificationNumberProvider extends Supplier<String> {
 
 	String get();
 }

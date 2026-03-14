@@ -1,11 +1,9 @@
 package com.devskiller.jfairy.producer.payment;
 
-import javax.inject.Inject;
 import java.util.IllegalFormatCodePointException;
 import java.util.List;
 
 import com.google.common.base.Strings;
-import com.google.inject.assistedinject.Assisted;
 import org.iban4j.CountryCode;
 import org.iban4j.Iban;
 import org.iban4j.UnsupportedCountryException;
@@ -27,11 +25,10 @@ public class DefaultIBANProvider implements IBANProvider {
 	protected String branchCode;
 	protected String nationalCheckDigit;
 
-	@Inject
+
 	public DefaultIBANProvider(BaseProducer baseProducer,
 	                           DataMaster dataMaster,
-	                           @Assisted IBANProperties.Property... properties) {
-
+	                           IBANProperties.Property... properties) {
 		this.dataMaster = dataMaster;
 		this.baseProducer = baseProducer;
 		for (IBANProperties.Property property : properties) {

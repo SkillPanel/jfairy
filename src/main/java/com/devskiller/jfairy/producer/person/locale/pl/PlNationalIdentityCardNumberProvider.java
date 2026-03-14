@@ -1,6 +1,5 @@
 package com.devskiller.jfairy.producer.person.locale.pl;
 
-import javax.inject.Inject;
 import java.time.LocalDate;
 
 import com.google.common.annotations.VisibleForTesting;
@@ -45,7 +44,7 @@ public class PlNationalIdentityCardNumberProvider implements NationalIdentityCar
 	private final DateProducer dateProducer;
 	private final BaseProducer baseProducer;
 
-	@Inject
+
 	public PlNationalIdentityCardNumberProvider(DateProducer dateProducer, BaseProducer baseProducer) {
 		this.dateProducer = dateProducer;
 		this.baseProducer = baseProducer;

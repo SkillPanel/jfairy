@@ -1,8 +1,6 @@
 package com.devskiller.jfairy.producer.company;
 
-import javax.inject.Inject;
 
-import com.google.inject.assistedinject.Assisted;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 
@@ -23,11 +21,11 @@ public class DefaultCompanyProvider implements CompanyProvider {
 
 	protected VATIdentificationNumberProvider vatIdentificationNumberProvider;
 
-	@Inject
+
 	public DefaultCompanyProvider(BaseProducer baseProducer,
-								  DataMaster dataMaster,
-								  VATIdentificationNumberProvider vatIdentificationNumberProvider,
-								  @Assisted CompanyProperties.CompanyProperty... companyProperties) {
+							  DataMaster dataMaster,
+							  VATIdentificationNumberProvider vatIdentificationNumberProvider,
+							  CompanyProperties.CompanyProperty... companyProperties) {
 		this.baseProducer = baseProducer;
 		this.dataMaster = dataMaster;
 		this.vatIdentificationNumberProvider = vatIdentificationNumberProvider;

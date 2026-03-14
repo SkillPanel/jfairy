@@ -1,10 +1,8 @@
 package com.devskiller.jfairy.producer.person.locale.pl;
 
-import javax.inject.Inject;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import com.google.inject.assistedinject.Assisted;
 
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.DateProducer;
@@ -42,9 +40,8 @@ public class PlNationalIdentificationNumberProvider implements NationalIdentific
 	private LocalDate issueDate;
 	private Person.Sex sex;
 
-	@Inject
+
 	public PlNationalIdentificationNumberProvider(DateProducer dateProducer, BaseProducer baseProducer,
-	                                              @Assisted
 		                                              NationalIdentificationNumberProperties.Property... properties) {
 		this.dateProducer = dateProducer;
 		this.baseProducer = baseProducer;

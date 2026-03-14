@@ -1,16 +1,15 @@
 package com.devskiller.jfairy.producer.payment;
+import java.util.function.Supplier;
 
-import javax.inject.Inject;
 import java.time.LocalDateTime;
 import java.time.Period;
 
-import com.google.inject.Provider;
 
 import com.devskiller.jfairy.data.DataMaster;
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.DateProducer;
 
-public class CreditCardProvider implements Provider<CreditCard> {
+public class CreditCardProvider implements Supplier<CreditCard> {
 
 	private static final Period DEFAULT_VALIDITY = Period.ofMonths(36);
 	private static final String DATA_KEY = "creditCardPrefixes";
@@ -20,7 +19,7 @@ public class CreditCardProvider implements Provider<CreditCard> {
 	private final BaseProducer baseProducer;
 	private final DateProducer dateProducer;
 
-	@Inject
+
 	public CreditCardProvider(DataMaster dataMaster, BaseProducer baseProducer, DateProducer dateProducer) {
 		this.dataMaster = dataMaster;
 		this.baseProducer = baseProducer;

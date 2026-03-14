@@ -1,6 +1,6 @@
 package com.devskiller.jfairy.producer.person;
+import java.util.function.Supplier;
 
-import com.google.inject.Provider;
 import org.apache.commons.lang3.StringUtils;
 
 import com.devskiller.jfairy.data.DataMaster;
@@ -10,7 +10,7 @@ import com.devskiller.jfairy.producer.util.TextUtils;
 import static com.devskiller.jfairy.producer.person.PersonProvider.PERSONAL_EMAIL;
 import static org.apache.commons.lang3.StringUtils.lowerCase;
 
-public class EmailProvider implements Provider<String> {
+public class EmailProvider implements Supplier<String> {
 
 	private final DataMaster dataMaster;
 	private final BaseProducer baseProducer;

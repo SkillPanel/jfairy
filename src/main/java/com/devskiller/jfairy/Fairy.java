@@ -3,10 +3,8 @@
  */
 package com.devskiller.jfairy;
 
-import javax.inject.Inject;
 import java.util.Locale;
-
-import com.google.inject.Provider;
+import java.util.function.Supplier;
 
 import com.devskiller.jfairy.data.DataMaster;
 import com.devskiller.jfairy.producer.BaseProducer;
@@ -36,7 +34,6 @@ public final class Fairy {
 	private final CompanyFactory companyFactory;
 	private final IBANFactory ibanFactory;
 
-	@Inject
 	Fairy(TextProducer textProducer, PersonFactory personFactory, NetworkProducer networkProducer,
 	      BaseProducer baseProducer, DateProducer dateProducer, CreditCardProvider creditCardProvider,
 	      CompanyFactory companyFactory, IBANFactory ibanFactory) {
@@ -58,7 +55,7 @@ public final class Fairy {
 		return Bootstrap.create(locale);
 	}
 
-	public static Fairy create(Provider<DataMaster> dataMasterProvider, Locale locale) {
+	public static Fairy create(Supplier<DataMaster> dataMasterProvider, Locale locale) {
 		return Bootstrap.create(dataMasterProvider, locale);
 	}
 

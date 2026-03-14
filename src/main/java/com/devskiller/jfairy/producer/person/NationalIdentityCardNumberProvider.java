@@ -1,9 +1,9 @@
 package com.devskiller.jfairy.producer.person;
+import java.util.function.Supplier;
 
-import com.google.inject.Provider;
 
 
-public interface NationalIdentityCardNumberProvider extends Provider<String> {
+public interface NationalIdentityCardNumberProvider extends Supplier<String> {
 
 	String get();
 }

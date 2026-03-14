@@ -1,6 +1,5 @@
 package com.devskiller.jfairy.producer.company.locale.pl;
 
-import javax.inject.Inject;
 
 import com.google.common.annotations.VisibleForTesting;
 import org.slf4j.Logger;
@@ -80,7 +79,7 @@ public class PlVATIdentificationNumberProvider implements VATIdentificationNumbe
 
 	private final BaseProducer baseProducer;
 
-	@Inject
+
 	public PlVATIdentificationNumberProvider(BaseProducer baseProducer) {
 
 		this.baseProducer = baseProducer;

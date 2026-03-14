@@ -1,8 +1,8 @@
 package com.devskiller.jfairy.producer.payment;
+import java.util.function.Supplier;
 
-import com.google.inject.Provider;
 
-public interface IBANProvider extends Provider<IBAN> {
+public interface IBANProvider extends Supplier<IBAN> {
 
 	IBAN get();
 

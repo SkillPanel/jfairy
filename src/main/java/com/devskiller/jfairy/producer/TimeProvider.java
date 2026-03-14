@@ -4,11 +4,9 @@
 
 package com.devskiller.jfairy.producer;
 
-import javax.inject.Singleton;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Singleton
 public class TimeProvider {
 
 	public int getCurrentYear() {

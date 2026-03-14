@@ -1,12 +1,10 @@
 package com.devskiller.jfairy.producer.person;
 
-import javax.inject.Inject;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-import com.google.inject.assistedinject.Assisted;
 import org.apache.commons.lang3.RandomStringUtils;
 
 import com.devskiller.jfairy.data.DataMaster;
@@ -50,21 +48,21 @@ public class DefaultPersonProvider implements PersonProvider {
 	protected final NationalIdentityCardNumberProvider nationalIdentityCardNumberProvider;
 	protected final AddressProvider addressProvider;
 	protected final CompanyFactory companyFactory;
+	
 	protected final TimeProvider timeProvider;
 	protected final PassportNumberProvider passportNumberProvider;
 
-	@Inject
+
 	public DefaultPersonProvider(DataMaster dataMaster,
 	                             DateProducer dateProducer,
 	                             BaseProducer baseProducer,
+	                             AddressProvider addressProvider,
 	                             NationalIdentificationNumberFactory nationalIdentificationNumberFactory,
 	                             NationalIdentityCardNumberProvider nationalIdentityCardNumberProvider,
-	                             AddressProvider addressProvider,
-	                             CompanyFactory companyFactory,
 	                             PassportNumberProvider passportNumberProvider,
 	                             TimeProvider timeProvider,
-	                             @Assisted PersonProperties.PersonProperty... personProperties) {
-
+	                             CompanyFactory companyFactory,
+	                             PersonProperties.PersonProperty... personProperties) {
 		this.dataMaster = dataMaster;
 		this.dateProducer = dateProducer;
 		this.baseProducer = baseProducer;
