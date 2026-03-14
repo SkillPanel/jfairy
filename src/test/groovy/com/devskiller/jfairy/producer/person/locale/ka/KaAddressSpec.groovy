@@ -21,12 +21,12 @@ class KaAddressSpec extends Specification {
 
 	def "should generate random street"() {
 		expect:
-		address.street == "დავით აღმაშენებლის გამზირი"
+		address.street == "კაკუცა ჩოლოყაშვილის გამზირი"
 	}
 
 	def "should generate random streetNumber"() {
 		expect:
-		address.streetNumber == "110"
+		address.streetNumber == "74"
 	}
 
 	def "should generate random apartmentNumber"() {
@@ -36,26 +36,26 @@ class KaAddressSpec extends Specification {
 
 	def "should generate random postalCode"() {
 		expect:
-		address.postalCode == "6003"
+		address.postalCode == "3220"
 	}
 
 	def "should generate random city"() {
 		expect:
-		address.city == "გარდაბანი"
+		address.city == "საგარეჯო"
  	}
 
 	def "should return addressLine1 in GE locale format"() {
 		expect:
-		address.addressLine1 == "6003, გარდაბანი"  // ZIP, city
+		address.addressLine1 == "3220, საგარეჯო"  // ZIP, city
 	}
 
 	def "should return addressLine2 in GE locale format"() {
 		expect:
-		address.addressLine2 == "დავით აღმაშენებლის გამზირი №110"  // street & number & appartment
+		address.addressLine2 == "კაკუცა ჩოლოყაშვილის გამზირი №74"  // street & number & appartment
 	}
 
 	def "should return address in GE locale format"() {
 		expect:
-		address.toString() == "6003, გარდაბანი${lineSeparator()}დავით აღმაშენებლის გამზირი №110"
+		address.toString() == "3220, საგარეჯო${lineSeparator()}კაკუცა ჩოლოყაშვილის გამზირი №74"
 	}
 }

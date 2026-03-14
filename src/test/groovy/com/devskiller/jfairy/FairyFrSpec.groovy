@@ -20,7 +20,7 @@ class FairyFrSpec extends Specification {
 		when:
 			Person person = fairy.person();
 		then:
-			person.address.city == 'Rosny-sous-Bois'
+			person.address.city == 'Saint-Herblain'
 	}
 
 }

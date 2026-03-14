@@ -18,12 +18,12 @@ class EsAddressSpec extends Specification {
 
 	def "should generate random street"() {
 		expect:
-			address.street == "Colón"
+			address.street == "Cruz"
 	}
 
 	def "should generate random streetNumber"() {
 		expect:
-			address.streetNumber == "101"
+			address.streetNumber == "8"
 	}
 
 	def "should generate random apartmentNumber"() {
@@ -33,27 +33,27 @@ class EsAddressSpec extends Specification {
 
 	def "should generate random postalCode"() {
 		expect:
-			address.postalCode == "79.240"
+			address.postalCode == "40.285"
 	}
 
 	def "should generate random city"() {
 		expect:
-			address.city == "Algeciras"
+			address.city == "Alicante"
 	}
 
 	def "should return addressLine1 in es locale format"() {
 		expect:
-			address.addressLine1 == "Colón, 101"
+			address.addressLine1 == "Cruz, 8"
 	}
 
 	def "should return addressLine2 in es locale format"() {
 		expect:
-			address.addressLine2 == "79.240 Algeciras"
+			address.addressLine2 == "40.285 Alicante"
 	}
 
 	def "should return address in es locale format"() {
 		expect:
-			address.toString() == "Colón, 101" + System.lineSeparator() + "79.240 Algeciras"
+			address.toString() == "Cruz, 8" + System.lineSeparator() + "40.285 Alicante"
 	}
 
 }

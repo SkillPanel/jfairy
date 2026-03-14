@@ -27,53 +27,16 @@ public class RandomGenerator {
 
 	public int nextInt(int min, int max) {
 		if (min == max) return min;
-		return min + random.nextInt(max - min + 1);
+		return random.nextInt(min, max + 1);
 	}
 
-	public long nextDouble(long min, long max) {
+	public long nextLong(long min, long max) {
 		if (min == max) return min;
-		long range = max - min + 1;
-		if (range <= 0) {
-			// Overflow: rejection sampling
-			while (true) {
-				long val = random.nextLong();
-				if (val >= min && val <= max) {
-					return val;
-				}
-			}
-		} else if (range <= Integer.MAX_VALUE) {
-			return min + (long) random.nextInt((int) range);
-		} else {
-			// Large range: use nextBytes-based algorithm matching commons-math3
-			return min + nextLongFromBytes(range);
-		}
-	}
-
-	/**
-	 * Generates a random long in [0, n) using nextBytes(8),
-	 * matching the commons-math3 RandomDataGenerator.nextLong(RandomGenerator, long) algorithm.
-	 */
-	private long nextLongFromBytes(long n) {
-		byte[] bytes = new byte[8];
-		while (true) {
-			random.nextBytes(bytes);
-			long val = 0;
-			for (byte b : bytes) {
-				val = (val << 8) | (b & 0xFFL);
-			}
-			val = val & Long.MAX_VALUE;
-			long result = val % n;
-			if (val - result + (n - 1) >= 0) {
-				return result;
-			}
-		}
+		return random.nextLong(min, max + 1);
 	}
 
 	public double nextDouble(double min, double max) {
-		double u = random.nextDouble();
-		while (u <= 0.0) {
-			u = random.nextDouble();
-		}
-		return u * max + (1.0 - u) * min;
+		if (min == max) return min;
+		return random.nextDouble(min, max);
 	}
 }

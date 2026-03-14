@@ -38,7 +38,7 @@ class EnAddressSpec extends Specification {
 
 	def "should generate random city"() {
 		expect:
-		    address.city == "Miami"
+		    address.city == "Washington"
 	}
 
 	def "should return addressLine1 in en locale format"() {
@@ -48,12 +48,12 @@ class EnAddressSpec extends Specification {
 
 	def "should return addressLine2 in en locale format"() {
 		expect:
-			address.addressLine2 == "Miami 42856"
+			address.addressLine2 == "Washington 42856"
 	}
 
 	def "should return address in en locale format"() {
 		expect:
-            address.toString() == "63 Herzi Street" + System.lineSeparator() + "Miami 42856"
+            address.toString() == "63 Herzi Street" + System.lineSeparator() + "Washington 42856"
 	}
 
 }

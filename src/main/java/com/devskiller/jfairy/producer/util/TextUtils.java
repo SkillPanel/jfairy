@@ -23,4 +23,20 @@ public final class TextUtils {
 		return s.replace("\u00DF", "ss");
 	}
 
+	public static String escapeNonAscii(String input) {
+		if (input == null) {
+			return null;
+		}
+		StringBuilder sb = new StringBuilder(input.length());
+		for (int i = 0; i < input.length(); i++) {
+			char c = input.charAt(i);
+			if (c > 0x7f) {
+				sb.append(String.format("\\u%04x", (int) c));
+			} else {
+				sb.append(c);
+			}
+		}
+		return sb.toString();
+	}
+
 }

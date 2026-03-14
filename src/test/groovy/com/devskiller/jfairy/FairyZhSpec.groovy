@@ -43,14 +43,14 @@ class FairyZhSpec extends Specification {
 		when:
 		Person person = fairy.person()
 		then:
-		person.address.addressLine1 == '广州市滨江路153号'
+		person.address.addressLine1 == '台北市朝阳大街67号'
 	}
 
 	def "Should create Chinese city"() {
 		when:
 		Person person = fairy.person()
 		then:
-		person.address.city == '广州'
+		person.address.city == '台北'
 	}
 
 	/********************
@@ -67,7 +67,7 @@ class FairyZhSpec extends Specification {
 		when:
 		Company company = fairy.company()
 		then:
-		company.url == "http://www.540E6D7791.cn"
+		company.url == "http://www.540e6d7791.org"
 	}
 
 	def "Should create Chinese company vat"() {

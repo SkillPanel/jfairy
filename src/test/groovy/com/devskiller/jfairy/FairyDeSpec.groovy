@@ -23,7 +23,7 @@ class FairyDeSpec extends Specification {
 		when:
 			Person person = fairy.person();
 		then:
-			person.address.city == 'Eschenburg'
+			person.address.city == 'Unterbachern'
 	}
 
 }

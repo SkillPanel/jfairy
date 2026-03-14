@@ -117,7 +117,7 @@ public class BaseProducer {
 	 * @return pseudorandom {@code long} value between {@code mon} (inclusive) and {@code max} (inclusive)
 	 */
 	public long randomBetween(long min, long max) {
-		return random.nextDouble(min, max);
+		return random.nextLong(min, max);
 	}
 
 	/**

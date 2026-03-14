@@ -18,42 +18,42 @@ class DeAddressSpec extends Specification {
 
 	def "should generate random street"() {
 		expect:
-			address.street == 'Sonnenburger Weg'
+			address.street == 'Petrirodaer Straße'
 	}
 
 	def "should generate random streetNumber"() {
 		expect:
-			address.streetNumber == '99'
+			address.streetNumber == '184'
 	}
 
 	def "should generate random apartmentNumber"() {
 		expect:
-			address.apartmentNumber == ''
+			address.apartmentNumber == '32'
 	}
 
 	def "should generate random postalCode"() {
 		expect:
-			address.postalCode == '98126'
+			address.postalCode == '60772'
 	}
 
 	def "should generate random city"() {
 		expect:
-			address.city == 'Wetschen'
+			address.city == 'Zescha'
 	}
 
 	def "should return addressLine1 in de locale format"() {
 		expect:
-			address.addressLine1 == 'Sonnenburger Weg 99'
+			address.addressLine1 == 'Petrirodaer Straße 184, 32'
 	}
 
 	def "should return addressLine2 in de locale format"() {
 		expect:
-			address.addressLine2 == '98126 Wetschen'
+			address.addressLine2 == '60772 Zescha'
 	}
 
 	def "should return address in de locale format"() {
 		expect:
-			address.toString() == "Sonnenburger Weg 99${System.lineSeparator()}98126 Wetschen"
+			address.toString() == "Petrirodaer Straße 184, 32${System.lineSeparator()}60772 Zescha"
 	}
 
 }

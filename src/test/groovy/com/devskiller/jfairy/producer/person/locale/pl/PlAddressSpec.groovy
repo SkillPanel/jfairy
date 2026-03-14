@@ -18,42 +18,42 @@ class PlAddressSpec extends Specification {
 
 	def "should generate random street"() {
 		expect:
-			address.street == "Prosta"
+			address.street == "Przepiórki"
 	}
 
 	def "should generate random streetNumber"() {
 		expect:
-			address.streetNumber == "71"
+			address.streetNumber == "23"
 	}
 
     def "should generate random apartmentNumber"() {
         expect:
-            address.apartmentNumber == ""
+            address.apartmentNumber == "210"
     }
 
 	def "should generate random postalCode"() {
 		expect:
-			address.postalCode == "26-077"
+			address.postalCode == "81-260"
 	}
 
 	def "should generate random city"() {
 		expect:
-		    address.city == "Pniewy"
+		    address.city == "Milicz"
 	}
 
 	def "should return addressLine1 in pl locale format"() {
 		expect:
-			address.addressLine1 == "Prosta 71"
+			address.addressLine1 == "Przepiórki 23, 210"
 	}
 
 	def "should return addressLine2 in pl locale format"() {
 		expect:
-			address.addressLine2 == "26-077 Pniewy"
+			address.addressLine2 == "81-260 Milicz"
 	}
 
 	def "should return address in pl locale format"() {
 		expect:
-			address.toString() == "Prosta 71" + System.lineSeparator() + "26-077 Pniewy"
+			address.toString() == "Przepiórki 23, 210" + System.lineSeparator() + "81-260 Milicz"
 	}
 
 }

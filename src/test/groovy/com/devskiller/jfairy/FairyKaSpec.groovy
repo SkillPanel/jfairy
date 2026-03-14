@@ -21,20 +21,20 @@ class FairyKaSpec extends Specification {
 		when:
 		Person person = fairy.person()
 		then:
-		person.address.street == 'კოსტავას'
+		person.address.street == 'მეფე სოლომონ II-ის ქუჩა'
 	}
 
 	def "Should create Georgian city"() {
 		when:
 		Person person = fairy.person()
 		then:
-		person.address.city == 'გორი'
+		person.address.city == 'ზუგდიდი'
 	}
 
 	def "Should create Georgian ID card"() {
 		when:
 		Person person = fairy.person()
 		then:
-		person.nationalIdentityCardNumber == 'Nხ4686471'
+		person.nationalIdentityCardNumber == 'Nს6819982'
 	}
 }
