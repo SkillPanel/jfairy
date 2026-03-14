@@ -18,6 +18,10 @@ import com.devskiller.jfairy.producer.person.locale.en.EnAddressProvider;
 import com.devskiller.jfairy.producer.person.locale.en.EnNationalIdentityCardNumberProvider;
 import com.devskiller.jfairy.producer.person.locale.en.EnPassportNumberProvider;
 import com.devskiller.jfairy.producer.company.locale.en.EnVATIdentificationNumberProvider;
+import com.devskiller.jfairy.producer.company.locale.br.BrVATIdentificationNumberProvider;
+import com.devskiller.jfairy.producer.person.locale.br.BrAddressProvider;
+import com.devskiller.jfairy.producer.person.locale.br.BrNationalIdentityCardNumberProvider;
+import com.devskiller.jfairy.producer.person.locale.br.BrPassportNumberProvider;
 import com.devskiller.jfairy.producer.person.locale.fr.FrAddressProvider;
 import com.devskiller.jfairy.producer.person.locale.es.EsAddressProvider;
 import com.devskiller.jfairy.producer.person.locale.es.EsNationalIdentityCardNumberProvider;
@@ -75,6 +79,7 @@ class LocaleSpecificProvidersFactory {
 			case ZH -> createZhProviders(dataMaster, baseProducer, dateProducer);
 			case DE -> createDeProviders(dataMaster, baseProducer, dateProducer);
 			case KA -> createKaProviders(dataMaster, baseProducer, dateProducer);
+			case BR -> createBrProviders(dataMaster, baseProducer, dateProducer);
 		};
 	}
 
@@ -172,6 +177,18 @@ class LocaleSpecificProvidersFactory {
 				new KaVATIdentificationNumberProvider(baseProducer),
 				new KaAddressProvider(dataMaster, baseProducer),
 				new KaPassportNumberProvider(baseProducer)
+		);
+	}
+
+	private static LocaleSpecificProviders createBrProviders(DataMaster dataMaster,
+	                                                         BaseProducer baseProducer,
+	                                                         DateProducer dateProducer) {
+		return new LocaleSpecificProviders(
+				new NoNationalIdentificationNumberFactory(),
+				new BrNationalIdentityCardNumberProvider(baseProducer),
+				new BrVATIdentificationNumberProvider(baseProducer),
+				new BrAddressProvider(dataMaster, baseProducer),
+				new BrPassportNumberProvider()
 		);
 	}
 }

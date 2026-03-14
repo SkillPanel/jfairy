@@ -13,5 +13,6 @@ public enum LanguageCode {
 	IT,
 	DE,
 	SV,
-	ZH
+	ZH,
+	BR
 }
