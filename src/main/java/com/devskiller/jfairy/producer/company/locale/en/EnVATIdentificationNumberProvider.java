@@ -7,7 +7,8 @@ import com.devskiller.jfairy.producer.VATIdentificationNumberProvider;
 
 import static java.lang.String.valueOf;
 import static java.lang.System.arraycopy;
-import static org.apache.commons.lang3.StringUtils.leftPad;
+
+import static com.devskiller.jfairy.producer.util.StringUtils.leftPad;
 
 /**
  * American VAT Identification Number (known as Employer Identification Number or EIN in the United States)

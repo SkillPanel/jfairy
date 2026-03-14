@@ -4,9 +4,9 @@ import java.util.regex.Pattern;
 
 import com.devskiller.jfairy.producer.VATIdentificationNumberProvider;
 
-import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
-import static org.apache.commons.lang3.RandomStringUtils.randomAlphanumeric;
-import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
+import static com.devskiller.jfairy.producer.util.RandomUtils.randomAlphabetic;
+import static com.devskiller.jfairy.producer.util.RandomUtils.randomAlphanumeric;
+import static com.devskiller.jfairy.producer.util.RandomUtils.randomNumeric;
 
 /**
  * Spanish VAT Identification Number (known as Número de Identificación Fiscal (for freelancers) or Código de Identificación Fiscal (for companies)	 in Spain)

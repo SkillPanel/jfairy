@@ -9,7 +9,8 @@ import com.devskiller.jfairy.producer.VATIdentificationNumberProvider;
 
 import static java.lang.String.format;
 import static java.lang.String.valueOf;
-import static org.apache.commons.lang3.StringUtils.leftPad;
+
+import static com.devskiller.jfairy.producer.util.StringUtils.leftPad;
 
 /**
  * Polish VAT Identification Number (known as NIP Numer Identyfikacji Podatkowej in Poland)

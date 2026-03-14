@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.devskiller.jfairy.producer.BaseProducer;
-import com.devskiller.jfairy.producer.util.TextUtils;
 
-import static org.apache.commons.lang3.StringUtils.left;
+import static com.devskiller.jfairy.producer.util.StringUtils.joinWithSpace;
+import static com.devskiller.jfairy.producer.util.StringUtils.left;
 
 public class TextProducer {
 
@@ -102,8 +102,8 @@ public class TextProducer {
 	}
 
 	public String paragraph(int sentenceCount) {
-		return result(TextUtils.joinWithSpace(sentences(sentenceCount +
-				baseProducer.randomBetween(SENTENCE_COUNT_PRECISION_MIN, SENTENCE_COUNT_PRECISION_MAX))));
+		return result(joinWithSpace(sentences(sentenceCount +
+			baseProducer.randomBetween(SENTENCE_COUNT_PRECISION_MIN, SENTENCE_COUNT_PRECISION_MAX))));
 	}
 
 	/**

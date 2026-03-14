@@ -2,7 +2,7 @@ package com.devskiller.jfairy.producer.company.locale.de;
 
 import com.devskiller.jfairy.producer.VATIdentificationNumberProvider;
 
-import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
+import static com.devskiller.jfairy.producer.util.RandomUtils.randomNumeric;
 
 /**
  * German VAT identification number (Umsatzsteuer-Identifikationsnummer or USt-IdNr.)

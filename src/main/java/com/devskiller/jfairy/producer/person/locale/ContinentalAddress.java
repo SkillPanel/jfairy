@@ -1,6 +1,6 @@
 package com.devskiller.jfairy.producer.person.locale;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static com.devskiller.jfairy.producer.util.StringUtils.isNotBlank;
 
 /**
  * An address format typical for European countries but the UK and ex-Soviet union.

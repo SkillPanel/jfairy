@@ -12,12 +12,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.EnumUtils;
-import org.apache.commons.lang3.Validate;
 import org.snakeyaml.engine.v2.api.Load;
 import org.snakeyaml.engine.v2.api.LoadSettings;
+
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.util.LanguageCode;
+import com.devskiller.jfairy.producer.util.ValidateUtils;
 
 
 public class MapBasedDataMaster implements DataMaster {
@@ -72,17 +72,23 @@ public class MapBasedDataMaster implements DataMaster {
 
 	@Override
 	public LanguageCode getLanguage() {
-		return EnumUtils.getEnum(LanguageCode.class, getString(LANGUAGE_TAG).toUpperCase());
+		String tag = getString(LANGUAGE_TAG).toUpperCase();
+		try {
+			return LanguageCode.valueOf(tag);
+		} catch (IllegalArgumentException ex) {
+			throw new IllegalArgumentException("Unknown language tag: " + tag, ex);
+		}
 	}
 
-	@SuppressWarnings({"unchecked", "ConstantConditions"}) // checked by Validate
+	@SuppressWarnings({"unchecked", "ConstantConditions"})
 	<T> T getData(String key, Class<T> type) {
-		Validate.notNull(key, "key cannot be null");
-		Validate.notNull(type, "type cannot be null");
+		ValidateUtils.notNull(key, "key cannot be null");
+		ValidateUtils.notNull(type, "type cannot be null");
 
 		Object element = dataSource.get(key);
-		Validate.isTrue(element != null, "No such key: %s", key);
-		Validate.isTrue(type.isAssignableFrom(element.getClass()),
+
+		ValidateUtils.isTrue(element != null, "No such key: %s", key);
+		ValidateUtils.isTrue(type.isAssignableFrom(element.getClass()),
 			"Element under desired key has incorrect type - should be %s", type.getSimpleName());
 
 		return (T) element;

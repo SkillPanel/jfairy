@@ -4,7 +4,7 @@ package com.devskiller.jfairy.producer.person.locale.de;
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.person.PassportNumberProvider;
 
-import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
+import static com.devskiller.jfairy.producer.util.RandomUtils.randomNumeric;
 
 /**
  * German passport (known as Reisepass)

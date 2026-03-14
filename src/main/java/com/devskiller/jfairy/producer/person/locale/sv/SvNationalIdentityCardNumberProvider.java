@@ -1,11 +1,11 @@
 package com.devskiller.jfairy.producer.person.locale.sv;
 
 
-import org.apache.commons.lang3.RandomStringUtils;
-
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.DateProducer;
 import com.devskiller.jfairy.producer.person.NationalIdentityCardNumberProvider;
+
+import static com.devskiller.jfairy.producer.util.RandomUtils.randomNumeric;
 
 /**
  * Swedish Identity Card Number (random number implementation)
@@ -23,6 +23,6 @@ public class SvNationalIdentityCardNumberProvider implements NationalIdentityCar
 
 	@Override
 	public String get() {
-		return RandomStringUtils.randomNumeric(8);
+		return randomNumeric(8);
 	}
 }

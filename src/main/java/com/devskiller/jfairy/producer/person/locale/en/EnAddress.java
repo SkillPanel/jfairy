@@ -2,7 +2,7 @@ package com.devskiller.jfairy.producer.person.locale.en;
 
 import com.devskiller.jfairy.producer.person.locale.AbstractAddress;
 
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
+import static com.devskiller.jfairy.producer.util.StringUtils.isNotBlank;
 
 public class EnAddress extends AbstractAddress {
 

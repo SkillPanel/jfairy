@@ -1,14 +1,14 @@
 package com.devskiller.jfairy.producer.person.locale.sk;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.DateProducer;
 import com.devskiller.jfairy.producer.person.NationalIdentificationNumber;
 import com.devskiller.jfairy.producer.person.NationalIdentificationNumberProperties;
 import com.devskiller.jfairy.producer.person.NationalIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.person.Person;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import static java.lang.Integer.valueOf;
 import static java.lang.String.format;

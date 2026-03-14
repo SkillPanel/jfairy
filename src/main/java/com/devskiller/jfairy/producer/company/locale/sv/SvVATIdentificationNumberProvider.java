@@ -8,11 +8,12 @@ import com.devskiller.jfairy.producer.VATIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.person.NationalIdentificationNumberFactory;
 import com.devskiller.jfairy.producer.person.NationalIdentificationNumberProvider;
 
+import static java.lang.String.valueOf;
+
 import static com.devskiller.jfairy.producer.person.NationalIdentificationNumberProperties.dateOfBirth;
 import static com.devskiller.jfairy.producer.person.locale.sv.SvNationalIdentificationNumberProvider.calculateChecksum;
-import static java.lang.String.valueOf;
-import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
-import static org.apache.commons.lang3.StringUtils.leftPad;
+import static com.devskiller.jfairy.producer.util.RandomUtils.randomNumeric;
+import static com.devskiller.jfairy.producer.util.StringUtils.leftPad;
 
 /**
  * Swedish VAT Identification Number (known as Momsnummer in Sweden)

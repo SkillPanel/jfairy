@@ -1,12 +1,14 @@
 package com.devskiller.jfairy.producer.company;
 
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.devskiller.jfairy.data.DataMaster;
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.VATIdentificationNumberProvider;
-import com.devskiller.jfairy.producer.util.TextUtils;
+
+import static com.devskiller.jfairy.producer.util.StringUtils.deleteWhitespace;
+import static com.devskiller.jfairy.producer.util.StringUtils.escapeNonAscii;
+import static com.devskiller.jfairy.producer.util.StringUtils.strip;
+import static com.devskiller.jfairy.producer.util.StringUtils.latinize;
 
 public class DefaultCompanyProvider implements CompanyProvider {
 
@@ -70,9 +72,9 @@ public class DefaultCompanyProvider implements CompanyProvider {
 			return;
 		}
 
-		String host = TextUtils.stripAccents(StringUtils.strip(StringUtils.deleteWhitespace(name.toLowerCase()), ".").replace("/", ""));
+		String host = latinize(strip(deleteWhitespace(name.toLowerCase()), ".").replace("/", ""));
 		int len1 = host.length();
-		host = TextUtils.escapeNonAscii(host).replaceAll("\\\\u", "");
+		host = escapeNonAscii(host).replaceAll("\\\\u", "");
 		int len2 = host.length();
 		if (len2 > len1 && len2 > 10)
 			host = host.substring(0, 10);

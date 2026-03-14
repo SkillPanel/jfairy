@@ -1,8 +1,8 @@
 package com.devskiller.jfairy.producer.person.locale.zh;
 
-import org.apache.commons.lang3.RandomStringUtils;
-
 import com.devskiller.jfairy.producer.person.PassportNumberProvider;
+
+import static com.devskiller.jfairy.producer.util.RandomUtils.randomAlphanumeric;
 
 /**
  * com.devskiller.jfairy.producer.person.locale.zh.ZhPassportNumberProvider
@@ -14,6 +14,6 @@ public class ZhPassportNumberProvider implements PassportNumberProvider {
 
 	@Override
 	public String get() {
-		return RandomStringUtils.randomAlphanumeric(9);
+		return randomAlphanumeric(9);
 	}
 }

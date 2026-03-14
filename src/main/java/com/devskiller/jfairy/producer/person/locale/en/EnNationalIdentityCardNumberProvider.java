@@ -7,7 +7,8 @@ import com.devskiller.jfairy.producer.person.NationalIdentityCardNumberProvider;
 
 import static java.lang.String.valueOf;
 import static java.lang.System.arraycopy;
-import static org.apache.commons.lang3.StringUtils.leftPad;
+
+import static com.devskiller.jfairy.producer.util.StringUtils.leftPad;
 
 /**
  * English National Identity Card Number (known as Social Security Number)

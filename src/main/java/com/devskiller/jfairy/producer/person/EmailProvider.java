@@ -1,14 +1,14 @@
 package com.devskiller.jfairy.producer.person;
-import java.util.function.Supplier;
 
-import org.apache.commons.lang3.StringUtils;
+import java.util.function.Supplier;
 
 import com.devskiller.jfairy.data.DataMaster;
 import com.devskiller.jfairy.producer.BaseProducer;
-import com.devskiller.jfairy.producer.util.TextUtils;
+import com.devskiller.jfairy.producer.util.StringUtils;
 
 import static com.devskiller.jfairy.producer.person.PersonProvider.PERSONAL_EMAIL;
-import static org.apache.commons.lang3.StringUtils.lowerCase;
+import static com.devskiller.jfairy.producer.util.StringUtils.lowerCase;
+import static com.devskiller.jfairy.producer.util.StringUtils.latinize;
 
 public class EmailProvider implements Supplier<String> {
 
@@ -40,6 +40,6 @@ public class EmailProvider implements Supplier<String> {
 				break;
 		}
 		String email = lowerCase(prefix + '@' + dataMaster.getRandomValue(PERSONAL_EMAIL));
-		return TextUtils.stripSharpS(TextUtils.stripAccents(email));
+		return latinize(email);
 	}
 }

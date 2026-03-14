@@ -1,8 +1,8 @@
 package com.devskiller.jfairy.producer.person.locale.es;
 
-import org.apache.commons.lang3.RandomStringUtils;
-
 import com.devskiller.jfairy.producer.person.PassportNumberProvider;
+
+import static com.devskiller.jfairy.producer.util.RandomUtils.randomAlphanumeric;
 
 /**
  * @author graux
@@ -12,6 +12,6 @@ public class EsPassportNumberProvider implements PassportNumberProvider {
 
 	@Override
 	public String get() {
-		return RandomStringUtils.randomAlphanumeric(9);
+		return randomAlphanumeric(9);
 	}
 }

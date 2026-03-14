@@ -1,18 +1,18 @@
 package com.devskiller.jfairy.producer.payment;
 
-import java.util.IllegalFormatCodePointException;
-import java.util.List;
-
-import org.apache.commons.lang3.StringUtils;
 import org.iban4j.CountryCode;
 import org.iban4j.Iban;
 import org.iban4j.UnsupportedCountryException;
-
 import org.jspecify.annotations.Nullable;
+
+import java.util.IllegalFormatCodePointException;
+import java.util.List;
 
 import com.devskiller.jfairy.data.DataMaster;
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.person.Country;
+
+import static com.devskiller.jfairy.producer.util.StringUtils.isNotEmpty;
 
 /**
  * ALPHA: Under development
@@ -51,7 +51,7 @@ public class DefaultIBANProvider implements IBANProvider {
 					.bankCode(bankCode)
 					.branchCode(branchCode)
 					.nationalCheckDigit(nationalCheckDigit);
-				if (StringUtils.isNotEmpty(accountNumber)) {
+				if (isNotEmpty(accountNumber)) {
 					builder.accountNumber(accountNumber);
 				}
 				Iban iban = builder.buildRandom();

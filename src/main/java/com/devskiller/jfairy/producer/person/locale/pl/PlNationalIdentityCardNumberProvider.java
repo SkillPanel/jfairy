@@ -6,12 +6,13 @@ import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.DateProducer;
 import com.devskiller.jfairy.producer.person.NationalIdentityCardNumberProvider;
 import com.devskiller.jfairy.producer.util.AlphaNumberSystem;
-import org.apache.commons.lang3.Validate;
+import com.devskiller.jfairy.producer.util.ValidateUtils;
 
 import static java.lang.String.copyValueOf;
 import static java.lang.String.valueOf;
 import static java.lang.System.arraycopy;
-import static org.apache.commons.lang3.StringUtils.leftPad;
+
+import static com.devskiller.jfairy.producer.util.StringUtils.leftPad;
 
 /**
  * Polish Identity Card Number
@@ -55,7 +56,7 @@ public class PlNationalIdentityCardNumberProvider implements NationalIdentityCar
 
 	public String get(LocalDate date) {
 
-		Validate.isTrue(date.getYear() >= ISSUING_BEGIN, "Polish ID was introduced in 2000");
+		ValidateUtils.isTrue(date.getYear() >= ISSUING_BEGIN, "Polish ID was introduced in 2000");
 
 		char[] id = new char[WEIGHTS.length];
 

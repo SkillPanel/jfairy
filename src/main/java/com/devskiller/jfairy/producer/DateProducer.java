@@ -11,7 +11,7 @@ import java.time.Month;
 import java.time.Period;
 import java.time.ZoneOffset;
 
-import org.apache.commons.lang3.Validate;
+import com.devskiller.jfairy.producer.util.ValidateUtils;
 
 import static java.time.temporal.TemporalAdjusters.firstDayOfYear;
 import static java.time.temporal.TemporalAdjusters.lastDayOfYear;
@@ -30,7 +30,7 @@ public class DateProducer {
 	}
 
 	public LocalDateTime randomDateInThePast(int maxYearsEarlier) {
-		Validate.isTrue(maxYearsEarlier >= 0, "%d has to be >= 0", maxYearsEarlier);
+		ValidateUtils.isTrue(maxYearsEarlier >= 0, "%d has to be >= 0", maxYearsEarlier);
 		LocalDateTime currentDate = timeProvider.getCurrentTime();
 		LocalDateTime latestDateInThePast = currentDate.minusSeconds(SECONDS_BEFORE_TO_BE_IN_THE_PAST);
 		LocalDateTime maxYearsEarlierDate = currentDate.minusYears(maxYearsEarlier);
@@ -54,7 +54,7 @@ public class DateProducer {
 	}
 
 	public LocalDateTime randomDateBetweenYears(int fromYear, int toYear) {
-		Validate.isTrue(fromYear <= toYear, "%d has to be <= %d", fromYear, toYear);
+		ValidateUtils.isTrue(fromYear <= toYear, "%d has to be <= %d", fromYear, toYear);
 		LocalDateTime fromDate = getDateForFirstDayForGivenYear(fromYear);
 		LocalDateTime toDate = getDateForLastDayForGivenYear(toYear);
 		return randomDateBetweenTwoDates(fromDate, toDate);

@@ -1,9 +1,8 @@
 package com.devskiller.jfairy.producer.payment;
-import java.util.function.Supplier;
 
 import java.time.LocalDateTime;
 import java.time.Period;
-
+import java.util.function.Supplier;
 
 import com.devskiller.jfairy.data.DataMaster;
 import com.devskiller.jfairy.producer.BaseProducer;

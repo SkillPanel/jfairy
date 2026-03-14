@@ -4,19 +4,19 @@
 package com.devskiller.jfairy.producer.text;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.devskiller.jfairy.data.DataMaster;
 import com.devskiller.jfairy.producer.BaseProducer;
-import com.devskiller.jfairy.producer.util.TextUtils;
 
-import static java.util.Arrays.asList;
-import static org.apache.commons.lang3.StringUtils.capitalize;
-import static org.apache.commons.lang3.StringUtils.endsWith;
-import static org.apache.commons.lang3.StringUtils.removeEnd;
-import static org.apache.commons.lang3.StringUtils.replaceChars;
-import static org.apache.commons.lang3.StringUtils.split;
-import static org.apache.commons.lang3.StringUtils.uncapitalize;
+import static com.devskiller.jfairy.producer.util.StringUtils.capitalize;
+import static com.devskiller.jfairy.producer.util.StringUtils.endsWith;
+import static com.devskiller.jfairy.producer.util.StringUtils.joinWithSpace;
+import static com.devskiller.jfairy.producer.util.StringUtils.removeEnd;
+import static com.devskiller.jfairy.producer.util.StringUtils.replaceChars;
+import static com.devskiller.jfairy.producer.util.StringUtils.split;
+import static com.devskiller.jfairy.producer.util.StringUtils.uncapitalize;
 
 public class TextProducerInternal {
 
@@ -47,8 +47,8 @@ public class TextProducerInternal {
 		this.baseProducer = baseProducer;
 		loremIpsum = dataMaster.getString(LOREM_IPSUM);
 		text = dataMaster.getString(TEXT);
-		words = asList(split(text, ' '));
-		latinWords = asList(split(loremIpsum, ' '));
+		words = new ArrayList<>(Arrays.asList(split(text, ' ')));
+		latinWords = new ArrayList<>(Arrays.asList(split(loremIpsum, ' ')));
 		alphabet = dataMaster.getString(ALPHABET);
 		maxAlphabetIndex = alphabet.length() - 1;
 	}
@@ -59,7 +59,7 @@ public class TextProducerInternal {
 
 	public String rawWords(List<String> words, int count, int precision) {
 		List<String> result = readRawWords(words, count, precision);
-		return TextUtils.joinWithSpace(result);
+		return joinWithSpace(result);
 	}
 
 	public String cleanLatinWords(int count) {
@@ -75,7 +75,7 @@ public class TextProducerInternal {
 		for (String part : readRawWords(words, count, 0)) {
 			result.add(uncapitalize(replaceChars(part, "., ", "")));
 		}
-		return TextUtils.joinWithSpace(result);
+		return joinWithSpace(result);
 	}
 
 	public String randomString(int charsCount) {

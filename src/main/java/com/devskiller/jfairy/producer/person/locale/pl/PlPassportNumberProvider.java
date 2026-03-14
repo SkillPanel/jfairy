@@ -7,12 +7,12 @@ import java.util.Map;
 import com.devskiller.jfairy.producer.person.PassportNumberProvider;
 import com.devskiller.jfairy.producer.util.AlphaNumberSystem;
 
+import static com.devskiller.jfairy.producer.util.RandomUtils.randomAlphabetic;
+import static com.devskiller.jfairy.producer.util.RandomUtils.randomNumeric;
+
 import static java.lang.Character.getNumericValue;
 import static java.lang.String.valueOf;
 import static java.lang.System.arraycopy;
-import static org.apache.commons.lang3.RandomStringUtils.randomAlphabetic;
-import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
-
 
 /**
  * @author Olga Maciaszek-Sharma

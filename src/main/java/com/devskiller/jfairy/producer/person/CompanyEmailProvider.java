@@ -1,11 +1,11 @@
 package com.devskiller.jfairy.producer.person;
+
 import java.util.function.Supplier;
 
-
 import com.devskiller.jfairy.producer.company.Company;
-import com.devskiller.jfairy.producer.util.TextUtils;
 
-import static org.apache.commons.lang3.StringUtils.lowerCase;
+import static com.devskiller.jfairy.producer.util.StringUtils.latinize;
+import static com.devskiller.jfairy.producer.util.StringUtils.lowerCase;
 
 public class CompanyEmailProvider implements Supplier<String> {
 
@@ -22,6 +22,6 @@ public class CompanyEmailProvider implements Supplier<String> {
 	@Override
 	public String get() {
 		String email = lowerCase(firstName + '.' + lastName + '@' + company.getDomain()).replaceAll(" ", ".");
-		return TextUtils.stripSharpS(TextUtils.stripAccents(email));
+		return latinize(email);
 	}
 }

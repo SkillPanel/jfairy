@@ -2,9 +2,10 @@ package com.devskiller.jfairy.producer.person.locale.es;
 
 import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.RandomStringUtils;
-
 import com.devskiller.jfairy.producer.person.NationalIdentityCardNumberProvider;
+
+import static com.devskiller.jfairy.producer.util.RandomUtils.randomAlphabetic;
+import static com.devskiller.jfairy.producer.util.RandomUtils.randomNumeric;
 
 /**
  * Spanish National Identity Card Number (known as Documento Nacional de Identidad or DNI)
@@ -24,7 +25,7 @@ public class EsNationalIdentityCardNumberProvider implements NationalIdentityCar
 
 	@Override
 	public String get() {
-		return String.format("%s-%s", RandomStringUtils.randomNumeric(8), RandomStringUtils.randomAlphabetic(1).toUpperCase());
+		return String.format("%s-%s", randomNumeric(8), randomAlphabetic(1).toUpperCase());
 	}
 
 	public boolean isValid(String dni) {
