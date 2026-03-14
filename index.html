@@ -17,11 +17,11 @@
         $('#main_content').headsmart()
       })
     </script>
-    <title>jFairy by Codearte</title>
+    <title>jFairy - Java fake data generator</title>
   </head>
 
   <body>
-    <a id="forkme_banner" href="https://github.com/Codearte/jfairy">View on GitHub</a>
+    <a id="forkme_banner" href="https://github.com/SkillPanel/jfairy">View on GitHub</a>
     <div class="shell">
 
       <header>
@@ -37,115 +37,62 @@
 
       <section id="downloads">
         <span class="inner">
-          <a href="https://github.com/Codearte/jfairy/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/Codearte/jfairy/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+          <a href="https://github.com/SkillPanel/jfairy/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/SkillPanel/jfairy/tarball/master" class="tgz"><em>download</em> .TGZ</a>
         </span>
       </section>
 
-
       <span class="banner-fix"></span>
 
-
       <section id="main_content">
-        <h1>
-<a id="jfairy-by-codearte" class="anchor" href="#jfairy-by-codearte" aria-hidden="true"><span class="octicon octicon-link"></span></a>jFairy by Codearte</h1>
+        <h1><a id="jfairy" class="anchor" href="#jfairy" aria-hidden="true"><span class="octicon octicon-link"></span></a>jFairy</h1>
 
-<p><a href="https://travis-ci.org/Devskiller/jfairy"><img src="https://travis-ci.org/Devskiller/jfairy.png" alt="Build Status"></a> <a href="https://maven-badges.herokuapp.com/maven-central/io.codearte.jfairy/jfairy"><img src="https://maven-badges.herokuapp.com/maven-central/io.codearte.jfairy/jfairy/badge.svg" alt="Maven Central"></a> <a href="https://coveralls.io/r/Codearte/jfairy"><img src="https://img.shields.io/coveralls/Codearte/jfairy.svg" alt="Coverage Status"></a></p>
+<p>
+  <a href="https://github.com/SkillPanel/jfairy/actions/workflows/build.yml"><img src="https://github.com/SkillPanel/jfairy/actions/workflows/build.yml/badge.svg" alt="Build"></a>
+  <a href="https://central.sonatype.com/artifact/com.devskiller/jfairy"><img src="https://img.shields.io/maven-central/v/com.devskiller/jfairy" alt="Maven Central"></a>
+  <a href="https://javadoc.io/doc/com.devskiller/jfairy"><img src="https://javadoc.io/badge2/com.devskiller/jfairy/javadoc.svg" alt="Javadocs"></a>
+</p>
 
-<p>Java fake data generator. Based on Wikipedia:</p>
-
-<blockquote>
-<p>Fairyland, in folklore, is the fabulous land or abode of fairies or fays.</p>
-</blockquote>
-
-<h2>
-<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
-
-<p>Creating simple objects:</p>
-
-<div class="highlight highlight-java"><pre><span class="pl-stj">Fairy</span> fairy <span class="pl-k">=</span> <span class="pl-stj">Fairy</span><span class="pl-k">.</span>create();
-<span class="pl-stj">Person</span> person <span class="pl-k">=</span> fairy<span class="pl-k">.</span>person();
-
-<span class="pl-stj">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(person<span class="pl-k">.</span>fullName());            
-<span class="pl-c">// Chloe Barker</span>
-<span class="pl-stj">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(person<span class="pl-k">.</span>email());               
-<span class="pl-c">// barker@yahoo.com</span>
-<span class="pl-stj">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(person<span class="pl-k">.</span>telephoneNumber());     
-<span class="pl-c">// 690-950-802</span>
-
-<span class="pl-stj">Person</span> adultMale <span class="pl-k">=</span> fairy<span class="pl-k">.</span>person(male(), minAge(<span class="pl-c1">21</span>));
-<span class="pl-stj">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(adultMale<span class="pl-k">.</span>isMale());           
-<span class="pl-c">// true</span>
-<span class="pl-stj">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(adultMale<span class="pl-k">.</span>dateOfBirth());      
-<span class="pl-c">// at least 21 years earlier</span></pre></div>
-
-<p>Creating related objects:</p>
-
-<div class="highlight highlight-java"><pre><span class="pl-stj">Fairy</span> fairy <span class="pl-k">=</span> <span class="pl-stj">Fairy</span><span class="pl-k">.</span>create();
-<span class="pl-stj">Company</span> company <span class="pl-k">=</span> fairy<span class="pl-k">.</span>company();
-<span class="pl-stj">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(company<span class="pl-k">.</span>name());          
-<span class="pl-c">// Robuten Associates</span>
-<span class="pl-stj">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(company<span class="pl-k">.</span>url());           
-<span class="pl-c">// http://www.robuteniaassociates.com</span>
-
-<span class="pl-stj">Person</span> salesman <span class="pl-k">=</span> fairy<span class="pl-k">.</span>person(withCompany(company));
-<span class="pl-stj">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(salesman<span class="pl-k">.</span>fullName());     
-<span class="pl-c">// Juan Camacho</span>
-<span class="pl-stj">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(salesman<span class="pl-k">.</span>companyEmail()); 
-<span class="pl-c">// juan.camacho@robuteniaassociates.com</span></pre></div>
-
-<p>Locale support:</p>
-
-<div class="highlight highlight-java"><pre><span class="pl-stj">Fairy</span> enFairy <span class="pl-k">=</span> <span class="pl-stj">Fairy</span><span class="pl-k">.</span>create();                               
-<span class="pl-c">// Locale.ENGLISH is default</span>
-<span class="pl-stj">Fairy</span> plFairy <span class="pl-k">=</span> <span class="pl-stj">Fairy</span><span class="pl-k">.</span>create(<span class="pl-stj">Locale</span><span class="pl-k">.</span>forLanguageTag(<span class="pl-s1"><span class="pl-pds">"</span>pl<span class="pl-pds">"</span></span>));    
-<span class="pl-c">// Polish version</span></pre></div>
-
-<h2>
-<a id="other-samples" class="anchor" href="#other-samples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Other samples</h2>
-
-<p>Look into <a href="https://github.com/Codearte/fairyland/tree/master/src/test/groovy/snippets/">code samples</a></p>
-
-<h2>
-<a id="building" class="anchor" href="#building" aria-hidden="true"><span class="octicon octicon-link"></span></a>Building</h2>
-
-<p>This project can be built using gradle command:</p>
-
-<pre><code>./gradlew build
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.devskiller&lt;/groupId&gt;
+    &lt;artifactId&gt;jfairy&lt;/artifactId&gt;
+    &lt;version&gt;0.7.1&lt;/version&gt;
+&lt;/dependency&gt;
 </code></pre>
 
-<h2>
-<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+<h2><a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
 
-<p>Installation into maven local repository</p>
+<pre><code>Fairy fairy = Fairy.create();
+Person person = fairy.person();
 
-<pre><code>./gradlew publishToMavenLocal
+person.getFullName();        // Chloe Barker
+person.getEmail();           // barker@yahoo.com
+person.getTelephoneNumber(); // 690-950-802
+person.getJobTitle();        // Software Developer
 </code></pre>
+
+<h2><a id="locales" class="anchor" href="#locales" aria-hidden="true"><span class="octicon octicon-link"></span></a>Supported locales</h2>
+
+<p>EN, PL, DE, FR, ES, SV, ZH, KA, IT, BR, SK</p>
+
+<pre><code>Fairy plFairy = Fairy.create(Locale.forLanguageTag("pl"));
+Fairy brFairy = Fairy.create(Locale.forLanguageTag("br"));
+</code></pre>
+
       </section>
 
       <footer>
         <span class="ribbon-outer">
           <span class="ribbon-inner">
-            <p>this project by <a href="https://github.com/Codearte">Codearte</a> can be found on <a href="https://github.com/Codearte/jfairy">GitHub</a></p>
+            <p>this project by <a href="https://github.com/SkillPanel">SkillPanel</a> can be found on <a href="https://github.com/SkillPanel/jfairy">GitHub</a></p>
           </span>
           <span class="left-tail"></span>
           <span class="right-tail"></span>
         </span>
-        <p>Generated with <a href="http://pages.github.com">GitHub Pages</a> using Merlot</p>
+        <p>Generated with <a href="https://pages.github.com">GitHub Pages</a> using Merlot</p>
         <span class="octocat"></span>
       </footer>
 
     </div>
-
-              <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-55892824-1");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
 
   </body>
 </html>
