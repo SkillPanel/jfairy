@@ -1,17 +1,16 @@
 package com.devskiller.jfairy.producer.net;
 
-import javax.inject.Inject;
 
 import com.devskiller.jfairy.producer.BaseProducer;
 
-class IPNumberProducer {
+public class IPNumberProducer {
 
 	private static final String IP_FORMAT = "%s.%s.%s.%s";
 	private static final int MAX = 0xFF;
 
 	private final BaseProducer baseProducer;
 
-	@Inject
+
 	public IPNumberProducer(BaseProducer baseProducer) {
 		this.baseProducer = baseProducer;
 	}

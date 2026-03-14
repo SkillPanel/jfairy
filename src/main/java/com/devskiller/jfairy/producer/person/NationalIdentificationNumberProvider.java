@@ -1,10 +1,10 @@
 package com.devskiller.jfairy.producer.person;
+import java.util.function.Supplier;
 
 import java.time.LocalDate;
 
-import com.google.inject.Provider;
 
-public interface NationalIdentificationNumberProvider extends Provider<NationalIdentificationNumber> {
+public interface NationalIdentificationNumberProvider extends Supplier<NationalIdentificationNumber> {
 
 	NationalIdentificationNumber get();
 

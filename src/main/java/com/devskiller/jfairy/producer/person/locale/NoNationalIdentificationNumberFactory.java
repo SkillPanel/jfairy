@@ -1,9 +1,7 @@
 package com.devskiller.jfairy.producer.person.locale;
 
-import javax.inject.Inject;
 import java.time.LocalDate;
 
-import com.google.inject.assistedinject.Assisted;
 
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.DateProducer;
@@ -15,7 +13,7 @@ import com.devskiller.jfairy.producer.person.Person;
 
 public class NoNationalIdentificationNumberFactory implements NationalIdentificationNumberFactory {
 
-	@Inject
+
 	public NoNationalIdentificationNumberFactory(BaseProducer baseProducer, DateProducer dateProducer) {
 	}
 
@@ -27,9 +25,8 @@ public class NoNationalIdentificationNumberFactory implements NationalIdentifica
 	public static class NoNationalIdentificationNumberProvider implements NationalIdentificationNumberProvider {
 
 
-		@Inject
 		public NoNationalIdentificationNumberProvider(DateProducer dateProducer, BaseProducer baseProducer,
-													  @Assisted NationalIdentificationNumberProperties.Property... properties) {
+													  NationalIdentificationNumberProperties.Property... properties) {
 		}
 
 		@Override

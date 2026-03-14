@@ -1,12 +1,12 @@
 package com.devskiller.jfairy.producer.person;
+import java.util.function.Supplier;
 
-import com.google.inject.Provider;
 
 /**
  * @author Olga Maciaszek-Sharma
  * @since 21.02.15
  */
-public interface PassportNumberProvider extends Provider<String> {
+public interface PassportNumberProvider extends Supplier<String> {
 
 	@Override
 	String get();

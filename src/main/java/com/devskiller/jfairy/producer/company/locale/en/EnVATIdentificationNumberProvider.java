@@ -3,7 +3,6 @@ package com.devskiller.jfairy.producer.company.locale.en;
 import java.util.Set;
 
 import com.google.common.collect.Sets;
-import com.google.inject.Inject;
 
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.VATIdentificationNumberProvider;
@@ -31,7 +30,7 @@ public class EnVATIdentificationNumberProvider implements VATIdentificationNumbe
 	private BaseProducer baseProducer;
 	private static Set<Integer> excludedNumbers = Sets.newHashSet(7, 8, 9, 17, 18, 19, 28, 29, 41, 47, 49, 69, 70, 79, 89, 96, 97);
 
-	@Inject
+
 	public EnVATIdentificationNumberProvider(BaseProducer baseProducer) {
 		this.baseProducer = baseProducer;
 	}

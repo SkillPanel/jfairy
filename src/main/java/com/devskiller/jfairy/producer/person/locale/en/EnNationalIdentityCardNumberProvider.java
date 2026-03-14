@@ -3,7 +3,6 @@ package com.devskiller.jfairy.producer.person.locale.en;
 import java.util.List;
 
 import com.google.common.collect.Lists;
-import com.google.inject.Inject;
 
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.person.NationalIdentityCardNumberProvider;
@@ -30,7 +29,7 @@ public class EnNationalIdentityCardNumberProvider implements NationalIdentityCar
 
 	private final BaseProducer baseProducer;
 
-	@Inject
+
 	public EnNationalIdentityCardNumberProvider(BaseProducer baseProducer) {
 		this.baseProducer = baseProducer;
 	}

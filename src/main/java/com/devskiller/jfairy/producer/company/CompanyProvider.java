@@ -1,8 +1,8 @@
 package com.devskiller.jfairy.producer.company;
+import java.util.function.Supplier;
 
-import com.google.inject.Provider;
 
-public interface CompanyProvider extends Provider<Company> {
+public interface CompanyProvider extends Supplier<Company> {
 
 	String DOMAIN = "domains";
 	String COMPANY_SUFFIX = "companySuffixes";

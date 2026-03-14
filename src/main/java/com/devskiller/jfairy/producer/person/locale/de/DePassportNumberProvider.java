@@ -1,6 +1,5 @@
 package com.devskiller.jfairy.producer.person.locale.de;
 
-import javax.inject.Inject;
 
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.person.PassportNumberProvider;
@@ -22,7 +21,7 @@ public class DePassportNumberProvider implements PassportNumberProvider {
 
 	private final BaseProducer baseProducer;
 
-	@Inject
+
 	public DePassportNumberProvider(BaseProducer baseProducer) {
 		this.baseProducer = baseProducer;
 	}

@@ -1,6 +1,5 @@
 package com.devskiller.jfairy.producer.company.locale.sv;
 
-import javax.inject.Inject;
 import java.time.LocalDate;
 
 import com.devskiller.jfairy.producer.BaseProducer;
@@ -31,7 +30,7 @@ public class SvVATIdentificationNumberProvider implements VATIdentificationNumbe
 	private final DateProducer dateProducer;
 	private final NationalIdentificationNumberFactory nationalIdentificationNumberFactory;
 
-	@Inject
+
 	public SvVATIdentificationNumberProvider(BaseProducer baseProducer, DateProducer dateProducer,
 	                                         NationalIdentificationNumberFactory nationalIdentificationNumberFactory) {
 		this.baseProducer = baseProducer;

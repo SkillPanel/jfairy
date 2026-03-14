@@ -3,7 +3,6 @@
  */
 package com.devskiller.jfairy.producer.text;
 
-import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class TextProducer {
 
 	private int limit = 0;
 
-	@Inject
+
 	public TextProducer(TextProducerInternal textProducerInternal, BaseProducer baseProducer) {
 		this.textProducerInternal = textProducerInternal;
 		this.baseProducer = baseProducer;

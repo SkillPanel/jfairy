@@ -3,7 +3,6 @@ package com.devskiller.jfairy.producer.person.locale.zh;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import com.google.inject.Inject;
 
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.DateProducer;
@@ -28,7 +27,7 @@ public class ZhNationalIdentityCardNumberProvider implements NationalIdentityCar
 	private final BaseProducer baseProducer;
 	private final DateProducer dateProducer;
 
-	@Inject
+
 	public ZhNationalIdentityCardNumberProvider(BaseProducer baseProducer) {
 		this.baseProducer = baseProducer;
 		this.dateProducer = new DateProducer(baseProducer, new TimeProvider());

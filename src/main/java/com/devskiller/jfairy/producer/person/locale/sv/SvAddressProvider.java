@@ -1,6 +1,5 @@
 package com.devskiller.jfairy.producer.person.locale.sv;
 
-import javax.inject.Inject;
 
 import com.devskiller.jfairy.data.DataMaster;
 import com.devskiller.jfairy.producer.BaseProducer;
@@ -8,7 +7,7 @@ import com.devskiller.jfairy.producer.person.AbstractAddressProvider;
 
 public class SvAddressProvider extends AbstractAddressProvider {
 
-	@Inject
+
 	public SvAddressProvider(DataMaster dataMaster, BaseProducer baseProducer) {
 		super(dataMaster, baseProducer);
 	}

@@ -4,8 +4,6 @@
 
 package com.devskiller.jfairy.producer;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -19,7 +17,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 import static java.time.temporal.TemporalAdjusters.firstDayOfYear;
 import static java.time.temporal.TemporalAdjusters.lastDayOfYear;
 
-@Singleton
 public class DateProducer {
 
 	@VisibleForTesting
@@ -28,7 +25,7 @@ public class DateProducer {
 	private final BaseProducer baseProducer;
 	private final TimeProvider timeProvider;
 
-	@Inject
+
 	public DateProducer(BaseProducer baseProducer, TimeProvider timeProvider) {
 		this.baseProducer = baseProducer;
 		this.timeProvider = timeProvider;

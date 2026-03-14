@@ -3,8 +3,6 @@ package com.devskiller.jfairy.producer.person.locale.sv;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import com.google.inject.Inject;
-import com.google.inject.assistedinject.Assisted;
 
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.DateProducer;
@@ -43,9 +41,9 @@ public class SvNationalIdentificationNumberProvider implements NationalIdentific
 	private LocalDate issueDate;
 	private Person.Sex sex;
 
-	@Inject
+
 	public SvNationalIdentificationNumberProvider(DateProducer dateProducer, BaseProducer baseProducer,
-	                                              @Assisted NationalIdentificationNumberProperties.Property... properties) {
+	                                              NationalIdentificationNumberProperties.Property... properties) {
 		this.dateProducer = dateProducer;
 		this.baseProducer = baseProducer;
 

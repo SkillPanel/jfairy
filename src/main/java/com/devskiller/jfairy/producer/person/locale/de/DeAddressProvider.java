@@ -1,6 +1,5 @@
 package com.devskiller.jfairy.producer.person.locale.de;
 
-import javax.inject.Inject;
 
 import com.devskiller.jfairy.data.DataMaster;
 import com.devskiller.jfairy.producer.BaseProducer;
@@ -11,7 +10,7 @@ import com.devskiller.jfairy.producer.person.AbstractAddressProvider;
  */
 public class DeAddressProvider extends AbstractAddressProvider {
 
-	@Inject
+
 	public DeAddressProvider(DataMaster dataMaster, BaseProducer baseProducer) {
 		super(dataMaster, baseProducer);
 	}

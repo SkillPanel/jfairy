@@ -1,17 +1,14 @@
 package com.devskiller.jfairy.producer;
 
-import javax.inject.Inject;
-import javax.inject.Singleton;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Singleton
 public class BaseProducer {
 
 	private final RandomGenerator random;
 
-	@Inject
+
 	public BaseProducer(RandomGenerator random) {
 		this.random = random;
 	}
