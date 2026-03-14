@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang3.EnumUtils;
+import org.apache.commons.lang3.Validate;
 import org.snakeyaml.engine.v2.api.Load;
 import org.snakeyaml.engine.v2.api.LoadSettings;
 import com.devskiller.jfairy.producer.BaseProducer;
@@ -74,22 +75,15 @@ public class MapBasedDataMaster implements DataMaster {
 		return EnumUtils.getEnum(LanguageCode.class, getString(LANGUAGE_TAG).toUpperCase());
 	}
 
-	@SuppressWarnings({"unchecked", "ConstantConditions"}) // checked by checkArgument
+	@SuppressWarnings({"unchecked", "ConstantConditions"}) // checked by Validate
 	<T> T getData(String key, Class<T> type) {
-		if (key == null) {
-			throw new IllegalArgumentException("key cannot be null");
-		}
-		if (type == null) {
-			throw new IllegalArgumentException("type cannot be null");
-		}
+		Validate.notNull(key, "key cannot be null");
+		Validate.notNull(type, "type cannot be null");
 
 		Object element = dataSource.get(key);
-		if (element == null) {
-			throw new IllegalArgumentException("No such key: " + key);
-		}
-		if (!type.isAssignableFrom(element.getClass())) {
-			throw new IllegalArgumentException("Element under desired key has incorrect type - should be " + type.getSimpleName());
-		}
+		Validate.isTrue(element != null, "No such key: %s", key);
+		Validate.isTrue(type.isAssignableFrom(element.getClass()),
+			"Element under desired key has incorrect type - should be %s", type.getSimpleName());
 
 		return (T) element;
 	}

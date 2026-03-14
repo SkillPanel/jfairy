@@ -9,11 +9,11 @@ public interface PersonProvider extends Supplier<Person> {
 
 	int MIN_AGE = 1;
 	int MAX_AGE = 100;
-String FIRST_NAME = "firstNames";
-String LAST_NAME = "lastNames";
-String PERSONAL_EMAIL = "personalEmails";
-String TELEPHONE_NUMBER_FORMATS = "telephone_number_formats";
-String JOB_TITLE = "jobTitles";
+	String FIRST_NAME = "firstNames";
+	String LAST_NAME = "lastNames";
+	String PERSONAL_EMAIL = "personalEmails";
+	String TELEPHONE_NUMBER_FORMATS = "telephone_number_formats";
+	String JOB_TITLE = "jobTitles";
 
 	@Override
 	Person get();

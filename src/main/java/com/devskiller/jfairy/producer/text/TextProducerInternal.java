@@ -4,7 +4,6 @@
 package com.devskiller.jfairy.producer.text;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.devskiller.jfairy.data.DataMaster;
@@ -105,8 +104,9 @@ public class TextProducerInternal {
 
 	private String sentence(List<String> words, int wordCount) {
 		String randomWords = rawWords(words, wordCount, WORD_COUNT_PRECISION_IN_SENTENCE);
-		List<String> sentences = new ArrayList<>();
-		for (String sentence : Arrays.asList(randomWords.split("\\. "))) {
+		String[] parts = randomWords.split("\\. ");
+		List<String> sentences = new ArrayList<>(parts.length);
+		for (String sentence : parts) {
 			sentences.add(capitalize(sentence));
 		}
 		String sentence = capitalize(String.join(". ", sentences));

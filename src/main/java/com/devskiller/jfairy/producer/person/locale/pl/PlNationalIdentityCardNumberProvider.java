@@ -6,6 +6,8 @@ import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.DateProducer;
 import com.devskiller.jfairy.producer.person.NationalIdentityCardNumberProvider;
 import com.devskiller.jfairy.producer.util.AlphaNumberSystem;
+import org.apache.commons.lang3.Validate;
+
 import static java.lang.String.copyValueOf;
 import static java.lang.String.valueOf;
 import static java.lang.System.arraycopy;
@@ -18,16 +20,16 @@ import static org.apache.commons.lang3.StringUtils.leftPad;
  */
 public class PlNationalIdentityCardNumberProvider implements NationalIdentityCardNumberProvider {
 
-static final int ISSUING_BEGIN = 2000;
+	static final int ISSUING_BEGIN = 2000;
 
 	private static final int[] WEIGHTS = new int[]{7, 3, 1, 0, 7, 3, 1, 7, 3};
 	private static final int CHECKSUM_INDEX = 3;
 
 	private static final int DIGITS_PART_SIZE = 5;
 
-static final int MAX_DIGITS_PART_VALUE = 99999;
+	static final int MAX_DIGITS_PART_VALUE = 99999;
 
-static final int LETTER_WEIGHT = 45;
+	static final int LETTER_WEIGHT = 45;
 	private static final int LETTERS_PART_SIZE = 3;
 	private static final int LETTER_VALUE_MODIFIER = 10;
 	private static final int ALPHABET_SIZE = 26;
@@ -53,9 +55,7 @@ static final int LETTER_WEIGHT = 45;
 
 	public String get(LocalDate date) {
 
-		if (date.getYear() < ISSUING_BEGIN) {
-			throw new IllegalArgumentException("Polish ID was introduced in 2000");
-		}
+		Validate.isTrue(date.getYear() >= ISSUING_BEGIN, "Polish ID was introduced in 2000");
 
 		char[] id = new char[WEIGHTS.length];
 

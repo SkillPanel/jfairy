@@ -41,7 +41,7 @@ class EnVATIdentificationNumberProviderSpec extends Specification {
 			for (char digit : areaPart.toCharArray()) {
 				digit.isDigit()
 			}
-			!EnVATIdentificationNumberProvider.excludedNumbers.contains(areaNumber)
+			!EnVATIdentificationNumberProvider.EXCLUDED_NUMBERS.contains(areaNumber)
 	}
 
 	def "should generate number with valid serial part"() {

@@ -1,6 +1,5 @@
 package com.devskiller.jfairy.producer.company.locale.en;
 
-import java.util.HashSet;
 import java.util.Set;
 
 import com.devskiller.jfairy.producer.BaseProducer;
@@ -27,7 +26,7 @@ public class EnVATIdentificationNumberProvider implements VATIdentificationNumbe
 	private static final int AREA_NUMBER_LENGTH = 2;
 
 	private BaseProducer baseProducer;
-	private static Set<Integer> excludedNumbers = new HashSet<>(Set.of(7, 8, 9, 17, 18, 19, 28, 29, 41, 47, 49, 69, 70, 79, 89, 96, 97));
+	private static final Set<Integer> EXCLUDED_NUMBERS = Set.of(7, 8, 9, 17, 18, 19, 28, 29, 41, 47, 49, 69, 70, 79, 89, 96, 97);
 
 
 	public EnVATIdentificationNumberProvider(BaseProducer baseProducer) {
@@ -58,7 +57,7 @@ public class EnVATIdentificationNumberProvider implements VATIdentificationNumbe
 		Integer number;
 		do {
 			number = baseProducer.randomBetween(0, 99);
-		} while (excludedNumbers.contains(number));
+		} while (EXCLUDED_NUMBERS.contains(number));
 		char[] digits = leftPad(number.toString(), AREA_NUMBER_LENGTH, "0").toCharArray();
 		arraycopy(digits, 0, ein, 0, digits.length);
 
