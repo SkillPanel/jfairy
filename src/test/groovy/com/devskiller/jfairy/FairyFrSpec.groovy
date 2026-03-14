@@ -13,14 +13,14 @@ class FairyFrSpec extends Specification {
 		when:
 			Person person = fairy.person();
 		then:
-			person.fullName == 'Tancrède Besnard'
+			person.fullName == 'Flavien Garcia'
 	}
 
 	def "Should create French city"() {
 		when:
 			Person person = fairy.person();
 		then:
-			person.address.city == 'Échirolles'
+			person.address.city == 'Vitrolles'
 	}
 
 }

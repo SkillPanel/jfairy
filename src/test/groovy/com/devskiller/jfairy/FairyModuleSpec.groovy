@@ -25,13 +25,15 @@ class FairyModuleSpec extends Specification {
 				Locale.forLanguageTag(locale), mapBasedDataMaster, baseProducer, dateProducer)
 
 		then:
-			providers.addressProvider.getClass() == expectedAddressProvider
+			providers.addressProvider().getClass() == expectedAddressProvider
 
 		where:
 			locale | expectedAddressProvider
 			"en"   | EnAddressProvider.class
 			"pl"   | PlAddressProvider.class
 			"es"   | EsAddressProvider.class
+			"fr"   | EnAddressProvider.class
+			"it"   | EnAddressProvider.class
 			"de"   | DeAddressProvider.class
 			"sv"   | SvAddressProvider.class
 			"ka"   | KaAddressProvider.class
@@ -44,6 +46,6 @@ class FairyModuleSpec extends Specification {
 				Locale.forLanguageTag("xx"), mapBasedDataMaster, baseProducer, dateProducer)
 
 		then:
-			providers.addressProvider.getClass() == EnAddressProvider.class
+			providers.addressProvider().getClass() == EnAddressProvider.class
 	}
 }

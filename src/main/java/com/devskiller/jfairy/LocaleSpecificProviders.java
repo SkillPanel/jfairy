@@ -9,22 +9,10 @@ import com.devskiller.jfairy.producer.person.PassportNumberProvider;
 /**
  * Container for locale-specific provider implementations
  */
-class LocaleSpecificProviders {
-	final NationalIdentificationNumberFactory nationalIdentificationNumberFactory;
-	final NationalIdentityCardNumberProvider nationalIdentityCardNumberProvider;
-	final VATIdentificationNumberProvider vatIdentificationNumberProvider;
-	final AddressProvider addressProvider;
-	final PassportNumberProvider passportNumberProvider;
-
-	LocaleSpecificProviders(NationalIdentificationNumberFactory nationalIdentificationNumberFactory,
-	                        NationalIdentityCardNumberProvider nationalIdentityCardNumberProvider,
-	                        VATIdentificationNumberProvider vatIdentificationNumberProvider,
-	                        AddressProvider addressProvider,
-	                        PassportNumberProvider passportNumberProvider) {
-		this.nationalIdentificationNumberFactory = nationalIdentificationNumberFactory;
-		this.nationalIdentityCardNumberProvider = nationalIdentityCardNumberProvider;
-		this.vatIdentificationNumberProvider = vatIdentificationNumberProvider;
-		this.addressProvider = addressProvider;
-		this.passportNumberProvider = passportNumberProvider;
-	}
+record LocaleSpecificProviders(
+		NationalIdentificationNumberFactory nationalIdentificationNumberFactory,
+		NationalIdentityCardNumberProvider nationalIdentityCardNumberProvider,
+		VATIdentificationNumberProvider vatIdentificationNumberProvider,
+		AddressProvider addressProvider,
+		PassportNumberProvider passportNumberProvider) {
 }

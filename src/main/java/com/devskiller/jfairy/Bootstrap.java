@@ -2,8 +2,8 @@ package com.devskiller.jfairy;
 
 import java.io.IOException;
 import java.util.Locale;
-
 import java.util.function.Supplier;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,8 +19,6 @@ import com.devskiller.jfairy.producer.net.IPNumberProducer;
 import com.devskiller.jfairy.producer.payment.CreditCardProvider;
 import com.devskiller.jfairy.producer.payment.IBANFactory;
 import com.devskiller.jfairy.producer.payment.IBANFactoryImpl;
-import com.devskiller.jfairy.producer.person.CompanyEmailProvider;
-import com.devskiller.jfairy.producer.person.EmailProvider;
 import com.devskiller.jfairy.producer.person.PersonFactory;
 import com.devskiller.jfairy.producer.person.PersonFactoryImpl;
 import com.devskiller.jfairy.producer.text.TextProducerInternal;
@@ -63,16 +61,16 @@ public class Bootstrap {
 		
 		// Create company factory first (needed by PersonFactory)
 		CompanyFactory companyFactory = new CompanyFactoryImpl(
-				baseProducer, dataMaster, localeProviders.vatIdentificationNumberProvider
+				baseProducer, dataMaster, localeProviders.vatIdentificationNumberProvider()
 		);
-		
+
 		// Create person factory
 		PersonFactory personFactory = new PersonFactoryImpl(
 				dataMaster, dateProducer, baseProducer,
-				localeProviders.addressProvider,
-				localeProviders.nationalIdentificationNumberFactory,
-				localeProviders.nationalIdentityCardNumberProvider,
-				localeProviders.passportNumberProvider,
+				localeProviders.addressProvider(),
+				localeProviders.nationalIdentificationNumberFactory(),
+				localeProviders.nationalIdentityCardNumberProvider(),
+				localeProviders.passportNumberProvider(),
 				timeProvider,
 				companyFactory
 		);
@@ -162,8 +160,7 @@ public class Bootstrap {
 		private DataMaster dataMaster;
 
 
-		private MapBasedDataMaster getDefaultDataMaster() {
-			BaseProducer baseProducer = new BaseProducer(randomGenerator);
+		private MapBasedDataMaster getDefaultDataMaster(BaseProducer baseProducer) {
 			return new MapBasedDataMaster(baseProducer);
 		}
 
@@ -208,7 +205,7 @@ public class Bootstrap {
 		/**
 		 * Sets a custom DataMaster implementation.
 		 *
-		 * @param dataMasterProvider The random seed to use.
+		 * @param dataMasterProvider The DataMaster supplier to use.
 		 * @return the same Builder (for chaining).
 		 */
 		public Builder withDataMasterProvider(Supplier<DataMaster> dataMasterProvider) {
@@ -224,7 +221,8 @@ public class Bootstrap {
 		 */
 		public Fairy build() {
 			if (dataMaster == null) {
-				dataMaster = getDefaultDataMaster();
+				BaseProducer baseProducer = new BaseProducer(randomGenerator);
+				dataMaster = getDefaultDataMaster(baseProducer);
 				fillDefaultDataMaster((MapBasedDataMaster) dataMaster, locale, filePrefix);
 			}
 			return createFairy(dataMaster, locale, randomGenerator);

@@ -1,5 +1,4 @@
 package com.devskiller.jfairy;
-import java.util.function.Supplier;
 
 /**
  * @author Jakub Kubrynski
