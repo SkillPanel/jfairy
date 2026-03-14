@@ -132,4 +132,24 @@ public final class Fairy {
 	public NetworkProducer networkProducer() {
 		return networkProducer;
 	}
+
+	/**
+	 * Returns a {@link UniqueFairy} that ensures generated objects are unique
+	 * by their natural key (email for Person, name for Company, etc.).
+	 *
+	 * @return A {@link UniqueFairy} instance
+	 */
+	public UniqueFairy unique() {
+		return new UniqueFairy(this, UniqueEnforcer.DEFAULT_MAX_RETRIES);
+	}
+
+	/**
+	 * Returns a {@link UniqueFairy} with custom max retries.
+	 *
+	 * @param maxRetries maximum generation attempts before throwing
+	 * @return A {@link UniqueFairy} instance
+	 */
+	public UniqueFairy unique(int maxRetries) {
+		return new UniqueFairy(this, maxRetries);
+	}
 }
