@@ -18,6 +18,7 @@ import com.devskiller.jfairy.producer.person.locale.en.EnAddressProvider;
 import com.devskiller.jfairy.producer.person.locale.en.EnNationalIdentityCardNumberProvider;
 import com.devskiller.jfairy.producer.person.locale.en.EnPassportNumberProvider;
 import com.devskiller.jfairy.producer.company.locale.en.EnVATIdentificationNumberProvider;
+import com.devskiller.jfairy.producer.person.locale.fr.FrAddressProvider;
 import com.devskiller.jfairy.producer.person.locale.es.EsAddressProvider;
 import com.devskiller.jfairy.producer.person.locale.es.EsNationalIdentityCardNumberProvider;
 import com.devskiller.jfairy.producer.person.locale.es.EsPassportNumberProvider;
@@ -68,7 +69,8 @@ class LocaleSpecificProvidersFactory {
 			case PL -> createPlProviders(dataMaster, baseProducer, dateProducer);
 			case EN -> createEnProviders(dataMaster, baseProducer, dateProducer);
 			case ES -> createEsProviders(dataMaster, baseProducer, dateProducer);
-			case FR, IT -> createEnProviders(dataMaster, baseProducer, dateProducer);
+			case FR -> createFrProviders(dataMaster, baseProducer, dateProducer);
+			case IT -> createEnProviders(dataMaster, baseProducer, dateProducer);
 			case SV -> createSvProviders(dataMaster, baseProducer, dateProducer);
 			case ZH -> createZhProviders(dataMaster, baseProducer, dateProducer);
 			case DE -> createDeProviders(dataMaster, baseProducer, dateProducer);
@@ -96,6 +98,18 @@ class LocaleSpecificProvidersFactory {
 				new EnNationalIdentityCardNumberProvider(baseProducer),
 				new EnVATIdentificationNumberProvider(baseProducer),
 				new EnAddressProvider(dataMaster, baseProducer),
+				new EnPassportNumberProvider()
+		);
+	}
+
+	private static LocaleSpecificProviders createFrProviders(DataMaster dataMaster,
+	                                                         BaseProducer baseProducer,
+	                                                         DateProducer dateProducer) {
+		return new LocaleSpecificProviders(
+				new NoNationalIdentificationNumberFactory(),
+				new EnNationalIdentityCardNumberProvider(baseProducer),
+				new EnVATIdentificationNumberProvider(baseProducer),
+				new FrAddressProvider(dataMaster, baseProducer),
 				new EnPassportNumberProvider()
 		);
 	}
