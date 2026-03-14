@@ -58,6 +58,12 @@ Fairy plFairy = Fairy.create(Locale.forLanguageTag("pl"));
 // Polish version
 ```
 
+## Thread safety
+
+`Fairy` object should not be used concurrently by multiple threads. It is recommended to create `Fairy` instance for each thread.
+
+Some methods are not thread-safe when multiple threads share the same `Fairy` object. For other methods it is still recommended to create a separate `Fairy` object, because `Random` object utilized underneath does not perform well when used concurrently by multiple threads.
+
 ## Other samples
 
 Look into [code samples](https://github.com/Devskiller/jfairy/tree/master/src/test/groovy/snippets/)
