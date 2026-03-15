@@ -117,6 +117,7 @@
 		<dep.plugin.resources.version>3.5.0</dep.plugin.resources.version>
 		<dep.plugin.source.version>3.4.0</dep.plugin.source.version>
 		<dep.plugin.surefire.version>3.5.5</dep.plugin.surefire.version>
+		<dep.plugin.versions.version>2.21.0</dep.plugin.versions.version>
 	</properties>
 
 	<dependencies>
@@ -421,6 +422,21 @@
 				<version>${dep.plugin.release.version}</version>
 				<configuration>
 					<releaseProfiles>release</releaseProfiles>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>versions-maven-plugin</artifactId>
+				<version>${dep.plugin.versions.version}</version>
+				<configuration>
+					<ruleSet>
+						<ignoreVersions>
+							<ignoreVersion>
+								<type>regex</type>
+								<version>.*(?i)(alpha|beta|rc|cr|preview|milestone|[mb][0-9]+).*</version>
+							</ignoreVersion>
+						</ignoreVersions>
+					</ruleSet>
 				</configuration>
 			</plugin>
 		</plugins>
