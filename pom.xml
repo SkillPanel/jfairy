@@ -9,6 +9,7 @@
 	<name>jFairy</name>
 	<description>Java fake data generator</description>
 	<url>https://github.com/Devskiller/jfairy</url>
+    <inceptionYear>2013</inceptionYear>
 
 	<licenses>
 		<license>
@@ -79,6 +80,8 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
+		<maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss z</maven.build.timestamp.format>
+
 		<!-- Dependency versions (ordered by usage) -->
 		<dep.snakeyaml-engine.version>2.3</dep.snakeyaml-engine.version>
 		<dep.jspecify.version>1.0.0</dep.jspecify.version>
@@ -105,6 +108,7 @@
 		<dep.plugin.gpg.version>3.2.8</dep.plugin.gpg.version>
 		<dep.plugin.jacoco.version>0.8.14</dep.plugin.jacoco.version>
 		<dep.plugin.javadoc.version>3.12.0</dep.plugin.javadoc.version>
+		<dep.plugin.jar.version>3.5.0</dep.plugin.jar.version>
 		<dep.plugin.release.version>3.3.1</dep.plugin.release.version>
 		<dep.plugin.resources.version>3.5.0</dep.plugin.resources.version>
 		<dep.plugin.source.version>3.4.0</dep.plugin.source.version>
@@ -332,6 +336,31 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${dep.plugin.jar.version}</version>
+				<configuration>
+					<archive>
+						<addMavenDescriptor>false</addMavenDescriptor>
+						<compress>true</compress>
+						<index>false</index>
+						<manifest>
+							<addClasspath>false</addClasspath>
+							<addDefaultEntries>true</addDefaultEntries>
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>  <!-- Implementation-Title/Version/Vendor -->
+							<addDefaultSpecificationEntries>false</addDefaultSpecificationEntries>
+							<addBuildEnvironmentEntries>true</addBuildEnvironmentEntries>  <!-- Build-Jdk, Build-Os, Build-Tool -->
+						</manifest>
+
+						<manifestEntries>
+							<Build-Time>${maven.build.timestamp}</Build-Time>
+							<Project-Url>${project.url}</Project-Url>
+							<Project-Inception-Year>${project.inceptionYear}</Project-Inception-Year>
+						</manifestEntries>
+					</archive>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
