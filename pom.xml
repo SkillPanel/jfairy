@@ -98,12 +98,14 @@
 		<dep.plugin.checkstyle.version>3.6.0</dep.plugin.checkstyle.version>
 		<dep.plugin.compiler.version>3.13.0</dep.plugin.compiler.version>
 		<dep.plugin.coveralls.version>4.3.0</dep.plugin.coveralls.version>
+		<dep.plugin.deploy.version>3.1.4</dep.plugin.deploy.version>
 		<dep.plugin.error-prone.version>2.39.0</dep.plugin.error-prone.version>
 		<dep.plugin.flatten.version>1.7.0</dep.plugin.flatten.version>
 		<dep.plugin.gmavenplus.version>4.2.0</dep.plugin.gmavenplus.version>
 		<dep.plugin.gpg.version>3.2.8</dep.plugin.gpg.version>
 		<dep.plugin.jacoco.version>0.8.13</dep.plugin.jacoco.version>
 		<dep.plugin.javadoc.version>3.12.0</dep.plugin.javadoc.version>
+		<dep.plugin.release.version>3.3.1</dep.plugin.release.version>
 		<dep.plugin.resources.version>3.3.1</dep.plugin.resources.version>
 		<dep.plugin.source.version>3.3.1</dep.plugin.source.version>
 		<dep.plugin.surefire.version>3.5.5</dep.plugin.surefire.version>
@@ -334,6 +336,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-deploy-plugin</artifactId>
+				<version>${dep.plugin.deploy.version}</version>
 				<configuration>
 					<skip>true</skip>
 				</configuration>
@@ -341,6 +344,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
+				<version>${dep.plugin.release.version}</version>
 				<configuration>
 					<releaseProfiles>release</releaseProfiles>
 				</configuration>
