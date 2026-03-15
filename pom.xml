@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.1.0 https://maven.apache.org/xsd/maven-4.1.0.xsd" root="true">
+	<modelVersion>4.1.0</modelVersion>
 
 	<groupId>com.devskiller</groupId>
 	<artifactId>jfairy</artifactId>
-	<version>${revision}</version>
+	<version>0.8.3-SNAPSHOT</version>
 
 	<name>jFairy</name>
 	<description>Java fake data generator</description>
@@ -49,20 +49,7 @@
 		<tag>HEAD</tag>
 	</scm>
 
-	<distributionManagement>
-		<repository>
-			<id>central</id>
-			<name>Central Repository</name>
-			<url>https://central.sonatype.com/api/v1/publisher</url>
-		</repository>
-		<snapshotRepository>
-			<id>central</id>
-			<name>Central Repository Snapshots</name>
-			<url>https://central.sonatype.com/api/v1/publisher</url>
-		</snapshotRepository>
-	</distributionManagement>
-
-	<issueManagement>
+<issueManagement>
 		<system>GitHub Issues</system>
 		<url>https://github.com/Devskiller/jfairy/issues</url>
 	</issueManagement>
@@ -73,7 +60,6 @@
 	</ciManagement>
 
 	<properties>
-		<revision>0.8.3-SNAPSHOT</revision>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -276,32 +262,6 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>flatten-maven-plugin</artifactId>
-				<version>1.7.0</version>
-				<configuration>
-					<outputDirectory>${project.build.directory}</outputDirectory>
-					<updatePomFile>true</updatePomFile>
-					<flattenMode>oss</flattenMode>
-				</configuration>
-				<executions>
-					<execution>
-						<id>flatten</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>flatten</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>flatten-clean</id>
-						<phase>clean</phase>
-						<goals>
-							<goal>clean</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-deploy-plugin</artifactId>
 				<configuration>
@@ -309,10 +269,30 @@
 				</configuration>
 			</plugin>
 			<plugin>
+				<groupId>org.sonatype.central</groupId>
+				<artifactId>central-publishing-maven-plugin</artifactId>
+				<version>0.10.0</version>
+				<extensions>true</extensions>
+				<executions>
+					<execution>
+						<id>central-publish</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>publish</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<publishingServerId>central</publishingServerId>
+					<autoPublish>false</autoPublish>
+				</configuration>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
 				<configuration>
 					<releaseProfiles>release</releaseProfiles>
+					<tagNameFormat>v@{project.version}</tagNameFormat>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -365,26 +345,6 @@
 								</goals>
 							</execution>
 						</executions>
-					</plugin>
-				<plugin>
-						<groupId>org.sonatype.central</groupId>
-						<artifactId>central-publishing-maven-plugin</artifactId>
-						<version>0.10.0</version>
-						<extensions>true</extensions>
-						<executions>
-							<execution>
-								<id>central-publish</id>
-								<phase>deploy</phase>
-								<goals>
-									<goal>publish</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<publishingServerId>central</publishingServerId>
-							<autoPublish>true</autoPublish>
-							<waitUntil>published</waitUntil>
-						</configuration>
 					</plugin>
 				</plugins>
 			</build>
