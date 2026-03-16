@@ -8,7 +8,7 @@ import com.devskiller.jfairy.producer.person.Address
 class PlAddressSpec extends Specification {
 
 	private final int SEED = 8
-	private Fairy fairy;
+	private Fairy fairy
 	private Address address
 
 	def setup() {
@@ -26,10 +26,10 @@ class PlAddressSpec extends Specification {
 			address.streetNumber == "23"
 	}
 
-    def "should generate random apartmentNumber"() {
-        expect:
-            address.apartmentNumber == "210"
-    }
+	def "should generate random apartmentNumber"() {
+		expect:
+			address.apartmentNumber == "210"
+	}
 
 	def "should generate random postalCode"() {
 		expect:
@@ -38,7 +38,7 @@ class PlAddressSpec extends Specification {
 
 	def "should generate random city"() {
 		expect:
-		    address.city == "Milicz"
+			address.city == "Milicz"
 	}
 
 	def "should return addressLine1 in pl locale format"() {

@@ -1,5 +1,7 @@
 package com.devskiller.jfairy
 
+import java.util.function.Supplier
+
 import com.devskiller.jfairy.producer.person.Person
 import com.devskiller.jfairy.producer.company.Company
 import spock.lang.Specification
@@ -79,9 +81,9 @@ class UniqueEnforcerSpec extends Specification {
 			int counter = 0
 			def unique = UniqueEnforcer.of({ -> counter++ }, { it }, 100)
 		when:
-			unique.next()                          // 0 via default
-			unique.next({ -> counter++ } as java.util.function.Supplier)  // 1 via custom
-			unique.next()                          // 2 via default
+			unique.next()                             // 0 via default
+			unique.next({ -> counter++ } as Supplier) // 1 via custom
+			unique.next()                             // 2 via default
 		then:
 			unique.size() == 3
 	}

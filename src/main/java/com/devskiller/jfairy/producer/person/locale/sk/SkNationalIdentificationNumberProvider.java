@@ -10,14 +10,13 @@ import com.devskiller.jfairy.producer.person.NationalIdentificationNumberPropert
 import com.devskiller.jfairy.producer.person.NationalIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.person.Person;
 
-import static java.lang.Integer.valueOf;
 import static java.lang.String.format;
 
 /**
  * Slovak National Identification Number (known as Rodne cislo)
  * <p>
  * Based on the same algorithm as Polish PESEL
- * More info: http://en.wikipedia.org/wiki/PESEL
+ * More info: <a href="http://en.wikipedia.org/wiki/PESEL">PESEL</a>
  */
 public class SkNationalIdentificationNumberProvider implements NationalIdentificationNumberProvider {
 
@@ -39,8 +38,7 @@ public class SkNationalIdentificationNumberProvider implements NationalIdentific
 	private LocalDate issueDate;
 	private Person.Sex sex;
 
-	public SkNationalIdentificationNumberProvider(DateProducer dateProducer, BaseProducer baseProducer,
-	                                              NationalIdentificationNumberProperties.Property... properties) {
+	public SkNationalIdentificationNumberProvider(DateProducer dateProducer, BaseProducer baseProducer, NationalIdentificationNumberProperties.Property... properties) {
 		this.dateProducer = dateProducer;
 		this.baseProducer = baseProducer;
 
@@ -97,7 +95,7 @@ public class SkNationalIdentificationNumberProvider implements NationalIdentific
 			return false;
 		}
 
-		int checksum = valueOf(nationalIdentificationNumber.substring(size - 1));
+		int checksum = Integer.parseInt(nationalIdentificationNumber.substring(size - 1));
 		int checkDigit = calculateChecksum(nationalIdentificationNumber);
 
 		return checkDigit == checksum;

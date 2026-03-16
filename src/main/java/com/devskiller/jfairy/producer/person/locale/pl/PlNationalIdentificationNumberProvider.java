@@ -10,14 +10,13 @@ import com.devskiller.jfairy.producer.person.NationalIdentificationNumberPropert
 import com.devskiller.jfairy.producer.person.NationalIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.person.Person;
 
-import static java.lang.Integer.valueOf;
 import static java.lang.String.format;
 
 /**
  * Spanish National Identification Number (known as PESEL or Polish Powszechny Elektroniczny System Ewidencji Ludności)
  * <p>
- * Universal Electronic System for Registration of the Population)
- * More info: http://en.wikipedia.org/wiki/PESEL
+ * Universal Electronic System for Registration of the Population
+ * More info: <a href="http://en.wikipedia.org/wiki/PESEL">PESEL</a>
  */
 public class PlNationalIdentificationNumberProvider implements NationalIdentificationNumberProvider {
 
@@ -39,8 +38,7 @@ public class PlNationalIdentificationNumberProvider implements NationalIdentific
 	private LocalDate issueDate;
 	private Person.Sex sex;
 
-	public PlNationalIdentificationNumberProvider(DateProducer dateProducer, BaseProducer baseProducer,
-		                                              NationalIdentificationNumberProperties.Property... properties) {
+	public PlNationalIdentificationNumberProvider(DateProducer dateProducer, BaseProducer baseProducer, NationalIdentificationNumberProperties.Property... properties) {
 		this.dateProducer = dateProducer;
 		this.baseProducer = baseProducer;
 
@@ -96,7 +94,7 @@ public class PlNationalIdentificationNumberProvider implements NationalIdentific
 			return false;
 		}
 
-		int checksum = valueOf(nationalIdentificationNumber.substring(size - 1));
+		int checksum = Integer.parseInt(nationalIdentificationNumber.substring(size - 1));
 		int checkDigit = calculateChecksum(nationalIdentificationNumber);
 
 		return checkDigit == checksum;

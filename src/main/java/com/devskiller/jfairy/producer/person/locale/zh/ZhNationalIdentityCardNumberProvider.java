@@ -21,7 +21,7 @@ public class ZhNationalIdentityCardNumberProvider implements NationalIdentityCar
 	 * The last 4 digit is an order number from 0001 to 9999
 	 */
 	private static final int ORDER_MAX = 9999;
-	private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+	private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd");
 
 	private final BaseProducer baseProducer;
 	private final DateProducer dateProducer;
@@ -44,6 +44,6 @@ public class ZhNationalIdentityCardNumberProvider implements NationalIdentityCar
 
 	private String getBirthDate() {
 		LocalDateTime birthDate = this.dateProducer.randomDateInThePast(50);
-		return formatter.format(birthDate);
+		return FORMATTER.format(birthDate);
 	}
 }

@@ -65,8 +65,7 @@ public class BaseProducer {
 		if (elements.size() >= count) {
 			return extractRandomList(elements, count);
 		} else {
-			List<T> randomElements = new ArrayList<T>();
-			randomElements.addAll(extractRandomList(elements, count % elements.size()));
+			List<T> randomElements = new ArrayList<>(extractRandomList(elements, count % elements.size()));
 			do {
 				randomElements.addAll(extractRandomList(elements, elements.size()));
 			} while (randomElements.size() < count);
@@ -75,8 +74,7 @@ public class BaseProducer {
 	}
 
 	private <T> List<T> extractRandomList(List<T> elements, int count) {
-		random.shuffle(elements);
-		return elements.subList(0, count);
+		return random.shuffle(elements).subList(0, count);
 	}
 
 	/**

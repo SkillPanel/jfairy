@@ -15,7 +15,7 @@ import static java.lang.String.format;
 /**
  * Swedish National Identification Number (known as Personal Identity Number or Personnummer in sweden)
  * <p>
- * https://en.wikipedia.org/wiki/Personal_identity_number_(Sweden)
+ * <a href="https://en.wikipedia.org/wiki/Personal_identity_number_(Sweden)">Personal identity number (Sweden)</a>
  * <p>
  * E.g.
  * 870508-5853
@@ -96,7 +96,7 @@ public class SvNationalIdentificationNumberProvider implements NationalIdentific
 			return false;
 		}
 
-		int checksum = Integer.valueOf(nationalIdentificationNumber.substring(size - 1));
+		int checksum = Integer.parseInt(nationalIdentificationNumber.substring(size - 1));
 		int checkDigit = calculateChecksum(nationalIdentificationNumber);
 
 		return checkDigit == checksum;

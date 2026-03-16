@@ -7,7 +7,7 @@ import com.devskiller.jfairy.producer.text.TextProducer
 
 class TextSpec extends Specification {
 
-	private TextProducer text;
+	private TextProducer text
 
 	def setup() {
 		text = Fairy.create().textProducer()

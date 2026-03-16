@@ -27,20 +27,12 @@ public class EmailProvider implements Supplier<String> {
 
 	@Override
 	public String get() {
-		String prefix = "";
-		switch (baseProducer.randomBetween(1, 3)) {
-			case 1:
-				prefix = StringUtils.replace(firstName + lastName, " ", "");
-				break;
-			case 2:
-				prefix = StringUtils.replace(firstName + "." + lastName, " ", ".");
-				break;
-			case 3:
-				prefix = StringUtils.replace(lastName, " ", "");
-				break;
-			default:
-				throw new IllegalStateException("Unexpected value: " + baseProducer.randomBetween(1, 3));
-		}
+		String prefix = switch (baseProducer.randomBetween(1, 3)) {
+			case 1 -> StringUtils.replace(firstName + lastName, " ", "");
+			case 2 -> StringUtils.replace(firstName + "." + lastName, " ", ".");
+			case 3 -> StringUtils.replace(lastName, " ", "");
+			default -> throw new IllegalStateException("Unexpected value: " + baseProducer.randomBetween(1, 3));
+		};
 		String email = lowerCase(prefix + '@' + dataMaster.getRandomValue(PERSONAL_EMAIL));
 		return latinize(email);
 	}

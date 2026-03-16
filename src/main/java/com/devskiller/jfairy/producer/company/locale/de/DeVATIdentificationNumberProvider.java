@@ -7,7 +7,7 @@ import static com.devskiller.jfairy.producer.util.RandomUtils.randomNumeric;
 /**
  * German VAT identification number (Umsatzsteuer-Identifikationsnummer or USt-IdNr.)
  * <p>
- * https://en.wikipedia.org/wiki/VAT_identification_number
+ * <a href="https://en.wikipedia.org/wiki/VAT_identification_number">VAT identification number</a>
  *
  * @author Roland Weisleder
  */

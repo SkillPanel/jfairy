@@ -62,7 +62,7 @@ public class SkPassportNumberProvider implements PassportNumberProvider {
 		}
 
 		for (int i = 3; i < 9; i++) {
-			Integer checkSumValue = getNumericValue(passport[i]);
+			int checkSumValue = getNumericValue(passport[i]);
 			checkSum += checkSumValue * WEIGHTS[i];
 		}
 
@@ -103,7 +103,7 @@ public class SkPassportNumberProvider implements PassportNumberProvider {
 		}
 
 		for (int i = 2; i < 9; i++) {
-			Integer checkSumValue = getNumericValue(passport[i]);
+			int checkSumValue = getNumericValue(passport[i]);
 			checkSum += checkSumValue * WEIGHTS[i];
 		}
 

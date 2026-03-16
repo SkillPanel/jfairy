@@ -36,9 +36,7 @@ public class CreditCardProvider implements Supplier<CreditCard> {
 		Integer prefix = dataMaster.getValuesOfType(DATA_KEY, CARD_VENDOR, Integer.class);
 		String stringPrefix = String.valueOf(prefix);
 		StringBuilder builder = new StringBuilder(stringPrefix);
-		for (int i = stringPrefix.length(); i < 15; i++) {
-			builder.append("#");
-		}
+		builder.append("#".repeat(Math.max(0, 15 - stringPrefix.length())));
 		return completeNumber(baseProducer.numerify(builder.toString()));
 	}
 

@@ -69,10 +69,10 @@ public final class ZhFairyUtil {
 	 */
 	public static String getRandomNumStr(BaseProducer baseProducer, int max, int paddingSize) {
 		int rndNum = baseProducer.randomBetween(1, max);
-		String numStr = "" + rndNum;
+		StringBuilder numStr = new StringBuilder("" + rndNum);
 		while (numStr.length() < paddingSize) {
-			numStr = "0" + numStr;
+			numStr.insert(0, "0");
 		}
-		return numStr;
+		return numStr.toString();
 	}
 }

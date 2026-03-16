@@ -6,7 +6,7 @@ import com.devskiller.jfairy.Fairy
 
 class SvPassportNumberProviderSpec extends Specification {
 
-	private Fairy fairy;
+	private Fairy fairy
 	private String passportNumber
 
 	def setup() {

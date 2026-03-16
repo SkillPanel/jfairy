@@ -24,10 +24,10 @@ class CompanyProviderSpec extends Specification {
 			dataMaster.getRandomValue(COMPANY_EMAIL) >> "info"
 			dataMaster.getRandomValue(COMPANY_NAME) >> "mercedes/bosch"
 			dataMaster.getRandomValue(DOMAIN) >> "com"
-			CompanyProvider companyProvider = new DefaultCompanyProvider(baseProducer, dataMaster, vatIdentificationNumberProvider);
+			CompanyProvider companyProvider = new DefaultCompanyProvider(baseProducer, dataMaster, vatIdentificationNumberProvider)
 
 		when:
-			String email = companyProvider.get().email;
+			String email = companyProvider.get().email
 
 		then:
 			email == "info@mercedesbosch.com"
@@ -40,10 +40,10 @@ class CompanyProviderSpec extends Specification {
 			dataMaster.getRandomValue(COMPANY_EMAIL) >> "info"
 			dataMaster.getRandomValue(COMPANY_NAME) >> "GOOGLE"
 			dataMaster.getRandomValue(DOMAIN) >> "com"
-			CompanyProvider companyProvider = new DefaultCompanyProvider(baseProducer, dataMaster, vatIdentificationNumberProvider);
+			CompanyProvider companyProvider = new DefaultCompanyProvider(baseProducer, dataMaster, vatIdentificationNumberProvider)
 
 		when:
-			String email = companyProvider.get().email;
+			String email = companyProvider.get().email
 
 		then:
 			email == "info@google.com"
@@ -56,10 +56,10 @@ class CompanyProviderSpec extends Specification {
 			dataMaster.getRandomValue(COMPANY_EMAIL) >> "info"
 			dataMaster.getRandomValue(COMPANY_NAME) >> "company inc."
 			dataMaster.getRandomValue(DOMAIN) >> "com"
-			CompanyProvider companyProvider = new DefaultCompanyProvider(baseProducer, dataMaster, vatIdentificationNumberProvider);
+			CompanyProvider companyProvider = new DefaultCompanyProvider(baseProducer, dataMaster, vatIdentificationNumberProvider)
 
 		when:
-			String email = companyProvider.get().email;
+			String email = companyProvider.get().email
 
 		then:
 			email == "info@companyinc.com"
@@ -71,10 +71,10 @@ class CompanyProviderSpec extends Specification {
 			dataMaster.getRandomValue(COMPANY_EMAIL) >> "info"
 			dataMaster.getRandomValue(COMPANY_NAME) >> "åäöéáąćęłńśóźż"
 			dataMaster.getRandomValue(DOMAIN) >> "com"
-			CompanyProvider companyProvider = new DefaultCompanyProvider(baseProducer, dataMaster, vatIdentificationNumberProvider);
+			CompanyProvider companyProvider = new DefaultCompanyProvider(baseProducer, dataMaster, vatIdentificationNumberProvider)
 
 		when:
-			String email = companyProvider.get().email;
+			String email = companyProvider.get().email
 
 		then:
 			email == "info@aaoeaacelnsozz.com"

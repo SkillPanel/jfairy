@@ -26,7 +26,7 @@ public class ZhAddressProvider extends AbstractAddressProvider {
 	public String getApartmentNumber() {
 		if (baseProducer.trueOrFalse()) {
 			String floor = String.valueOf(baseProducer.randomInt(38));
-			String room = "0" + String.valueOf(baseProducer.randomInt(8));
+			String room = "0" + baseProducer.randomInt(8);
 			return floor + room;
 		} else {
 			return "";

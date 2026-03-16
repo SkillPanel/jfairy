@@ -8,7 +8,7 @@ import static com.devskiller.jfairy.producer.util.RandomUtils.randomNumeric;
 /**
  * German Identity Card (known as Personalausweis)
  * <p>
- * https://en.wikipedia.org/wiki/German_identity_card
+ * <a href="https://en.wikipedia.org/wiki/German_identity_card">German identity card</a>
  *
  * @author Roland Weisleder
  */

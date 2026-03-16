@@ -10,7 +10,7 @@ import com.devskiller.jfairy.Fairy
  */
 class EnVATIdentificationNumberProviderSpec extends Specification {
 
-	private Fairy fairy;
+	private Fairy fairy
 	private String vatIdentificationNumber
 	private final partsDividedAtChar = 2
 	private final int vatIdentificationNumberLength = 10
@@ -29,7 +29,7 @@ class EnVATIdentificationNumberProviderSpec extends Specification {
 
 	def "should generate number divided by hyphen"() {
 		expect:
-			vatIdentificationNumber.charAt(partsDividedAtChar) == '-'
+			vatIdentificationNumber.charAt(partsDividedAtChar) == ('-' as char)
 	}
 
 	def "should generate number with valid area part"() {

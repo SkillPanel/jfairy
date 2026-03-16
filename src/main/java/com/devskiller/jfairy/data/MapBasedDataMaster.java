@@ -23,7 +23,7 @@ public class MapBasedDataMaster implements DataMaster {
 
 	public static final String LANGUAGE_TAG = "language";
 	private final BaseProducer baseProducer;
-	private Map<String, Object> dataSource = new CaseInsensitiveMap();
+	private final Map<String, Object> dataSource = new CaseInsensitiveMap();
 
 	public MapBasedDataMaster(BaseProducer baseProducer) {
 		this.baseProducer = baseProducer;
@@ -78,7 +78,7 @@ public class MapBasedDataMaster implements DataMaster {
 		}
 	}
 
-	@SuppressWarnings({"unchecked", "ConstantConditions"})
+	@SuppressWarnings("unchecked")
 	<T> T getData(String key, Class<T> type) {
 		ValidateUtils.notNull(key, "key cannot be null");
 		ValidateUtils.notNull(type, "type cannot be null");
@@ -119,6 +119,8 @@ public class MapBasedDataMaster implements DataMaster {
 
 	private static final class CaseInsensitiveMap extends HashMap<String, Object> {
 
+		private static final long serialVersionUID = 1L;
+
 		@Override
 		@SuppressWarnings("unchecked")
 		public Object put(String key, Object value) {
@@ -141,7 +143,6 @@ public class MapBasedDataMaster implements DataMaster {
 		}
 
 		@Override
-		@SuppressWarnings("unchecked")
 		public Object get(Object key) {
 			return super.get(((String) key).toLowerCase());
 		}

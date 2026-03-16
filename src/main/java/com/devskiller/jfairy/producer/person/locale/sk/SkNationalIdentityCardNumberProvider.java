@@ -17,7 +17,7 @@ import static com.devskiller.jfairy.producer.util.StringUtils.leftPad;
  * Slovak Identity Card Number
  * <p>
  * Based on the same format as Polish identity card
- * http://en.wikipedia.org/wiki/Polish_identity_card
+ * <a href="http://en.wikipedia.org/wiki/Polish_identity_card">Polish identity card</a>
  */
 public class SkNationalIdentityCardNumberProvider implements NationalIdentityCardNumberProvider {
 

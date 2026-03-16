@@ -40,7 +40,7 @@ public final class UniqueFairy {
 		this.personEnforcer = UniqueEnforcer.of(fairy::person, Person::getEmail, maxRetries);
 		this.companyEnforcer = UniqueEnforcer.of(fairy::company, Company::getName, maxRetries);
 		// Lambda needed: fairy::iban is ambiguous (overloaded no-arg and vararg)
-		this.ibanEnforcer = UniqueEnforcer.of(() -> fairy.iban(), IBAN::getIbanNumber, maxRetries);
+		this.ibanEnforcer = UniqueEnforcer.of(fairy::iban, IBAN::getIbanNumber, maxRetries);
 		this.creditCardEnforcer = UniqueEnforcer.of(fairy::creditCard, CreditCard::getCardNumber, maxRetries);
 	}
 

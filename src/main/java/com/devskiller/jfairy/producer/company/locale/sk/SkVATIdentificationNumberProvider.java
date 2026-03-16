@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.VATIdentificationNumberProvider;
 
-import static java.lang.String.format;
 import static java.lang.String.valueOf;
 
 import static com.devskiller.jfairy.producer.util.StringUtils.leftPad;
@@ -14,7 +13,7 @@ import static com.devskiller.jfairy.producer.util.StringUtils.leftPad;
 /**
  * Slovak VAT Identification Number (known as NIP)
  * <p>
- * https://en.wikipedia.org/wiki/VAT_identification_number
+ * <a href="https://en.wikipedia.org/wiki/VAT_identification_number">VAT identification number</a>
  */
 public class SkVATIdentificationNumberProvider implements VATIdentificationNumberProvider {
 
@@ -112,7 +111,7 @@ public class SkVATIdentificationNumberProvider implements VATIdentificationNumbe
 			int checksum = calculateChecksum(normalizedNip);
 			return checksum == normalizedNip.charAt(CHECKSUM_CHAR_INDEX) - '0';
 		} catch (NumberFormatException ex) {
-			LOG.debug(format("Invalid nip %s", nip), ex);
+			LOG.debug("Invalid nip {}", nip, ex);
 			return false;
 		}
 	}

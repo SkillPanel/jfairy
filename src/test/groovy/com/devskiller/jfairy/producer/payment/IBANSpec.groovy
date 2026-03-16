@@ -16,7 +16,7 @@ class IBANSpec extends Specification {
 
 	def setup() {
 		baseProducer = new BaseProducer(new RandomGenerator())
-		dataMaster = new MapBasedDataMaster(baseProducer);
+		dataMaster = new MapBasedDataMaster(baseProducer)
 		dataMaster.readResources("jfairy_pl.yml")
 	}
 
@@ -34,10 +34,10 @@ class IBANSpec extends Specification {
 				dataMaster,
 				IBANProperties.accountNumber("00234573201"),
 				IBANProperties.country("AT")
-			);
+			)
 
 		then:
-			IbanUtil.validate(iban.get().ibanNumber);
+			IbanUtil.validate(iban.get().ibanNumber)
 	}
 
 	/**
@@ -53,7 +53,7 @@ class IBANSpec extends Specification {
 		when:
 			IBANProvider iban = new DefaultIBANProvider(baseProducer, dataMaster)
 		then:
-			IbanUtil.validate(iban.get().ibanNumber);
+			IbanUtil.validate(iban.get().ibanNumber)
 	}
 
 	def "should be usable directly from Fairy"() {
@@ -79,7 +79,7 @@ class IBANSpec extends Specification {
 
 	def "should set proper country for according to selected language"() {
 		when:
-			String number = Fairy.create(new Locale('SV')).iban().ibanNumber
+			String number = Fairy.create(Locale.of('SV')).iban().ibanNumber
 		then:
 			number.startsWith('SE')
 	}

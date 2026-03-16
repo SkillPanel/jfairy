@@ -17,7 +17,7 @@ import static com.devskiller.jfairy.producer.util.RandomUtils.randomNumeric;
 public class EsNationalIdentityCardNumberProvider implements NationalIdentityCardNumberProvider {
 
 	private static final String REGEX_DNI = "^\\d{8}([-]?)[A-Z]$";
-	private Pattern regexDni;
+	private final Pattern regexDni;
 
 	public EsNationalIdentityCardNumberProvider() {
 		this.regexDni = Pattern.compile(REGEX_DNI);

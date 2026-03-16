@@ -13,11 +13,11 @@ class KaNationalIdentityCardNumberProviderSpec extends Specification {
 		provider = new KaNationalIdentityCardNumberProvider(baseProducer)
 	}
 
-	private boolean isOldIdCardNumber(String id) {
+	private static boolean isOldIdCardNumber(String id) {
 		id.matches("N[ა-ჰ]\\d{7}")
 	}
 
-	private boolean isNewIdCardNumber(String id) {
+	private static boolean isNewIdCardNumber(String id) {
 		id.matches("\\d{2}\\p{Upper}{2}\\d{5}")
 	}
 

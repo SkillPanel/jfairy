@@ -13,7 +13,7 @@ import static com.devskiller.jfairy.producer.util.StringUtils.leftPad;
 /**
  * American VAT Identification Number (known as Employer Identification Number or EIN in the United States)
  * <p>
- * https://en.wikipedia.org/wiki/Employer_Identification_Number
+ * <a href="https://en.wikipedia.org/wiki/Employer_Identification_Number">Employer Identification Number</a>
  *
  * @author Olga Maciaszek-Sharma
  * @since 21.03.15
@@ -26,7 +26,7 @@ public class EnVATIdentificationNumberProvider implements VATIdentificationNumbe
 	private static final int SERIAL_NUMBER_INDEX = 3;
 	private static final int AREA_NUMBER_LENGTH = 2;
 
-	private BaseProducer baseProducer;
+	private final BaseProducer baseProducer;
 	private static final Set<Integer> EXCLUDED_NUMBERS = Set.of(7, 8, 9, 17, 18, 19, 28, 29, 41, 47, 49, 69, 70, 79, 89, 96, 97);
 
 	public EnVATIdentificationNumberProvider(BaseProducer baseProducer) {
@@ -53,11 +53,11 @@ public class EnVATIdentificationNumberProvider implements VATIdentificationNumbe
 	}
 
 	private void fillAreaNumber(char[] ein) {
-		Integer number;
+		int number;
 		do {
 			number = baseProducer.randomBetween(0, 99);
 		} while (EXCLUDED_NUMBERS.contains(number));
-		char[] digits = leftPad(number.toString(), AREA_NUMBER_LENGTH, "0").toCharArray();
+		char[] digits = leftPad(Integer.toString(number), AREA_NUMBER_LENGTH, "0").toCharArray();
 		arraycopy(digits, 0, ein, 0, digits.length);
 
 	}

@@ -11,13 +11,13 @@ import static com.devskiller.jfairy.producer.util.RandomUtils.randomNumeric;
 /**
  * Spanish VAT Identification Number (known as Número de Identificación Fiscal (for freelancers) or Código de Identificación Fiscal (for companies)	 in Spain)
  * <p>
- * https://en.wikipedia.org/wiki/VAT_identification_number
+ * <a href="https://en.wikipedia.org/wiki/VAT_identification_number">VAT identification number</a>
  */
 public class EsVATIdentificationNumberProvider implements VATIdentificationNumberProvider {
 
 	private static final String REGEX_CIF = "^[A-Z][0-9]{2}[0-9]{5}([KPQSABEH]|[0-9]|[A-Z])$";
 
-	private Pattern regexCif;
+	private final Pattern regexCif;
 
 	public EsVATIdentificationNumberProvider() {
 		this.regexCif = Pattern.compile(REGEX_CIF);

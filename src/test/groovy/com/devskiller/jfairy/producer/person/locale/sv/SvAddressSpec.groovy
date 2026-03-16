@@ -8,7 +8,7 @@ import com.devskiller.jfairy.producer.person.Address
 class SvAddressSpec extends Specification {
 
 	private final int SEED = 7
-	private Fairy fairy;
+	private Fairy fairy
 	private Address address
 
 	def setup() {

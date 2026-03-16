@@ -3,7 +3,7 @@ package com.devskiller.jfairy.producer.person.locale;
 import com.devskiller.jfairy.producer.person.Address;
 
 /**
- * A base of all addresses. It carries all needed fields, but leaves most of formatting to subclasses.
+ * A base of all addresses. It carries all needed fields, but leaves most of the formatting to subclasses.
  */
 public abstract class AbstractAddress implements Address {
 	protected final String street;

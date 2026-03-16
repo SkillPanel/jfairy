@@ -18,7 +18,7 @@ import static com.devskiller.jfairy.producer.util.StringUtils.leftPad;
 /**
  * Swedish VAT Identification Number (known as Momsnummer in Sweden)
  * <p>
- * https://en.wikipedia.org/wiki/VAT_identification_number
+ * <a href="https://en.wikipedia.org/wiki/VAT_identification_number">VAT identification number</a>
  */
 public class SvVATIdentificationNumberProvider implements VATIdentificationNumberProvider {
 
@@ -31,8 +31,7 @@ public class SvVATIdentificationNumberProvider implements VATIdentificationNumbe
 	private final DateProducer dateProducer;
 	private final NationalIdentificationNumberFactory nationalIdentificationNumberFactory;
 
-	public SvVATIdentificationNumberProvider(BaseProducer baseProducer, DateProducer dateProducer,
-	                                         NationalIdentificationNumberFactory nationalIdentificationNumberFactory) {
+	public SvVATIdentificationNumberProvider(BaseProducer baseProducer, DateProducer dateProducer, NationalIdentificationNumberFactory nationalIdentificationNumberFactory) {
 		this.baseProducer = baseProducer;
 		this.dateProducer = dateProducer;
 		this.nationalIdentificationNumberFactory = nationalIdentificationNumberFactory;
@@ -40,7 +39,7 @@ public class SvVATIdentificationNumberProvider implements VATIdentificationNumbe
 
 	@Override
 	public String get() {
-		boolean isSoleTrader = baseProducer.trueOrFalse(); // Approximately 50% probablilty of a company to be of type sole trader (enskild firma)
+		boolean isSoleTrader = baseProducer.trueOrFalse(); // Approximately 50% probability of a company to be of type sole trader (enskild firma)
 		if (isSoleTrader) {
 			return generateVatNumberForSoleTrader();
 		}
@@ -74,7 +73,7 @@ public class SvVATIdentificationNumberProvider implements VATIdentificationNumbe
 			return false;
 		}
 
-		int checksum = Integer.valueOf(Character.toString(vatIdentificationNumber.charAt(length - 3)));
+		int checksum = Integer.parseInt(Character.toString(vatIdentificationNumber.charAt(length - 3)));
 		int checkDigit = calculateChecksum(vatIdentificationNumber.substring(2, vatIdentificationNumber.length() - 2));
 
 		return checkDigit == checksum;
@@ -83,17 +82,17 @@ public class SvVATIdentificationNumberProvider implements VATIdentificationNumbe
 
 	/**
 	 * Group number used to determine the first numer in a swedish organization number
-	 * Enum is translated from swedish wiki https://sv.wikipedia.org/wiki/Organisationsnummer
+	 * Enum is translated from swedish wiki <a href="https://sv.wikipedia.org/wiki/Organisationsnummer">...</a>
 	 */
 	private enum GroupNumber {
-		ESTATE(1),                                                // Dödsbon
-		STATE_OR_COUNTY_OR_MUNICIPALITY_OR_PARISH(2),            // Stat, landsting, kommuner, församlingar
-		FOREIGN_COMPANY(3),                                        // Utländska företag som bedriver näringsverksamhet eller äger fastigheter i Sverige
-		LIMITED_COMPANY(5),                                        // Aktiebolag
-		PARTNERSHIP(6),                                            // Enkelt bolag
-		ECONOMIC_ASSOCIATION(7),                                // Ekonomiska föreningar
-		NON_PROFIT_ASSOCIATION_OR_FOUNDATION(8),                // Ideella föreningar och stiftelser
-		TRADING_COMPANY_OR_LIMITED_COMPANY_OR_PARTNERSHIP(9);    // Handelsbolag, kommanditbolag och enkla bolag
+		ESTATE(1),                                            // Dödsbon
+		STATE_OR_COUNTY_OR_MUNICIPALITY_OR_PARISH(2),         // Stat, landsting, kommuner, församlingar
+		FOREIGN_COMPANY(3),                                   // Utländska företag som bedriver näringsverksamhet eller äger fastigheter i Sverige
+		LIMITED_COMPANY(5),                                   // Aktiebolag
+		PARTNERSHIP(6),                                       // Enkelt bolag
+		ECONOMIC_ASSOCIATION(7),                              // Ekonomiska föreningar
+		NON_PROFIT_ASSOCIATION_OR_FOUNDATION(8),              // Ideella föreningar och stiftelser
+		TRADING_COMPANY_OR_LIMITED_COMPANY_OR_PARTNERSHIP(9); // Handelsbolag, kommanditbolag och enkla bolag
 
 		private final int value;
 

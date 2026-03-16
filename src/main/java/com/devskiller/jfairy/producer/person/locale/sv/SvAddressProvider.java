@@ -11,11 +11,6 @@ public class SvAddressProvider extends AbstractAddressProvider {
 	}
 
 	@Override
-	public String getApartmentNumber() {
-		return baseProducer.trueOrFalse() ? String.valueOf(baseProducer.randomBetween(1, 350)) : "";
-	}
-
-	@Override
 	public SvAddress get() {
 		return new SvAddress(getStreet(), getStreetNumber(), getApartmentNumber(),
 				getPostalCode(), getCity());

@@ -9,7 +9,7 @@ import spock.lang.Unroll
 
 class BaseProducerSpec extends Specification {
 
-	private BaseProducer baseProducer = Spy(BaseProducer, constructorArgs: [new RandomGenerator()]);
+	private BaseProducer baseProducer = Spy(BaseProducer, constructorArgs: [new RandomGenerator()])
 
 	def setup() {
 		baseProducer.randomBetween('0', '9') >> '7'

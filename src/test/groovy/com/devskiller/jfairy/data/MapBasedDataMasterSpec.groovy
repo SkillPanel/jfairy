@@ -12,7 +12,7 @@ import com.devskiller.jfairy.producer.person.PersonProvider
 
 class MapBasedDataMasterSpec extends Specification {
 
-	private BaseProducer baseProducer = Spy(BaseProducer, constructorArgs: [new RandomGenerator()]);
+	private BaseProducer baseProducer = Spy(BaseProducer, constructorArgs: [new RandomGenerator()])
 	private MapBasedDataMaster data = Spy(MapBasedDataMaster, constructorArgs: [baseProducer])
 
 	def setup() {
@@ -21,7 +21,7 @@ class MapBasedDataMasterSpec extends Specification {
 
 	def "should read first names"() {
 		when:
-			DataMaster dataMaster = new MapBasedDataMaster();
+			DataMaster dataMaster = new MapBasedDataMaster()
 			dataMaster.readResources("jfairy_en.yml")
 
 			Map<String, List<String>> firstNames = dataMaster.getData(PersonProvider.FIRST_NAME, Map.class)

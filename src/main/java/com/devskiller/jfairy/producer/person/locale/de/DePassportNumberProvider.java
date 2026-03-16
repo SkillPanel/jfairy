@@ -8,7 +8,7 @@ import static com.devskiller.jfairy.producer.util.RandomUtils.randomNumeric;
 /**
  * German passport (known as Reisepass)
  * <p>
- * https://en.wikipedia.org/wiki/German_passport
+ * <a href="https://en.wikipedia.org/wiki/German_passport">German passport</a>
  *
  * @author Roland Weisleder
  */

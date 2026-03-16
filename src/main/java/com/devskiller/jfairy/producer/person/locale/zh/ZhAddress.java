@@ -22,7 +22,7 @@ public class ZhAddress extends AbstractAddress {
 	@Override
 	public String getAddressLine1() {
 		String line = city + CITY + street + streetNumber + NUMBER;
-		if (apartmentNumber.length() > 0) {
+		if (!apartmentNumber.isEmpty()) {
 			return line + " " + apartmentNumber + ROOM;
 		} else {
 			return line;

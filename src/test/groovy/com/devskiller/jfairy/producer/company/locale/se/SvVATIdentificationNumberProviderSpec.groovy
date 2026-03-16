@@ -10,7 +10,7 @@ class SvVATIdentificationNumberProviderSpec extends Specification {
 
 	private static final int VAT_IDENTIFICATION_NUMBER_LENGTH = 14
 
-	private Fairy fairy;
+	private Fairy fairy
 	private String vatIdentificationNumber
 
 	def setup() {

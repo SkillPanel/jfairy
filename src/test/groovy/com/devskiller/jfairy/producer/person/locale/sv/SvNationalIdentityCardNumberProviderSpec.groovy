@@ -6,7 +6,7 @@ import com.devskiller.jfairy.Fairy
 
 class SvNationalIdentityCardNumberProviderSpec extends Specification {
 
-	private Fairy fairy;
+	private Fairy fairy
 	private String nationalIdentityCardNumber
 
 	def setup() {

@@ -25,9 +25,9 @@ class FairySpec extends Specification {
 	def "Second person should be different without fairy instance"() {
 
 		given:
-			Person person = Fairy.create().person();
+			Person person = Fairy.create().person()
 		when:
-			person = Fairy.create().person();
+			person = Fairy.create().person()
 		then:
 			person.fullName != old(person.fullName)
 	}
@@ -36,9 +36,9 @@ class FairySpec extends Specification {
 
 		given:
 			Fairy fairy = Fairy.create()
-			Person person = fairy.person();
+			Person person = fairy.person()
 		when:
-			person = fairy.person();
+			person = fairy.person()
 		then:
 			person.fullName != old(person.fullName)
 	}
@@ -55,10 +55,10 @@ class FairySpec extends Specification {
 			Person fourthPerson = secondFairy.person()
 
 		expect:
-			firstPerson.fullName.equals(secondPerson.fullName)
-			thirdPerson.fullName.equals(fourthPerson.fullName)
+		firstPerson.fullName == secondPerson.fullName
+		thirdPerson.fullName == fourthPerson.fullName
 
-			!firstPerson.fullName.equals(thirdPerson.fullName)
+		firstPerson.fullName != thirdPerson.fullName
 	}
 
 	def "Second person should be different with different random seeds"() {
@@ -68,15 +68,15 @@ class FairySpec extends Specification {
 			Fairy secondFairy = Fairy.builder().withRandomSeed(20).build()
 
 			Person firstPerson = firstFairy.person()
-			Person secondPerson = secondFairy.person();
+			Person secondPerson = secondFairy.person()
 
 		expect:
-			!firstPerson.fullName.equals(secondPerson.fullName)
+		firstPerson.fullName != secondPerson.fullName
 	}
 
 	def "should use default DataMaster when custom not provided"() {
 		given:
-			Fairy fairy = Fairy.create();
+			Fairy fairy = Fairy.create()
 		when:
 			Person samplePerson = fairy.person()
 
@@ -87,7 +87,7 @@ class FairySpec extends Specification {
 
 	def "should use custom DataMaster when provided"() {
 		given:
-			Fairy fairy = Fairy.create(customDataMasterProvider, Locale.forLanguageTag("EN"));
+			Fairy fairy = Fairy.create(customDataMasterProvider, Locale.forLanguageTag("EN"))
 
 		when:
 			Person samplePerson = fairy.person()

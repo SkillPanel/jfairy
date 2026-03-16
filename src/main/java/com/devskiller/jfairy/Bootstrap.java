@@ -24,7 +24,9 @@ import com.devskiller.jfairy.producer.person.PersonFactoryImpl;
 import com.devskiller.jfairy.producer.text.TextProducerInternal;
 
 /**
- * <p>Using a {@link #builder()}, you can configure the following fields:</p>
+ * <p>
+ * Using a {@link #builder()}, you can configure the following fields:
+ * <p>
  * <ul>
  * <li><tt>locale</tt>: Specifies the locale for the random data file.</li>
  * <li><tt>filePrefix</tt>: Specifies the file prefix.
@@ -37,6 +39,7 @@ import com.devskiller.jfairy.producer.text.TextProducerInternal;
  * ID in a database to always result in the same fake name.
  * </li>
  * </ul>
+ * <p>
  * Obviously, don't set both <tt>random</tt> and <tt>randomSeed</tt>, only the last one you set will
  * actually take effect.
  *
@@ -53,6 +56,8 @@ public final class Bootstrap {
 	}
 
 	public static Fairy createFairy(DataMaster dataMaster, Locale locale, RandomGenerator randomGenerator) {
+		LOG.debug("Creating Fairy instance for locale {}", locale);
+
 		// Create base components
 		BaseProducer baseProducer = new BaseProducer(randomGenerator);
 		TimeProvider timeProvider = new TimeProvider();
@@ -92,14 +97,21 @@ public final class Bootstrap {
 				companyFactory, ibanFactory
 		);
 
+		LOG.trace("Fairy components initialized");
 		return fairyFactory.createFairy();
 	}
 
 	private static void fillDefaultDataMaster(MapBasedDataMaster dataMaster, Locale locale, String filePrefix) {
 		try {
-			dataMaster.readResources(filePrefix + ".yml");
-			dataMaster.readResources(filePrefix + "_" + locale.getLanguage() + ".yml");
+			String baseFile = filePrefix + ".yml";
+			String localeFile = filePrefix + "_" + locale.getLanguage() + ".yml";
+
+			LOG.debug("Loading data resources: {}, {}", baseFile, localeFile);
+
+			dataMaster.readResources(baseFile);
+			dataMaster.readResources(localeFile);
 		} catch (IOException ex) {
+			LOG.error("Failed to load data resources for locale {}", locale);
 			throw new IllegalStateException(ex);
 		}
 	}
@@ -196,6 +208,7 @@ public final class Bootstrap {
 		 * @return the same Builder (for chaining).
 		 */
 		public Builder withRandomSeed(int randomSeed) {
+			LOG.debug("Using fixed random seed: {}", randomSeed);
 			this.randomGenerator = new RandomGenerator(randomSeed);
 			return this;
 		}

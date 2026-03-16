@@ -385,7 +385,7 @@ class PersonSpec extends Specification {
 
 	def "withCompany should create person with specific company"() {
 		when:
-			Company specificCompany = new Company("Company name", "domain.com", "company@emial.com", "VATNO");
+			Company specificCompany = new Company("Company name", "domain.com", "company@emial.com", "VATNO")
 			Person person = fairy.person(withCompany(specificCompany))
 		then:
 			person.getCompany() == specificCompany
@@ -393,7 +393,7 @@ class PersonSpec extends Specification {
 
 	def "withAddress should create person with specific address"() {
 		when:
-			EnAddress specificAddress = new EnAddress("POSTALCODE", "City", "Streetname", "123", "10B");
+			EnAddress specificAddress = new EnAddress("POSTALCODE", "City", "Streetname", "123", "10B")
 			Person person = fairy.person(withAddress(specificAddress))
 		then:
 			person.getAddress() == specificAddress

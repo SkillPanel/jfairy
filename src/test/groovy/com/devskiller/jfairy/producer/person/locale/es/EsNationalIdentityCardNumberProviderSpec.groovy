@@ -14,7 +14,7 @@ import com.devskiller.jfairy.Fairy
  */
 class EsNationalIdentityCardNumberProviderSpec extends Specification {
 
-	private Fairy fairy;
+	private Fairy fairy
 	private String esNationalIdentityCardNumber
 	private final int dniLength = 10
 	private final int hyphenPos = 8
@@ -31,15 +31,15 @@ class EsNationalIdentityCardNumberProviderSpec extends Specification {
 
 	def "should generate number divided by hyphens"() {
 		given:
-			char letter = esNationalIdentityCardNumber.charAt(hyphenPos);
+			char letter = esNationalIdentityCardNumber.charAt(hyphenPos)
 
 		expect:
-			letter == '-';
+			letter == ('-' as char)
 	}
 
 	def "should generate number with all numbers before the hyphen"() {
 		given:
-			String numbers = esNationalIdentityCardNumber.substring(0, hyphenPos);
+			String numbers = esNationalIdentityCardNumber.substring(0, hyphenPos)
 
 		expect:
 			for (char digit : numbers.toCharArray()) {
@@ -50,9 +50,9 @@ class EsNationalIdentityCardNumberProviderSpec extends Specification {
 
 	def "should generate number with letter after the hyphen"() {
 		given:
-			char letter = esNationalIdentityCardNumber.charAt(hyphenPos + 1);
+			char letter = esNationalIdentityCardNumber.charAt(hyphenPos + 1)
 
 		expect:
-			letter.isLetter();
+			letter.isLetter()
 	}
 }

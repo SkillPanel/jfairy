@@ -24,7 +24,7 @@ public class PlPassportNumberProvider implements PassportNumberProvider {
 
 	private static final int[] WEIGHTS = new int[]{7, 3, 9, 1, 7, 3, 1, 7, 3};
 
-	private List<String> alphabet;
+	private final List<String> alphabet;
 
 	private static Map<String, Integer> letterDigits = null;
 
@@ -34,7 +34,7 @@ public class PlPassportNumberProvider implements PassportNumberProvider {
 	}
 
 	private Map<String, Integer> generateLetterDigits() {
-		Integer baseNum = 10;
+		int baseNum = 10;
 		Map<String, Integer> letterDigits = new HashMap<>();
 		for (String letter : alphabet) {
 			letterDigits.put(letter, baseNum++);
@@ -56,7 +56,7 @@ public class PlPassportNumberProvider implements PassportNumberProvider {
 	}
 
 	private void fillChecksum(char[] passport) {
-		Integer checkSum = 0;
+		int checkSum = 0;
 
 		for (int i = 0; i < 2; i++) {
 			Integer checkSumValue = letterDigits.get(valueOf(passport[i]));
@@ -64,7 +64,7 @@ public class PlPassportNumberProvider implements PassportNumberProvider {
 		}
 
 		for (int i = 3; i < 9; i++) {
-			Integer checkSumValue = getNumericValue(passport[i]);
+			int checkSumValue = getNumericValue(passport[i]);
 			checkSum += checkSumValue * WEIGHTS[i];
 		}
 
@@ -92,7 +92,7 @@ public class PlPassportNumberProvider implements PassportNumberProvider {
 		}
 
 		for (int i = 2; i < 9; i++) {
-			Integer checkSumValue = getNumericValue(passport[i]);
+			int checkSumValue = getNumericValue(passport[i]);
 			checkSum += checkSumValue * WEIGHTS[i];
 		}
 

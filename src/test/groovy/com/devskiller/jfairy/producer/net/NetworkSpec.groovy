@@ -8,9 +8,9 @@ import com.devskiller.jfairy.producer.RandomGenerator
 
 class NetworkSpec extends Specification {
 
-	private InetAddressValidator ipValidator = InetAddressValidator.getInstance();
+	private InetAddressValidator ipValidator = InetAddressValidator.getInstance()
 
-	private IPNumberProducer ipNumber = new IPNumberProducer(new BaseProducer(new RandomGenerator()));
+	private IPNumberProducer ipNumber = new IPNumberProducer(new BaseProducer(new RandomGenerator()))
 	private NetworkProducer network = new NetworkProducer(ipNumber)
 
 	def "Should generate proper ip number"() {

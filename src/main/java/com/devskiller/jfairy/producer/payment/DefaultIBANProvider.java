@@ -19,8 +19,8 @@ import static com.devskiller.jfairy.producer.util.StringUtils.isNotEmpty;
  */
 public class DefaultIBANProvider implements IBANProvider {
 
-	protected DataMaster dataMaster;
-	protected BaseProducer baseProducer;
+	protected final DataMaster dataMaster;
+	protected final BaseProducer baseProducer;
 	protected CountryCode countryCode;
 	protected String accountNumber;
 	protected String bankCode;
@@ -28,8 +28,8 @@ public class DefaultIBANProvider implements IBANProvider {
 	protected String nationalCheckDigit;
 
 	public DefaultIBANProvider(BaseProducer baseProducer,
-	                           DataMaster dataMaster,
-	                           IBANProperties.Property... properties) {
+		                       DataMaster dataMaster,
+		                       IBANProperties.Property... properties) {
 		this.dataMaster = dataMaster;
 		this.baseProducer = baseProducer;
 		for (IBANProperties.Property property : properties) {

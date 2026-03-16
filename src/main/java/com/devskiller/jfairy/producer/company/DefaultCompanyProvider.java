@@ -16,10 +16,10 @@ public class DefaultCompanyProvider implements CompanyProvider {
 	protected String email;
 	protected String vatIdentificationNumber;
 
-	protected BaseProducer baseProducer;
-	protected DataMaster dataMaster;
+	protected final BaseProducer baseProducer;
+	protected final DataMaster dataMaster;
 
-	protected VATIdentificationNumberProvider vatIdentificationNumberProvider;
+	protected final VATIdentificationNumberProvider vatIdentificationNumberProvider;
 
 	public DefaultCompanyProvider(BaseProducer baseProducer,
 							  DataMaster dataMaster,
@@ -59,9 +59,9 @@ public class DefaultCompanyProvider implements CompanyProvider {
 	/**
 	 * In case of the illegal hostname characters in company name
 	 * and truncate it if it is too long (length &gt; 10) after escape
-	 *
+	 * <p>
 	 * It is compatible with other non-latin language and will not change the original result for latin language.
-	 *
+	 * <p>
 	 * P.S. Actually the best way for Chinese here is to use phonetic writing (so as Japanese or Korean)
 	 */
 	@Override

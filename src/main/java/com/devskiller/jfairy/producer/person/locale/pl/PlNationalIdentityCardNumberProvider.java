@@ -17,7 +17,7 @@ import static com.devskiller.jfairy.producer.util.StringUtils.leftPad;
 /**
  * Polish Identity Card Number
  * <p>
- * http://en.wikipedia.org/wiki/Polish_identity_card
+ * <a href="http://en.wikipedia.org/wiki/Polish_identity_card">Polish identity card</a>
  */
 public class PlNationalIdentityCardNumberProvider implements NationalIdentityCardNumberProvider {
 
