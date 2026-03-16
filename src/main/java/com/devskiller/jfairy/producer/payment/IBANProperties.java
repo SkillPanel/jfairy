@@ -9,7 +9,7 @@ import com.devskiller.jfairy.producer.util.LanguageCode;
 
 public final class IBANProperties {
 
-	private final static HashMap<LanguageCode, CountryCode> COUNTRIES = new HashMap<>();
+	private static final HashMap<LanguageCode, CountryCode> COUNTRIES = new HashMap<>();
 
 	static {
 		COUNTRIES.put(LanguageCode.PL, CountryCode.PL);
@@ -51,7 +51,6 @@ public final class IBANProperties {
 		};
 	}
 
-
 	public static Property accountNumber(final String accountNumber) {
 		return new Property() {
 			@Override
@@ -60,7 +59,6 @@ public final class IBANProperties {
 			}
 		};
 	}
-
 
 	public static Property country(final String country) {
 		return new Property() {
@@ -97,6 +95,5 @@ public final class IBANProperties {
 			}
 		};
 	}
-
 
 }

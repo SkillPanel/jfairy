@@ -12,8 +12,8 @@ import com.devskiller.jfairy.producer.TimeProvider;
 import com.devskiller.jfairy.producer.company.Company;
 import com.devskiller.jfairy.producer.company.CompanyFactory;
 
-import static com.devskiller.jfairy.producer.util.StringUtils.lowerCase;
 import static com.devskiller.jfairy.producer.util.StringUtils.latinize;
+import static com.devskiller.jfairy.producer.util.StringUtils.lowerCase;
 
 public class DefaultPersonProvider implements PersonProvider {
 
@@ -46,10 +46,9 @@ public class DefaultPersonProvider implements PersonProvider {
 	protected final NationalIdentityCardNumberProvider nationalIdentityCardNumberProvider;
 	protected final AddressProvider addressProvider;
 	protected final CompanyFactory companyFactory;
-	
+
 	protected final TimeProvider timeProvider;
 	protected final PassportNumberProvider passportNumberProvider;
-
 
 	public DefaultPersonProvider(DataMaster dataMaster,
 	                             DateProducer dateProducer,
@@ -377,6 +376,5 @@ public class DefaultPersonProvider implements PersonProvider {
 	public void setJobTitle(String jobTitle) {
 		this.jobTitle = jobTitle;
 	}
+
 }
-
-

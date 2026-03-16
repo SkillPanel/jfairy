@@ -3,7 +3,6 @@ package com.devskiller.jfairy.producer.person.locale.zh;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.DateProducer;
 import com.devskiller.jfairy.producer.TimeProvider;
@@ -27,7 +26,6 @@ public class ZhNationalIdentityCardNumberProvider implements NationalIdentityCar
 	private final BaseProducer baseProducer;
 	private final DateProducer dateProducer;
 
-
 	public ZhNationalIdentityCardNumberProvider(BaseProducer baseProducer) {
 		this.baseProducer = baseProducer;
 		this.dateProducer = new DateProducer(baseProducer, new TimeProvider());
@@ -49,4 +47,3 @@ public class ZhNationalIdentityCardNumberProvider implements NationalIdentityCar
 		return formatter.format(birthDate);
 	}
 }
-

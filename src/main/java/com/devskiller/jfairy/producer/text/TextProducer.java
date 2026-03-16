@@ -29,7 +29,6 @@ public class TextProducer {
 
 	private int limit = 0;
 
-
 	public TextProducer(TextProducerInternal textProducerInternal, BaseProducer baseProducer) {
 		this.textProducerInternal = textProducerInternal;
 		this.baseProducer = baseProducer;
@@ -102,8 +101,8 @@ public class TextProducer {
 	}
 
 	public String paragraph(int sentenceCount) {
-		return result(joinWithSpace(sentences(sentenceCount +
-			baseProducer.randomBetween(SENTENCE_COUNT_PRECISION_MIN, SENTENCE_COUNT_PRECISION_MAX))));
+		return result(joinWithSpace(sentences(sentenceCount
+			+ baseProducer.randomBetween(SENTENCE_COUNT_PRECISION_MIN, SENTENCE_COUNT_PRECISION_MAX))));
 	}
 
 	/**

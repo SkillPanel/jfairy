@@ -8,7 +8,7 @@ import com.devskiller.jfairy.producer.BaseProducer;
  * @author lhfcws
  * @since 2017/3/10
  */
-public class ZhFairyUtil {
+public final class ZhFairyUtil {
 
 	private ZhFairyUtil() {}
 
@@ -50,7 +50,6 @@ public class ZhFairyUtil {
 		"81",    // Hong Kong
 		"82",    // Macau
 	};
-
 
 	/**
 	 * Max code of city

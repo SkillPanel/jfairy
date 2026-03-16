@@ -26,17 +26,23 @@ public class RandomGenerator {
 	}
 
 	public int nextInt(int min, int max) {
-		if (min == max) return min;
+		if (min == max) {
+			return min;
+		}
 		return random.nextInt(min, max + 1);
 	}
 
 	public long nextLong(long min, long max) {
-		if (min == max) return min;
+		if (min == max) {
+			return min;
+		}
 		return random.nextLong(min, max + 1);
 	}
 
 	public double nextDouble(double min, double max) {
-		if (min == max) return min;
+		if (min == max) {
+			return min;
+		}
 		return random.nextDouble(min, max);
 	}
 }

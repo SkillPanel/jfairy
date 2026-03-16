@@ -1,7 +1,6 @@
 package com.devskiller.jfairy.producer.company;
 import java.util.function.Supplier;
 
-
 public interface CompanyProvider extends Supplier<Company> {
 
 	String DOMAIN = "domains";

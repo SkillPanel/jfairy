@@ -28,7 +28,6 @@ public class EnNationalIdentityCardNumberProvider implements NationalIdentityCar
 
 	private final BaseProducer baseProducer;
 
-
 	public EnNationalIdentityCardNumberProvider(BaseProducer baseProducer) {
 		this.baseProducer = baseProducer;
 	}
@@ -58,7 +57,7 @@ public class EnNationalIdentityCardNumberProvider implements NationalIdentityCar
 		String number;
 		do {
 			number = valueOf(baseProducer.randomBetween(1, 899));
-		} while (number.equals("666"));
+		} while ("666".equals(number));
 		char[] digits = leftPad(number, AREA_NUMBER_LENGTH, "0").toCharArray();
 		arraycopy(digits, 0, ssn, 0, digits.length);
 	}

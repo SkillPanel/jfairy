@@ -42,7 +42,6 @@ public class TextProducerInternal {
 
 	private final List<String> latinWords;
 
-
 	public TextProducerInternal(DataMaster dataMaster, BaseProducer baseProducer) {
 		this.baseProducer = baseProducer;
 		loremIpsum = dataMaster.getString(LOREM_IPSUM);

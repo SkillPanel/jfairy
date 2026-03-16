@@ -14,11 +14,10 @@ public interface DataMaster {
 
 	List<String> getStringList(String key);
 
-	<T> T getValuesOfType(String dataKey, final String type, final Class<T> resultClass);
+	<T> T getValuesOfType(String dataKey, String type, Class<T> resultClass);
 
 	String getRandomValue(String key);
 
 	LanguageCode getLanguage();
-
 
 }

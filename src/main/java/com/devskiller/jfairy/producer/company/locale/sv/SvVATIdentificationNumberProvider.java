@@ -31,7 +31,6 @@ public class SvVATIdentificationNumberProvider implements VATIdentificationNumbe
 	private final DateProducer dateProducer;
 	private final NationalIdentificationNumberFactory nationalIdentificationNumberFactory;
 
-
 	public SvVATIdentificationNumberProvider(BaseProducer baseProducer, DateProducer dateProducer,
 	                                         NationalIdentificationNumberFactory nationalIdentificationNumberFactory) {
 		this.baseProducer = baseProducer;

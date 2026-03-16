@@ -19,6 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Unit tests for {@link StringUtils}.
  */
+@SuppressWarnings("checkstyle:MethodName")
 @DisplayName("StringUtils")
 class StringUtilsTest {
 

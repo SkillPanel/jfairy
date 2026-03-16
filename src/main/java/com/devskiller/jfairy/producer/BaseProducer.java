@@ -8,7 +8,6 @@ public class BaseProducer {
 
 	private final RandomGenerator random;
 
-
 	public BaseProducer(RandomGenerator random) {
 		this.random = random;
 	}
@@ -79,8 +78,6 @@ public class BaseProducer {
 		random.shuffle(elements);
 		return elements.subList(0, count);
 	}
-
-
 
 	/**
 	 * Returns random int value

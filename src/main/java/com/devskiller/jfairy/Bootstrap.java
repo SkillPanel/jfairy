@@ -43,22 +43,25 @@ import com.devskiller.jfairy.producer.text.TextProducerInternal;
  * @author Jakub Kubrynski
  * @author Olga Maciaszek-Sharma
  */
-public class Bootstrap {
+public final class Bootstrap {
 
 	private static final Logger LOG = LoggerFactory.getLogger(Bootstrap.class);
 
 	private static final String DATA_FILE_PREFIX = "jfairy";
+
+	private Bootstrap() {
+	}
 
 	public static Fairy createFairy(DataMaster dataMaster, Locale locale, RandomGenerator randomGenerator) {
 		// Create base components
 		BaseProducer baseProducer = new BaseProducer(randomGenerator);
 		TimeProvider timeProvider = new TimeProvider();
 		DateProducer dateProducer = new DateProducer(baseProducer, timeProvider);
-		
+
 		// Create locale-specific providers
 		LocaleSpecificProviders localeProviders = LocaleSpecificProvidersFactory.createProvidersForLocale(
 				locale, dataMaster, baseProducer, dateProducer);
-		
+
 		// Create company factory first (needed by PersonFactory)
 		CompanyFactory companyFactory = new CompanyFactoryImpl(
 				baseProducer, dataMaster, localeProviders.vatIdentificationNumberProvider()
@@ -74,31 +77,30 @@ public class Bootstrap {
 				timeProvider,
 				companyFactory
 		);
-		
+
 		IBANFactory ibanFactory = new IBANFactoryImpl(baseProducer, dataMaster);
-		
+
 		// Create other producers
 		CreditCardProvider creditCardProvider = new CreditCardProvider(dataMaster, baseProducer, dateProducer);
 		TextProducerInternal textProducerInternal = new TextProducerInternal(dataMaster, baseProducer);
 		IPNumberProducer ipNumberProducer = new IPNumberProducer(baseProducer);
-		
+
 		// Create fairy factory
 		FairyFactory fairyFactory = new FairyFactoryImpl(
 				textProducerInternal, baseProducer, personFactory,
 				ipNumberProducer, dateProducer, creditCardProvider,
 				companyFactory, ibanFactory
 		);
-		
+
 		return fairyFactory.createFairy();
 	}
-
 
 	private static void fillDefaultDataMaster(MapBasedDataMaster dataMaster, Locale locale, String filePrefix) {
 		try {
 			dataMaster.readResources(filePrefix + ".yml");
 			dataMaster.readResources(filePrefix + "_" + locale.getLanguage() + ".yml");
-		} catch (IOException e) {
-			throw new IllegalStateException(e);
+		} catch (IOException ex) {
+			throw new IllegalStateException(ex);
 		}
 	}
 
@@ -110,7 +112,6 @@ public class Bootstrap {
 	public static Builder builder() {
 		return new Builder();
 	}
-
 
 	/**
 	 * Use this factory method to create dataset containing default jfairy.yml and jfairy_{langCode}.yml files
@@ -146,19 +147,16 @@ public class Bootstrap {
 				.build();
 	}
 
-
 	public static Fairy create(Supplier<DataMaster> dataMaster, Locale locale) {
 		return builder().withDataMasterProvider(dataMaster).withLocale(locale).build();
 	}
 
-	
-	public static class Builder {
+	public static final class Builder {
 
 		private Locale locale = Locale.ENGLISH;
 		private String filePrefix = DATA_FILE_PREFIX;
 		private RandomGenerator randomGenerator = new RandomGenerator();
 		private DataMaster dataMaster;
-
 
 		private MapBasedDataMaster getDefaultDataMaster(BaseProducer baseProducer) {
 			return new MapBasedDataMaster(baseProducer);
@@ -213,7 +211,6 @@ public class Bootstrap {
 			return this;
 		}
 
-
 		/**
 		 * Returns the completed Fairy.
 		 *
@@ -228,6 +225,5 @@ public class Bootstrap {
 			return createFairy(dataMaster, locale, randomGenerator);
 		}
 	}
-
 
 }

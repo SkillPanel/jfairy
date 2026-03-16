@@ -18,7 +18,6 @@ public class CreditCardProvider implements Supplier<CreditCard> {
 	private final BaseProducer baseProducer;
 	private final DateProducer dateProducer;
 
-
 	public CreditCardProvider(DataMaster dataMaster, BaseProducer baseProducer, DateProducer dateProducer) {
 		this.dataMaster = dataMaster;
 		this.baseProducer = baseProducer;

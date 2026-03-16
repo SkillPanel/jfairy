@@ -1,7 +1,6 @@
 package com.devskiller.jfairy.producer.person;
 import java.util.function.Supplier;
 
-
 /**
  * @author Olga Maciaszek-Sharma
  * @since 21.02.15

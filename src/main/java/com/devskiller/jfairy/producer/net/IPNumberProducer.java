@@ -1,6 +1,5 @@
 package com.devskiller.jfairy.producer.net;
 
-
 import com.devskiller.jfairy.producer.BaseProducer;
 
 public class IPNumberProducer {
@@ -9,7 +8,6 @@ public class IPNumberProducer {
 	private static final int MAX = 0xFF;
 
 	private final BaseProducer baseProducer;
-
 
 	public IPNumberProducer(BaseProducer baseProducer) {
 		this.baseProducer = baseProducer;

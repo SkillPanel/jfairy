@@ -1,6 +1,5 @@
 package com.devskiller.jfairy.producer.person.locale.de;
 
-
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.person.NationalIdentityCardNumberProvider;
 
@@ -20,7 +19,6 @@ public class DeNationalIdentityCardNumberProvider implements NationalIdentityCar
 	private static final String VALID_NUMBER_PATTERN = "^[LMNPRTVWXY][0-9]{8}$";
 
 	private final BaseProducer baseProducer;
-
 
 	public DeNationalIdentityCardNumberProvider(BaseProducer baseProducer) {
 		this.baseProducer = baseProducer;

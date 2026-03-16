@@ -316,16 +316,15 @@
 				<artifactId>maven-checkstyle-plugin</artifactId>
 				<version>${dep.plugin.checkstyle.version}</version>
 				<configuration>
-					<configLocation>google_checks.xml</configLocation>
+					<configLocation>${project.basedir}/src/test/resources/team/checkstyle-rules.xml</configLocation>
 					<consoleOutput>true</consoleOutput>
-					<failOnViolation>false</failOnViolation>
-					<sourceDirectories>
-						<sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
-					</sourceDirectories>
+					<failOnViolation>true</failOnViolation>
+					<includeTestSourceDirectory>true</includeTestSourceDirectory>
+					<logViolationsToConsole>true</logViolationsToConsole>
 				</configuration>
 				<executions>
 					<execution>
-						<id>checkstyle</id>
+						<id>checkstyle-check</id>
 						<phase>verify</phase>
 						<goals>
 							<goal>check</goal>

@@ -1,6 +1,5 @@
 package com.devskiller.jfairy.producer.company;
 
-
 public final class CompanyProperties {
 
 	private CompanyProperties() {

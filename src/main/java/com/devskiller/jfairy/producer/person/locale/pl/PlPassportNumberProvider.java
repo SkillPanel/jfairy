@@ -7,12 +7,12 @@ import java.util.Map;
 import com.devskiller.jfairy.producer.person.PassportNumberProvider;
 import com.devskiller.jfairy.producer.util.AlphaNumberSystem;
 
-import static com.devskiller.jfairy.producer.util.RandomUtils.randomAlphabetic;
-import static com.devskiller.jfairy.producer.util.RandomUtils.randomNumeric;
-
 import static java.lang.Character.getNumericValue;
 import static java.lang.String.valueOf;
 import static java.lang.System.arraycopy;
+
+import static com.devskiller.jfairy.producer.util.RandomUtils.randomAlphabetic;
+import static com.devskiller.jfairy.producer.util.RandomUtils.randomNumeric;
 
 /**
  * @author Olga Maciaszek-Sharma
@@ -41,7 +41,6 @@ public class PlPassportNumberProvider implements PassportNumberProvider {
 		}
 		return letterDigits;
 	}
-
 
 	@Override
 	public String get() {
@@ -100,6 +99,5 @@ public class PlPassportNumberProvider implements PassportNumberProvider {
 		return checkSum % 10 == 0;
 
 	}
-
 
 }

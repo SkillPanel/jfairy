@@ -1,13 +1,11 @@
 package com.devskiller.jfairy.producer.net;
 
-
 /**
  * TODO: Add emails
  */
 public class NetworkProducer {
 
 	private final IPNumberProducer ipNumberProducer;
-
 
 	public NetworkProducer(IPNumberProducer ipNumberProducer) {
 		this.ipNumberProducer = ipNumberProducer;

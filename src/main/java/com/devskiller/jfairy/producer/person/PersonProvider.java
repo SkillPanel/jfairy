@@ -1,7 +1,7 @@
 package com.devskiller.jfairy.producer.person;
-import java.util.function.Supplier;
 
 import java.time.LocalDate;
+import java.util.function.Supplier;
 
 import com.devskiller.jfairy.producer.company.Company;
 
@@ -93,6 +93,5 @@ public interface PersonProvider extends Supplier<Person> {
 	void setPassportNumber(String passportNumber);
 
 	void setJobTitle(String jobTitle);
+
 }
-
-

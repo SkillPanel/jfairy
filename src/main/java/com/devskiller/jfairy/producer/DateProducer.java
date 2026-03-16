@@ -1,7 +1,6 @@
 /*
  * Copyright (c) 2013. Codearte
  */
-
 package com.devskiller.jfairy.producer;
 
 import java.time.Instant;
@@ -22,7 +21,6 @@ public class DateProducer {
 
 	private final BaseProducer baseProducer;
 	private final TimeProvider timeProvider;
-
 
 	public DateProducer(BaseProducer baseProducer, TimeProvider timeProvider) {
 		this.baseProducer = baseProducer;

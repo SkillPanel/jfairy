@@ -1,8 +1,7 @@
 package com.devskiller.jfairy.producer.person;
-import java.util.function.Supplier;
 
 import java.time.LocalDate;
-
+import java.util.function.Supplier;
 
 public interface NationalIdentificationNumberProvider extends Supplier<NationalIdentificationNumber> {
 

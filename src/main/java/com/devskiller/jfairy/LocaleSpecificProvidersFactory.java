@@ -8,54 +8,54 @@ import org.slf4j.LoggerFactory;
 import com.devskiller.jfairy.data.DataMaster;
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.DateProducer;
+import com.devskiller.jfairy.producer.company.locale.br.BrVATIdentificationNumberProvider;
+import com.devskiller.jfairy.producer.company.locale.de.DeVATIdentificationNumberProvider;
+import com.devskiller.jfairy.producer.company.locale.en.EnVATIdentificationNumberProvider;
+import com.devskiller.jfairy.producer.company.locale.es.EsVATIdentificationNumberProvider;
+import com.devskiller.jfairy.producer.company.locale.ka.KaVATIdentificationNumberProvider;
+import com.devskiller.jfairy.producer.company.locale.pl.PlVATIdentificationNumberProvider;
+import com.devskiller.jfairy.producer.company.locale.sk.SkVATIdentificationNumberProvider;
+import com.devskiller.jfairy.producer.company.locale.sv.SvVATIdentificationNumberProvider;
+import com.devskiller.jfairy.producer.company.locale.zh.ZhVATIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.person.NationalIdentificationNumberFactory;
 import com.devskiller.jfairy.producer.person.locale.NoNationalIdentificationNumberFactory;
-import com.devskiller.jfairy.producer.person.locale.de.DeAddressProvider;
-import com.devskiller.jfairy.producer.person.locale.de.DeNationalIdentityCardNumberProvider;
-import com.devskiller.jfairy.producer.person.locale.de.DePassportNumberProvider;
-import com.devskiller.jfairy.producer.company.locale.de.DeVATIdentificationNumberProvider;
-import com.devskiller.jfairy.producer.person.locale.en.EnAddressProvider;
-import com.devskiller.jfairy.producer.person.locale.en.EnNationalIdentityCardNumberProvider;
-import com.devskiller.jfairy.producer.person.locale.en.EnPassportNumberProvider;
-import com.devskiller.jfairy.producer.company.locale.en.EnVATIdentificationNumberProvider;
-import com.devskiller.jfairy.producer.company.locale.br.BrVATIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.person.locale.br.BrAddressProvider;
 import com.devskiller.jfairy.producer.person.locale.br.BrNationalIdentityCardNumberProvider;
 import com.devskiller.jfairy.producer.person.locale.br.BrPassportNumberProvider;
-import com.devskiller.jfairy.producer.person.locale.fr.FrAddressProvider;
+import com.devskiller.jfairy.producer.person.locale.de.DeAddressProvider;
+import com.devskiller.jfairy.producer.person.locale.de.DeNationalIdentityCardNumberProvider;
+import com.devskiller.jfairy.producer.person.locale.de.DePassportNumberProvider;
+import com.devskiller.jfairy.producer.person.locale.en.EnAddressProvider;
+import com.devskiller.jfairy.producer.person.locale.en.EnNationalIdentityCardNumberProvider;
+import com.devskiller.jfairy.producer.person.locale.en.EnPassportNumberProvider;
 import com.devskiller.jfairy.producer.person.locale.es.EsAddressProvider;
 import com.devskiller.jfairy.producer.person.locale.es.EsNationalIdentityCardNumberProvider;
 import com.devskiller.jfairy.producer.person.locale.es.EsPassportNumberProvider;
-import com.devskiller.jfairy.producer.company.locale.es.EsVATIdentificationNumberProvider;
+import com.devskiller.jfairy.producer.person.locale.fr.FrAddressProvider;
 import com.devskiller.jfairy.producer.person.locale.ka.KaAddressProvider;
 import com.devskiller.jfairy.producer.person.locale.ka.KaNationalIdentityCardNumberProvider;
 import com.devskiller.jfairy.producer.person.locale.ka.KaPassportNumberProvider;
-import com.devskiller.jfairy.producer.company.locale.ka.KaVATIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.person.locale.pl.PlAddressProvider;
 import com.devskiller.jfairy.producer.person.locale.pl.PlNationalIdentificationNumberFactory;
 import com.devskiller.jfairy.producer.person.locale.pl.PlNationalIdentityCardNumberProvider;
 import com.devskiller.jfairy.producer.person.locale.pl.PlPassportNumberProvider;
-import com.devskiller.jfairy.producer.company.locale.pl.PlVATIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.person.locale.sk.SkAddressProvider;
 import com.devskiller.jfairy.producer.person.locale.sk.SkNationalIdentificationNumberFactory;
 import com.devskiller.jfairy.producer.person.locale.sk.SkNationalIdentityCardNumberProvider;
 import com.devskiller.jfairy.producer.person.locale.sk.SkPassportNumberProvider;
-import com.devskiller.jfairy.producer.company.locale.sk.SkVATIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.person.locale.sv.SvAddressProvider;
 import com.devskiller.jfairy.producer.person.locale.sv.SvNationalIdentificationNumberFactory;
 import com.devskiller.jfairy.producer.person.locale.sv.SvNationalIdentityCardNumberProvider;
 import com.devskiller.jfairy.producer.person.locale.sv.SvPassportNumberProvider;
-import com.devskiller.jfairy.producer.company.locale.sv.SvVATIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.person.locale.zh.ZhAddressProvider;
 import com.devskiller.jfairy.producer.person.locale.zh.ZhNationalIdentityCardNumberProvider;
 import com.devskiller.jfairy.producer.person.locale.zh.ZhPassportNumberProvider;
-import com.devskiller.jfairy.producer.company.locale.zh.ZhVATIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.util.LanguageCode;
 
 /**
  * Factory for creating locale-specific provider implementations
  */
-class LocaleSpecificProvidersFactory {
+final class LocaleSpecificProvidersFactory {
 
 	private static final Logger LOG = LoggerFactory.getLogger(LocaleSpecificProvidersFactory.class);
 
@@ -69,7 +69,7 @@ class LocaleSpecificProvidersFactory {
 		LanguageCode code;
 		try {
 			code = LanguageCode.valueOf(locale.getLanguage().toUpperCase());
-		} catch (IllegalArgumentException e) {
+		} catch (IllegalArgumentException ex) {
 			LOG.warn("Unknown locale {}", locale);
 			code = LanguageCode.EN;
 		}

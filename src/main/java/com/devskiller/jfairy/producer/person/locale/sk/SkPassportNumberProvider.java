@@ -40,7 +40,6 @@ public class SkPassportNumberProvider implements PassportNumberProvider {
 		return digits;
 	}
 
-
 	@Override
 	public String get() {
 		char[] passport = new char[9];
@@ -111,6 +110,5 @@ public class SkPassportNumberProvider implements PassportNumberProvider {
 		return checkSum % 10 == 0;
 
 	}
-
 
 }

@@ -3,7 +3,6 @@ package com.devskiller.jfairy.producer.person.locale.pl;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.DateProducer;
 import com.devskiller.jfairy.producer.person.NationalIdentificationNumber;
@@ -40,14 +39,12 @@ public class PlNationalIdentificationNumberProvider implements NationalIdentific
 	private LocalDate issueDate;
 	private Person.Sex sex;
 
-
 	public PlNationalIdentificationNumberProvider(DateProducer dateProducer, BaseProducer baseProducer,
 		                                              NationalIdentificationNumberProperties.Property... properties) {
 		this.dateProducer = dateProducer;
 		this.baseProducer = baseProducer;
 
 		with(properties);
-
 	}
 
 	public void with(NationalIdentificationNumberProperties.Property[] properties) {

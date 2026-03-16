@@ -1,6 +1,5 @@
 package com.devskiller.jfairy.producer.person.locale.pl;
 
-
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.DateProducer;
 import com.devskiller.jfairy.producer.person.NationalIdentificationNumberFactory;
@@ -10,7 +9,6 @@ public class PlNationalIdentificationNumberFactory implements NationalIdentifica
 
 	private final BaseProducer baseProducer;
 	private final DateProducer dateProducer;
-
 
 	public PlNationalIdentificationNumberFactory(BaseProducer baseProducer, DateProducer dateProducer) {
 		this.baseProducer = baseProducer;

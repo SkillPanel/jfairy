@@ -1,14 +1,13 @@
 package com.devskiller.jfairy.producer.company;
 
-
 import com.devskiller.jfairy.data.DataMaster;
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.VATIdentificationNumberProvider;
 
 import static com.devskiller.jfairy.producer.util.StringUtils.deleteWhitespace;
 import static com.devskiller.jfairy.producer.util.StringUtils.escapeNonAscii;
-import static com.devskiller.jfairy.producer.util.StringUtils.strip;
 import static com.devskiller.jfairy.producer.util.StringUtils.latinize;
+import static com.devskiller.jfairy.producer.util.StringUtils.strip;
 
 public class DefaultCompanyProvider implements CompanyProvider {
 
@@ -21,7 +20,6 @@ public class DefaultCompanyProvider implements CompanyProvider {
 	protected DataMaster dataMaster;
 
 	protected VATIdentificationNumberProvider vatIdentificationNumberProvider;
-
 
 	public DefaultCompanyProvider(BaseProducer baseProducer,
 							  DataMaster dataMaster,
@@ -76,8 +74,9 @@ public class DefaultCompanyProvider implements CompanyProvider {
 		int len1 = host.length();
 		host = escapeNonAscii(host).replaceAll("\\\\u", "");
 		int len2 = host.length();
-		if (len2 > len1 && len2 > 10)
+		if (len2 > len1 && len2 > 10) {
 			host = host.substring(0, 10);
+		}
 
 		domain = host + "." + dataMaster.getRandomValue(DOMAIN);
 	}

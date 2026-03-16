@@ -1,13 +1,21 @@
-# EditorConfig: http://EditorConfig.org
+# EditorConfig — https://editorconfig.org
 root = true
 
+# ── Defaults for all files ────────────────────────────────────────────────────
 [*]
-indent_style = tab
-indent_size = 4
-end_of_line = lf
-charset = utf-8
+indent_style             = tab
+indent_size              = 4
+end_of_line              = lf
+charset                  = utf-8
 trim_trailing_whitespace = true
-insert_final_newline = true
+insert_final_newline     = true
 
+# ── Markdown ──────────────────────────────────────────────────────────────────
+# Trailing spaces are significant in Markdown (line break); keep them.
 [*.md]
 trim_trailing_whitespace = false
+max_line_length          = off
+
+# ── Shell scripts ─────────────────────────────────────────────────────────────
+[*.sh]
+indent_size = 2

@@ -1,6 +1,5 @@
 package com.devskiller.jfairy.producer.person.locale.sv;
 
-
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.DateProducer;
 import com.devskiller.jfairy.producer.person.NationalIdentityCardNumberProvider;
@@ -15,7 +14,6 @@ public class SvNationalIdentityCardNumberProvider implements NationalIdentityCar
 	private final DateProducer dateProducer;
 	private final BaseProducer baseProducer;
 
-
 	public SvNationalIdentityCardNumberProvider(DateProducer dateProducer, BaseProducer baseProducer) {
 		this.dateProducer = dateProducer;
 		this.baseProducer = baseProducer;
@@ -25,4 +23,5 @@ public class SvNationalIdentityCardNumberProvider implements NationalIdentityCar
 	public String get() {
 		return randomNumeric(8);
 	}
+
 }

@@ -19,13 +19,11 @@ import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.util.LanguageCode;
 import com.devskiller.jfairy.producer.util.ValidateUtils;
 
-
 public class MapBasedDataMaster implements DataMaster {
 
 	public static final String LANGUAGE_TAG = "language";
 	private final BaseProducer baseProducer;
 	private Map<String, Object> dataSource = new CaseInsensitiveMap();
-
 
 	public MapBasedDataMaster(BaseProducer baseProducer) {
 		this.baseProducer = baseProducer;
@@ -119,7 +117,7 @@ public class MapBasedDataMaster implements DataMaster {
 		dataSource.putAll(data);
 	}
 
-	private static class CaseInsensitiveMap extends HashMap<String, Object> {
+	private static final class CaseInsensitiveMap extends HashMap<String, Object> {
 
 		@Override
 		@SuppressWarnings("unchecked")

@@ -14,7 +14,8 @@ public class IBAN {
 	private final String ownerAccountType;
 	private final String ibanNumber;
 
-	public IBAN(String accountNumber, String identificationNumber, String branchCode, String checkDigit, String accountType, String bankCode, String bban, String country, String nationalCheckDigit, String ownerAccountType, String ibanNumber) {
+	public IBAN(String accountNumber, String identificationNumber, String branchCode, String checkDigit,
+				String accountType, String bankCode, String bban, String country, String nationalCheckDigit, String ownerAccountType, String ibanNumber) {
 		this.accountNumber = accountNumber;
 		this.identificationNumber = identificationNumber;
 		this.branchCode = branchCode;

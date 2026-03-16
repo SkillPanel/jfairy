@@ -3,7 +3,6 @@ package com.devskiller.jfairy.producer.person.locale.sv;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.DateProducer;
 import com.devskiller.jfairy.producer.person.NationalIdentificationNumber;
@@ -29,7 +28,6 @@ public class SvNationalIdentificationNumberProvider implements NationalIdentific
 	private static final int NATIONAL_IDENTIFICATION_NUMBER_LENGTH = 11;
 	private static final int VALIDITY_IN_YEARS = 120;
 
-
 	private static final int[] WEIGHTS = {2, 1, 2, 1, 2, 1, 2, 1, 2};
 	private static final int MAX_SERIAL_NUMBER = 99;
 	private static final int TEN = 10;
@@ -40,7 +38,6 @@ public class SvNationalIdentificationNumberProvider implements NationalIdentific
 	private final DateProducer dateProducer;
 	private LocalDate issueDate;
 	private Person.Sex sex;
-
 
 	public SvNationalIdentificationNumberProvider(DateProducer dateProducer, BaseProducer baseProducer,
 	                                              NationalIdentificationNumberProperties.Property... properties) {
@@ -128,4 +125,3 @@ public class SvNationalIdentificationNumberProvider implements NationalIdentific
 	}
 
 }
-

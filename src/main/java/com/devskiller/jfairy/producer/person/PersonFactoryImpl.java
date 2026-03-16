@@ -1,10 +1,10 @@
 package com.devskiller.jfairy.producer.person;
 
 import com.devskiller.jfairy.data.DataMaster;
-import com.devskiller.jfairy.producer.company.CompanyFactory;
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.DateProducer;
 import com.devskiller.jfairy.producer.TimeProvider;
+import com.devskiller.jfairy.producer.company.CompanyFactory;
 
 public class PersonFactoryImpl implements PersonFactory {
 
@@ -15,7 +15,7 @@ public class PersonFactoryImpl implements PersonFactory {
 	private final NationalIdentificationNumberFactory nationalIdentificationNumberFactory;
 	private final NationalIdentityCardNumberProvider nationalIdentityCardNumberProvider;
 	private final PassportNumberProvider passportNumberProvider;
-	
+
 	private final TimeProvider timeProvider;
 	private final CompanyFactory companyFactory;
 

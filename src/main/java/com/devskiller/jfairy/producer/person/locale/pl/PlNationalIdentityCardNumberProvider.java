@@ -40,7 +40,6 @@ public class PlNationalIdentityCardNumberProvider implements NationalIdentityCar
 	private final DateProducer dateProducer;
 	private final BaseProducer baseProducer;
 
-
 	public PlNationalIdentityCardNumberProvider(DateProducer dateProducer, BaseProducer baseProducer) {
 		this.dateProducer = dateProducer;
 		this.baseProducer = baseProducer;

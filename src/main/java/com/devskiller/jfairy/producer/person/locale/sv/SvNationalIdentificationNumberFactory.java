@@ -1,6 +1,5 @@
 package com.devskiller.jfairy.producer.person.locale.sv;
 
-
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.DateProducer;
 import com.devskiller.jfairy.producer.person.NationalIdentificationNumberFactory;
@@ -10,7 +9,6 @@ public class SvNationalIdentificationNumberFactory implements NationalIdentifica
 
 	private final BaseProducer baseProducer;
 	private final DateProducer dateProducer;
-
 
 	public SvNationalIdentificationNumberFactory(BaseProducer baseProducer, DateProducer dateProducer) {
 		this.baseProducer = baseProducer;

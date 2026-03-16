@@ -13,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Unit tests for {@link RandomUtils}.
  */
+@SuppressWarnings("checkstyle:MethodName")
 @DisplayName("RandomUtils")
 class RandomUtilsTest {
 

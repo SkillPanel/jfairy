@@ -1,6 +1,5 @@
 package com.devskiller.jfairy.producer.person.locale.de;
 
-
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.person.PassportNumberProvider;
 
@@ -20,7 +19,6 @@ public class DePassportNumberProvider implements PassportNumberProvider {
 	private static final String VALID_NUMBER_PATTERN = "^[CFGHJK][0-9]{8}$";
 
 	private final BaseProducer baseProducer;
-
 
 	public DePassportNumberProvider(BaseProducer baseProducer) {
 		this.baseProducer = baseProducer;

@@ -29,7 +29,6 @@ public class EnVATIdentificationNumberProvider implements VATIdentificationNumbe
 	private BaseProducer baseProducer;
 	private static final Set<Integer> EXCLUDED_NUMBERS = Set.of(7, 8, 9, 17, 18, 19, 28, 29, 41, 47, 49, 69, 70, 79, 89, 96, 97);
 
-
 	public EnVATIdentificationNumberProvider(BaseProducer baseProducer) {
 		this.baseProducer = baseProducer;
 	}
@@ -53,7 +52,6 @@ public class EnVATIdentificationNumberProvider implements VATIdentificationNumbe
 		arraycopy(digits, 0, ein, SERIAL_NUMBER_INDEX, digits.length);
 	}
 
-
 	private void fillAreaNumber(char[] ein) {
 		Integer number;
 		do {
@@ -67,4 +65,5 @@ public class EnVATIdentificationNumberProvider implements VATIdentificationNumbe
 	private void fillHyphen(char[] ein) {
 		ein[HYPHEN_INDEX] = '-';
 	}
+
 }

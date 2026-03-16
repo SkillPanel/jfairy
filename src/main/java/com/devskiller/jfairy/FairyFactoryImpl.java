@@ -44,8 +44,8 @@ class FairyFactoryImpl implements FairyFactory {
 	public Fairy createFairy() {
 		TextProducer textProducer = new TextProducer(textProducerInternal, baseProducer);
 		NetworkProducer networkProducer = new NetworkProducer(ipNumberProducer);
-		
-		return new Fairy(textProducer, personFactory, networkProducer, baseProducer, 
+
+		return new Fairy(textProducer, personFactory, networkProducer, baseProducer,
 		                 dateProducer, creditCardProvider, companyFactory, ibanFactory);
 	}
 }

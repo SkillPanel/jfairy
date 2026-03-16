@@ -8,27 +8,27 @@ import com.devskiller.jfairy.producer.person.NationalIdentityCardNumberProvider;
 public class KaNationalIdentityCardNumberProvider implements NationalIdentityCardNumberProvider {
 
 	private static class OldCardNumberProvider implements NationalIdentityCardNumberProvider {
-		private static char[] GEORGIAN_CHAR = "აბგდევზთიკლმნოპჟრსტუფქღყშჩცძწჭხჯჰ".toCharArray();
+		private static final char[] GEORGIAN_CHAR = "აბგდევზთიკლმნოპჟრსტუფქღყშჩცძწჭხჯჰ".toCharArray();
 
 		private final BaseProducer baseProducer;
 
-		public OldCardNumberProvider(BaseProducer baseProducer) {
+		OldCardNumberProvider(BaseProducer baseProducer) {
 			this.baseProducer = baseProducer;
 		}
 
 		@Override
 		public String get() {
-			char geChar = GEORGIAN_CHAR[baseProducer.randomInt(GEORGIAN_CHAR.length - 1 )];
+			char geChar = GEORGIAN_CHAR[baseProducer.randomInt(GEORGIAN_CHAR.length - 1)];
 			return "N" + geChar + baseProducer.numerify("#######");
 		}
 	}
 
 	private static class NewCardNumberProvider implements NationalIdentityCardNumberProvider {
-		private final static String NEW_CARD_MASK = "##??#####";
+		private static final String NEW_CARD_MASK = "##??#####";
 
 		private final BaseProducer baseProducer;
 
-		public NewCardNumberProvider(BaseProducer baseProducer) {
+		NewCardNumberProvider(BaseProducer baseProducer) {
 			this.baseProducer = baseProducer;
 		}
 
@@ -39,7 +39,6 @@ public class KaNationalIdentityCardNumberProvider implements NationalIdentityCar
 	}
 
 	private final Supplier<NationalIdentityCardNumberProvider> formatPicker;
-
 
 	public KaNationalIdentityCardNumberProvider(BaseProducer baseProducer) {
 		NationalIdentityCardNumberProvider oldCardNumberProvider = new OldCardNumberProvider(baseProducer);
