@@ -88,10 +88,9 @@
 		<!-- Dependency versions (ordered by usage) -->
 		<dep.snakeyaml-engine.version>2.3</dep.snakeyaml-engine.version>
 		<dep.jspecify.version>1.0.0</dep.jspecify.version>
-		<dep.slf4j.version>2.0.16</dep.slf4j.version>
+		<dep.slf4j.version>2.0.17</dep.slf4j.version>
 		<dep.iban4j.version>3.2.3-RELEASE</dep.iban4j.version>
 		<dep.commons-validator.version>1.7</dep.commons-validator.version>
-		<dep.logback.version>1.5.16</dep.logback.version>
 		<dep.spock.version>2.4-groovy-4.0</dep.spock.version>
 		<dep.groovy.version>4.0.24</dep.groovy.version>
 		<dep.byte-buddy.version>1.15.11</dep.byte-buddy.version>
@@ -147,12 +146,12 @@
 			<version>${dep.commons-validator.version}</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>${dep.logback.version}</version>
-			<scope>test</scope>
-		</dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${dep.slf4j.version}</version>
+            <scope>test</scope>
+        </dependency>
 		<dependency>
 			<groupId>org.spockframework</groupId>
 			<artifactId>spock-core</artifactId>
