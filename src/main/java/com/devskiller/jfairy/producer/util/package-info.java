@@ -3,8 +3,6 @@
  *
  * <p>This package contains stateless helper utilities used across the library:
  * <ul>
- *   <li>{@link com.devskiller.jfairy.producer.util.RandomUtils} – random string generation
- *       (numeric, alphabetic, alphanumeric)</li>
  *   <li>{@link com.devskiller.jfairy.producer.util.StringUtils} – string manipulation
  *       (padding, trimming, case conversion, accent stripping, joining, splitting, …)</li>
  *   <li>{@link com.devskiller.jfairy.producer.util.ValidateUtils} – argument validation

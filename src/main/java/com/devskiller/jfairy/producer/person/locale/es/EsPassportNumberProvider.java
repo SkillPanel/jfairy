@@ -1,8 +1,7 @@
 package com.devskiller.jfairy.producer.person.locale.es;
 
+import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.person.PassportNumberProvider;
-
-import static com.devskiller.jfairy.producer.util.RandomUtils.randomAlphanumeric;
 
 /**
  * @author graux
@@ -10,8 +9,14 @@ import static com.devskiller.jfairy.producer.util.RandomUtils.randomAlphanumeric
  */
 public class EsPassportNumberProvider implements PassportNumberProvider {
 
+	private final BaseProducer baseProducer;
+
+	public EsPassportNumberProvider(BaseProducer baseProducer) {
+		this.baseProducer = baseProducer;
+	}
+
 	@Override
 	public String get() {
-		return randomAlphanumeric(9);
+		return baseProducer.randomAlphanumeric(9);
 	}
 }

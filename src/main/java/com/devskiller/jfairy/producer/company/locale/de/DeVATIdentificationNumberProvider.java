@@ -1,8 +1,7 @@
 package com.devskiller.jfairy.producer.company.locale.de;
 
+import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.VATIdentificationNumberProvider;
-
-import static com.devskiller.jfairy.producer.util.RandomUtils.randomNumeric;
 
 /**
  * German VAT identification number (Umsatzsteuer-Identifikationsnummer or USt-IdNr.)
@@ -15,9 +14,15 @@ public class DeVATIdentificationNumberProvider implements VATIdentificationNumbe
 
 	private static final String VALID_NUMBER_PATTERN = "^[0-9]{9}$";
 
+	private final BaseProducer baseProducer;
+
+	public DeVATIdentificationNumberProvider(BaseProducer baseProducer) {
+		this.baseProducer = baseProducer;
+	}
+
 	@Override
 	public String get() {
-		return randomNumeric(9);
+		return baseProducer.randomNumeric(9);
 	}
 
 	public boolean isValid(String vatIdentificationNumber) {

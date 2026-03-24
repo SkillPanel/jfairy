@@ -4,15 +4,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.person.PassportNumberProvider;
 import com.devskiller.jfairy.producer.util.AlphaNumberSystem;
 
 import static java.lang.Character.getNumericValue;
 import static java.lang.String.valueOf;
 import static java.lang.System.arraycopy;
-
-import static com.devskiller.jfairy.producer.util.RandomUtils.randomAlphabetic;
-import static com.devskiller.jfairy.producer.util.RandomUtils.randomNumeric;
 
 /**
  * @author Olga Maciaszek-Sharma
@@ -24,13 +22,16 @@ public class PlPassportNumberProvider implements PassportNumberProvider {
 
 	private static final int[] WEIGHTS = new int[]{7, 3, 9, 1, 7, 3, 1, 7, 3};
 
-	private final List<String> alphabet;
-
 	private static Map<String, Integer> letterDigits = null;
 
-	public PlPassportNumberProvider() {
-		alphabet = AlphaNumberSystem.generateAlphabetList();
-		letterDigits = generateLetterDigits();
+	private final List<String> alphabet;
+
+	private final BaseProducer baseProducer;
+
+	public PlPassportNumberProvider(BaseProducer baseProducer) {
+		this.alphabet = AlphaNumberSystem.generateAlphabetList();
+		this.letterDigits = generateLetterDigits();
+		this.baseProducer = baseProducer;
 	}
 
 	private Map<String, Integer> generateLetterDigits() {
@@ -73,12 +74,12 @@ public class PlPassportNumberProvider implements PassportNumberProvider {
 	}
 
 	private void fillSeries(char[] passport) {
-		char[] randomSeries = randomAlphabetic(2).toUpperCase().toCharArray();
+		char[] randomSeries = baseProducer.randomAlphabetic(2).toUpperCase().toCharArray();
 		arraycopy(randomSeries, 0, passport, 0, randomSeries.length);
 	}
 
 	private void fillDigits(char[] passport) {
-		char[] randomDigits = randomNumeric(6).toCharArray();
+		char[] randomDigits = baseProducer.randomNumeric(6).toCharArray();
 		arraycopy(randomDigits, 0, passport, 3, randomDigits.length);
 	}
 

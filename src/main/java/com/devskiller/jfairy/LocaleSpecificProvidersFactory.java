@@ -97,7 +97,7 @@ final class LocaleSpecificProvidersFactory {
 				new PlNationalIdentityCardNumberProvider(dateProducer, baseProducer),
 				new PlVATIdentificationNumberProvider(baseProducer),
 				new PlAddressProvider(dataMaster, baseProducer),
-				new PlPassportNumberProvider()
+				new PlPassportNumberProvider(baseProducer)
 		);
 	}
 
@@ -122,7 +122,7 @@ final class LocaleSpecificProvidersFactory {
 				new EnNationalIdentityCardNumberProvider(baseProducer),
 				new EnVATIdentificationNumberProvider(baseProducer),
 				new EnAddressProvider(dataMaster, baseProducer),
-				new EnPassportNumberProvider()
+				new EnPassportNumberProvider(baseProducer)
 		);
 	}
 
@@ -134,7 +134,7 @@ final class LocaleSpecificProvidersFactory {
 				new EnNationalIdentityCardNumberProvider(baseProducer),
 				new EnVATIdentificationNumberProvider(baseProducer),
 				new FrAddressProvider(dataMaster, baseProducer),
-				new EnPassportNumberProvider()
+				new EnPassportNumberProvider(baseProducer)
 		);
 	}
 
@@ -143,10 +143,10 @@ final class LocaleSpecificProvidersFactory {
 	                                                         DateProducer dateProducer) {
 		return new LocaleSpecificProviders(
 				new NoNationalIdentificationNumberFactory(),
-				new EsNationalIdentityCardNumberProvider(),
-				new EsVATIdentificationNumberProvider(),
+				new EsNationalIdentityCardNumberProvider(baseProducer),
+				new EsVATIdentificationNumberProvider(baseProducer),
 				new EsAddressProvider(dataMaster, baseProducer),
-				new EsPassportNumberProvider()
+				new EsPassportNumberProvider(baseProducer)
 		);
 	}
 
@@ -159,7 +159,7 @@ final class LocaleSpecificProvidersFactory {
 				new SvNationalIdentityCardNumberProvider(dateProducer, baseProducer),
 				new SvVATIdentificationNumberProvider(baseProducer, dateProducer, nationalIdFactory),
 				new SvAddressProvider(dataMaster, baseProducer),
-				new SvPassportNumberProvider()
+				new SvPassportNumberProvider(baseProducer)
 		);
 	}
 
@@ -171,7 +171,7 @@ final class LocaleSpecificProvidersFactory {
 				new ZhNationalIdentityCardNumberProvider(baseProducer),
 				new ZhVATIdentificationNumberProvider(),
 				new ZhAddressProvider(dataMaster, baseProducer),
-				new ZhPassportNumberProvider()
+				new ZhPassportNumberProvider(baseProducer)
 		);
 	}
 
@@ -181,7 +181,7 @@ final class LocaleSpecificProvidersFactory {
 		return new LocaleSpecificProviders(
 				new NoNationalIdentificationNumberFactory(),
 				new DeNationalIdentityCardNumberProvider(baseProducer),
-				new DeVATIdentificationNumberProvider(),
+				new DeVATIdentificationNumberProvider(baseProducer),
 				new DeAddressProvider(dataMaster, baseProducer),
 				new DePassportNumberProvider(baseProducer)
 		);

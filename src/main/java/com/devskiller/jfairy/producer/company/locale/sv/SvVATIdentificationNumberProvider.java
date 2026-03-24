@@ -12,7 +12,6 @@ import static java.lang.String.valueOf;
 
 import static com.devskiller.jfairy.producer.person.NationalIdentificationNumberProperties.dateOfBirth;
 import static com.devskiller.jfairy.producer.person.locale.sv.SvNationalIdentificationNumberProvider.calculateChecksum;
-import static com.devskiller.jfairy.producer.util.RandomUtils.randomNumeric;
 import static com.devskiller.jfairy.producer.util.StringUtils.leftPad;
 
 /**
@@ -46,7 +45,8 @@ public class SvVATIdentificationNumberProvider implements VATIdentificationNumbe
 
 		int randomGroupNumber = baseProducer.randomElement(GroupNumber.class).getValue();
 		String randomNumericBetween20And99 = leftPad(valueOf(baseProducer.randomBetween(20, 99)), 2, "0");
-		String organizationNumberWithoutChecksum = randomGroupNumber + randomNumeric(1) + randomNumericBetween20And99 + randomNumeric(5);
+		String organizationNumberWithoutChecksum = randomGroupNumber + baseProducer.randomNumeric(1)
+			+ randomNumericBetween20And99 + baseProducer.randomNumeric(5);
 		String organizationNumber = organizationNumberWithoutChecksum + calculateChecksum(organizationNumberWithoutChecksum);
 
 		return SE + organizationNumber + "01";

@@ -43,14 +43,14 @@ class FairyZhSpec extends Specification {
 		when:
 		Person person = fairy.person()
 		then:
-		person.address.addressLine1 == '台北市朝阳大街67号'
+		person.address.addressLine1 == '南京市中山大道122号 101房'
 	}
 
 	def "Should create Chinese city"() {
 		when:
 		Person person = fairy.person()
 		then:
-		person.address.city == '台北'
+		person.address.city == '南京'
 	}
 
 	/********************

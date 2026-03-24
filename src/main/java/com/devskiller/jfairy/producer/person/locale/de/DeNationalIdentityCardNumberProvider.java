@@ -3,8 +3,6 @@ package com.devskiller.jfairy.producer.person.locale.de;
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.person.NationalIdentityCardNumberProvider;
 
-import static com.devskiller.jfairy.producer.util.RandomUtils.randomNumeric;
-
 /**
  * German Identity Card (known as Personalausweis)
  * <p>
@@ -26,7 +24,7 @@ public class DeNationalIdentityCardNumberProvider implements NationalIdentityCar
 
 	@Override
 	public String get() {
-		return baseProducer.randomElement(ID_CARD_TYPE_LETTERS) + randomNumeric(8);
+		return baseProducer.randomElement(ID_CARD_TYPE_LETTERS) + baseProducer.randomNumeric(8);
 	}
 
 	public boolean isValid(String nationalIdentityCardNumber) {

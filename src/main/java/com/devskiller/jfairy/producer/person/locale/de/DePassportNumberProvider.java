@@ -3,8 +3,6 @@ package com.devskiller.jfairy.producer.person.locale.de;
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.person.PassportNumberProvider;
 
-import static com.devskiller.jfairy.producer.util.RandomUtils.randomNumeric;
-
 /**
  * German passport (known as Reisepass)
  * <p>
@@ -26,7 +24,7 @@ public class DePassportNumberProvider implements PassportNumberProvider {
 
 	@Override
 	public String get() {
-		return baseProducer.randomElement(PASSPORT_TYPE_LETTERS) + randomNumeric(8);
+		return baseProducer.randomElement(PASSPORT_TYPE_LETTERS) + baseProducer.randomNumeric(8);
 	}
 
 	public boolean isValid(String passportNumber) {

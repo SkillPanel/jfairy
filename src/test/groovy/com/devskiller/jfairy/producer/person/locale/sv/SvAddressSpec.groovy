@@ -18,42 +18,42 @@ class SvAddressSpec extends Specification {
 
 	def "should generate random street"() {
 		expect:
-			address.street == "Barnängsgränd"
+			address.street == "Styrmansgatan"
 	}
 
 	def "should generate random streetNumber"() {
 		expect:
-			address.streetNumber == "19"
+			address.streetNumber == "139"
 	}
 
 	def "should generate random apartmentNumber"() {
 		expect:
-			address.apartmentNumber == ""
+			address.apartmentNumber == "321"
 	}
 
 	def "should generate random postalCode"() {
 		expect:
-			address.postalCode == "567 45"
+			address.postalCode == "460 11"
 	}
 
 	def "should generate random city"() {
 		expect:
-			address.city == "Karlskoga"
+			address.city == "Östhammar"
 	}
 
 	def "should return addressLine1 in sv locale format"() {
 		expect:
-			address.addressLine1 == "Barnängsgränd 19"
+			address.addressLine1 == "Styrmansgatan 139 Lgh 321"
 	}
 
 	def "should return addressLine2 in sv locale format"() {
 		expect:
-			address.addressLine2 == "567 45 Karlskoga"
+			address.addressLine2 == "460 11 Östhammar"
 	}
 
 	def "should return address in sv locale format"() {
 		expect:
-			address.toString() == "Barnängsgränd 19" + System.lineSeparator() + "567 45 Karlskoga"
+			address.toString() == "Styrmansgatan 139 Lgh 321" + System.lineSeparator() + "460 11 Östhammar"
 	}
 
 }

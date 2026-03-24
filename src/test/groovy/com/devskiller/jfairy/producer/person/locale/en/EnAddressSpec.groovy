@@ -18,42 +18,42 @@ class EnAddressSpec extends Specification {
 
 	def "should generate random street"() {
 		expect:
-			address.street == "Herzi Street"
+			address.street == "Highland Place"
 	}
 
 	def "should generate random streetNumber"() {
 		expect:
-			address.streetNumber == "63"
+			address.streetNumber == "136"
 	}
 
 	def "should generate random apartmentNumber"() {
 		expect:
-			address.apartmentNumber == ""
+			address.apartmentNumber == "147"
 	}
 
 	def "should generate random postalCode"() {
 		expect:
-			address.postalCode == "42856"
+			address.postalCode == "25059"
 	}
 
 	def "should generate random city"() {
 		expect:
-			address.city == "Washington"
+			address.city == "San Francisco"
 	}
 
 	def "should return addressLine1 in en locale format"() {
 		expect:
-			address.addressLine1 == "63 Herzi Street"
+			address.addressLine1 == "136 Highland Place APT 147"
 	}
 
 	def "should return addressLine2 in en locale format"() {
 		expect:
-			address.addressLine2 == "Washington 42856"
+			address.addressLine2 == "San Francisco 25059"
 	}
 
 	def "should return address in en locale format"() {
 		expect:
-			address.toString() == "63 Herzi Street" + System.lineSeparator() + "Washington 42856"
+			address.toString() == "136 Highland Place APT 147" + System.lineSeparator() + "San Francisco 25059"
 	}
 
 }

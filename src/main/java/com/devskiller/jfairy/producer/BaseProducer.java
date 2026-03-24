@@ -126,6 +126,18 @@ public class BaseProducer {
 		return random.nextDouble(min, max);
 	}
 
+	public String randomNumeric(int length) {
+		return random.randomNumeric(length);
+	}
+
+	public String randomAlphabetic(int length) {
+		return random.randomAlphabetic(length);
+	}
+
+	public String randomAlphanumeric(int length) {
+		return random.randomAlphanumeric(length);
+	}
+
 	/**
 	 * Replaces all {@code '?'} characters with random chars from [a - z] range
 	 *

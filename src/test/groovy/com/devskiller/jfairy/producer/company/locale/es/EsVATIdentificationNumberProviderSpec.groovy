@@ -3,13 +3,16 @@ package com.devskiller.jfairy.producer.company.locale.es
 import spock.lang.Specification
 import spock.lang.Unroll
 
+import com.devskiller.jfairy.producer.BaseProducer
+import com.devskiller.jfairy.producer.RandomGenerator
+
 /**
  * @author graux
  * @since 24/06/2015
  */
 class EsVATIdentificationNumberProviderSpec extends Specification {
 
-	private EsVATIdentificationNumberProvider generator = new EsVATIdentificationNumberProvider()
+	private EsVATIdentificationNumberProvider generator = new EsVATIdentificationNumberProvider(new BaseProducer(new RandomGenerator(73)))
 
 	@Unroll
 	def "Should validate #vatIdentificationNumber as #valid"() {

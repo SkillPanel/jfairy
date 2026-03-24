@@ -16,14 +16,14 @@ class FairyDeSpec extends Specification {
 		when:
 			Person person = fairy.person()
 		then:
-			person.fullName == 'Hannsgeorg Scheidt' // well, that's german enough...
+			person.fullName == 'Timo Höfling' // well, that's german enough...
 	}
 
 	def "Should create German city"() {
 		when:
 			Person person = fairy.person()
 		then:
-			person.address.city == 'Unterbachern'
+			person.address.city == 'Hockenheim'
 	}
 
 }
