@@ -1,7 +1,6 @@
 package com.devskiller.jfairy.producer.person.locale.sv;
 
 import com.devskiller.jfairy.producer.BaseProducer;
-import com.devskiller.jfairy.producer.DateProducer;
 import com.devskiller.jfairy.producer.person.NationalIdentityCardNumberProvider;
 
 /**
@@ -9,11 +8,9 @@ import com.devskiller.jfairy.producer.person.NationalIdentityCardNumberProvider;
  */
 public class SvNationalIdentityCardNumberProvider implements NationalIdentityCardNumberProvider {
 
-	private final DateProducer dateProducer;
 	private final BaseProducer baseProducer;
 
-	public SvNationalIdentityCardNumberProvider(DateProducer dateProducer, BaseProducer baseProducer) {
-		this.dateProducer = dateProducer;
+	public SvNationalIdentityCardNumberProvider(BaseProducer baseProducer) {
 		this.baseProducer = baseProducer;
 	}
 
