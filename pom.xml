@@ -103,7 +103,8 @@
 		<dep.plugin.coveralls.version>4.3.0</dep.plugin.coveralls.version>
 		<dep.plugin.deploy.version>3.1.4</dep.plugin.deploy.version>
 		<dep.plugin.enforcer.version>3.6.2</dep.plugin.enforcer.version>
-		<dep.plugin.error-prone.version>2.39.0</dep.plugin.error-prone.version>
+		<!-- last error-prone version compatible with Java 17; 2.43.0+ requires Java 21 -->
+		<dep.plugin.error-prone.version>2.42.0</dep.plugin.error-prone.version>
 		<dep.plugin.flatten.version>1.7.3</dep.plugin.flatten.version>
 		<dep.plugin.gmavenplus.version>4.3.1</dep.plugin.gmavenplus.version>
 		<dep.plugin.gpg.version>3.2.8</dep.plugin.gpg.version>
