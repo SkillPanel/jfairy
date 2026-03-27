@@ -9,13 +9,6 @@ public interface IBANProvider extends Supplier<IBAN> {
 
 	void fillCountryCode();
 
-	void setNationalCheckDigit(String nationalCheckDigit);
-
-	void setBranchCode(String branchCode);
-
 	void setCountry(String country);
 
-	void setAccountNumber(String accountNumber);
-
-	void setBankCode(String bankCode);
 }

@@ -87,7 +87,7 @@
 		<dep.snakeyaml-engine.version>3.0.1</dep.snakeyaml-engine.version>
 		<dep.jspecify.version>1.0.0</dep.jspecify.version>
 		<dep.slf4j.version>2.0.17</dep.slf4j.version>
-		<dep.iban4j.version>3.2.13-RELEASE</dep.iban4j.version>
+		<dep.iban-commons.version>1.8.4</dep.iban-commons.version>
 		<dep.commons-validator.version>1.10.1</dep.commons-validator.version>
 		<dep.spock.version>2.4-groovy-4.0</dep.spock.version>
 		<dep.groovy.version>4.0.30</dep.groovy.version>
@@ -135,9 +135,9 @@
 			<version>${dep.slf4j.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.iban4j</groupId>
-			<artifactId>iban4j</artifactId>
-			<version>${dep.iban4j.version}</version>
+			<groupId>de.speedbanking</groupId>
+			<artifactId>iban-commons</artifactId>
+			<version>${dep.iban-commons.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-validator</groupId>

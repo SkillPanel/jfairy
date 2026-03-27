@@ -109,6 +109,7 @@ public class MapBasedDataMaster implements DataMaster {
 			final Load load = new Load(loadSettings);
 			final URL url = resources.nextElement();
 			try (InputStream is = url.openStream()) {
+				@SuppressWarnings("unchecked")
 				final Map<String, Object> data = (Map<String, Object>) load.loadFromInputStream(is);
 				appendData(data);
 			}
