@@ -1,0 +1,28 @@
+alphabet: abcçdefgğhıijklmnoöprsştuüvyz
+domains: [ com.tr, org.tr, net.tr, edu.tr, gov.tr, k12.tr, av.tr, dr.tr, bel.tr, tsk.tr ]
+firstNames: {
+    male: [ Ahmet, Mehmet, Mustafa, Ali, Hüseyin, Hasan, İbrahim, İsmail, Osman, Murat, Ömer, Ramazan, Halil, Süleyman, Abdullah, Mahmut, Recep, Salih, Fatih, Kadir, Emre, Gökhan, Hakan, Serkan, Metin, Burak, Volkan, Bülent, Kenan, Selçuk, Yavuz, Sinan, Can, Kerem, Deniz, Onur, Umut, Eren, Arda, Mert, Yiğit, Berk, Tolga, Kaan, Doruk, Batuhan, Görkem, Furkan, Enes, Yunus, Bilal ],
+    female: [ Fatma, Ayşe, Emine, Hatice, Zeynep, Özlem, Elif, Meryem, Gamze, Şerife, Hanife, Sultan, Zehra, Havva, Hayriye, Cemile, Güllü, Leyla, Saliha, Melek, Arzu, Yasemin, Esra, Dilek, Pınar, Tuğba, Seda, Ebru, Gizem, Büşra, Kübra, Feyza, Beyza, İrem, Merve, Nursel, Selin, Pelin, Damla, Yağmur, Ece, Duru, Defne, Azra, Derin, Bade, Nehir, Eylül, Melis ],
+}
+lastNames: {
+    male: [ Yılmaz, Kaya, Demir, Çelik, Şahin, Yıldız, Yıldırım, Öztürk, Aydın, Özdemir, Arslan, Doğan, Kılıç, Aslan, Çetin, Kara, Koç, Kurt, Özkan, Şimşek, Polat, Özcan, Korkmaz, Çakır, Erdoğan, Yavuz, Can, Aksoy, Köse, Güler, Aktaş, Avcı, Akın, Özer, Ünal, Kaplan, Bulut, Yiğit, Sarı, Taş, Kaymak, Önal, Güneş, Ay, Karaman, Çavuş, Yalçın, Uzun, Karakaş, Tekin ],
+    female: [ Yılmaz, Kaya, Demir, Çelik, Şahin, Yıldız, Yıldırım, Öztürk, Aydın, Özdemir, Arslan, Doğan, Kılıç, Aslan, Çetin, Kara, Koç, Kurt, Özkan, Şimşek, Polat, Özcan, Korkmaz, Çakır, Erdoğan, Yavuz, Can, Aksoy, Köse, Güler, Aktaş, Avcı, Akın, Özer, Ünal, Kaplan, Bulut, Yiğit, Sarı, Taş, Kaymak, Önal, Güneş, Ay, Karaman, Çavuş, Yalçın, Uzun, Karakaş, Tekin ]
+}
+personalEmails: [ gmail.com, hotmail.com, yahoo.com, outlook.com, icloud.com ]
+companyNames: [ Holding, Şirket, Ticaret, Sanayi, Limited, Anonim, Bilişim, Otomotiv, Gıda, İnşaat, Tekstil, Lojistik, Turizm, Enerji, Medya, Sağlık, Eğitim, Banka, Sigorta, Mağaza, Market, Restoran, Kafe ]
+companySuffixes: [ 'A.Ş.', 'Ltd. Şti.', 'Hizmetleri', 'Grubu', 'Dış Ticaret' ]
+companyEmails: [ info, destek, satis, hello, merhaba ]
+
+text: Bu bir deneme metnidir. Türkçe dil desteği için oluşturulmuştur. Bu sistem sayesinde rastgele Türkçe veriler üretebilirsiniz. Adresler, isimler, telefon numaraları ve daha fazlası artık jfairy ile mümkün. Teknolojinin getirdiği bu kolaylıklar sayesinde test süreçleriniz daha hızlı ve verimli hale gelecek.
+
+telephone_number_formats: [ '+90 5## ### ## ##' ]
+
+postal_code: [ '#####' ]
+
+city: [ İstanbul, Ankara, İzmir, Bursa, Antalya, Adana, Konya, Gaziantep, Şanlıurfa, Mersin, Kocaeli, Diyarbakır, Hatay, Manisa, Kayseri, Samsun, Balıkesir, Kahramanmaraş, Van, Aydın ]
+
+street: [ İstiklal Caddesi, Bağdat Caddesi, Cumhuriyet Caddesi, Atatürk Bulvarı, Vatan Caddesi, Ordu Caddesi, Halaskargazi Caddesi, Abdi İpekçi Caddesi, Nispetiye Caddesi, Barbaros Bulvarı, Turgut Özal Bulvarı, Mevlana Caddesi, Fevzi Çakmak Caddesi, Ziya Gökalp Caddesi, Mithatpaşa Caddesi, Tunalı Hilmi Caddesi, Bahçelievler 7. Cadde, Kenan Evren Bulvarı, Gazipaşa Bulvarı, Talatpaşa Bulvarı ]
+
+country: [ 'Türkiye' ]
+
+language: 'TR'

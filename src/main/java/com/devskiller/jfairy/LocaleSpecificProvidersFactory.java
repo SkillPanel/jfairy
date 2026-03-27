@@ -17,6 +17,7 @@ import com.devskiller.jfairy.producer.company.locale.ka.KaVATIdentificationNumbe
 import com.devskiller.jfairy.producer.company.locale.pl.PlVATIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.company.locale.sk.SkVATIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.company.locale.sv.SvVATIdentificationNumberProvider;
+import com.devskiller.jfairy.producer.company.locale.tr.TrVATIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.company.locale.zh.ZhVATIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.person.NationalIdentificationNumberFactory;
 import com.devskiller.jfairy.producer.person.locale.NoNationalIdentificationNumberFactory;
@@ -50,6 +51,9 @@ import com.devskiller.jfairy.producer.person.locale.sv.SvAddressProvider;
 import com.devskiller.jfairy.producer.person.locale.sv.SvNationalIdentificationNumberFactory;
 import com.devskiller.jfairy.producer.person.locale.sv.SvNationalIdentityCardNumberProvider;
 import com.devskiller.jfairy.producer.person.locale.sv.SvPassportNumberProvider;
+import com.devskiller.jfairy.producer.person.locale.tr.TrAddressProvider;
+import com.devskiller.jfairy.producer.person.locale.tr.TrNationalIdentityCardNumberProvider;
+import com.devskiller.jfairy.producer.person.locale.tr.TrPassportNumberProvider;
 import com.devskiller.jfairy.producer.person.locale.zh.ZhAddressProvider;
 import com.devskiller.jfairy.producer.person.locale.zh.ZhNationalIdentityCardNumberProvider;
 import com.devskiller.jfairy.producer.person.locale.zh.ZhPassportNumberProvider;
@@ -89,6 +93,7 @@ final class LocaleSpecificProvidersFactory {
 			case DE -> createDeProviders(dataMaster, baseProducer);
 			case KA -> createKaProviders(dataMaster, baseProducer);
 			case BR -> createBrProviders(dataMaster, baseProducer);
+			case TR -> createTrProviders(dataMaster, baseProducer);
 		};
 	}
 
@@ -230,6 +235,17 @@ final class LocaleSpecificProvidersFactory {
 				new BrVATIdentificationNumberProvider(baseProducer),
 				new BrAddressProvider(dataMaster, baseProducer),
 				new BrPassportNumberProvider()
+		);
+	}
+
+	private static LocaleSpecificProviders createTrProviders(DataMaster dataMaster,
+	                                                         BaseProducer baseProducer) {
+		return new LocaleSpecificProviders(
+				new NoNationalIdentificationNumberFactory(),
+				new TrNationalIdentityCardNumberProvider(baseProducer),
+				new TrVATIdentificationNumberProvider(baseProducer),
+				new TrAddressProvider(dataMaster, baseProducer),
+				new TrPassportNumberProvider(baseProducer)
 		);
 	}
 }
