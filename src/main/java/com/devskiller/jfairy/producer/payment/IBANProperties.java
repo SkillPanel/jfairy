@@ -3,25 +3,24 @@ package com.devskiller.jfairy.producer.payment;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.iban4j.CountryCode;
+import de.speedbanking.iban.IbanRegistry;
 
 import com.devskiller.jfairy.producer.util.LanguageCode;
 
 public final class IBANProperties {
 
-	private static final HashMap<LanguageCode, CountryCode> COUNTRIES = new HashMap<>();
+	private static final Map<LanguageCode, IbanRegistry> COUNTRIES = new HashMap<>();
 
 	static {
-		COUNTRIES.put(LanguageCode.PL, CountryCode.PL);
-		COUNTRIES.put(LanguageCode.EN, CountryCode.GB);
-		COUNTRIES.put(LanguageCode.ES, CountryCode.ES);
-		COUNTRIES.put(LanguageCode.FR, CountryCode.FR);
-		COUNTRIES.put(LanguageCode.KA, CountryCode.GE);
-		COUNTRIES.put(LanguageCode.IT, CountryCode.IT);
-		COUNTRIES.put(LanguageCode.DE, CountryCode.DE);
-		COUNTRIES.put(LanguageCode.SK, CountryCode.SK);
-		COUNTRIES.put(LanguageCode.SV, CountryCode.SV);
-		COUNTRIES.put(LanguageCode.ZH, CountryCode.TW);
+		COUNTRIES.put(LanguageCode.PL, IbanRegistry.PL);
+		COUNTRIES.put(LanguageCode.EN, IbanRegistry.GB);
+		COUNTRIES.put(LanguageCode.ES, IbanRegistry.ES);
+		COUNTRIES.put(LanguageCode.FR, IbanRegistry.FR);
+		COUNTRIES.put(LanguageCode.KA, IbanRegistry.GE);
+		COUNTRIES.put(LanguageCode.IT, IbanRegistry.IT);
+		COUNTRIES.put(LanguageCode.DE, IbanRegistry.DE);
+		COUNTRIES.put(LanguageCode.SK, IbanRegistry.SK);
+		COUNTRIES.put(LanguageCode.SV, IbanRegistry.SV);
 	}
 
 	private IBANProperties() {
@@ -31,33 +30,6 @@ public final class IBANProperties {
 
 		public abstract void apply(IBANProvider provider);
 
-	}
-
-	public static Property branchCode(final String branchCode) {
-		return new Property() {
-			@Override
-			public void apply(IBANProvider provider) {
-				provider.setBranchCode(branchCode);
-			}
-		};
-	}
-
-	public static Property nationalCheckDigit(final String nationalCheckDigit) {
-		return new Property() {
-			@Override
-			public void apply(IBANProvider provider) {
-				provider.setNationalCheckDigit(nationalCheckDigit);
-			}
-		};
-	}
-
-	public static Property accountNumber(final String accountNumber) {
-		return new Property() {
-			@Override
-			public void apply(IBANProvider provider) {
-				provider.setAccountNumber(accountNumber);
-			}
-		};
 	}
 
 	public static Property country(final String country) {
@@ -82,18 +54,9 @@ public final class IBANProperties {
 		return COUNTRIES.entrySet().stream()
 			.filter(locale -> locale.getKey().name().equals(lang))
 			.map(Map.Entry::getValue)
-			.map(CountryCode::getAlpha2)
+			.map(IbanRegistry::name)
 			.findFirst()
 			.orElse("PL");
-	}
-
-	public static Property bankCode(final String bankCode) {
-		return new Property() {
-			@Override
-			public void apply(IBANProvider provider) {
-				provider.setBankCode(bankCode);
-			}
-		};
 	}
 
 }

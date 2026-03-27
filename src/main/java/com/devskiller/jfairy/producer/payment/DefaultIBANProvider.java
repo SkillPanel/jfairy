@@ -1,18 +1,16 @@
 package com.devskiller.jfairy.producer.payment;
 
-import java.util.IllegalFormatCodePointException;
 import java.util.List;
+import java.util.Optional;
 
-import org.iban4j.CountryCode;
-import org.iban4j.Iban;
-import org.iban4j.UnsupportedCountryException;
+import de.speedbanking.iban.Iban;
+import de.speedbanking.iban.IbanRegistry;
+import de.speedbanking.iban.RandomIban;
 import org.jspecify.annotations.Nullable;
 
 import com.devskiller.jfairy.data.DataMaster;
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.person.Country;
-
-import static com.devskiller.jfairy.producer.util.StringUtils.isNotEmpty;
 
 /**
  * ALPHA: Under development
@@ -21,11 +19,7 @@ public class DefaultIBANProvider implements IBANProvider {
 
 	protected final DataMaster dataMaster;
 	protected final BaseProducer baseProducer;
-	protected CountryCode countryCode;
-	protected String accountNumber;
-	protected String bankCode;
-	protected String branchCode;
-	protected String nationalCheckDigit;
+	protected String countryCode;
 
 	public DefaultIBANProvider(BaseProducer baseProducer,
 		                       DataMaster dataMaster,
@@ -39,38 +33,21 @@ public class DefaultIBANProvider implements IBANProvider {
 
 	@Override
 	public @Nullable IBAN get() {
-		try {
+		fillCountryCode();
 
-			fillCountryCode();
-
-			try {
-
-				Iban.Builder builder = new Iban.Builder()
-					.countryCode(countryCode)
-					.bankCode(bankCode)
-					.branchCode(branchCode)
-					.nationalCheckDigit(nationalCheckDigit);
-				if (isNotEmpty(accountNumber)) {
-					builder.accountNumber(accountNumber);
-				}
-				Iban iban = builder.buildRandom();
-
-				String identificationNumber = iban.getIdentificationNumber();
-				String checkDigit = iban.getCheckDigit();
-				String accountType = iban.getAccountType();
-				String bban = iban.getBban();
-				String ownerAccountType = iban.getOwnerAccountType();
-				String ibanNumber = iban.toString();
-
-				return new IBAN(accountNumber, identificationNumber, branchCode, checkDigit,
-					accountType, bankCode, bban, countryCode.getName(), nationalCheckDigit,
-					ownerAccountType, ibanNumber);
-			} catch (UnsupportedCountryException ex) {
-				return null;
-			}
-		} catch (IllegalFormatCodePointException ex) {
-			throw new IllegalArgumentException("Invalid iban " + ex.getMessage(), ex);
+		IbanRegistry reg = IbanRegistry.getByCode(countryCode);
+		if (reg == null) {
+			return null;
 		}
+		Iban iban = RandomIban.of(countryCode);
+
+		return new IBAN(iban.getAccountNumber(),
+						iban.getCheckDigits(),
+						iban.getBankCode(),
+						iban.getBban(),
+						iban.getCountryCode(),
+						iban.getNationalCheckDigit(),
+						iban.toString());
 	}
 
 	@Override
@@ -78,33 +55,15 @@ public class DefaultIBANProvider implements IBANProvider {
 		if (countryCode == null) {
 			List<Country> countries = Country.findCountryForLanguage(dataMaster.getLanguage());
 			Country country = baseProducer.randomElement(countries);
-			countryCode = CountryCode.valueOf(country.getCode());
+
+			IbanRegistry r = IbanRegistry.getByCode(country.getCode());
+			countryCode = Optional.ofNullable(r).map(IbanRegistry::name).orElse(null);
 		}
 	}
 
 	@Override
-	public void setNationalCheckDigit(String nationalCheckDigit) {
-		this.nationalCheckDigit = nationalCheckDigit;
-	}
-
-	@Override
-	public void setBranchCode(String branchCode) {
-		this.branchCode = branchCode;
-	}
-
-	@Override
 	public void setCountry(String country) {
-		this.countryCode = CountryCode.valueOf(country);
-	}
-
-	@Override
-	public void setAccountNumber(String accountNumber) {
-		this.accountNumber = accountNumber;
-	}
-
-	@Override
-	public void setBankCode(String bankCode) {
-		this.bankCode = bankCode;
+		this.countryCode = country;
 	}
 
 }

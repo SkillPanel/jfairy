@@ -1,6 +1,6 @@
 package com.devskiller.jfairy.producer.payment
 
-import org.iban4j.IbanUtil
+import de.speedbanking.iban.IbanValidator
 import spock.lang.Specification
 
 import com.devskiller.jfairy.Fairy
@@ -25,23 +25,21 @@ class IBANSpec extends Specification {
 	 * ATkk bbbb bccc cccc cccc
 	 *
 	 * b = National bank code
-	 c = Account number
 	 */
 	def "should return valid iban"() {
 		when:
 			IBANProvider iban = new DefaultIBANProvider(
 				baseProducer,
 				dataMaster,
-				IBANProperties.accountNumber("00234573201"),
 				IBANProperties.country("AT")
 			)
 
 		then:
-			IbanUtil.validate(iban.get().ibanNumber)
+			IbanValidator.validate(iban.get().ibanNumber)
 	}
 
 	/**
-	 * Poland	28	24n	PLkk bbbs sssx cccc cccc cccc cccc	b = National bank code
+	 Poland	28	24n	PLkk bbbs sssx cccc cccc cccc cccc	b = National bank code
 	 s = Branch code
 	 x = National check digit
 	 c = Account number,
@@ -53,7 +51,7 @@ class IBANSpec extends Specification {
 		when:
 			IBANProvider iban = new DefaultIBANProvider(baseProducer, dataMaster)
 		then:
-			IbanUtil.validate(iban.get().ibanNumber)
+			IbanValidator.validate(iban.get().ibanNumber)
 	}
 
 	def "should be usable directly from Fairy"() {
