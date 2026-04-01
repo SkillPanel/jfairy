@@ -1,24 +1,28 @@
 # jFairy by Devskiller
 
-[![Build](https://github.com/SkillPanel/jfairy/actions/workflows/build.yml/badge.svg)](https://github.com/SkillPanel/jfairy/actions/workflows/build.yml) [![Maven Central](https://img.shields.io/maven-central/v/com.devskiller/jfairy)](https://central.sonatype.com/artifact/com.devskiller/jfairy) [![Javadocs](https://javadoc.io/badge2/com.devskiller/jfairy/javadoc.svg)](https://javadoc.io/doc/com.devskiller/jfairy)
+[](https://github.com/SkillPanel/jfairy/actions/workflows/build.yml)
+[](https://central.sonatype.com/artifact/com.devskiller/jfairy)
+[](https://javadoc.io/doc/com.devskiller/jfairy)
 
-Java fake data generator. Based on Wikipedia:
+Java fake data generator. According to Wikipedia:
 
 > Fairyland, in folklore, is the fabulous land or abode of fairies or fays.
 
 ## Installation
 
+Add the following dependency to your `pom.xml`:
+
 ```xml
 <dependency>
     <groupId>com.devskiller</groupId>
     <artifactId>jfairy</artifactId>
-    <version>0.8.1</version>
+    <version>0.8.2</version>
 </dependency>
 ```
 
 ## Usage
 
-Creating simple objects:
+### Creating simple objects
 
 ```java
 Fairy fairy = Fairy.create();
@@ -42,7 +46,7 @@ System.out.println(adultMale.getDateOfBirth());
 // at least 21 years earlier
 ```
 
-Creating related objects:
+### Creating related objects
 
 ```java
 Fairy fairy = Fairy.create();
@@ -61,19 +65,20 @@ System.out.println(salesman.getCompanyEmail());
 
 ## Supported locales
 
-| Locale | Language tag |
-|--------|-------------|
-| English (default) | `en` |
-| Polish | `pl` |
-| German | `de` |
-| French | `fr` |
-| Spanish | `es` |
-| Swedish | `sv` |
-| Chinese | `zh` |
-| Georgian | `ka` |
-| Italian | `it` |
-| Brazilian Portuguese | `br` |
-| Slovak | `sk` |
+| Locale               | Language tag |
+|:---------------------|:------------:|
+| English (default)    |     `en`     |
+| Polish               |     `pl`     |
+| German               |     `de`     |
+| French               |     `fr`     |
+| Spanish              |     `es`     |
+| Swedish              |     `sv`     |
+| Chinese              |     `zh`     |
+| Georgian             |     `ka`     |
+| Italian              |     `it`     |
+| Brazilian Portuguese |     `br`     |
+| Slovak               |     `sk`     |
+| Turkish              |     `tr`     |
 
 ```java
 Fairy enFairy = Fairy.create();
@@ -102,20 +107,20 @@ Person p = unique.next();
 
 ## Thread safety
 
-`Fairy` object should not be used concurrently by multiple threads. It is recommended to create `Fairy` instance for each thread.
+`Fairy` objects are not designed for concurrent use by multiple threads.
+It is recommended to create a separate `Fairy` instance for each thread.
 
-Some methods are not thread-safe when multiple threads share the same `Fairy` object. For other methods it is still recommended to create a separate `Fairy` object, because `Random` object utilized underneath does not perform well when used concurrently by multiple threads.
-
-## Other samples
-
-Look into [code samples](https://github.com/SkillPanel/jfairy/tree/master/src/test/groovy/snippets/)
+While some methods might appear safe, the underlying `Random` implementation can lead to contention and poor performance. Creating dedicated instances ensures both thread safety and optimal execution speed.
 
 ## JUnit 5 Extension
 
-If you use JUnit 5, check out [jfairy-junit-extension](https://github.com/SkillPanel/jfairy-junit-extension) — a JUnit 5 extension that allows injecting jFairy-generated objects directly into test method parameters.
+If you use JUnit 5, check out [jfairy-junit-extension](https://github.com/SkillPanel/jfairy-junit-extension) — an extension that allows injecting jFairy-generated objects directly into test method parameters.
 
 ## Building
 
-This project can be built using maven command:
+This project uses Maven and can be built using the provided wrapper:
 
-    ./mvnw install
+```bash
+./mvnw
+```
+
