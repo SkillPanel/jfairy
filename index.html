@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="width=640">
@@ -13,18 +13,18 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script type="text/javascript" src="javascripts/headsmart.min.js"></script>
     <script type="text/javascript">
-      $(document).ready(function () {
-        $('#main_content').headsmart()
-      })
+        $(document).ready(function () {
+          $('#main_content').headsmart()
+        })
     </script>
     <title>jFairy - Java fake data generator</title>
-  </head>
+</head>
 
-  <body>
-    <a id="forkme_banner" href="https://github.com/SkillPanel/jfairy">View on GitHub</a>
-    <div class="shell">
+<body>
+<a id="forkme_banner" href="https://github.com/SkillPanel/jfairy">View on GitHub</a>
+<div class="shell">
 
-      <header>
+    <header>
         <span class="ribbon-outer">
           <span class="ribbon-inner">
             <h1>jFairy</h1>
@@ -33,36 +33,53 @@
           <span class="left-tail"></span>
           <span class="right-tail"></span>
         </span>
-      </header>
+    </header>
 
-      <section id="downloads">
+    <section id="downloads">
         <span class="inner">
-          <a href="https://github.com/SkillPanel/jfairy/zipball/master" class="zip"><em>download</em> .ZIP</a><a href="https://github.com/SkillPanel/jfairy/tarball/master" class="tgz"><em>download</em> .TGZ</a>
+          <a href="https://github.com/SkillPanel/jfairy/zipball/master" class="zip"><em>download</em> .ZIP</a>
+          <a href="https://github.com/SkillPanel/jfairy/tarball/master" class="tgz"><em>download</em> .TGZ</a>
         </span>
-      </section>
+    </section>
 
-      <span class="banner-fix"></span>
+    <span class="banner-fix"></span>
 
-      <section id="main_content">
-        <h1><a id="jfairy" class="anchor" href="#jfairy" aria-hidden="true"><span class="octicon octicon-link"></span></a>jFairy</h1>
+    <section id="main_content">
+        <h1><a id="jfairy" class="anchor" href="#jfairy" aria-hidden="true"><span
+                class="octicon octicon-link"></span></a>jFairy</h1>
 
-<p>
-  <a href="https://github.com/SkillPanel/jfairy/actions/workflows/build.yml"><img src="https://github.com/SkillPanel/jfairy/actions/workflows/build.yml/badge.svg" alt="Build"></a>
-  <a href="https://central.sonatype.com/artifact/com.devskiller/jfairy"><img src="https://img.shields.io/maven-central/v/com.devskiller/jfairy" alt="Maven Central"></a>
-  <a href="https://javadoc.io/doc/com.devskiller/jfairy"><img src="https://javadoc.io/badge2/com.devskiller/jfairy/javadoc.svg" alt="Javadocs"></a>
-</p>
+        <p>
+            <a href="https://github.com/SkillPanel/jfairy/actions/workflows/build.yml"><img
+                    src="https://github.com/SkillPanel/jfairy/actions/workflows/build.yml/badge.svg" alt="Build"></a>
+            <a href="https://central.sonatype.com/artifact/com.devskiller/jfairy"><img
+                    src="https://img.shields.io/maven-central/v/com.devskiller/jfairy" alt="Maven Central"></a>
+            <a href="https://javadoc.io/doc/com.devskiller/jfairy"><img
+                    src="https://javadoc.io/badge2/com.devskiller/jfairy/javadoc.svg" alt="Javadocs"></a>
+        </p>
 
-<p>Java fake data generator. Based on Wikipedia:</p>
+        <p>Java fake data generator. According to Wikipedia:</p>
 
-<blockquote>
-<p>Fairyland, in folklore, is the fabulous land or abode of fairies or fays.</p>
-</blockquote>
+        <blockquote>
+            <p>Fairyland, in folklore, is the fabulous land or abode of fairies or fays.</p>
+        </blockquote>
 
-<h2><a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+        <h2><a id="installation" class="anchor" href="#installation" aria-hidden="true"><span
+                class="octicon octicon-link"></span></a>Installation</h2>
 
-<p>Creating simple objects:</p>
+        <p>Add the following dependency to your <code>pom.xml</code>:</p>
 
-<pre><code>Fairy fairy = Fairy.create();
+        <pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;com.devskiller&lt;/groupId&gt;
+    &lt;artifactId&gt;jfairy&lt;/artifactId&gt;
+    &lt;version&gt;x.y.z&lt;/version&gt;
+&lt;/dependency&gt;</code></pre>
+
+        <h2><a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage
+        </h2>
+
+        <p>Creating simple objects:</p>
+
+        <pre><code>Fairy fairy = Fairy.create();
 Person person = fairy.person();
 
 System.out.println(person.getFullName());        // Chloe Barker
@@ -75,9 +92,9 @@ System.out.println(adultMale.isMale());          // true
 System.out.println(adultMale.getDateOfBirth());  // at least 21 years earlier
 </code></pre>
 
-<p>Creating related objects:</p>
+        <p>Creating related objects:</p>
 
-<pre><code>Fairy fairy = Fairy.create();
+        <pre><code>Fairy fairy = Fairy.create();
 Company company = fairy.company();
 System.out.println(company.getName());           // Robuten Associates
 System.out.println(company.getUrl());            // http://www.robuteniaassociates.com
@@ -87,29 +104,46 @@ System.out.println(salesman.getFullName());      // Juan Camacho
 System.out.println(salesman.getCompanyEmail());  // juan.camacho@robuteniaassociates.com
 </code></pre>
 
-<h2><a id="locales" class="anchor" href="#locales" aria-hidden="true"><span class="octicon octicon-link"></span></a>Supported locales</h2>
+        <h2><a id="locales" class="anchor" href="#locales" aria-hidden="true"><span class="octicon octicon-link"></span></a>Supported
+            locales</h2>
 
-<p style="font-size: 1.4em; letter-spacing: 0.3em">&#127468;&#127463; &#127477;&#127473; &#127465;&#127466; &#127467;&#127479; &#127466;&#127480; &#127480;&#127466; &#127464;&#127475; &#127468;&#127466; &#127470;&#127481; &#127463;&#127479; &#127480;&#127472;</p>
+        <p style="font-size: 1.4em; letter-spacing: 0.3em; text-align: center">
+            <span title="Polish (pl)">&#127477;&#127473;</span>
+            <span title="English (en)">&#127468;&#127463;</span>
+            <span title="Brazilian Portuguese (br)">&#127463;&#127479;</span>
+            <span title="Chinese (zh)">&#127464;&#127475;</span>
+            <span title="French (fr)">&#127467;&#127479;</span>
+            <span title="Georgian (ka)">&#127468;&#127466;</span>
+        </p>
+        <p style="font-size: 1.4em; letter-spacing: 0.3em; text-align: center">
+            <span title="German (de)">&#127465;&#127466;</span>
+            <span title="Italian (it)">&#127470;&#127481;</span>
+            <span title="Slovak (sk)">&#127480;&#127472;</span>
+            <span title="Spanish (es)">&#127466;&#127480;</span>
+            <span title="Swedish (sv)">&#127480;&#127466;</span>
+            <span title="Turkish (tr)">&#127481;&#127479;</span>
+        </p>
 
-<pre><code>Fairy plFairy = Fairy.create(Locale.forLanguageTag("pl"));
+        <pre><code>Fairy plFairy = Fairy.create(Locale.forLanguageTag("pl"));
 Fairy brFairy = Fairy.create(Locale.forLanguageTag("br"));
 </code></pre>
 
-      </section>
+    </section>
 
-      <footer>
+    <footer>
         <span class="ribbon-outer">
           <span class="ribbon-inner">
-            <p>this project by <a href="https://github.com/SkillPanel">SkillPanel</a> can be found on <a href="https://github.com/SkillPanel/jfairy">GitHub</a></p>
+            <p>this project by <a href="https://github.com/SkillPanel">SkillPanel</a> can be found on <a
+                    href="https://github.com/SkillPanel/jfairy">GitHub</a></p>
           </span>
           <span class="left-tail"></span>
           <span class="right-tail"></span>
         </span>
         <p>Generated with <a href="https://pages.github.com">GitHub Pages</a> using Merlot</p>
         <span class="octocat"></span>
-      </footer>
+    </footer>
 
-    </div>
+</div>
 
-  </body>
+</body>
 </html>
