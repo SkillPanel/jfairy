@@ -41,6 +41,10 @@
 			<id>kdebski85</id>
 			<name>Krzysztof Dębski</name>
 		</developer>
+		<developer>
+			<id>spannm</id>
+			<name>Markus Spann</name>
+		</developer>
 	</developers>
 
 	<scm>
@@ -90,8 +94,8 @@
 		<dep.iban-commons.version>1.8.4</dep.iban-commons.version>
 		<dep.commons-validator.version>1.10.1</dep.commons-validator.version>
 		<dep.spock.version>2.4-groovy-4.0</dep.spock.version>
-		<dep.groovy.version>4.0.30</dep.groovy.version>
-		<dep.byte-buddy.version>1.18.7</dep.byte-buddy.version>
+		<dep.groovy.version>4.0.31</dep.groovy.version>
+		<dep.byte-buddy.version>1.18.8</dep.byte-buddy.version>
 		<dep.objenesis.version>3.5</dep.objenesis.version>
 		<dep.junit-jupiter.version>5.14.3</dep.junit-jupiter.version>
 
