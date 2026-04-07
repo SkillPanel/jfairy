@@ -117,6 +117,7 @@
 		<dep.plugin.jar.version>3.5.0</dep.plugin.jar.version>
 		<dep.plugin.release.version>3.3.1</dep.plugin.release.version>
 		<dep.plugin.resources.version>3.5.0</dep.plugin.resources.version>
+		<dep.plugin.sortpom.version>4.0.0</dep.plugin.sortpom.version>
 		<dep.plugin.source.version>3.4.0</dep.plugin.source.version>
 		<dep.plugin.surefire.version>3.5.5</dep.plugin.surefire.version>
 		<dep.plugin.versions.version>2.21.0</dep.plugin.versions.version>
@@ -196,6 +197,21 @@
 	<build>
 
 		<defaultGoal>clean verify</defaultGoal>
+
+		<pluginManagement>
+			<plugins>
+                <plugin>
+                    <groupId>com.github.ekryd.sortpom</groupId>
+                    <artifactId>sortpom-maven-plugin</artifactId>
+                    <version>${dep.plugin.sortpom.version}</version>
+                    <configuration>
+                        <createBackupFile>false</createBackupFile>
+                        <expandEmptyElements>false</expandEmptyElements>
+		                <nrOfIndentSpace>-1</nrOfIndentSpace>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
 
 		<plugins>
 			<plugin>
