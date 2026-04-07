@@ -54,6 +54,16 @@
 		<tag>HEAD</tag>
 	</scm>
 
+	<issueManagement>
+		<system>GitHub Issues</system>
+		<url>https://github.com/Devskiller/jfairy/issues</url>
+	</issueManagement>
+
+	<ciManagement>
+		<system>GitHub Actions</system>
+		<url>https://github.com/SkillPanel/jfairy/actions</url>
+	</ciManagement>
+
 	<distributionManagement>
 		<repository>
 			<id>central</id>
@@ -66,16 +76,6 @@
 			<url>https://central.sonatype.com/api/v1/publisher</url>
 		</snapshotRepository>
 	</distributionManagement>
-
-	<issueManagement>
-		<system>GitHub Issues</system>
-		<url>https://github.com/Devskiller/jfairy/issues</url>
-	</issueManagement>
-
-	<ciManagement>
-		<system>GitHub Actions</system>
-		<url>https://github.com/SkillPanel/jfairy/actions</url>
-	</ciManagement>
 
 	<properties>
 		<revision>0.8.3-SNAPSHOT</revision>
@@ -117,6 +117,7 @@
 		<dep.plugin.jar.version>3.5.0</dep.plugin.jar.version>
 		<dep.plugin.release.version>3.3.1</dep.plugin.release.version>
 		<dep.plugin.resources.version>3.5.0</dep.plugin.resources.version>
+		<dep.plugin.sortpom.version>4.0.0</dep.plugin.sortpom.version>
 		<dep.plugin.source.version>3.4.0</dep.plugin.source.version>
 		<dep.plugin.surefire.version>3.5.5</dep.plugin.surefire.version>
 		<dep.plugin.versions.version>2.21.0</dep.plugin.versions.version>
@@ -197,6 +198,21 @@
 
 		<defaultGoal>clean verify</defaultGoal>
 
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>com.github.ekryd.sortpom</groupId>
+					<artifactId>sortpom-maven-plugin</artifactId>
+					<version>${dep.plugin.sortpom.version}</version>
+					<configuration>
+						<createBackupFile>false</createBackupFile>
+						<expandEmptyElements>false</expandEmptyElements>
+						<nrOfIndentSpace>-1</nrOfIndentSpace>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -210,10 +226,10 @@
 				<executions>
 					<execution>
 						<id>add-test-source</id>
-						<phase>generate-test-sources</phase>
 						<goals>
 							<goal>add-test-source</goal>
 						</goals>
+						<phase>generate-test-sources</phase>
 						<configuration>
 							<sources>
 								<source>${project.basedir}/src/test/java</source>
@@ -262,13 +278,6 @@
 				<groupId>org.codehaus.gmavenplus</groupId>
 				<artifactId>gmavenplus-plugin</artifactId>
 				<version>${dep.plugin.gmavenplus.version}</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>compileTests</goal>
-						</goals>
-					</execution>
-				</executions>
 				<configuration>
 					<testSources>
 						<testSource>
@@ -279,6 +288,13 @@
 						</testSource>
 					</testSources>
 				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compileTests</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 
 			<plugin>
@@ -333,10 +349,10 @@
 				<executions>
 					<execution>
 						<id>checkstyle-check</id>
-						<phase>verify</phase>
 						<goals>
 							<goal>check</goal>
 						</goals>
+						<phase>verify</phase>
 					</execution>
 				</executions>
 			</plugin>
@@ -381,17 +397,17 @@
 				<executions>
 					<execution>
 						<id>flatten</id>
-						<phase>prepare-package</phase>
 						<goals>
 							<goal>flatten</goal>
 						</goals>
+						<phase>prepare-package</phase>
 					</execution>
 					<execution>
 						<id>flatten-clean</id>
-						<phase>clean</phase>
 						<goals>
 							<goal>clean</goal>
 						</goals>
+						<phase>clean</phase>
 					</execution>
 				</executions>
 			</plugin>
@@ -471,7 +487,7 @@
 			</properties>
 		</profile>
 
-        <!-- profile to fail the build on Error Prone findings
+		<!-- profile to fail the build on Error Prone findings
              mvn clean compile -D check.fail-errorprone=true
              https://errorprone.info/bugpattern/IncompatibleModifiers -->
 		<profile>
@@ -508,10 +524,10 @@
 						<executions>
 							<execution>
 								<id>sign-artifacts</id>
-								<phase>verify</phase>
 								<goals>
 									<goal>sign</goal>
 								</goals>
+								<phase>verify</phase>
 							</execution>
 						</executions>
 					</plugin>
@@ -549,20 +565,20 @@
 						<artifactId>central-publishing-maven-plugin</artifactId>
 						<version>${dep.plugin.central-publishing.version}</version>
 						<extensions>true</extensions>
-						<executions>
-							<execution>
-								<id>central-publish</id>
-								<phase>deploy</phase>
-								<goals>
-									<goal>publish</goal>
-								</goals>
-							</execution>
-						</executions>
 						<configuration>
 							<publishingServerId>central</publishingServerId>
 							<autoPublish>true</autoPublish>
 							<waitUntil>published</waitUntil>
 						</configuration>
+						<executions>
+							<execution>
+								<id>central-publish</id>
+								<goals>
+									<goal>publish</goal>
+								</goals>
+								<phase>deploy</phase>
+							</execution>
+						</executions>
 					</plugin>
 				</plugins>
 			</build>
