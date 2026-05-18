@@ -90,8 +90,8 @@
 		<!-- Dependency versions (ordered by usage) -->
 		<dep.snakeyaml-engine.version>3.0.1</dep.snakeyaml-engine.version>
 		<dep.jspecify.version>1.0.0</dep.jspecify.version>
-		<dep.slf4j.version>2.0.17</dep.slf4j.version>
-		<dep.iban-commons.version>1.8.4</dep.iban-commons.version>
+		<dep.slf4j.version>2.0.18</dep.slf4j.version>
+		<dep.iban-commons.version>1.8.7</dep.iban-commons.version>
 		<dep.commons-validator.version>1.10.1</dep.commons-validator.version>
 		<dep.spock.version>2.4-groovy-4.0</dep.spock.version>
 		<dep.groovy.version>4.0.31</dep.groovy.version>
@@ -106,7 +106,7 @@
 		<dep.plugin.compiler.version>3.15.0</dep.plugin.compiler.version>
 		<dep.plugin.coveralls.version>4.3.0</dep.plugin.coveralls.version>
 		<dep.plugin.deploy.version>3.1.4</dep.plugin.deploy.version>
-		<dep.plugin.enforcer.version>3.6.2</dep.plugin.enforcer.version>
+		<dep.plugin.enforcer.version>3.6.3</dep.plugin.enforcer.version>
 		<!-- last error-prone version compatible with Java 17; 2.43.0+ requires Java 21 -->
 		<dep.plugin.error-prone.version>2.42.0</dep.plugin.error-prone.version>
 		<dep.plugin.flatten.version>1.7.3</dep.plugin.flatten.version>
