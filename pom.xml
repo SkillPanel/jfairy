@@ -88,16 +88,16 @@
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm:ss z</maven.build.timestamp.format>
 
 		<!-- Dependency versions (ordered by usage) -->
-		<dep.snakeyaml-engine.version>3.0.1</dep.snakeyaml-engine.version>
-		<dep.jspecify.version>1.0.0</dep.jspecify.version>
+		<dep.snakeyaml-engine.version>3.1.1</dep.snakeyaml-engine.version>
+		<dep.jspecify.version>1.0.1</dep.jspecify.version>
 		<dep.slf4j.version>2.0.18</dep.slf4j.version>
-		<dep.iban-commons.version>1.8.7</dep.iban-commons.version>
-		<dep.commons-validator.version>1.10.1</dep.commons-validator.version>
+		<dep.iban-commons.version>1.8.8</dep.iban-commons.version>
+		<dep.commons-validator.version>1.11.0</dep.commons-validator.version>
 		<dep.spock.version>2.4-groovy-5.0</dep.spock.version>
-		<dep.groovy.version>5.0.6</dep.groovy.version>
-		<dep.byte-buddy.version>1.18.8</dep.byte-buddy.version>
-		<dep.objenesis.version>3.5</dep.objenesis.version>
-		<dep.junit-jupiter.version>5.14.3</dep.junit-jupiter.version>
+		<dep.groovy.version>5.0.8</dep.groovy.version>
+		<dep.byte-buddy.version>1.18.11</dep.byte-buddy.version>
+		<dep.objenesis.version>3.6</dep.objenesis.version>
+		<dep.junit-jupiter.version>5.14.4</dep.junit-jupiter.version>
 
 		<!-- Plugin versions (ordered alphabetically) -->
 		<dep.plugin.build-helper.version>3.6.1</dep.plugin.build-helper.version>
@@ -109,17 +109,17 @@
 		<dep.plugin.enforcer.version>3.6.3</dep.plugin.enforcer.version>
 		<!-- last error-prone version compatible with Java 17; 2.43.0+ requires Java 21 -->
 		<dep.plugin.error-prone.version>2.42.0</dep.plugin.error-prone.version>
-		<dep.plugin.flatten.version>1.7.3</dep.plugin.flatten.version>
+		<dep.plugin.flatten.version>1.8.0</dep.plugin.flatten.version>
 		<dep.plugin.gmavenplus.version>4.3.1</dep.plugin.gmavenplus.version>
 		<dep.plugin.gpg.version>3.2.8</dep.plugin.gpg.version>
-		<dep.plugin.jacoco.version>0.8.14</dep.plugin.jacoco.version>
+		<dep.plugin.jacoco.version>0.8.15</dep.plugin.jacoco.version>
 		<dep.plugin.javadoc.version>3.12.0</dep.plugin.javadoc.version>
-		<dep.plugin.jar.version>3.5.0</dep.plugin.jar.version>
+		<dep.plugin.jar.version>3.5.1</dep.plugin.jar.version>
 		<dep.plugin.release.version>3.3.1</dep.plugin.release.version>
 		<dep.plugin.resources.version>3.5.0</dep.plugin.resources.version>
 		<dep.plugin.sortpom.version>4.0.0</dep.plugin.sortpom.version>
 		<dep.plugin.source.version>3.4.0</dep.plugin.source.version>
-		<dep.plugin.surefire.version>3.5.5</dep.plugin.surefire.version>
+		<dep.plugin.surefire.version>3.5.6</dep.plugin.surefire.version>
 		<dep.plugin.versions.version>2.21.0</dep.plugin.versions.version>
 	</properties>
 
@@ -279,7 +279,7 @@
 				<artifactId>gmavenplus-plugin</artifactId>
 				<version>${dep.plugin.gmavenplus.version}</version>
 				<configuration>
-                    <targetBytecode>${javaVersion}</targetBytecode>
+					<targetBytecode>${javaVersion}</targetBytecode>
 					<testSources>
 						<testSource>
 							<directory>${project.basedir}/src/test/groovy</directory>
