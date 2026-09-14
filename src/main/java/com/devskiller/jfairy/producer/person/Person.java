@@ -19,7 +19,7 @@ public class Person {
 	/**
 	 * Languages whose naming convention places the family name before the given name.
 	 */
-	private static final Set<LanguageCode> FAMILY_NAME_FIRST_LANGUAGES = Set.of(LanguageCode.JA);
+	private static final Set<LanguageCode> FAMILY_NAME_FIRST_LANGUAGES = Set.of(LanguageCode.JA, LanguageCode.ZH);
 
 	private final Address address;
 	private final String firstName;

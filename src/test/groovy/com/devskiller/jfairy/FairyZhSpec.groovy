@@ -22,7 +22,7 @@ class FairyZhSpec extends Specification {
 		when:
 		Person person = fairy.person()
 		then:
-		person.fullName == '国富 钱'
+		person.fullName == '钱 国富'
 	}
 
 	def "Should create Chinese id card"() {
