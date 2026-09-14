@@ -4,10 +4,7 @@ firstNames: {
   male: [俊杰, 亚波, 耀鸿, 旦冉, 国辉, 国富, 小明, 俊佳, 金城, 俊煜, 嘉斌, 泽民, 宸风, 雨泽, 云帆, 剑枫, 正宇],
   female: [析丹, 小慧, 黛玉, 宝钗, 宝华, 祖英, 蒹葭, 瑶依, 沛菡, 曼文, 艾韵, 灵芸, 静琪, 碧琪, 雅芝, 安妮]
 }
-lastNames: {
-  male: [赵, 钱, 孙, 李, 周, 吴, 郑, 王, 冯, 陈, 楚, 卫, 苏, 蒋, 沈, 韩, 杨, 张, 黄, 徐, 刘],
-  female: [赵, 钱, 孙, 李, 周, 吴, 郑, 王, 冯, 陈, 楚, 卫, 苏, 蒋, 沈, 韩, 杨, 张, 黄, 徐, 刘]
-}
+lastNames: [赵, 钱, 孙, 李, 周, 吴, 郑, 王, 冯, 陈, 楚, 卫, 苏, 蒋, 沈, 韩, 杨, 张, 黄, 徐, 刘]
 # Enhanced personal email domains with major Chinese providers
 personalEmails: [gmail.com, 163.com, 126.com, qq.com, sina.com, sohu.com, aliyun.com, outlook.com, hotmail.com, 139.com, 189.cn]
 companyNames: [数说故事, 网易之, 腾企鹅, 千度, 京西, 后海金融, 互动派, 塔布数据, 阿狸巴巴, 图匠]

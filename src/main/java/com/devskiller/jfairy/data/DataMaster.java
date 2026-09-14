@@ -33,6 +33,11 @@ public interface DataMaster {
 
 	/**
 	 * Retrieves structured data of a specific type and converts it to the requested class.
+	 * <p>
+	 * The entry under {@code dataKey} may either be a map keyed by {@code type} (e.g. {@code male}/{@code female}
+	 * name lists) or a plain list. In the latter case {@code type} is ignored and a random element of that list
+	 * is returned; this lets a locale share a single, non-gendered list (e.g. surnames that don't vary by sex)
+	 * instead of duplicating the same entries under every type.
 	 *
 	 * @param dataKey the root key for the data search
 	 * @param type the specific sub-type or category

@@ -4,10 +4,7 @@ firstNames: {
     male: [ Ahmet, Mehmet, Mustafa, Ali, Hüseyin, Hasan, İbrahim, İsmail, Osman, Murat, Ömer, Ramazan, Halil, Süleyman, Abdullah, Mahmut, Recep, Salih, Fatih, Kadir, Emre, Gökhan, Hakan, Serkan, Metin, Burak, Volkan, Bülent, Kenan, Selçuk, Yavuz, Sinan, Can, Kerem, Deniz, Onur, Umut, Eren, Arda, Mert, Yiğit, Berk, Tolga, Kaan, Doruk, Batuhan, Görkem, Furkan, Enes, Yunus, Bilal ],
     female: [ Fatma, Ayşe, Emine, Hatice, Zeynep, Özlem, Elif, Meryem, Gamze, Şerife, Hanife, Sultan, Zehra, Havva, Hayriye, Cemile, Güllü, Leyla, Saliha, Melek, Arzu, Yasemin, Esra, Dilek, Pınar, Tuğba, Seda, Ebru, Gizem, Büşra, Kübra, Feyza, Beyza, İrem, Merve, Nursel, Selin, Pelin, Damla, Yağmur, Ece, Duru, Defne, Azra, Derin, Bade, Nehir, Eylül, Melis ],
 }
-lastNames: {
-    male: [ Yılmaz, Kaya, Demir, Çelik, Şahin, Yıldız, Yıldırım, Öztürk, Aydın, Özdemir, Arslan, Doğan, Kılıç, Aslan, Çetin, Kara, Koç, Kurt, Özkan, Şimşek, Polat, Özcan, Korkmaz, Çakır, Erdoğan, Yavuz, Can, Aksoy, Köse, Güler, Aktaş, Avcı, Akın, Özer, Ünal, Kaplan, Bulut, Yiğit, Sarı, Taş, Kaymak, Önal, Güneş, Ay, Karaman, Çavuş, Yalçın, Uzun, Karakaş, Tekin ],
-    female: [ Yılmaz, Kaya, Demir, Çelik, Şahin, Yıldız, Yıldırım, Öztürk, Aydın, Özdemir, Arslan, Doğan, Kılıç, Aslan, Çetin, Kara, Koç, Kurt, Özkan, Şimşek, Polat, Özcan, Korkmaz, Çakır, Erdoğan, Yavuz, Can, Aksoy, Köse, Güler, Aktaş, Avcı, Akın, Özer, Ünal, Kaplan, Bulut, Yiğit, Sarı, Taş, Kaymak, Önal, Güneş, Ay, Karaman, Çavuş, Yalçın, Uzun, Karakaş, Tekin ]
-}
+lastNames: [ Yılmaz, Kaya, Demir, Çelik, Şahin, Yıldız, Yıldırım, Öztürk, Aydın, Özdemir, Arslan, Doğan, Kılıç, Aslan, Çetin, Kara, Koç, Kurt, Özkan, Şimşek, Polat, Özcan, Korkmaz, Çakır, Erdoğan, Yavuz, Can, Aksoy, Köse, Güler, Aktaş, Avcı, Akın, Özer, Ünal, Kaplan, Bulut, Yiğit, Sarı, Taş, Kaymak, Önal, Güneş, Ay, Karaman, Çavuş, Yalçın, Uzun, Karakaş, Tekin ]
 personalEmails: [ gmail.com, hotmail.com, yahoo.com, outlook.com, icloud.com ]
 companyNames: [ Holding, Şirket, Ticaret, Sanayi, Limited, Anonim, Bilişim, Otomotiv, Gıda, İnşaat, Tekstil, Lojistik, Turizm, Enerji, Medya, Sağlık, Eğitim, Banka, Sigorta, Mağaza, Market, Restoran, Kafe ]
 companySuffixes: [ 'A.Ş.', 'Ltd. Şti.', 'Hizmetleri', 'Grubu', 'Dış Ticaret' ]

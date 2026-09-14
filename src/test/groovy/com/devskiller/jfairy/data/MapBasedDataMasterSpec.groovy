@@ -32,7 +32,7 @@ class MapBasedDataMasterSpec extends Specification {
 
 	def "should return men"() {
 		setup:
-			data.getData(PersonProvider.FIRST_NAME, Map.class) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
+			data.getData(PersonProvider.FIRST_NAME, Object.class) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
 
 		when:
 			String male = data.getValuesOfType(PersonProvider.FIRST_NAME, "male", String.class)
@@ -43,13 +43,24 @@ class MapBasedDataMasterSpec extends Specification {
 
 	def "should return one of women"() {
 		setup:
-			data.getData(PersonProvider.FIRST_NAME, Map.class) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
+			data.getData(PersonProvider.FIRST_NAME, Object.class) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
 
 		when:
 			String female = data.getValuesOfType(PersonProvider.FIRST_NAME, "female", String.class)
 
 		then:
 			(female == "Ana") || (female == "Ivon")
+	}
+
+	def "should return an element from a flat, non-gendered list regardless of the requested type"() {
+		setup:
+			data.getData(PersonProvider.LAST_NAME, Object.class) >> ['Smith', 'Jones']
+
+		when:
+			String lastName = data.getValuesOfType(PersonProvider.LAST_NAME, "male", String.class)
+
+		then:
+			(lastName == "Smith") || (lastName == "Jones")
 	}
 
 }
