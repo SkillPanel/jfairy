@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -54,6 +55,42 @@ class RandomGeneratorTest {
 			generator.randomNumeric(-1)
 		);
 		assertTrue(exception.getMessage().contains("length must be >= 0"));
+	}
+
+	@DisplayName("Should not overflow when upper bound is Long.MAX_VALUE")
+	@Test
+	void shouldNotOverflowOnMaxLongBound() {
+		RandomGenerator generator = new RandomGenerator();
+
+		for (int i = 0; i < 1000; i++) {
+			assertDoesNotThrow(() -> generator.nextLong(0L, Long.MAX_VALUE));
+		}
+	}
+
+	@DisplayName("Should not overflow for the full long range")
+	@Test
+	void shouldNotOverflowOnFullLongRange() {
+		RandomGenerator generator = new RandomGenerator();
+
+		assertDoesNotThrow(() -> generator.nextLong(Long.MIN_VALUE, Long.MAX_VALUE));
+	}
+
+	@DisplayName("Should not overflow when upper bound is Integer.MAX_VALUE")
+	@Test
+	void shouldNotOverflowOnMaxIntBound() {
+		RandomGenerator generator = new RandomGenerator();
+
+		for (int i = 0; i < 1000; i++) {
+			assertDoesNotThrow(() -> generator.nextInt(0, Integer.MAX_VALUE));
+		}
+	}
+
+	@DisplayName("Should not overflow for the full int range")
+	@Test
+	void shouldNotOverflowOnFullIntRange() {
+		RandomGenerator generator = new RandomGenerator();
+
+		assertDoesNotThrow(() -> generator.nextInt(Integer.MIN_VALUE, Integer.MAX_VALUE));
 	}
 
 }

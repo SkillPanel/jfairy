@@ -63,7 +63,12 @@ public class RandomGenerator {
 	 * @return a random integer
 	 */
 	public int nextInt(int min, int max) {
-		return min == max ? min : random.nextInt(min, max + 1);
+		if (min == max) {
+			return min;
+		} else if (max == Integer.MAX_VALUE) {
+			return min == Integer.MIN_VALUE ? random.nextInt() : random.nextInt(min - 1, max) + 1;
+		}
+		return random.nextInt(min, max + 1);
 	}
 
 	/**
@@ -74,7 +79,12 @@ public class RandomGenerator {
 	 * @return a random long
 	 */
 	public long nextLong(long min, long max) {
-		return min == max ? min : random.nextLong(min, max + 1);
+		if (min == max) {
+			return min;
+		} else if (max == Long.MAX_VALUE) {
+			return min == Long.MIN_VALUE ? random.nextLong() : random.nextLong(min - 1, max) + 1;
+		}
+		return random.nextLong(min, max + 1);
 	}
 
 	/**
