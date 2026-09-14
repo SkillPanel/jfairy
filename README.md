@@ -79,6 +79,7 @@ System.out.println(salesman.getCompanyEmail());
 | Brazilian Portuguese |     `br`     |
 | Slovak               |     `sk`     |
 | Turkish              |     `tr`     |
+| Japanese             |     `ja`     |
 
 ```java
 Fairy enFairy = Fairy.create();

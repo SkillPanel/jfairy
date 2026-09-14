@@ -22,7 +22,8 @@ public enum Country {
 	China("CN", LanguageCode.ZH),
 	Brazil("BR", LanguageCode.BR),
 	Slovakia("SK", LanguageCode.SK),
-	Turkey("TR", LanguageCode.TR);
+	Turkey("TR", LanguageCode.TR),
+	Japan("JP", LanguageCode.JA);
 
 	//	ISO 3166 code
 	private final String code;
@@ -49,10 +50,20 @@ public enum Country {
 	 * @throws IllegalStateException if no languages are associated with the country
 	 */
 	public Locale getPrimaryLocale() {
+		return new Locale(getPrimaryLanguage().name().toLowerCase(Locale.ROOT), code);
+	}
+
+	/**
+	 * Returns the primary {@link LanguageCode} for this country (the first one it was declared with).
+	 *
+	 * @return the primary language code
+	 * @throws IllegalStateException if no languages are associated with the country
+	 */
+	public LanguageCode getPrimaryLanguage() {
 		if (languages.length == 0) {
 			throw new IllegalStateException("No languages defined for country " + name());
 		}
-		return new Locale(languages[0].name().toLowerCase(Locale.ROOT), code);
+		return languages[0];
 	}
 
 	public static List<Country> findCountryForLanguage(LanguageCode language) {
