@@ -1,5 +1,7 @@
 package com.devskiller.jfairy.producer.company;
 
+import java.util.StringJoiner;
+
 public class Company {
 
 	private final String name;
@@ -32,6 +34,16 @@ public class Company {
 
 	public String getVatIdentificationNumber() {
 		return vatIdentificationNumber;
+	}
+
+	@Override
+	public String toString() {
+		return new StringJoiner(", ", getClass().getSimpleName() + "[", "]")
+			.add("name='" + name + "'")
+			.add("url=" + getUrl())
+			.add("email=" + getEmail())
+			.add("vatIdentificationNumber=" + vatIdentificationNumber)
+			.toString();
 	}
 
 }

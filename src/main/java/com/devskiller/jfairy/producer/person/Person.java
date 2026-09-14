@@ -1,6 +1,7 @@
 package com.devskiller.jfairy.producer.person;
 
 import java.time.LocalDate;
+import java.util.StringJoiner;
 
 import com.devskiller.jfairy.producer.company.Company;
 
@@ -145,5 +146,20 @@ public class Person {
 
 	public Country getNationality() {
 		return nationality;
+	}
+
+	@Override
+	public String toString() {
+		return new StringJoiner(", ", getClass().getSimpleName() + "[", "]")
+			.add("fullName='" + getFullName() + "'")
+			.add("sex=" + sex)
+			.add("dateOfBirth=" + dateOfBirth)
+			.add("email=" + email)
+			.add("telephoneNumber=" + telephoneNumber)
+			.add("address=" + address)
+			.add("company=" + company)
+			.add("jobTitle='" + jobTitle + "'")
+			.add("nationality=" + nationality)
+			.toString();
 	}
 }

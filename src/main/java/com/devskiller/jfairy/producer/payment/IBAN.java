@@ -1,5 +1,7 @@
 package com.devskiller.jfairy.producer.payment;
 
+import java.util.StringJoiner;
+
 public class IBAN {
 
 	private final String accountNumber;
@@ -47,5 +49,15 @@ public class IBAN {
 
 	public String getIbanNumber() {
 		return ibanNumber;
+	}
+
+	@Override
+	public String toString() {
+		return new StringJoiner(", ", getClass().getSimpleName() + "[", "]")
+			.add("ibanNumber=" + ibanNumber)
+			.add("country=" + country)
+			.add("bankCode=" + bankCode)
+			.add("accountNumber=" + accountNumber)
+			.toString();
 	}
 }
