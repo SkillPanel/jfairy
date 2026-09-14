@@ -59,6 +59,7 @@ class BaseProducerSpec extends Specification {
 		  2L   | 3L
 		  -5L  | -2L
 		  -3L  | 2L
+		  0L   | Long.MAX_VALUE
 		  2.0  | 3.0
 		  -2.0 | -1.0
 	}
