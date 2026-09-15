@@ -3,27 +3,27 @@ import java.util.function.Supplier;
 
 public interface CompanyProvider extends Supplier<Company> {
 
-	String DOMAIN = "domains";
-	String COMPANY_SUFFIX = "companySuffixes";
-	String COMPANY_NAME = "companyNames";
-	String COMPANY_EMAIL = "companyEmails";
+    String DOMAIN = "domains";
+    String COMPANY_SUFFIX = "companySuffixes";
+    String COMPANY_NAME = "companyNames";
+    String COMPANY_EMAIL = "companyEmails";
 
-	@Override
-	Company get();
+    @Override
+    Company get();
 
-	void generateName();
+    void generateName();
 
-	void generateDomain();
+    void generateDomain();
 
-	void generateEmail();
+    void generateEmail();
 
-	void generateVatIdentificationNumber();
+    void generateVatIdentificationNumber();
 
-	void setName(String name);
+    void setName(String name);
 
-	void setDomain(String domain);
+    void setDomain(String domain);
 
-	void setEmail(String email);
+    void setEmail(String email);
 
-	void setVatIdentificationNumber(String vatIdentificationNumber);
+    void setVatIdentificationNumber(String vatIdentificationNumber);
 }

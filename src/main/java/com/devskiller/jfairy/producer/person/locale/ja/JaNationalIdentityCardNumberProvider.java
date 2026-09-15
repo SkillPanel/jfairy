@@ -8,20 +8,20 @@ import com.devskiller.jfairy.producer.person.NationalIdentityCardNumberProvider;
  */
 public class JaNationalIdentityCardNumberProvider implements NationalIdentityCardNumberProvider {
 
-	private static final int DIGIT_COUNT = 12;
+    private static final int DIGIT_COUNT = 12;
 
-	private final BaseProducer baseProducer;
+    private final BaseProducer baseProducer;
 
-	public JaNationalIdentityCardNumberProvider(BaseProducer baseProducer) {
-		this.baseProducer = baseProducer;
-	}
+    public JaNationalIdentityCardNumberProvider(BaseProducer baseProducer) {
+        this.baseProducer = baseProducer;
+    }
 
-	@Override
-	public String get() {
-		StringBuilder sb = new StringBuilder(DIGIT_COUNT);
-		for (int i = 0; i < DIGIT_COUNT; i++) {
-			sb.append(baseProducer.randomInt(9));
-		}
-		return sb.toString();
-	}
+    @Override
+    public String get() {
+        StringBuilder sb = new StringBuilder(DIGIT_COUNT);
+        for (int i = 0; i < DIGIT_COUNT; i++) {
+            sb.append(baseProducer.randomInt(9));
+        }
+        return sb.toString();
+    }
 }

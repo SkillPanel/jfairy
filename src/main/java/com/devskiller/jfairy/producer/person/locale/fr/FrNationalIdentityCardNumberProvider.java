@@ -25,28 +25,28 @@ import com.devskiller.jfairy.producer.person.NationalIdentityCardNumberProvider;
  */
 public class FrNationalIdentityCardNumberProvider implements NationalIdentityCardNumberProvider {
 
-	private final BaseProducer baseProducer;
+    private final BaseProducer baseProducer;
 
-	public FrNationalIdentityCardNumberProvider(BaseProducer baseProducer) {
-		this.baseProducer = baseProducer;
-	}
+    public FrNationalIdentityCardNumberProvider(BaseProducer baseProducer) {
+        this.baseProducer = baseProducer;
+    }
 
-	@Override
-	public String get() {
-		// department (01-95)
-		int dept = baseProducer.randomBetween(1, 95);
+    @Override
+    public String get() {
+        // department (01-95)
+        int dept = baseProducer.randomBetween(1, 95);
 
-		// year (last two digits, from 2021 to current year)
-		int currentYear = Year.now(ZoneId.systemDefault()).getValue() % 100;
-		int year = baseProducer.randomBetween(21, currentYear);
+        // year (last two digits, from 2021 to current year)
+        int currentYear = Year.now(ZoneId.systemDefault()).getValue() % 100;
+        int year = baseProducer.randomBetween(21, currentYear);
 
-		// month (01-12)
-		int month = baseProducer.randomBetween(1, 12);
+        // month (01-12)
+        int month = baseProducer.randomBetween(1, 12);
 
-		// random suffix (6 alphanumeric chars)
-		String suffix = baseProducer.randomAlphanumeric(6);
+        // random suffix (6 alphanumeric chars)
+        String suffix = baseProducer.randomAlphanumeric(6);
 
-		return String.format("%02d%02d%02d%s", dept, year, month, suffix);
-	}
+        return String.format("%02d%02d%02d%s", dept, year, month, suffix);
+    }
 
 }

@@ -11,26 +11,26 @@ import com.devskiller.jfairy.producer.RandomGenerator
  */
 class DeNationalIdentityCardNumberProviderSpec extends Specification {
 
-	private BaseProducer baseProducer = new BaseProducer(new RandomGenerator())
-	private DeNationalIdentityCardNumberProvider generator = new DeNationalIdentityCardNumberProvider(baseProducer)
+    private BaseProducer baseProducer = new BaseProducer(new RandomGenerator())
+    private DeNationalIdentityCardNumberProvider generator = new DeNationalIdentityCardNumberProvider(baseProducer)
 
-	@Unroll
-	def "Should validate #nationalIdentityCardNumber as #valid"() {
-		expect:
-			generator.isValid(nationalIdentityCardNumber) == valid
-		where:
-			nationalIdentityCardNumber | valid
-			'T22000129'                | true
-			'123456789'                | false
-			'L00000000'                | true
-			'A12345678'                | false
-	}
+    @Unroll
+    def "Should validate #nationalIdentityCardNumber as #valid"() {
+        expect:
+            generator.isValid(nationalIdentityCardNumber) == valid
+        where:
+            nationalIdentityCardNumber | valid
+            'T22000129'                | true
+            '123456789'                | false
+            'L00000000'                | true
+            'A12345678'                | false
+    }
 
-	def "Should always generate proper nationalIdentityCardNumber"() {
-		expect:
-			generator.isValid(generator.get())
-		where:
-			i << (1..100)
-	}
+    def "Should always generate proper nationalIdentityCardNumber"() {
+        expect:
+            generator.isValid(generator.get())
+        where:
+            i << (1..100)
+    }
 
 }

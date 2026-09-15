@@ -9,21 +9,21 @@ import com.devskiller.jfairy.producer.VATIdentificationNumberProvider;
  */
 public class JaVATIdentificationNumberProvider implements VATIdentificationNumberProvider {
 
-	private static final int DIGIT_COUNT = 13;
+    private static final int DIGIT_COUNT = 13;
 
-	private final BaseProducer baseProducer;
+    private final BaseProducer baseProducer;
 
-	public JaVATIdentificationNumberProvider(BaseProducer baseProducer) {
-		this.baseProducer = baseProducer;
-	}
+    public JaVATIdentificationNumberProvider(BaseProducer baseProducer) {
+        this.baseProducer = baseProducer;
+    }
 
-	@Override
-	public String get() {
-		StringBuilder sb = new StringBuilder(1 + DIGIT_COUNT);
-		sb.append('T');
-		for (int i = 0; i < DIGIT_COUNT; i++) {
-			sb.append(baseProducer.randomInt(9));
-		}
-		return sb.toString();
-	}
+    @Override
+    public String get() {
+        StringBuilder sb = new StringBuilder(1 + DIGIT_COUNT);
+        sb.append('T');
+        for (int i = 0; i < DIGIT_COUNT; i++) {
+            sb.append(baseProducer.randomInt(9));
+        }
+        return sb.toString();
+    }
 }

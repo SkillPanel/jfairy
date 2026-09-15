@@ -17,33 +17,33 @@ import com.devskiller.jfairy.producer.util.ZhFairyUtil;
  */
 public class ZhNationalIdentityCardNumberProvider implements NationalIdentityCardNumberProvider {
 
-	/**
-	 * The last 4 digit is an order number from 0001 to 9999
-	 */
-	private static final int ORDER_MAX = 9999;
-	private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd");
+    /**
+     * The last 4 digit is an order number from 0001 to 9999
+     */
+    private static final int ORDER_MAX = 9999;
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("yyyyMMdd");
 
-	private final BaseProducer baseProducer;
-	private final DateProducer dateProducer;
+    private final BaseProducer baseProducer;
+    private final DateProducer dateProducer;
 
-	public ZhNationalIdentityCardNumberProvider(BaseProducer baseProducer) {
-		this.baseProducer = baseProducer;
-		this.dateProducer = new DateProducer(baseProducer, new TimeProvider());
-	}
+    public ZhNationalIdentityCardNumberProvider(BaseProducer baseProducer) {
+        this.baseProducer = baseProducer;
+        this.dateProducer = new DateProducer(baseProducer, new TimeProvider());
+    }
 
-	@Override
-	public String get() {
-		StringBuilder idBuilder = new StringBuilder();
-		idBuilder.append(baseProducer.randomElement(ZhFairyUtil.PROV_LIST));
-		idBuilder.append(ZhFairyUtil.getRandomNumStr(baseProducer, ZhFairyUtil.CITY_MAX, 2));
-		idBuilder.append(ZhFairyUtil.getRandomNumStr(baseProducer, ZhFairyUtil.DISTRICT_MAX, 2));
-		idBuilder.append(getBirthDate());
-		idBuilder.append(ZhFairyUtil.getRandomNumStr(baseProducer, ORDER_MAX, 4));
-		return idBuilder.toString();
-	}
+    @Override
+    public String get() {
+        StringBuilder idBuilder = new StringBuilder();
+        idBuilder.append(baseProducer.randomElement(ZhFairyUtil.PROV_LIST));
+        idBuilder.append(ZhFairyUtil.getRandomNumStr(baseProducer, ZhFairyUtil.CITY_MAX, 2));
+        idBuilder.append(ZhFairyUtil.getRandomNumStr(baseProducer, ZhFairyUtil.DISTRICT_MAX, 2));
+        idBuilder.append(getBirthDate());
+        idBuilder.append(ZhFairyUtil.getRandomNumStr(baseProducer, ORDER_MAX, 4));
+        return idBuilder.toString();
+    }
 
-	private String getBirthDate() {
-		LocalDateTime birthDate = this.dateProducer.randomDateInThePast(50);
-		return FORMATTER.format(birthDate);
-	}
+    private String getBirthDate() {
+        LocalDateTime birthDate = this.dateProducer.randomDateInThePast(50);
+        return FORMATTER.format(birthDate);
+    }
 }

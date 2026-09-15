@@ -11,26 +11,26 @@ import com.devskiller.jfairy.producer.RandomGenerator
  */
 class DePassportNumberProviderSpec extends Specification {
 
-	private BaseProducer baseProducer = new BaseProducer(new RandomGenerator())
-	private DePassportNumberProvider generator = new DePassportNumberProvider(baseProducer)
+    private BaseProducer baseProducer = new BaseProducer(new RandomGenerator())
+    private DePassportNumberProvider generator = new DePassportNumberProvider(baseProducer)
 
-	@Unroll
-	def "Should validate #passportNumber as #valid"() {
-		expect:
-			generator.isValid(passportNumber) == valid
-		where:
-			passportNumber | valid
-			'C22000129'    | true
-			'123456789'    | false
-			'H00000000'    | true
-			'A12345678'    | false
-	}
+    @Unroll
+    def "Should validate #passportNumber as #valid"() {
+        expect:
+            generator.isValid(passportNumber) == valid
+        where:
+            passportNumber | valid
+            'C22000129'    | true
+            '123456789'    | false
+            'H00000000'    | true
+            'A12345678'    | false
+    }
 
-	def "Should always generate proper passportNumber"() {
-		expect:
-			generator.isValid(generator.get())
-		where:
-			i << (1..100)
-	}
+    def "Should always generate proper passportNumber"() {
+        expect:
+            generator.isValid(generator.get())
+        where:
+            i << (1..100)
+    }
 
 }

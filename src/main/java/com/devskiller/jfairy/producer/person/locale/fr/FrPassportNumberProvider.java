@@ -14,17 +14,17 @@ import com.devskiller.jfairy.producer.person.PassportNumberProvider;
  */
 public class FrPassportNumberProvider implements PassportNumberProvider {
 
-	private final BaseProducer baseProducer;
+    private final BaseProducer baseProducer;
 
-	public FrPassportNumberProvider(BaseProducer baseProducer) {
-		this.baseProducer = baseProducer;
-	}
+    public FrPassportNumberProvider(BaseProducer baseProducer) {
+        this.baseProducer = baseProducer;
+    }
 
-	@Override
-	public String get() {
-		return baseProducer.randomNumeric(2)
-			 + baseProducer.randomAlphabetic(2)
-			 + baseProducer.randomNumeric(5);
-	}
+    @Override
+    public String get() {
+        return baseProducer.randomNumeric(2)
+             + baseProducer.randomAlphabetic(2)
+             + baseProducer.randomNumeric(5);
+    }
 
 }

@@ -48,195 +48,195 @@ import com.devskiller.jfairy.producer.text.TextProducerInternal;
  */
 public final class Bootstrap {
 
-	private static final Logger LOG = LoggerFactory.getLogger(Bootstrap.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Bootstrap.class);
 
-	private static final String DATA_FILE_PREFIX = "jfairy";
+    private static final String DATA_FILE_PREFIX = "jfairy";
 
-	private Bootstrap() {
-	}
+    private Bootstrap() {
+    }
 
-	public static Fairy createFairy(DataMaster dataMaster, Locale locale, RandomGenerator randomGenerator) {
-		LOG.debug("Creating Fairy instance for locale {}", locale);
+    public static Fairy createFairy(DataMaster dataMaster, Locale locale, RandomGenerator randomGenerator) {
+        LOG.debug("Creating Fairy instance for locale {}", locale);
 
-		// Create base components
-		BaseProducer baseProducer = new BaseProducer(randomGenerator);
-		TimeProvider timeProvider = new TimeProvider();
-		DateProducer dateProducer = new DateProducer(baseProducer, timeProvider);
+        // Create base components
+        BaseProducer baseProducer = new BaseProducer(randomGenerator);
+        TimeProvider timeProvider = new TimeProvider();
+        DateProducer dateProducer = new DateProducer(baseProducer, timeProvider);
 
-		// Create locale-specific providers
-		LocaleSpecificProviders localeProviders = LocaleSpecificProvidersFactory.createProvidersForLocale(
-				locale, dataMaster, baseProducer, dateProducer);
+        // Create locale-specific providers
+        LocaleSpecificProviders localeProviders = LocaleSpecificProvidersFactory.createProvidersForLocale(
+                locale, dataMaster, baseProducer, dateProducer);
 
-		// Create company factory first (needed by PersonFactory)
-		CompanyFactory companyFactory = new CompanyFactoryImpl(
-				baseProducer, dataMaster, localeProviders.vatIdentificationNumberProvider()
-		);
+        // Create company factory first (needed by PersonFactory)
+        CompanyFactory companyFactory = new CompanyFactoryImpl(
+                baseProducer, dataMaster, localeProviders.vatIdentificationNumberProvider()
+        );
 
-		// Create person factory
-		PersonFactory personFactory = new PersonFactoryImpl(
-				dataMaster, dateProducer, baseProducer,
-				localeProviders.addressProvider(),
-				localeProviders.nationalIdentificationNumberFactory(),
-				localeProviders.nationalIdentityCardNumberProvider(),
-				localeProviders.passportNumberProvider(),
-				timeProvider,
-				companyFactory
-		);
+        // Create person factory
+        PersonFactory personFactory = new PersonFactoryImpl(
+                dataMaster, dateProducer, baseProducer,
+                localeProviders.addressProvider(),
+                localeProviders.nationalIdentificationNumberFactory(),
+                localeProviders.nationalIdentityCardNumberProvider(),
+                localeProviders.passportNumberProvider(),
+                timeProvider,
+                companyFactory
+        );
 
-		IBANFactory ibanFactory = new IBANFactoryImpl(baseProducer, dataMaster);
+        IBANFactory ibanFactory = new IBANFactoryImpl(baseProducer, dataMaster);
 
-		// Create other producers
-		CreditCardProvider creditCardProvider = new CreditCardProvider(dataMaster, baseProducer, dateProducer);
-		TextProducerInternal textProducerInternal = new TextProducerInternal(dataMaster, baseProducer);
-		IPNumberProducer ipNumberProducer = new IPNumberProducer(baseProducer);
+        // Create other producers
+        CreditCardProvider creditCardProvider = new CreditCardProvider(dataMaster, baseProducer, dateProducer);
+        TextProducerInternal textProducerInternal = new TextProducerInternal(dataMaster, baseProducer);
+        IPNumberProducer ipNumberProducer = new IPNumberProducer(baseProducer);
 
-		// Create fairy factory
-		FairyFactory fairyFactory = new FairyFactoryImpl(
-				textProducerInternal, baseProducer, personFactory,
-				ipNumberProducer, dateProducer, creditCardProvider,
-				companyFactory, ibanFactory
-		);
+        // Create fairy factory
+        FairyFactory fairyFactory = new FairyFactoryImpl(
+                textProducerInternal, baseProducer, personFactory,
+                ipNumberProducer, dateProducer, creditCardProvider,
+                companyFactory, ibanFactory
+        );
 
-		LOG.trace("Fairy components initialized");
-		return fairyFactory.createFairy();
-	}
+        LOG.trace("Fairy components initialized");
+        return fairyFactory.createFairy();
+    }
 
-	private static void fillDefaultDataMaster(MapBasedDataMaster dataMaster, Locale locale, String filePrefix) {
-		try {
-			String baseFile = filePrefix + ".yml";
-			String localeFile = filePrefix + "_" + locale.getLanguage() + ".yml";
+    private static void fillDefaultDataMaster(MapBasedDataMaster dataMaster, Locale locale, String filePrefix) {
+        try {
+            String baseFile = filePrefix + ".yml";
+            String localeFile = filePrefix + "_" + locale.getLanguage() + ".yml";
 
-			LOG.debug("Loading data resources: {}, {}", baseFile, localeFile);
+            LOG.debug("Loading data resources: {}, {}", baseFile, localeFile);
 
-			dataMaster.readResources(baseFile);
-			dataMaster.readResources(localeFile);
-		} catch (IOException ex) {
-			LOG.error("Failed to load data resources for locale {}", locale);
-			throw new IllegalStateException(ex);
-		}
-	}
+            dataMaster.readResources(baseFile);
+            dataMaster.readResources(localeFile);
+        } catch (IOException ex) {
+            LOG.error("Failed to load data resources for locale {}", locale);
+            throw new IllegalStateException(ex);
+        }
+    }
 
-	/**
-	 * Creates a Builder that will let you configure a Fairy's fields one by one.
-	 *
-	 * @return a Builder instance.
-	 */
-	public static Builder builder() {
-		return new Builder();
-	}
+    /**
+     * Creates a Builder that will let you configure a Fairy's fields one by one.
+     *
+     * @return a Builder instance.
+     */
+    public static Builder builder() {
+        return new Builder();
+    }
 
-	/**
-	 * Use this factory method to create dataset containing default jfairy.yml and jfairy_{langCode}.yml files
-	 * merged with custom files with the same name
-	 *
-	 * @return Fairy instance
-	 */
-	public static Fairy create() {
-		return builder().build();
-	}
+    /**
+     * Use this factory method to create dataset containing default jfairy.yml and jfairy_{langCode}.yml files
+     * merged with custom files with the same name
+     *
+     * @return Fairy instance
+     */
+    public static Fairy create() {
+        return builder().build();
+    }
 
-	/**
-	 * Use this factory method to create dataset containing default jfairy.yml and jfairy_{langCode}.yml files
-	 * merged with custom files with the same name
-	 *
-	 * @param locale will be used to assess langCode for data file
-	 * @return Fairy instance
-	 */
-	public static Fairy create(Locale locale) {
-		return builder().withLocale(locale).build();
-	}
+    /**
+     * Use this factory method to create dataset containing default jfairy.yml and jfairy_{langCode}.yml files
+     * merged with custom files with the same name
+     *
+     * @param locale will be used to assess langCode for data file
+     * @return Fairy instance
+     */
+    public static Fairy create(Locale locale) {
+        return builder().withLocale(locale).build();
+    }
 
-	/**
-	 * Use this factory method to create your own dataset overriding bundled one
-	 *
-	 * @param locale         will be used to assess langCode for data file
-	 * @param dataFilePrefix prefix of the data file - final pattern will be jfairy.yml and dataFilePrefix_{langCode}.yml
-	 * @return Fairy instance
-	 */
-	public static Fairy create(Locale locale, String dataFilePrefix) {
-		return builder().withLocale(locale)
-				.withFilePrefix(dataFilePrefix)
-				.build();
-	}
+    /**
+     * Use this factory method to create your own dataset overriding bundled one
+     *
+     * @param locale         will be used to assess langCode for data file
+     * @param dataFilePrefix prefix of the data file - final pattern will be jfairy.yml and dataFilePrefix_{langCode}.yml
+     * @return Fairy instance
+     */
+    public static Fairy create(Locale locale, String dataFilePrefix) {
+        return builder().withLocale(locale)
+                .withFilePrefix(dataFilePrefix)
+                .build();
+    }
 
-	public static Fairy create(Supplier<DataMaster> dataMaster, Locale locale) {
-		return builder().withDataMasterProvider(dataMaster).withLocale(locale).build();
-	}
+    public static Fairy create(Supplier<DataMaster> dataMaster, Locale locale) {
+        return builder().withDataMasterProvider(dataMaster).withLocale(locale).build();
+    }
 
-	public static final class Builder {
+    public static final class Builder {
 
-		private Locale locale = Locale.ENGLISH;
-		private String filePrefix = DATA_FILE_PREFIX;
-		private RandomGenerator randomGenerator = new RandomGenerator();
-		private DataMaster dataMaster;
+        private Locale locale = Locale.ENGLISH;
+        private String filePrefix = DATA_FILE_PREFIX;
+        private RandomGenerator randomGenerator = new RandomGenerator();
+        private DataMaster dataMaster;
 
-		private MapBasedDataMaster getDefaultDataMaster(BaseProducer baseProducer) {
-			return new MapBasedDataMaster(baseProducer);
-		}
+        private MapBasedDataMaster getDefaultDataMaster(BaseProducer baseProducer) {
+            return new MapBasedDataMaster(baseProducer);
+        }
 
-		private Builder() {
+        private Builder() {
 
-		}
+        }
 
-		/**
-		 * Sets the locale for the resulting Fairy.
-		 *
-		 * @param locale The Locale to set.
-		 * @return the same Builder (for chaining).
-		 */
-		public Builder withLocale(Locale locale) {
-			this.locale = locale;
-			return this;
-		}
+        /**
+         * Sets the locale for the resulting Fairy.
+         *
+         * @param locale The Locale to set.
+         * @return the same Builder (for chaining).
+         */
+        public Builder withLocale(Locale locale) {
+            this.locale = locale;
+            return this;
+        }
 
-		/**
-		 * Sets the data file prefix for the resulting Fairy.
-		 *
-		 * @param filePrefix The prefix of the file (such as "jfairy" for "jfairy_en.yml").
-		 * @return the same Builder (for chaining).
-		 */
-		public Builder withFilePrefix(String filePrefix) {
-			this.filePrefix = filePrefix;
-			return this;
-		}
+        /**
+         * Sets the data file prefix for the resulting Fairy.
+         *
+         * @param filePrefix The prefix of the file (such as "jfairy" for "jfairy_en.yml").
+         * @return the same Builder (for chaining).
+         */
+        public Builder withFilePrefix(String filePrefix) {
+            this.filePrefix = filePrefix;
+            return this;
+        }
 
-		/**
-		 * Sets the random seed to use to pick things randomly. (If you set this, you will always
-		 * get the same result when you generate things.)
-		 *
-		 * @param randomSeed The random seed to use.
-		 * @return the same Builder (for chaining).
-		 */
-		public Builder withRandomSeed(int randomSeed) {
-			LOG.debug("Using fixed random seed: {}", randomSeed);
-			this.randomGenerator = new RandomGenerator(randomSeed);
-			return this;
-		}
+        /**
+         * Sets the random seed to use to pick things randomly. (If you set this, you will always
+         * get the same result when you generate things.)
+         *
+         * @param randomSeed The random seed to use.
+         * @return the same Builder (for chaining).
+         */
+        public Builder withRandomSeed(int randomSeed) {
+            LOG.debug("Using fixed random seed: {}", randomSeed);
+            this.randomGenerator = new RandomGenerator(randomSeed);
+            return this;
+        }
 
-		/**
-		 * Sets a custom DataMaster implementation.
-		 *
-		 * @param dataMasterProvider The DataMaster supplier to use.
-		 * @return the same Builder (for chaining).
-		 */
-		public Builder withDataMasterProvider(Supplier<DataMaster> dataMasterProvider) {
-			this.dataMaster = dataMasterProvider.get();
-			return this;
-		}
+        /**
+         * Sets a custom DataMaster implementation.
+         *
+         * @param dataMasterProvider The DataMaster supplier to use.
+         * @return the same Builder (for chaining).
+         */
+        public Builder withDataMasterProvider(Supplier<DataMaster> dataMasterProvider) {
+            this.dataMaster = dataMasterProvider.get();
+            return this;
+        }
 
-		/**
-		 * Returns the completed Fairy.
-		 *
-		 * @return Fairy instance
-		 */
-		public Fairy build() {
-			if (dataMaster == null) {
-				BaseProducer baseProducer = new BaseProducer(randomGenerator);
-				dataMaster = getDefaultDataMaster(baseProducer);
-				fillDefaultDataMaster((MapBasedDataMaster) dataMaster, locale, filePrefix);
-			}
-			return createFairy(dataMaster, locale, randomGenerator);
-		}
-	}
+        /**
+         * Returns the completed Fairy.
+         *
+         * @return Fairy instance
+         */
+        public Fairy build() {
+            if (dataMaster == null) {
+                BaseProducer baseProducer = new BaseProducer(randomGenerator);
+                dataMaster = getDefaultDataMaster(baseProducer);
+                fillDefaultDataMaster((MapBasedDataMaster) dataMaster, locale, filePrefix);
+            }
+            return createFairy(dataMaster, locale, randomGenerator);
+        }
+    }
 
 }

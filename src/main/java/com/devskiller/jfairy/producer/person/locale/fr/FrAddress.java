@@ -4,12 +4,12 @@ import com.devskiller.jfairy.producer.person.locale.ContinentalAddress;
 
 public class FrAddress extends ContinentalAddress {
 
-	public FrAddress(String streetNumber, String street, String apartmentNumber, String postalCode, String city) {
-		super(street, streetNumber, apartmentNumber, postalCode, city);
-	}
+    public FrAddress(String streetNumber, String street, String apartmentNumber, String postalCode, String city) {
+        super(street, streetNumber, apartmentNumber, postalCode, city);
+    }
 
-	@Override
-	protected String getApartmentMark() {
-		return " Apt ";
-	}
+    @Override
+    protected String getApartmentMark() {
+        return " Apt ";
+    }
 }

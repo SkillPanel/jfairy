@@ -8,9 +8,9 @@ import com.devskiller.jfairy.producer.person.PersonProperties
 println "\n * With context"
 Fairy fairy = Fairy.create(Locale.forLanguageTag("en"))
 3.times {
-	Person person = fairy.person()
+    Person person = fairy.person()
 
-	println "${person.fullName} <${person.email}>"
+    println "${person.fullName} <${person.email}>"
 
 }
 
@@ -45,11 +45,11 @@ println "       Full address: " + person.address.toString()
 println ""
 
 3.times {
-	println "  Men: " + fairy.person(PersonProperties.male()).fullName
+    println "  Men: " + fairy.person(PersonProperties.male()).fullName
 }
 
 3.times {
-	println "Women: " + fairy.person(PersonProperties.female()).fullName
+    println "Women: " + fairy.person(PersonProperties.female()).fullName
 }
 
 println fairy.person().nationalIdentityCardNumber

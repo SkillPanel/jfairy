@@ -15,32 +15,32 @@ import com.devskiller.jfairy.producer.util.ZhFairyUtil;
  */
 public class ZhVATIdentificationNumberProvider implements VATIdentificationNumberProvider {
 
-	private static final BaseProducer BASE_PRODUCER = new BaseProducer(new RandomGenerator());
+    private static final BaseProducer BASE_PRODUCER = new BaseProducer(new RandomGenerator());
 
-	@Override
-	public String get() {
-		StringBuilder vatBuilder = new StringBuilder();
-		vatBuilder.append(BASE_PRODUCER.randomElement(ZhFairyUtil.PROV_LIST));
-		vatBuilder.append(ZhFairyUtil.getRandomNumStr(BASE_PRODUCER, ZhFairyUtil.CITY_MAX, 2));
-		vatBuilder.append(ZhFairyUtil.getRandomNumStr(BASE_PRODUCER, ZhFairyUtil.DISTRICT_MAX, 2));
-		vatBuilder.append(getChars(9));
-		return vatBuilder.toString();
-	}
+    @Override
+    public String get() {
+        StringBuilder vatBuilder = new StringBuilder();
+        vatBuilder.append(BASE_PRODUCER.randomElement(ZhFairyUtil.PROV_LIST));
+        vatBuilder.append(ZhFairyUtil.getRandomNumStr(BASE_PRODUCER, ZhFairyUtil.CITY_MAX, 2));
+        vatBuilder.append(ZhFairyUtil.getRandomNumStr(BASE_PRODUCER, ZhFairyUtil.DISTRICT_MAX, 2));
+        vatBuilder.append(getChars(9));
+        return vatBuilder.toString();
+    }
 
-	private char getChar() {
-		int rndNum = BASE_PRODUCER.randomBetween(0, 35);
-		if (rndNum < 10) {
-			return (char) (49 + rndNum);
-		} else {
-			return (char) (65 + rndNum - 10);
-		}
-	}
+    private char getChar() {
+        int rndNum = BASE_PRODUCER.randomBetween(0, 35);
+        if (rndNum < 10) {
+            return (char) (49 + rndNum);
+        } else {
+            return (char) (65 + rndNum - 10);
+        }
+    }
 
-	private String getChars(int paddingSize) {
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < paddingSize; i++) {
-			sb.append(getChar());
-		}
-		return sb.toString();
-	}
+    private String getChars(int paddingSize) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < paddingSize; i++) {
+            sb.append(getChar());
+        }
+        return sb.toString();
+    }
 }

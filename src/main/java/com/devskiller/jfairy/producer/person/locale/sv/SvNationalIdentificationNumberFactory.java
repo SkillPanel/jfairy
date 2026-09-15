@@ -7,16 +7,16 @@ import com.devskiller.jfairy.producer.person.NationalIdentificationNumberPropert
 
 public class SvNationalIdentificationNumberFactory implements NationalIdentificationNumberFactory {
 
-	private final BaseProducer baseProducer;
-	private final DateProducer dateProducer;
+    private final BaseProducer baseProducer;
+    private final DateProducer dateProducer;
 
-	public SvNationalIdentificationNumberFactory(BaseProducer baseProducer, DateProducer dateProducer) {
-		this.baseProducer = baseProducer;
-		this.dateProducer = dateProducer;
-	}
+    public SvNationalIdentificationNumberFactory(BaseProducer baseProducer, DateProducer dateProducer) {
+        this.baseProducer = baseProducer;
+        this.dateProducer = dateProducer;
+    }
 
-	@Override
-	public SvNationalIdentificationNumberProvider produceNationalIdentificationNumberProvider(NationalIdentificationNumberProperties.Property... properties) {
-		return new SvNationalIdentificationNumberProvider(dateProducer, baseProducer, properties);
-	}
+    @Override
+    public SvNationalIdentificationNumberProvider produceNationalIdentificationNumberProvider(NationalIdentificationNumberProperties.Property... properties) {
+        return new SvNationalIdentificationNumberProvider(dateProducer, baseProducer, properties);
+    }
 }

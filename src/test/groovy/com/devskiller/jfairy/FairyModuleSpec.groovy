@@ -16,37 +16,37 @@ import com.devskiller.jfairy.producer.person.locale.zh.ZhAddressProvider
 
 class FairyModuleSpec extends Specification {
 
-	private MapBasedDataMaster mapBasedDataMaster = Stub(MapBasedDataMaster)
-	private BaseProducer baseProducer = Stub(BaseProducer)
-	private DateProducer dateProducer = Stub(DateProducer)
+    private MapBasedDataMaster mapBasedDataMaster = Stub(MapBasedDataMaster)
+    private BaseProducer baseProducer = Stub(BaseProducer)
+    private DateProducer dateProducer = Stub(DateProducer)
 
-	def "should create appropriate locale-specific providers for locale"() {
-		when:
-			LocaleSpecificProviders providers = LocaleSpecificProvidersFactory.createProvidersForLocale(
-				Locale.forLanguageTag(locale), mapBasedDataMaster, baseProducer, dateProducer)
+    def "should create appropriate locale-specific providers for locale"() {
+        when:
+            LocaleSpecificProviders providers = LocaleSpecificProvidersFactory.createProvidersForLocale(
+                Locale.forLanguageTag(locale), mapBasedDataMaster, baseProducer, dateProducer)
 
-		then:
-			providers.addressProvider().getClass() == expectedAddressProvider
+        then:
+            providers.addressProvider().getClass() == expectedAddressProvider
 
-		where:
-			locale | expectedAddressProvider
-			"en"   | EnAddressProvider.class
-			"pl"   | PlAddressProvider.class
-			"es"   | EsAddressProvider.class
-			"fr"   | FrAddressProvider.class
-			"it"   | EnAddressProvider.class
-			"de"   | DeAddressProvider.class
-			"sv"   | SvAddressProvider.class
-			"ka"   | KaAddressProvider.class
-			"zh"   | ZhAddressProvider.class
-	}
+        where:
+            locale | expectedAddressProvider
+            "en"   | EnAddressProvider.class
+            "pl"   | PlAddressProvider.class
+            "es"   | EsAddressProvider.class
+            "fr"   | FrAddressProvider.class
+            "it"   | EnAddressProvider.class
+            "de"   | DeAddressProvider.class
+            "sv"   | SvAddressProvider.class
+            "ka"   | KaAddressProvider.class
+            "zh"   | ZhAddressProvider.class
+    }
 
-	def "should fall back to English providers for unknown locale"() {
-		when:
-			LocaleSpecificProviders providers = LocaleSpecificProvidersFactory.createProvidersForLocale(
-				Locale.forLanguageTag("xx"), mapBasedDataMaster, baseProducer, dateProducer)
+    def "should fall back to English providers for unknown locale"() {
+        when:
+            LocaleSpecificProviders providers = LocaleSpecificProvidersFactory.createProvidersForLocale(
+                Locale.forLanguageTag("xx"), mapBasedDataMaster, baseProducer, dateProducer)
 
-		then:
-			providers.addressProvider().getClass() == EnAddressProvider.class
-	}
+        then:
+            providers.addressProvider().getClass() == EnAddressProvider.class
+    }
 }

@@ -10,27 +10,27 @@ import com.devskiller.jfairy.producer.person.locale.AbstractAddress;
  */
 public class ZhAddress extends AbstractAddress {
 
-	private static final String CITY = "市";
-	private static final String NUMBER = "号";
-	private static final String ROOM = "房";
-	private static final String POSTCODE = "邮编";
+    private static final String CITY = "市";
+    private static final String NUMBER = "号";
+    private static final String ROOM = "房";
+    private static final String POSTCODE = "邮编";
 
-	public ZhAddress(String streetNumber, String street, String apartmentNumber, String city, String postalCode) {
-		super(street, streetNumber, apartmentNumber, postalCode, city);
-	}
+    public ZhAddress(String streetNumber, String street, String apartmentNumber, String city, String postalCode) {
+        super(street, streetNumber, apartmentNumber, postalCode, city);
+    }
 
-	@Override
-	public String getAddressLine1() {
-		String line = city + CITY + street + streetNumber + NUMBER;
-		if (!apartmentNumber.isEmpty()) {
-			return line + " " + apartmentNumber + ROOM;
-		} else {
-			return line;
-		}
-	}
+    @Override
+    public String getAddressLine1() {
+        String line = city + CITY + street + streetNumber + NUMBER;
+        if (!apartmentNumber.isEmpty()) {
+            return line + " " + apartmentNumber + ROOM;
+        } else {
+            return line;
+        }
+    }
 
-	@Override
-	public String getAddressLine2() {
-		return POSTCODE + " " + postalCode;
-	}
+    @Override
+    public String getAddressLine2() {
+        return POSTCODE + " " + postalCode;
+    }
 }

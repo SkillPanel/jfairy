@@ -18,43 +18,43 @@ import com.devskiller.jfairy.producer.company.DefaultCompanyProvider;
  */
 public class JaCompanyProvider extends DefaultCompanyProvider {
 
-	private static final String COMPANY_DOMAIN_HOST = "companyDomains";
+    private static final String COMPANY_DOMAIN_HOST = "companyDomains";
 
-	/**
-	 * Index picked in {@link #generateName()}, reused in {@link #generateDomain()} so the domain matches the
-	 * chosen name. Stays {@code -1} when the name was supplied externally (e.g. via {@link CompanyProperties}),
-	 * in which case the domain falls back to an independently picked, still-readable stem.
-	 */
-	private int selectedIndex = -1;
+    /**
+     * Index picked in {@link #generateName()}, reused in {@link #generateDomain()} so the domain matches the
+     * chosen name. Stays {@code -1} when the name was supplied externally (e.g. via {@link CompanyProperties}),
+     * in which case the domain falls back to an independently picked, still-readable stem.
+     */
+    private int selectedIndex = -1;
 
-	public JaCompanyProvider(BaseProducer baseProducer, DataMaster dataMaster,
-	                          VATIdentificationNumberProvider vatIdentificationNumberProvider,
-	                          CompanyProperties.CompanyProperty... companyProperties) {
-		super(baseProducer, dataMaster, vatIdentificationNumberProvider, companyProperties);
-	}
+    public JaCompanyProvider(BaseProducer baseProducer, DataMaster dataMaster,
+                              VATIdentificationNumberProvider vatIdentificationNumberProvider,
+                              CompanyProperties.CompanyProperty... companyProperties) {
+        super(baseProducer, dataMaster, vatIdentificationNumberProvider, companyProperties);
+    }
 
-	@Override
-	public void generateName() {
-		if (name != null) {
-			return;
-		}
-		List<String> names = dataMaster.getStringList(COMPANY_NAME);
-		selectedIndex = baseProducer.randomBetween(0, names.size() - 1);
-		name = names.get(selectedIndex);
-		if (baseProducer.trueOrFalse()) {
-			name += " " + dataMaster.getRandomValue(COMPANY_SUFFIX);
-		}
-	}
+    @Override
+    public void generateName() {
+        if (name != null) {
+            return;
+        }
+        List<String> names = dataMaster.getStringList(COMPANY_NAME);
+        selectedIndex = baseProducer.randomBetween(0, names.size() - 1);
+        name = names.get(selectedIndex);
+        if (baseProducer.trueOrFalse()) {
+            name += " " + dataMaster.getRandomValue(COMPANY_SUFFIX);
+        }
+    }
 
-	@Override
-	public void generateDomain() {
-		if (domain != null) {
-			return;
-		}
-		List<String> domains = dataMaster.getStringList(COMPANY_DOMAIN_HOST);
-		String host = selectedIndex >= 0 && selectedIndex < domains.size()
-			? domains.get(selectedIndex)
-			: dataMaster.getRandomValue(COMPANY_DOMAIN_HOST);
-		domain = host + "." + dataMaster.getRandomValue(DOMAIN);
-	}
+    @Override
+    public void generateDomain() {
+        if (domain != null) {
+            return;
+        }
+        List<String> domains = dataMaster.getStringList(COMPANY_DOMAIN_HOST);
+        String host = selectedIndex >= 0 && selectedIndex < domains.size()
+            ? domains.get(selectedIndex)
+            : dataMaster.getRandomValue(COMPANY_DOMAIN_HOST);
+        domain = host + "." + dataMaster.getRandomValue(DOMAIN);
+    }
 }

@@ -2,18 +2,18 @@ package com.devskiller.jfairy.producer.person;
 
 public interface Address {
 
-	String getStreet();
+    String getStreet();
 
-	String getStreetNumber();
+    String getStreetNumber();
 
-	String getApartmentNumber();
+    String getApartmentNumber();
 
-	String getPostalCode();
+    String getPostalCode();
 
-	String getCity();
+    String getCity();
 
-	String getAddressLine1();
+    String getAddressLine1();
 
-	String getAddressLine2();
+    String getAddressLine2();
 
 }

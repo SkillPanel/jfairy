@@ -6,14 +6,14 @@ import com.devskiller.jfairy.producer.person.AbstractAddressProvider;
 
 public class DeAddressProvider extends AbstractAddressProvider {
 
-	public DeAddressProvider(DataMaster dataMaster, BaseProducer baseProducer) {
-		super(dataMaster, baseProducer);
-	}
+    public DeAddressProvider(DataMaster dataMaster, BaseProducer baseProducer) {
+        super(dataMaster, baseProducer);
+    }
 
-	@Override
-	public DeAddress get() {
-		return new DeAddress(getStreetNumber(), getStreet(), getApartmentNumber(),
-			getCity(), getPostalCode());
-	}
+    @Override
+    public DeAddress get() {
+        return new DeAddress(getStreetNumber(), getStreet(), getApartmentNumber(),
+            getCity(), getPostalCode());
+    }
 
 }

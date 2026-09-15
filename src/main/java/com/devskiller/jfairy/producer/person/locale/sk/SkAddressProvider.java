@@ -6,14 +6,14 @@ import com.devskiller.jfairy.producer.person.AbstractAddressProvider;
 
 public class SkAddressProvider extends AbstractAddressProvider {
 
-	public SkAddressProvider(DataMaster dataMaster, BaseProducer baseProducer) {
-		super(dataMaster, baseProducer);
-	}
+    public SkAddressProvider(DataMaster dataMaster, BaseProducer baseProducer) {
+        super(dataMaster, baseProducer);
+    }
 
-	@Override
-	public SkAddress get() {
-		return new SkAddress(getStreet(), getStreetNumber(), getApartmentNumber(),
-				getPostalCode(), getCity());
-	}
+    @Override
+    public SkAddress get() {
+        return new SkAddress(getStreet(), getStreetNumber(), getApartmentNumber(),
+                getPostalCode(), getCity());
+    }
 
 }

@@ -12,55 +12,55 @@ import com.devskiller.jfairy.producer.person.PersonProvider
 
 class MapBasedDataMasterSpec extends Specification {
 
-	private BaseProducer baseProducer = Spy(BaseProducer, constructorArgs: [new RandomGenerator()])
-	private MapBasedDataMaster data = Spy(MapBasedDataMaster, constructorArgs: [baseProducer])
+    private BaseProducer baseProducer = Spy(BaseProducer, constructorArgs: [new RandomGenerator()])
+    private MapBasedDataMaster data = Spy(MapBasedDataMaster, constructorArgs: [baseProducer])
 
-	def setup() {
-		baseProducer.randomBetween() >> 0
-	}
+    def setup() {
+        baseProducer.randomBetween() >> 0
+    }
 
-	def "should read first names"() {
-		when:
-			DataMaster dataMaster = new MapBasedDataMaster()
-			dataMaster.readResources("jfairy_en.yml")
+    def "should read first names"() {
+        when:
+            DataMaster dataMaster = new MapBasedDataMaster()
+            dataMaster.readResources("jfairy_en.yml")
 
-			Map<String, List<String>> firstNames = dataMaster.getData(PersonProvider.FIRST_NAME, Map.class)
-		then:
-			firstNames.size() > 0
-			firstNames.keySet().size() > 0
-	}
+            Map<String, List<String>> firstNames = dataMaster.getData(PersonProvider.FIRST_NAME, Map.class)
+        then:
+            firstNames.size() > 0
+            firstNames.keySet().size() > 0
+    }
 
-	def "should return men"() {
-		setup:
-			data.getData(PersonProvider.FIRST_NAME, Object.class) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
+    def "should return men"() {
+        setup:
+            data.getData(PersonProvider.FIRST_NAME, Object.class) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
 
-		when:
-			String male = data.getValuesOfType(PersonProvider.FIRST_NAME, "male", String.class)
+        when:
+            String male = data.getValuesOfType(PersonProvider.FIRST_NAME, "male", String.class)
 
-		then:
-			male == "Mark"
-	}
+        then:
+            male == "Mark"
+    }
 
-	def "should return one of women"() {
-		setup:
-			data.getData(PersonProvider.FIRST_NAME, Object.class) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
+    def "should return one of women"() {
+        setup:
+            data.getData(PersonProvider.FIRST_NAME, Object.class) >> [female: ['Ana', 'Ivon'], male: ['Mark']]
 
-		when:
-			String female = data.getValuesOfType(PersonProvider.FIRST_NAME, "female", String.class)
+        when:
+            String female = data.getValuesOfType(PersonProvider.FIRST_NAME, "female", String.class)
 
-		then:
-			(female == "Ana") || (female == "Ivon")
-	}
+        then:
+            (female == "Ana") || (female == "Ivon")
+    }
 
-	def "should return an element from a flat, non-gendered list regardless of the requested type"() {
-		setup:
-			data.getData(PersonProvider.LAST_NAME, Object.class) >> ['Smith', 'Jones']
+    def "should return an element from a flat, non-gendered list regardless of the requested type"() {
+        setup:
+            data.getData(PersonProvider.LAST_NAME, Object.class) >> ['Smith', 'Jones']
 
-		when:
-			String lastName = data.getValuesOfType(PersonProvider.LAST_NAME, "male", String.class)
+        when:
+            String lastName = data.getValuesOfType(PersonProvider.LAST_NAME, "male", String.class)
 
-		then:
-			(lastName == "Smith") || (lastName == "Jones")
-	}
+        then:
+            (lastName == "Smith") || (lastName == "Jones")
+    }
 
 }

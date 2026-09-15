@@ -16,23 +16,23 @@ import com.devskiller.jfairy.producer.person.NationalIdentityCardNumberProvider;
  */
 public class EsNationalIdentityCardNumberProvider implements NationalIdentityCardNumberProvider {
 
-	private static final String REGEX_DNI = "^\\d{8}([-]?)[A-Z]$";
+    private static final String REGEX_DNI = "^\\d{8}([-]?)[A-Z]$";
 
-	private final BaseProducer baseProducer;
-	private final Pattern regexDni;
-	private final Locale primaryLocale = Country.Spain.getPrimaryLocale();
+    private final BaseProducer baseProducer;
+    private final Pattern regexDni;
+    private final Locale primaryLocale = Country.Spain.getPrimaryLocale();
 
-	public EsNationalIdentityCardNumberProvider(BaseProducer baseProducer) {
-		this.baseProducer = baseProducer;
-		this.regexDni = Pattern.compile(REGEX_DNI);
-	}
+    public EsNationalIdentityCardNumberProvider(BaseProducer baseProducer) {
+        this.baseProducer = baseProducer;
+        this.regexDni = Pattern.compile(REGEX_DNI);
+    }
 
-	@Override
-	public String get() {
-		return String.format("%s-%s", baseProducer.randomNumeric(8), baseProducer.randomAlphabetic(1).toUpperCase(primaryLocale));
-	}
+    @Override
+    public String get() {
+        return String.format("%s-%s", baseProducer.randomNumeric(8), baseProducer.randomAlphabetic(1).toUpperCase(primaryLocale));
+    }
 
-	public boolean isValid(String dni) {
-		return this.regexDni.matcher(dni).matches();
-	}
+    public boolean isValid(String dni) {
+        return this.regexDni.matcher(dni).matches();
+    }
 }

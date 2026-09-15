@@ -5,6 +5,6 @@ package com.devskiller.jfairy.producer.person;
  */
 public interface PersonFactory {
 
-	PersonProvider producePersonProvider(PersonProperties.PersonProperty... personProperties);
+    PersonProvider producePersonProvider(PersonProperties.PersonProperty... personProperties);
 
 }

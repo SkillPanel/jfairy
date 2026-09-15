@@ -16,46 +16,46 @@ import com.devskiller.jfairy.producer.RandomGenerator
  */
 class CreditCardProviderSpec extends Specification {
 
-	public static final LocalDateTime EXPIRY_DATE = LocalDateTime.parse("2009-02-11T23:59:59.999")
+    public static final LocalDateTime EXPIRY_DATE = LocalDateTime.parse("2009-02-11T23:59:59.999")
 
-	private DataMaster dataMaster
-	private DateProducer dateProducer
-	private CreditCardProvider creditCardProvider
-	private BaseProducer baseProducer
+    private DataMaster dataMaster
+    private DateProducer dateProducer
+    private CreditCardProvider creditCardProvider
+    private BaseProducer baseProducer
 
-	def setup() {
-		baseProducer = new BaseProducer(new RandomGenerator())
-		dataMaster = new MapBasedDataMaster(baseProducer)
-		dateProducer = Mock(DateProducer)
-		dataMaster.readResources("jfairy.yml")
-		creditCardProvider = new CreditCardProvider(dataMaster, baseProducer, dateProducer)
-	}
+    def setup() {
+        baseProducer = new BaseProducer(new RandomGenerator())
+        dataMaster = new MapBasedDataMaster(baseProducer)
+        dateProducer = Mock(DateProducer)
+        dataMaster.readResources("jfairy.yml")
+        creditCardProvider = new CreditCardProvider(dataMaster, baseProducer, dateProducer)
+    }
 
-	def "should return credit card basic data"() {
-		when:
-			CreditCard creditCard = creditCardProvider.get()
-		then:
-			creditCard.vendor == 'Visa'
-			creditCard.cardNumber.length() == 16
-	}
+    def "should return credit card basic data"() {
+        when:
+            CreditCard creditCard = creditCardProvider.get()
+        then:
+            creditCard.vendor == 'Visa'
+            creditCard.cardNumber.length() == 16
+    }
 
-	def "should return card expiry date"() {
-		given:
-			dateProducer.randomDateBetweenNowAndFuturePeriod(_) >> EXPIRY_DATE
-		when:
-			CreditCard creditCard = creditCardProvider.get()
-		then:
-			creditCard.expiryDate == EXPIRY_DATE
-	}
+    def "should return card expiry date"() {
+        given:
+            dateProducer.randomDateBetweenNowAndFuturePeriod(_) >> EXPIRY_DATE
+        when:
+            CreditCard creditCard = creditCardProvider.get()
+        then:
+            creditCard.expiryDate == EXPIRY_DATE
+    }
 
-	def "should return card expiry date string"() {
-		given:
-			dateProducer.randomDateBetweenNowAndFuturePeriod(_) >> EXPIRY_DATE
-		when:
-			CreditCard creditCard = creditCardProvider.get()
-		then:
-			creditCard.expiryDateAsString == "02/09"
-	}
+    def "should return card expiry date string"() {
+        given:
+            dateProducer.randomDateBetweenNowAndFuturePeriod(_) >> EXPIRY_DATE
+        when:
+            CreditCard creditCard = creditCardProvider.get()
+        then:
+            creditCard.expiryDateAsString == "02/09"
+    }
 
 
 }

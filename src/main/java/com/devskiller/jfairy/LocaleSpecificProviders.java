@@ -10,9 +10,9 @@ import com.devskiller.jfairy.producer.person.PassportNumberProvider;
  * Container for locale-specific provider implementations
  */
 record LocaleSpecificProviders(
-		NationalIdentificationNumberFactory nationalIdentificationNumberFactory,
-		NationalIdentityCardNumberProvider nationalIdentityCardNumberProvider,
-		VATIdentificationNumberProvider vatIdentificationNumberProvider,
-		AddressProvider addressProvider,
-		PassportNumberProvider passportNumberProvider) {
+        NationalIdentificationNumberFactory nationalIdentificationNumberFactory,
+        NationalIdentityCardNumberProvider nationalIdentityCardNumberProvider,
+        VATIdentificationNumberProvider vatIdentificationNumberProvider,
+        AddressProvider addressProvider,
+        PassportNumberProvider passportNumberProvider) {
 }

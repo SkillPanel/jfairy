@@ -15,17 +15,17 @@ import static AlphaNumberSystem.convertToString
  */
 class AlphaNumberSystemSpec extends Specification {
 
-	@Unroll
-	void "Number #x should be converted to #y"() {
-		expect:
-			convertToString(x, ('A'..'Z').size()) == y
-		where:
-			x  | y
-			0  | "A"
-			1  | "B"
-			2  | "C"
-			25 | "Z"
-			26 | "BA"
+    @Unroll
+    void "Number #x should be converted to #y"() {
+        expect:
+            convertToString(x, ('A'..'Z').size()) == y
+        where:
+            x  | y
+            0  | "A"
+            1  | "B"
+            2  | "C"
+            25 | "Z"
+            26 | "BA"
 
-	}
+    }
 }
