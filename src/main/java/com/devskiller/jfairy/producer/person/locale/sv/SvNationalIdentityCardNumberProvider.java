@@ -8,15 +8,15 @@ import com.devskiller.jfairy.producer.person.NationalIdentityCardNumberProvider;
  */
 public class SvNationalIdentityCardNumberProvider implements NationalIdentityCardNumberProvider {
 
-	private final BaseProducer baseProducer;
+    private final BaseProducer baseProducer;
 
-	public SvNationalIdentityCardNumberProvider(BaseProducer baseProducer) {
-		this.baseProducer = baseProducer;
-	}
+    public SvNationalIdentityCardNumberProvider(BaseProducer baseProducer) {
+        this.baseProducer = baseProducer;
+    }
 
-	@Override
-	public String get() {
-		return baseProducer.randomNumeric(8);
-	}
+    @Override
+    public String get() {
+        return baseProducer.randomNumeric(8);
+    }
 
 }

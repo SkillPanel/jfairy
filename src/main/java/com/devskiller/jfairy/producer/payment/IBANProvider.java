@@ -4,11 +4,11 @@ import java.util.function.Supplier;
 
 public interface IBANProvider extends Supplier<IBAN> {
 
-	@Override
-	IBAN get();
+    @Override
+    IBAN get();
 
-	void fillCountryCode();
+    void fillCountryCode();
 
-	void setCountry(String country);
+    void setCountry(String country);
 
 }

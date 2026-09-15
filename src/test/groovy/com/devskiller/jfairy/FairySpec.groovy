@@ -8,92 +8,91 @@ import com.devskiller.jfairy.producer.person.Person
 
 class FairySpec extends Specification {
 
-	private static final String CUSTOM_STRING = 'Custom Data Master'
+    private static final String CUSTOM_STRING = 'Custom Data Master'
 
-	DataMaster customDataMaster = Stub(DataMaster) {
-		getString(_ as String) >> CUSTOM_STRING
-		getStringList(_ as String) >> Arrays.asList(CUSTOM_STRING)
-		getValuesOfType(_ as String, _ as String, String.class) >> CUSTOM_STRING
-		getRandomValue(_ as String) >> CUSTOM_STRING
-	}
+    DataMaster customDataMaster = Stub(DataMaster) {
+        getString(_ as String) >> CUSTOM_STRING
+        getStringList(_ as String) >> Arrays.asList(CUSTOM_STRING)
+        getValuesOfType(_ as String, _ as String, String.class) >> CUSTOM_STRING
+        getRandomValue(_ as String) >> CUSTOM_STRING
+    }
 
-	Supplier<DataMaster> customDataMasterProvider = Stub(Supplier) {
-		get() >> customDataMaster
-	}
+    Supplier<DataMaster> customDataMasterProvider = Stub(Supplier) {
+        get() >> customDataMaster
+    }
 
+    def "Second person should be different without fairy instance"() {
 
-	def "Second person should be different without fairy instance"() {
+        given:
+            Person person = Fairy.create().person()
+        when:
+            person = Fairy.create().person()
+        then:
+            person.fullName != old(person.fullName)
+    }
 
-		given:
-			Person person = Fairy.create().person()
-		when:
-			person = Fairy.create().person()
-		then:
-			person.fullName != old(person.fullName)
-	}
+    def "Second person should be different with one fairy"() {
 
-	def "Second person should be different with one fairy"() {
+        given:
+            Fairy fairy = Fairy.create()
+            Person person = fairy.person()
+        when:
+            person = fairy.person()
+        then:
+            person.fullName != old(person.fullName)
+    }
 
-		given:
-			Fairy fairy = Fairy.create()
-			Person person = fairy.person()
-		when:
-			person = fairy.person()
-		then:
-			person.fullName != old(person.fullName)
-	}
+    def "Second person should be the same with the same random seed"() {
 
-	def "Second person should be the same with the same random seed"() {
+        given:
+            Fairy firstFairy = Fairy.builder().withRandomSeed(10).build()
+            Fairy secondFairy = Fairy.builder().withRandomSeed(10).build()
 
-		given:
-			Fairy firstFairy = Fairy.builder().withRandomSeed(10).build()
-			Fairy secondFairy = Fairy.builder().withRandomSeed(10).build()
+            Person firstPerson = firstFairy.person()
+            Person secondPerson = secondFairy.person()
+            Person thirdPerson = firstFairy.person()
+            Person fourthPerson = secondFairy.person()
 
-			Person firstPerson = firstFairy.person()
-			Person secondPerson = secondFairy.person()
-			Person thirdPerson = firstFairy.person()
-			Person fourthPerson = secondFairy.person()
+        expect:
+        firstPerson.fullName == secondPerson.fullName
+        thirdPerson.fullName == fourthPerson.fullName
 
-		expect:
-		firstPerson.fullName == secondPerson.fullName
-		thirdPerson.fullName == fourthPerson.fullName
+        firstPerson.fullName != thirdPerson.fullName
+    }
 
-		firstPerson.fullName != thirdPerson.fullName
-	}
+    def "Second person should be different with different random seeds"() {
 
-	def "Second person should be different with different random seeds"() {
+        given:
+            Fairy firstFairy = Fairy.builder().withRandomSeed(10).build()
+            Fairy secondFairy = Fairy.builder().withRandomSeed(20).build()
 
-		given:
-			Fairy firstFairy = Fairy.builder().withRandomSeed(10).build()
-			Fairy secondFairy = Fairy.builder().withRandomSeed(20).build()
+            Person firstPerson = firstFairy.person()
+            Person secondPerson = secondFairy.person()
 
-			Person firstPerson = firstFairy.person()
-			Person secondPerson = secondFairy.person()
+        expect:
+        firstPerson.fullName != secondPerson.fullName
+    }
 
-		expect:
-		firstPerson.fullName != secondPerson.fullName
-	}
+    def "should use default DataMaster when custom not provided"() {
+        given:
+            Fairy fairy = Fairy.create()
+        when:
+            Person samplePerson = fairy.person()
 
-	def "should use default DataMaster when custom not provided"() {
-		given:
-			Fairy fairy = Fairy.create()
-		when:
-			Person samplePerson = fairy.person()
+        then:
+            samplePerson.firstName && samplePerson.firstName != CUSTOM_STRING
 
-		then:
-			samplePerson.firstName && samplePerson.firstName != CUSTOM_STRING
+    }
 
-	}
+    def "should use custom DataMaster when provided"() {
+        given:
+            Fairy fairy = Fairy.create(customDataMasterProvider, Locale.forLanguageTag("EN"))
 
-	def "should use custom DataMaster when provided"() {
-		given:
-			Fairy fairy = Fairy.create(customDataMasterProvider, Locale.forLanguageTag("EN"))
+        when:
+            Person samplePerson = fairy.person()
 
-		when:
-			Person samplePerson = fairy.person()
+        then:
+            samplePerson.firstName == CUSTOM_STRING
 
-		then:
-			samplePerson.firstName == CUSTOM_STRING
-
-	}
+    }
 }

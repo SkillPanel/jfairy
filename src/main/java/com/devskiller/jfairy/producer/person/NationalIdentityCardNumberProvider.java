@@ -4,6 +4,6 @@ import java.util.function.Supplier;
 
 public interface NationalIdentityCardNumberProvider extends Supplier<String> {
 
-	@Override
-	String get();
+    @Override
+    String get();
 }

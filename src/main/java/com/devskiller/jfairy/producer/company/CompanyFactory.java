@@ -2,6 +2,6 @@ package com.devskiller.jfairy.producer.company;
 
 public interface CompanyFactory {
 
-	CompanyProvider produceCompany(CompanyProperties.CompanyProperty... companyProperties);
+    CompanyProvider produceCompany(CompanyProperties.CompanyProperty... companyProperties);
 
 }

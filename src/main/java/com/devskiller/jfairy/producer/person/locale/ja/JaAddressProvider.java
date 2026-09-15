@@ -11,29 +11,29 @@ import com.devskiller.jfairy.producer.person.Address;
  */
 public class JaAddressProvider extends AbstractAddressProvider {
 
-	private static final int CHOME_MAX = 9;
-	private static final int BAN_MAX = 30;
-	private static final int GO_MAX = 20;
+    private static final int CHOME_MAX = 9;
+    private static final int BAN_MAX = 30;
+    private static final int GO_MAX = 20;
 
-	public JaAddressProvider(DataMaster dataMaster, BaseProducer baseProducer) {
-		super(dataMaster, baseProducer);
-	}
+    public JaAddressProvider(DataMaster dataMaster, BaseProducer baseProducer) {
+        super(dataMaster, baseProducer);
+    }
 
-	@Override
-	public Address get() {
-		return new JaAddress(getStreet(), getStreetNumber(), getApartmentNumber(), getPostalCode(), getCity());
-	}
+    @Override
+    public Address get() {
+        return new JaAddress(getStreet(), getStreetNumber(), getApartmentNumber(), getPostalCode(), getCity());
+    }
 
-	@Override
-	public String getStreetNumber() {
-		int chome = baseProducer.randomBetween(1, CHOME_MAX);
-		int ban = baseProducer.randomBetween(1, BAN_MAX);
-		int go = baseProducer.randomBetween(1, GO_MAX);
-		return chome + "-" + ban + "-" + go;
-	}
+    @Override
+    public String getStreetNumber() {
+        int chome = baseProducer.randomBetween(1, CHOME_MAX);
+        int ban = baseProducer.randomBetween(1, BAN_MAX);
+        int go = baseProducer.randomBetween(1, GO_MAX);
+        return chome + "-" + ban + "-" + go;
+    }
 
-	@Override
-	public String getApartmentNumber() {
-		return baseProducer.trueOrFalse() ? String.valueOf(baseProducer.randomBetween(101, 999)) : "";
-	}
+    @Override
+    public String getApartmentNumber() {
+        return baseProducer.trueOrFalse() ? String.valueOf(baseProducer.randomBetween(101, 999)) : "";
+    }
 }

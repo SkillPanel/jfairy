@@ -68,200 +68,200 @@ import com.devskiller.jfairy.producer.util.LanguageCode;
  */
 final class LocaleSpecificProvidersFactory {
 
-	private static final Logger LOG = LoggerFactory.getLogger(LocaleSpecificProvidersFactory.class);
+    private static final Logger LOG = LoggerFactory.getLogger(LocaleSpecificProvidersFactory.class);
 
-	private LocaleSpecificProvidersFactory() {
-	}
+    private LocaleSpecificProvidersFactory() {
+    }
 
-	static LocaleSpecificProviders createProvidersForLocale(Locale locale,
-	                                                        DataMaster dataMaster,
-	                                                        BaseProducer baseProducer,
-	                                                        DateProducer dateProducer) {
-		LanguageCode code;
-		try {
-			code = LanguageCode.valueOf(locale.getLanguage().toUpperCase(Locale.ROOT));
-		} catch (IllegalArgumentException ex) {
-			LOG.warn("Unknown locale {}", locale);
-			code = LanguageCode.EN;
-		}
+    static LocaleSpecificProviders createProvidersForLocale(Locale locale,
+                                                            DataMaster dataMaster,
+                                                            BaseProducer baseProducer,
+                                                            DateProducer dateProducer) {
+        LanguageCode code;
+        try {
+            code = LanguageCode.valueOf(locale.getLanguage().toUpperCase(Locale.ROOT));
+        } catch (IllegalArgumentException ex) {
+            LOG.warn("Unknown locale {}", locale);
+            code = LanguageCode.EN;
+        }
 
-		return switch (code) {
-			case PL -> createPlProviders(dataMaster, baseProducer, dateProducer);
-			case EN -> createEnProviders(dataMaster, baseProducer);
-			case ES -> createEsProviders(dataMaster, baseProducer);
-			case FR -> createFrProviders(dataMaster, baseProducer);
-			case IT -> createItProviders(dataMaster, baseProducer);
-			case SK -> createSkProviders(dataMaster, baseProducer, dateProducer);
-			case SV -> createSvProviders(dataMaster, baseProducer, dateProducer);
-			case ZH -> createZhProviders(dataMaster, baseProducer);
-			case DE -> createDeProviders(dataMaster, baseProducer);
-			case KA -> createKaProviders(dataMaster, baseProducer);
-			case BR -> createBrProviders(dataMaster, baseProducer);
-			case TR -> createTrProviders(dataMaster, baseProducer);
-			case JA -> createJaProviders(dataMaster, baseProducer);
-		};
-	}
+        return switch (code) {
+            case PL -> createPlProviders(dataMaster, baseProducer, dateProducer);
+            case EN -> createEnProviders(dataMaster, baseProducer);
+            case ES -> createEsProviders(dataMaster, baseProducer);
+            case FR -> createFrProviders(dataMaster, baseProducer);
+            case IT -> createItProviders(dataMaster, baseProducer);
+            case SK -> createSkProviders(dataMaster, baseProducer, dateProducer);
+            case SV -> createSvProviders(dataMaster, baseProducer, dateProducer);
+            case ZH -> createZhProviders(dataMaster, baseProducer);
+            case DE -> createDeProviders(dataMaster, baseProducer);
+            case KA -> createKaProviders(dataMaster, baseProducer);
+            case BR -> createBrProviders(dataMaster, baseProducer);
+            case TR -> createTrProviders(dataMaster, baseProducer);
+            case JA -> createJaProviders(dataMaster, baseProducer);
+        };
+    }
 
-	private static LocaleSpecificProviders createPlProviders(DataMaster dataMaster,
-	                                                         BaseProducer baseProducer,
-	                                                         DateProducer dateProducer) {
-		return new LocaleSpecificProviders(
-				new PlNationalIdentificationNumberFactory(baseProducer, dateProducer),
-				new PlNationalIdentityCardNumberProvider(dateProducer, baseProducer),
-				new PlVATIdentificationNumberProvider(baseProducer),
-				new PlAddressProvider(dataMaster, baseProducer),
-				new PlPassportNumberProvider(baseProducer)
-		);
-	}
+    private static LocaleSpecificProviders createPlProviders(DataMaster dataMaster,
+                                                             BaseProducer baseProducer,
+                                                             DateProducer dateProducer) {
+        return new LocaleSpecificProviders(
+                new PlNationalIdentificationNumberFactory(baseProducer, dateProducer),
+                new PlNationalIdentityCardNumberProvider(dateProducer, baseProducer),
+                new PlVATIdentificationNumberProvider(baseProducer),
+                new PlAddressProvider(dataMaster, baseProducer),
+                new PlPassportNumberProvider(baseProducer)
+        );
+    }
 
-	private static LocaleSpecificProviders createSkProviders(DataMaster dataMaster,
-	                                                         BaseProducer baseProducer,
-	                                                         DateProducer dateProducer) {
-		return new LocaleSpecificProviders(
-				new SkNationalIdentificationNumberFactory(baseProducer, dateProducer),
-				new SkNationalIdentityCardNumberProvider(dateProducer, baseProducer),
-				new SkVATIdentificationNumberProvider(baseProducer),
-				new SkAddressProvider(dataMaster, baseProducer),
-				new SkPassportNumberProvider(baseProducer)
-		);
-	}
+    private static LocaleSpecificProviders createSkProviders(DataMaster dataMaster,
+                                                             BaseProducer baseProducer,
+                                                             DateProducer dateProducer) {
+        return new LocaleSpecificProviders(
+                new SkNationalIdentificationNumberFactory(baseProducer, dateProducer),
+                new SkNationalIdentityCardNumberProvider(dateProducer, baseProducer),
+                new SkVATIdentificationNumberProvider(baseProducer),
+                new SkAddressProvider(dataMaster, baseProducer),
+                new SkPassportNumberProvider(baseProducer)
+        );
+    }
 
-	private static LocaleSpecificProviders createEnProviders(DataMaster dataMaster,
-	                                                         BaseProducer baseProducer) {
-		return new LocaleSpecificProviders(
-				new NoNationalIdentificationNumberFactory(),
-				new EnNationalIdentityCardNumberProvider(baseProducer),
-				new EnVATIdentificationNumberProvider(baseProducer),
-				new EnAddressProvider(dataMaster, baseProducer),
-				new EnPassportNumberProvider(baseProducer)
-		);
-	}
+    private static LocaleSpecificProviders createEnProviders(DataMaster dataMaster,
+                                                             BaseProducer baseProducer) {
+        return new LocaleSpecificProviders(
+                new NoNationalIdentificationNumberFactory(),
+                new EnNationalIdentityCardNumberProvider(baseProducer),
+                new EnVATIdentificationNumberProvider(baseProducer),
+                new EnAddressProvider(dataMaster, baseProducer),
+                new EnPassportNumberProvider(baseProducer)
+        );
+    }
 
-	/**
-	 * Creates providers for French locale.
-	 *
-	 * @param dataMaster   data source
-	 * @param baseProducer base producer
-	 * @return French specific providers
-	 */
-	private static LocaleSpecificProviders createFrProviders(DataMaster dataMaster,
-	                                                         BaseProducer baseProducer) {
-		return new LocaleSpecificProviders(
-				new NoNationalIdentificationNumberFactory(),
-				new FrNationalIdentityCardNumberProvider(baseProducer),
-				new FrVATIdentificationNumberProvider(baseProducer),
-				new FrAddressProvider(dataMaster, baseProducer),
-				new FrPassportNumberProvider(baseProducer)
-		);
-	}
+    /**
+     * Creates providers for French locale.
+     *
+     * @param dataMaster   data source
+     * @param baseProducer base producer
+     * @return French specific providers
+     */
+    private static LocaleSpecificProviders createFrProviders(DataMaster dataMaster,
+                                                             BaseProducer baseProducer) {
+        return new LocaleSpecificProviders(
+                new NoNationalIdentificationNumberFactory(),
+                new FrNationalIdentityCardNumberProvider(baseProducer),
+                new FrVATIdentificationNumberProvider(baseProducer),
+                new FrAddressProvider(dataMaster, baseProducer),
+                new FrPassportNumberProvider(baseProducer)
+        );
+    }
 
-	/**
-	 * Creates providers for Italian locale.
-	 * <p>
-	 * Note: Currently uses English fallbacks.
-	 *
-	 * @param dataMaster   data source
-	 * @param baseProducer base producer
-	 * @return Italian specific providers
-	 */
-	private static LocaleSpecificProviders createItProviders(DataMaster dataMaster,
-															 BaseProducer baseProducer) {
-		return new LocaleSpecificProviders(
-			new NoNationalIdentificationNumberFactory(),
-			new EnNationalIdentityCardNumberProvider(baseProducer),
-			new EnVATIdentificationNumberProvider(baseProducer),
-			new EnAddressProvider(dataMaster, baseProducer),
-			new EnPassportNumberProvider(baseProducer)
-	);
-	}
+    /**
+     * Creates providers for Italian locale.
+     * <p>
+     * Note: Currently uses English fallbacks.
+     *
+     * @param dataMaster   data source
+     * @param baseProducer base producer
+     * @return Italian specific providers
+     */
+    private static LocaleSpecificProviders createItProviders(DataMaster dataMaster,
+                                                             BaseProducer baseProducer) {
+        return new LocaleSpecificProviders(
+            new NoNationalIdentificationNumberFactory(),
+            new EnNationalIdentityCardNumberProvider(baseProducer),
+            new EnVATIdentificationNumberProvider(baseProducer),
+            new EnAddressProvider(dataMaster, baseProducer),
+            new EnPassportNumberProvider(baseProducer)
+    );
+    }
 
-	private static LocaleSpecificProviders createEsProviders(DataMaster dataMaster,
-	                                                         BaseProducer baseProducer) {
-		return new LocaleSpecificProviders(
-				new NoNationalIdentificationNumberFactory(),
-				new EsNationalIdentityCardNumberProvider(baseProducer),
-				new EsVATIdentificationNumberProvider(baseProducer),
-				new EsAddressProvider(dataMaster, baseProducer),
-				new EsPassportNumberProvider(baseProducer)
-		);
-	}
+    private static LocaleSpecificProviders createEsProviders(DataMaster dataMaster,
+                                                             BaseProducer baseProducer) {
+        return new LocaleSpecificProviders(
+                new NoNationalIdentificationNumberFactory(),
+                new EsNationalIdentityCardNumberProvider(baseProducer),
+                new EsVATIdentificationNumberProvider(baseProducer),
+                new EsAddressProvider(dataMaster, baseProducer),
+                new EsPassportNumberProvider(baseProducer)
+        );
+    }
 
-	private static LocaleSpecificProviders createSvProviders(DataMaster dataMaster,
-	                                                         BaseProducer baseProducer,
-	                                                         DateProducer dateProducer) {
-		NationalIdentificationNumberFactory nationalIdFactory = new SvNationalIdentificationNumberFactory(baseProducer, dateProducer);
-		return new LocaleSpecificProviders(
-				nationalIdFactory,
-				new SvNationalIdentityCardNumberProvider(baseProducer),
-				new SvVATIdentificationNumberProvider(baseProducer, dateProducer, nationalIdFactory),
-				new SvAddressProvider(dataMaster, baseProducer),
-				new SvPassportNumberProvider(baseProducer)
-		);
-	}
+    private static LocaleSpecificProviders createSvProviders(DataMaster dataMaster,
+                                                             BaseProducer baseProducer,
+                                                             DateProducer dateProducer) {
+        NationalIdentificationNumberFactory nationalIdFactory = new SvNationalIdentificationNumberFactory(baseProducer, dateProducer);
+        return new LocaleSpecificProviders(
+                nationalIdFactory,
+                new SvNationalIdentityCardNumberProvider(baseProducer),
+                new SvVATIdentificationNumberProvider(baseProducer, dateProducer, nationalIdFactory),
+                new SvAddressProvider(dataMaster, baseProducer),
+                new SvPassportNumberProvider(baseProducer)
+        );
+    }
 
-	private static LocaleSpecificProviders createZhProviders(DataMaster dataMaster,
-	                                                         BaseProducer baseProducer) {
-		return new LocaleSpecificProviders(
-				new NoNationalIdentificationNumberFactory(),
-				new ZhNationalIdentityCardNumberProvider(baseProducer),
-				new ZhVATIdentificationNumberProvider(),
-				new ZhAddressProvider(dataMaster, baseProducer),
-				new ZhPassportNumberProvider(baseProducer)
-		);
-	}
+    private static LocaleSpecificProviders createZhProviders(DataMaster dataMaster,
+                                                             BaseProducer baseProducer) {
+        return new LocaleSpecificProviders(
+                new NoNationalIdentificationNumberFactory(),
+                new ZhNationalIdentityCardNumberProvider(baseProducer),
+                new ZhVATIdentificationNumberProvider(),
+                new ZhAddressProvider(dataMaster, baseProducer),
+                new ZhPassportNumberProvider(baseProducer)
+        );
+    }
 
-	private static LocaleSpecificProviders createDeProviders(DataMaster dataMaster,
-	                                                         BaseProducer baseProducer) {
-		return new LocaleSpecificProviders(
-				new NoNationalIdentificationNumberFactory(),
-				new DeNationalIdentityCardNumberProvider(baseProducer),
-				new DeVATIdentificationNumberProvider(baseProducer),
-				new DeAddressProvider(dataMaster, baseProducer),
-				new DePassportNumberProvider(baseProducer)
-		);
-	}
+    private static LocaleSpecificProviders createDeProviders(DataMaster dataMaster,
+                                                             BaseProducer baseProducer) {
+        return new LocaleSpecificProviders(
+                new NoNationalIdentificationNumberFactory(),
+                new DeNationalIdentityCardNumberProvider(baseProducer),
+                new DeVATIdentificationNumberProvider(baseProducer),
+                new DeAddressProvider(dataMaster, baseProducer),
+                new DePassportNumberProvider(baseProducer)
+        );
+    }
 
-	private static LocaleSpecificProviders createKaProviders(DataMaster dataMaster,
-	                                                         BaseProducer baseProducer) {
-		return new LocaleSpecificProviders(
-				new NoNationalIdentificationNumberFactory(),
-				new KaNationalIdentityCardNumberProvider(baseProducer),
-				new KaVATIdentificationNumberProvider(baseProducer),
-				new KaAddressProvider(dataMaster, baseProducer),
-				new KaPassportNumberProvider(baseProducer)
-		);
-	}
+    private static LocaleSpecificProviders createKaProviders(DataMaster dataMaster,
+                                                             BaseProducer baseProducer) {
+        return new LocaleSpecificProviders(
+                new NoNationalIdentificationNumberFactory(),
+                new KaNationalIdentityCardNumberProvider(baseProducer),
+                new KaVATIdentificationNumberProvider(baseProducer),
+                new KaAddressProvider(dataMaster, baseProducer),
+                new KaPassportNumberProvider(baseProducer)
+        );
+    }
 
-	private static LocaleSpecificProviders createBrProviders(DataMaster dataMaster,
-	                                                         BaseProducer baseProducer) {
-		return new LocaleSpecificProviders(
-				new NoNationalIdentificationNumberFactory(),
-				new BrNationalIdentityCardNumberProvider(baseProducer),
-				new BrVATIdentificationNumberProvider(baseProducer),
-				new BrAddressProvider(dataMaster, baseProducer),
-				new BrPassportNumberProvider()
-		);
-	}
+    private static LocaleSpecificProviders createBrProviders(DataMaster dataMaster,
+                                                             BaseProducer baseProducer) {
+        return new LocaleSpecificProviders(
+                new NoNationalIdentificationNumberFactory(),
+                new BrNationalIdentityCardNumberProvider(baseProducer),
+                new BrVATIdentificationNumberProvider(baseProducer),
+                new BrAddressProvider(dataMaster, baseProducer),
+                new BrPassportNumberProvider()
+        );
+    }
 
-	private static LocaleSpecificProviders createTrProviders(DataMaster dataMaster,
-	                                                         BaseProducer baseProducer) {
-		return new LocaleSpecificProviders(
-				new NoNationalIdentificationNumberFactory(),
-				new TrNationalIdentityCardNumberProvider(baseProducer),
-				new TrVATIdentificationNumberProvider(baseProducer),
-				new TrAddressProvider(dataMaster, baseProducer),
-				new TrPassportNumberProvider(baseProducer)
-		);
-	}
+    private static LocaleSpecificProviders createTrProviders(DataMaster dataMaster,
+                                                             BaseProducer baseProducer) {
+        return new LocaleSpecificProviders(
+                new NoNationalIdentificationNumberFactory(),
+                new TrNationalIdentityCardNumberProvider(baseProducer),
+                new TrVATIdentificationNumberProvider(baseProducer),
+                new TrAddressProvider(dataMaster, baseProducer),
+                new TrPassportNumberProvider(baseProducer)
+        );
+    }
 
-	private static LocaleSpecificProviders createJaProviders(DataMaster dataMaster,
-	                                                         BaseProducer baseProducer) {
-		return new LocaleSpecificProviders(
-				new NoNationalIdentificationNumberFactory(),
-				new JaNationalIdentityCardNumberProvider(baseProducer),
-				new JaVATIdentificationNumberProvider(baseProducer),
-				new JaAddressProvider(dataMaster, baseProducer),
-				new JaPassportNumberProvider(baseProducer)
-		);
-	}
+    private static LocaleSpecificProviders createJaProviders(DataMaster dataMaster,
+                                                             BaseProducer baseProducer) {
+        return new LocaleSpecificProviders(
+                new NoNationalIdentificationNumberFactory(),
+                new JaNationalIdentityCardNumberProvider(baseProducer),
+                new JaVATIdentificationNumberProvider(baseProducer),
+                new JaAddressProvider(dataMaster, baseProducer),
+                new JaPassportNumberProvider(baseProducer)
+        );
+    }
 }

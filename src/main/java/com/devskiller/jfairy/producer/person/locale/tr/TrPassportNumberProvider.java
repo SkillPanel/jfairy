@@ -5,14 +5,14 @@ import com.devskiller.jfairy.producer.person.PassportNumberProvider;
 
 public class TrPassportNumberProvider implements PassportNumberProvider {
 
-	private final BaseProducer baseProducer;
+    private final BaseProducer baseProducer;
 
-	public TrPassportNumberProvider(BaseProducer baseProducer) {
-		this.baseProducer = baseProducer;
-	}
+    public TrPassportNumberProvider(BaseProducer baseProducer) {
+        this.baseProducer = baseProducer;
+    }
 
-	@Override
-	public String get() {
-		return "U" + String.format("%08d", baseProducer.randomBetween(1, 99999999));
-	}
+    @Override
+    public String get() {
+        return "U" + String.format("%08d", baseProducer.randomBetween(1, 99999999));
+    }
 }

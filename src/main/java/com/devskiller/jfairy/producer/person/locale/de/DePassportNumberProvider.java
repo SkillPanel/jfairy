@@ -12,23 +12,23 @@ import com.devskiller.jfairy.producer.person.PassportNumberProvider;
  */
 public class DePassportNumberProvider implements PassportNumberProvider {
 
-	private static final String[] PASSPORT_TYPE_LETTERS = {"C", "F", "G", "H", "J", "K"};
+    private static final String[] PASSPORT_TYPE_LETTERS = {"C", "F", "G", "H", "J", "K"};
 
-	private static final String VALID_NUMBER_PATTERN = "^[CFGHJK][0-9]{8}$";
+    private static final String VALID_NUMBER_PATTERN = "^[CFGHJK][0-9]{8}$";
 
-	private final BaseProducer baseProducer;
+    private final BaseProducer baseProducer;
 
-	public DePassportNumberProvider(BaseProducer baseProducer) {
-		this.baseProducer = baseProducer;
-	}
+    public DePassportNumberProvider(BaseProducer baseProducer) {
+        this.baseProducer = baseProducer;
+    }
 
-	@Override
-	public String get() {
-		return baseProducer.randomElement(PASSPORT_TYPE_LETTERS) + baseProducer.randomNumeric(8);
-	}
+    @Override
+    public String get() {
+        return baseProducer.randomElement(PASSPORT_TYPE_LETTERS) + baseProducer.randomNumeric(8);
+    }
 
-	public boolean isValid(String passportNumber) {
-		return passportNumber.matches(VALID_NUMBER_PATTERN);
-	}
+    public boolean isValid(String passportNumber) {
+        return passportNumber.matches(VALID_NUMBER_PATTERN);
+    }
 
 }

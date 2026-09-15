@@ -12,21 +12,21 @@ import com.devskiller.jfairy.producer.VATIdentificationNumberProvider;
  */
 public class DeVATIdentificationNumberProvider implements VATIdentificationNumberProvider {
 
-	private static final String VALID_NUMBER_PATTERN = "^[0-9]{9}$";
+    private static final String VALID_NUMBER_PATTERN = "^[0-9]{9}$";
 
-	private final BaseProducer baseProducer;
+    private final BaseProducer baseProducer;
 
-	public DeVATIdentificationNumberProvider(BaseProducer baseProducer) {
-		this.baseProducer = baseProducer;
-	}
+    public DeVATIdentificationNumberProvider(BaseProducer baseProducer) {
+        this.baseProducer = baseProducer;
+    }
 
-	@Override
-	public String get() {
-		return baseProducer.randomNumeric(9);
-	}
+    @Override
+    public String get() {
+        return baseProducer.randomNumeric(9);
+    }
 
-	public boolean isValid(String vatIdentificationNumber) {
-		return vatIdentificationNumber.matches(VALID_NUMBER_PATTERN);
-	}
+    public boolean isValid(String vatIdentificationNumber) {
+        return vatIdentificationNumber.matches(VALID_NUMBER_PATTERN);
+    }
 
 }

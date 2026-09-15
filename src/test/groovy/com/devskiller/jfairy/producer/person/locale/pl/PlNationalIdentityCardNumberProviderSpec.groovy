@@ -21,22 +21,22 @@ import static PlNationalIdentityCardNumberProvider.MAX_DIGITS_PART_VALUE
  */
 class PlNationalIdentityCardNumberProviderSpec extends Specification {
 
-	private BaseProducer baseProducer = Mock(BaseProducer)
-	private DateProducer dateGenerator = Mock(DateProducer)
+    private BaseProducer baseProducer = Mock(BaseProducer)
+    private DateProducer dateGenerator = Mock(DateProducer)
 
-	/**
-	 * http://en.wikipedia.org/wiki/Polish_identity_card
-	 */
-	void "should generate proper id number"() {
-		int max = (2013 - ISSUING_BEGIN) * LETTER_WEIGHT
-		setup:
-			baseProducer.randomBetween(max, (int) max + LETTER_WEIGHT) >> ('A'..'Z').size() // ABA
-			baseProducer.randomInt(MAX_DIGITS_PART_VALUE) >> 0
-		when:
-			PlNationalIdentityCardNumberProvider generator = new PlNationalIdentityCardNumberProvider(dateGenerator, baseProducer)
-			String id = generator.get(LocalDate.parse("2013-12-12"))
-		then:
-			id == "ABA300000"
-			generator.isValid(id)
-	}
+    /**
+     * http://en.wikipedia.org/wiki/Polish_identity_card
+     */
+    void "should generate proper id number"() {
+        int max = (2013 - ISSUING_BEGIN) * LETTER_WEIGHT
+        setup:
+            baseProducer.randomBetween(max, (int) max + LETTER_WEIGHT) >> ('A'..'Z').size() // ABA
+            baseProducer.randomInt(MAX_DIGITS_PART_VALUE) >> 0
+        when:
+            PlNationalIdentityCardNumberProvider generator = new PlNationalIdentityCardNumberProvider(dateGenerator, baseProducer)
+            String id = generator.get(LocalDate.parse("2013-12-12"))
+        then:
+            id == "ABA300000"
+            generator.isValid(id)
+    }
 }

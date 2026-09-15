@@ -9,50 +9,50 @@ import com.devskiller.jfairy.producer.person.NationalIdentityCardNumberProvider;
 
 public class KaNationalIdentityCardNumberProvider implements NationalIdentityCardNumberProvider {
 
-	private static class OldCardNumberProvider implements NationalIdentityCardNumberProvider {
-		private static final char[] GEORGIAN_CHAR = "აბგდევზთიკლმნოპჟრსტუფქღყშჩცძწჭხჯჰ".toCharArray();
+    private final Supplier<NationalIdentityCardNumberProvider> formatPicker;
 
-		private final BaseProducer baseProducer;
+    public KaNationalIdentityCardNumberProvider(BaseProducer baseProducer) {
+        NationalIdentityCardNumberProvider oldCardNumberProvider = new OldCardNumberProvider(baseProducer);
+        NationalIdentityCardNumberProvider newCardNumberProvider = new NewCardNumberProvider(baseProducer);
+        formatPicker = () -> baseProducer.trueOrFalse() ? oldCardNumberProvider : newCardNumberProvider;
+    }
 
-		OldCardNumberProvider(BaseProducer baseProducer) {
-			this.baseProducer = baseProducer;
-		}
+    @Override
+    public String get() {
+        NationalIdentityCardNumberProvider numberProvider = formatPicker.get();
+        return numberProvider.get();
+    }
 
-		@Override
-		public String get() {
-			char geChar = GEORGIAN_CHAR[baseProducer.randomInt(GEORGIAN_CHAR.length - 1)];
-			return "N" + geChar + baseProducer.numerify("#######");
-		}
-	}
+    private static class OldCardNumberProvider implements NationalIdentityCardNumberProvider {
+        private static final char[] GEORGIAN_CHAR = "აბგდევზთიკლმნოპჟრსტუფქღყშჩცძწჭხჯჰ".toCharArray();
 
-	private static class NewCardNumberProvider implements NationalIdentityCardNumberProvider {
-		private static final String NEW_CARD_MASK = "##??#####";
+        private final BaseProducer baseProducer;
 
-		private final BaseProducer baseProducer;
+        OldCardNumberProvider(BaseProducer baseProducer) {
+            this.baseProducer = baseProducer;
+        }
 
-		private final Locale primaryLocale = Country.Georgia.getPrimaryLocale();
+        @Override
+        public String get() {
+            char geChar = GEORGIAN_CHAR[baseProducer.randomInt(GEORGIAN_CHAR.length - 1)];
+            return "N" + geChar + baseProducer.numerify("#######");
+        }
+    }
 
-		NewCardNumberProvider(BaseProducer baseProducer) {
-			this.baseProducer = baseProducer;
-		}
+    private static class NewCardNumberProvider implements NationalIdentityCardNumberProvider {
+        private static final String NEW_CARD_MASK = "##??#####";
 
-		@Override
-		public String get() {
-			return baseProducer.bothify(NEW_CARD_MASK).toUpperCase(primaryLocale);
-		}
-	}
+        private final BaseProducer baseProducer;
 
-	private final Supplier<NationalIdentityCardNumberProvider> formatPicker;
+        private final Locale primaryLocale = Country.Georgia.getPrimaryLocale();
 
-	public KaNationalIdentityCardNumberProvider(BaseProducer baseProducer) {
-		NationalIdentityCardNumberProvider oldCardNumberProvider = new OldCardNumberProvider(baseProducer);
-		NationalIdentityCardNumberProvider newCardNumberProvider = new NewCardNumberProvider(baseProducer);
-		formatPicker = () -> baseProducer.trueOrFalse() ? oldCardNumberProvider : newCardNumberProvider;
-	}
+        NewCardNumberProvider(BaseProducer baseProducer) {
+            this.baseProducer = baseProducer;
+        }
 
-	@Override
-	public String get() {
-		NationalIdentityCardNumberProvider numberProvider = formatPicker.get();
-		return numberProvider.get();
-	}
+        @Override
+        public String get() {
+            return baseProducer.bothify(NEW_CARD_MASK).toUpperCase(primaryLocale);
+        }
+    }
 }

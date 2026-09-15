@@ -12,23 +12,23 @@ import com.devskiller.jfairy.producer.person.NationalIdentityCardNumberProvider;
  */
 public class DeNationalIdentityCardNumberProvider implements NationalIdentityCardNumberProvider {
 
-	private static final String[] ID_CARD_TYPE_LETTERS = {"L", "M", "N", "P", "R", "T", "V", "W", "X", "Y"};
+    private static final String[] ID_CARD_TYPE_LETTERS = {"L", "M", "N", "P", "R", "T", "V", "W", "X", "Y"};
 
-	private static final String VALID_NUMBER_PATTERN = "^[LMNPRTVWXY][0-9]{8}$";
+    private static final String VALID_NUMBER_PATTERN = "^[LMNPRTVWXY][0-9]{8}$";
 
-	private final BaseProducer baseProducer;
+    private final BaseProducer baseProducer;
 
-	public DeNationalIdentityCardNumberProvider(BaseProducer baseProducer) {
-		this.baseProducer = baseProducer;
-	}
+    public DeNationalIdentityCardNumberProvider(BaseProducer baseProducer) {
+        this.baseProducer = baseProducer;
+    }
 
-	@Override
-	public String get() {
-		return baseProducer.randomElement(ID_CARD_TYPE_LETTERS) + baseProducer.randomNumeric(8);
-	}
+    @Override
+    public String get() {
+        return baseProducer.randomElement(ID_CARD_TYPE_LETTERS) + baseProducer.randomNumeric(8);
+    }
 
-	public boolean isValid(String nationalIdentityCardNumber) {
-		return nationalIdentityCardNumber.matches(VALID_NUMBER_PATTERN);
-	}
+    public boolean isValid(String nationalIdentityCardNumber) {
+        return nationalIdentityCardNumber.matches(VALID_NUMBER_PATTERN);
+    }
 
 }

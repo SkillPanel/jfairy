@@ -11,14 +11,14 @@ import com.devskiller.jfairy.producer.person.PassportNumberProvider;
  */
 public class ZhPassportNumberProvider implements PassportNumberProvider {
 
-	private final BaseProducer baseProducer;
+    private final BaseProducer baseProducer;
 
-	public ZhPassportNumberProvider(BaseProducer baseProducer) {
-		this.baseProducer = baseProducer;
-	}
+    public ZhPassportNumberProvider(BaseProducer baseProducer) {
+        this.baseProducer = baseProducer;
+    }
 
-	@Override
-	public String get() {
-		return baseProducer.randomAlphanumeric(9);
-	}
+    @Override
+    public String get() {
+        return baseProducer.randomAlphanumeric(9);
+    }
 }

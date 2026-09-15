@@ -8,14 +8,14 @@ import com.devskiller.jfairy.producer.person.PassportNumberProvider;
  */
 public class SvPassportNumberProvider implements PassportNumberProvider {
 
-	private final BaseProducer baseProducer;
+    private final BaseProducer baseProducer;
 
-	public SvPassportNumberProvider(BaseProducer baseProducer) {
-		this.baseProducer = baseProducer;
-	}
+    public SvPassportNumberProvider(BaseProducer baseProducer) {
+        this.baseProducer = baseProducer;
+    }
 
-	@Override
-	public String get() {
-		return baseProducer.randomNumeric(8);
-	}
+    @Override
+    public String get() {
+        return baseProducer.randomNumeric(8);
+    }
 }

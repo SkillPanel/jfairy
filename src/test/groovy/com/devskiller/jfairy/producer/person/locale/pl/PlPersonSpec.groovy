@@ -8,24 +8,24 @@ import com.devskiller.jfairy.producer.person.Person
 
 class PlPersonSpec extends Specification {
 
-	private Fairy fairy = Bootstrap.create(Locale.forLanguageTag("PL"))
+    private Fairy fairy = Bootstrap.create(Locale.forLanguageTag("PL"))
 
-	def setup() {
-		Bootstrap.create()
-	}
+    def setup() {
+        Bootstrap.create()
+    }
 
-	def "should create nationality"() {
-		when:
-			Person person = fairy.person()
-		then:
-			person.nationality.code == 'PL'
-	}
+    def "should create nationality"() {
+        when:
+            Person person = fairy.person()
+        then:
+            person.nationality.code == 'PL'
+    }
 
-	def "should create nationalIdentificationNumber"() {
-		when:
-			Person person = fairy.person()
-		then:
-			person.nationalIdentificationNumber
-	}
+    def "should create nationalIdentificationNumber"() {
+        when:
+            Person person = fairy.person()
+        then:
+            person.nationalIdentificationNumber
+    }
 
 }

@@ -17,53 +17,53 @@ import com.devskiller.jfairy.producer.person.Country;
  */
 public class DefaultIBANProvider implements IBANProvider {
 
-	protected final DataMaster dataMaster;
-	protected final BaseProducer baseProducer;
-	protected String countryCode;
+    protected final DataMaster dataMaster;
+    protected final BaseProducer baseProducer;
+    protected String countryCode;
 
-	public DefaultIBANProvider(BaseProducer baseProducer,
-		                       DataMaster dataMaster,
-		                       IBANProperties.Property... properties) {
-		this.dataMaster = dataMaster;
-		this.baseProducer = baseProducer;
-		for (IBANProperties.Property property : properties) {
-			property.apply(this);
-		}
-	}
+    public DefaultIBANProvider(BaseProducer baseProducer,
+                               DataMaster dataMaster,
+                               IBANProperties.Property... properties) {
+        this.dataMaster = dataMaster;
+        this.baseProducer = baseProducer;
+        for (IBANProperties.Property property : properties) {
+            property.apply(this);
+        }
+    }
 
-	@Override
-	public @Nullable IBAN get() {
-		fillCountryCode();
+    @Override
+    public @Nullable IBAN get() {
+        fillCountryCode();
 
-		IbanRegistry reg = IbanRegistry.getByCode(countryCode);
-		if (reg == null) {
-			return null;
-		}
-		Iban iban = RandomIban.of(countryCode);
+        IbanRegistry reg = IbanRegistry.getByCode(countryCode);
+        if (reg == null) {
+            return null;
+        }
+        Iban iban = RandomIban.of(countryCode);
 
-		return new IBAN(iban.getAccountNumber(),
-						iban.getCheckDigits(),
-						iban.getBankCode(),
-						iban.getBban(),
-						iban.getCountryCode(),
-						iban.getNationalCheckDigit(),
-						iban.toString());
-	}
+        return new IBAN(iban.getAccountNumber(),
+                        iban.getCheckDigits(),
+                        iban.getBankCode(),
+                        iban.getBban(),
+                        iban.getCountryCode(),
+                        iban.getNationalCheckDigit(),
+                        iban.toString());
+    }
 
-	@Override
-	public void fillCountryCode() {
-		if (countryCode == null) {
-			List<Country> countries = Country.findCountryForLanguage(dataMaster.getLanguage());
-			Country country = baseProducer.randomElement(countries);
+    @Override
+    public void fillCountryCode() {
+        if (countryCode == null) {
+            List<Country> countries = Country.findCountryForLanguage(dataMaster.getLanguage());
+            Country country = baseProducer.randomElement(countries);
 
-			IbanRegistry r = IbanRegistry.getByCode(country.getCode());
-			countryCode = Optional.ofNullable(r).map(IbanRegistry::name).orElse(null);
-		}
-	}
+            IbanRegistry r = IbanRegistry.getByCode(country.getCode());
+            countryCode = Optional.ofNullable(r).map(IbanRegistry::name).orElse(null);
+        }
+    }
 
-	@Override
-	public void setCountry(String country) {
-		this.countryCode = country;
-	}
+    @Override
+    public void setCountry(String country) {
+        this.countryCode = country;
+    }
 
 }

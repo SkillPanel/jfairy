@@ -13,7 +13,7 @@ import java.util.function.Supplier;
  */
 public interface PassportNumberProvider extends Supplier<String> {
 
-	@Override
-	String get();
+    @Override
+    String get();
 
 }

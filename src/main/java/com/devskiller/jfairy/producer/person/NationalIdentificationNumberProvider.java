@@ -5,10 +5,10 @@ import java.util.function.Supplier;
 
 public interface NationalIdentificationNumberProvider extends Supplier<NationalIdentificationNumber> {
 
-	@Override
-	NationalIdentificationNumber get();
+    @Override
+    NationalIdentificationNumber get();
 
-	void setIssueDate(LocalDate dateOfBirth);
+    void setIssueDate(LocalDate dateOfBirth);
 
-	void setSex(Person.Sex sex);
+    void setSex(Person.Sex sex);
 }

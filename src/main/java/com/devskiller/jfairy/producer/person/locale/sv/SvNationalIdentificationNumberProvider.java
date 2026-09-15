@@ -25,101 +25,101 @@ import static java.lang.String.format;
  */
 public class SvNationalIdentificationNumberProvider implements NationalIdentificationNumberProvider {
 
-	private static final int NATIONAL_IDENTIFICATION_NUMBER_LENGTH = 11;
-	private static final int VALIDITY_IN_YEARS = 120;
+    private static final int NATIONAL_IDENTIFICATION_NUMBER_LENGTH = 11;
+    private static final int VALIDITY_IN_YEARS = 120;
 
-	private static final int[] WEIGHTS = {2, 1, 2, 1, 2, 1, 2, 1, 2};
-	private static final int MAX_SERIAL_NUMBER = 99;
-	private static final int TEN = 10;
+    private static final int[] WEIGHTS = {2, 1, 2, 1, 2, 1, 2, 1, 2};
+    private static final int MAX_SERIAL_NUMBER = 99;
+    private static final int TEN = 10;
 
-	private static final int[] SEX_FIELDS = {0, 2, 4, 6, 8};
+    private static final int[] SEX_FIELDS = {0, 2, 4, 6, 8};
 
-	private final BaseProducer baseProducer;
-	private final DateProducer dateProducer;
-	private LocalDate issueDate;
-	private Person.Sex sex;
+    private final BaseProducer baseProducer;
+    private final DateProducer dateProducer;
+    private LocalDate issueDate;
+    private Person.Sex sex;
 
-	public SvNationalIdentificationNumberProvider(DateProducer dateProducer, BaseProducer baseProducer,
-	                                              NationalIdentificationNumberProperties.Property... properties) {
-		this.dateProducer = dateProducer;
-		this.baseProducer = baseProducer;
+    public SvNationalIdentificationNumberProvider(DateProducer dateProducer, BaseProducer baseProducer,
+                                                  NationalIdentificationNumberProperties.Property... properties) {
+        this.dateProducer = dateProducer;
+        this.baseProducer = baseProducer;
 
-		with(properties);
-	}
+        with(properties);
+    }
 
-	public void with(NationalIdentificationNumberProperties.Property[] properties) {
-		for (NationalIdentificationNumberProperties.Property property : properties) {
-			property.apply(this);
-		}
-	}
+    private void with(NationalIdentificationNumberProperties.Property[] properties) {
+        for (NationalIdentificationNumberProperties.Property property : properties) {
+            property.apply(this);
+        }
+    }
 
-	@Override
-	public NationalIdentificationNumber get() {
+    @Override
+    public NationalIdentificationNumber get() {
 
-		if (issueDate == null) {
-			issueDate = dateProducer.randomDateInThePast(VALIDITY_IN_YEARS).toLocalDate();
-		}
-		if (sex == null) {
-			sex = baseProducer.trueOrFalse() ? Person.Sex.MALE : Person.Sex.FEMALE;
-		}
+        if (issueDate == null) {
+            issueDate = dateProducer.randomDateInThePast(VALIDITY_IN_YEARS).toLocalDate();
+        }
+        if (sex == null) {
+            sex = baseProducer.trueOrFalse() ? Person.Sex.MALE : Person.Sex.FEMALE;
+        }
 
-		return new NationalIdentificationNumber(generate());
-	}
+        return new NationalIdentificationNumber(generate());
+    }
 
-	private String generate() {
-		int serialNumber = baseProducer.randomInt(MAX_SERIAL_NUMBER);
-		int sexCode = calculateSexCode(sex);
+    private String generate() {
+        int serialNumber = baseProducer.randomInt(MAX_SERIAL_NUMBER);
+        int sexCode = calculateSexCode(sex);
 
-		String nationalIdentificationNumber = format("%s%s%s-%02d%d",
-			DateTimeFormatter.ofPattern("uu").format(issueDate),
-			DateTimeFormatter.ofPattern("MM").format(issueDate),
-			DateTimeFormatter.ofPattern("dd").format(issueDate), serialNumber, sexCode);
+        String nationalIdentificationNumber = format("%s%s%s-%02d%d",
+            DateTimeFormatter.ofPattern("uu").format(issueDate),
+            DateTimeFormatter.ofPattern("MM").format(issueDate),
+            DateTimeFormatter.ofPattern("dd").format(issueDate), serialNumber, sexCode);
 
-		return nationalIdentificationNumber + calculateChecksum(nationalIdentificationNumber);
-	}
+        return nationalIdentificationNumber + calculateChecksum(nationalIdentificationNumber);
+    }
 
-	@Override
-	public void setIssueDate(LocalDate issueDate) {
-		this.issueDate = issueDate;
-	}
+    @Override
+    public void setIssueDate(LocalDate issueDate) {
+        this.issueDate = issueDate;
+    }
 
-	@Override
-	public void setSex(Person.Sex sex) {
-		this.sex = sex;
-	}
+    @Override
+    public void setSex(Person.Sex sex) {
+        this.sex = sex;
+    }
 
-	public static boolean isValid(String nationalIdentificationNumber) {
-		int size = nationalIdentificationNumber.length();
-		if (size != NATIONAL_IDENTIFICATION_NUMBER_LENGTH) {
-			return false;
-		}
+    public static boolean isValid(String nationalIdentificationNumber) {
+        int size = nationalIdentificationNumber.length();
+        if (size != NATIONAL_IDENTIFICATION_NUMBER_LENGTH) {
+            return false;
+        }
 
-		int checksum = Integer.parseInt(nationalIdentificationNumber.substring(size - 1));
-		int checkDigit = calculateChecksum(nationalIdentificationNumber);
+        int checksum = Integer.parseInt(nationalIdentificationNumber.substring(size - 1));
+        int checkDigit = calculateChecksum(nationalIdentificationNumber);
 
-		return checkDigit == checksum;
+        return checkDigit == checksum;
 
-	}
+    }
 
-	private int calculateSexCode(Person.Sex sex) {
-		return SEX_FIELDS[baseProducer.randomInt(SEX_FIELDS.length - 1)] + (sex == Person.Sex.MALE ? 1 : 0);
-	}
+    private int calculateSexCode(Person.Sex sex) {
+        return SEX_FIELDS[baseProducer.randomInt(SEX_FIELDS.length - 1)] + (sex == Person.Sex.MALE ? 1 : 0);
+    }
 
-	public static int calculateChecksum(String nationalIdentificationNumber) {
-		String nationalIdentificationNumberWithoutHyphen = nationalIdentificationNumber.replace("-", "");
-		int sum = 0;
-		int i = 0;
-		for (int weight : WEIGHTS) {
-			int digit = Character.digit(nationalIdentificationNumberWithoutHyphen.charAt(i++), 10);
-			int product = digit * weight;
-			sum += (product / 10) + (product % 10);
-		}
+    public static int calculateChecksum(String nationalIdentificationNumber) {
+        String nationalIdentificationNumberWithoutHyphen = nationalIdentificationNumber.replace("-", "");
+        int sum = 0;
+        int i = 0;
+        for (int weight : WEIGHTS) {
+            int digit = Character.digit(nationalIdentificationNumberWithoutHyphen.charAt(i++), 10);
+            int product = digit * weight;
+            sum += (product / 10) + (product % 10);
+        }
 
-		if (sum % 10 == 0) {
-			return 0;
-		}
+        if (sum % 10 == 0) {
+            return 0;
+        }
 
-		return TEN - (sum % 10);
-	}
+        return TEN - (sum % 10);
+    }
 
 }

@@ -6,13 +6,13 @@ import com.devskiller.jfairy.producer.person.AbstractAddressProvider;
 
 public class FrAddressProvider extends AbstractAddressProvider {
 
-	public FrAddressProvider(DataMaster dataMaster, BaseProducer baseProducer) {
-		super(dataMaster, baseProducer);
-	}
+    public FrAddressProvider(DataMaster dataMaster, BaseProducer baseProducer) {
+        super(dataMaster, baseProducer);
+    }
 
-	@Override
-	public FrAddress get() {
-		return new FrAddress(getStreetNumber(), getStreet(), getApartmentNumber(),
-				getPostalCode(), getCity());
-	}
+    @Override
+    public FrAddress get() {
+        return new FrAddress(getStreetNumber(), getStreet(), getApartmentNumber(),
+                getPostalCode(), getCity());
+    }
 }

@@ -13,24 +13,24 @@ import com.devskiller.jfairy.producer.person.Address;
  */
 public class ZhAddressProvider extends AbstractAddressProvider {
 
-	public ZhAddressProvider(DataMaster dataMaster, BaseProducer baseProducer) {
-		super(dataMaster, baseProducer);
-	}
+    public ZhAddressProvider(DataMaster dataMaster, BaseProducer baseProducer) {
+        super(dataMaster, baseProducer);
+    }
 
-	@Override
-	public Address get() {
-		return new ZhAddress(getStreetNumber(), getStreet(), getApartmentNumber(),
-			getCity(), getPostalCode());
-	}
+    @Override
+    public Address get() {
+        return new ZhAddress(getStreetNumber(), getStreet(), getApartmentNumber(),
+            getCity(), getPostalCode());
+    }
 
-	@Override
-	public String getApartmentNumber() {
-		if (baseProducer.trueOrFalse()) {
-			String floor = String.valueOf(baseProducer.randomInt(38));
-			String room = "0" + baseProducer.randomInt(8);
-			return floor + room;
-		} else {
-			return "";
-		}
-	}
+    @Override
+    public String getApartmentNumber() {
+        if (baseProducer.trueOrFalse()) {
+            String floor = String.valueOf(baseProducer.randomInt(38));
+            String room = "0" + baseProducer.randomInt(8);
+            return floor + room;
+        } else {
+            return "";
+        }
+    }
 }

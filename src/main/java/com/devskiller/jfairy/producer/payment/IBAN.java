@@ -4,60 +4,60 @@ import java.util.StringJoiner;
 
 public class IBAN {
 
-	private final String accountNumber;
-	private final String checkDigit;
-	private final String bankCode;
-	private final String bban;
-	private final String country;
-	private final String nationalCheckDigit;
-	private final String ibanNumber;
+    private final String accountNumber;
+    private final String checkDigit;
+    private final String bankCode;
+    private final String bban;
+    private final String country;
+    private final String nationalCheckDigit;
+    private final String ibanNumber;
 
-	public IBAN(String accountNumber, String checkDigit, String bankCode, String bban,
-				String country, String nationalCheckDigit, String ibanNumber) {
-		this.accountNumber = accountNumber;
-		this.checkDigit = checkDigit;
-		this.bankCode = bankCode;
-		this.bban = bban;
-		this.country = country;
-		this.nationalCheckDigit = nationalCheckDigit;
-		this.ibanNumber = ibanNumber;
-	}
+    public IBAN(String accountNumber, String checkDigit, String bankCode, String bban,
+                String country, String nationalCheckDigit, String ibanNumber) {
+        this.accountNumber = accountNumber;
+        this.checkDigit = checkDigit;
+        this.bankCode = bankCode;
+        this.bban = bban;
+        this.country = country;
+        this.nationalCheckDigit = nationalCheckDigit;
+        this.ibanNumber = ibanNumber;
+    }
 
-	public String getAccountNumber() {
-		return accountNumber;
-	}
+    public String getAccountNumber() {
+        return accountNumber;
+    }
 
-	public String getCheckDigit() {
-		return checkDigit;
-	}
+    public String getCheckDigit() {
+        return checkDigit;
+    }
 
-	public String getBankCode() {
-		return bankCode;
-	}
+    public String getBankCode() {
+        return bankCode;
+    }
 
-	public String getBban() {
-		return bban;
-	}
+    public String getBban() {
+        return bban;
+    }
 
-	public String getCountry() {
-		return country;
-	}
+    public String getCountry() {
+        return country;
+    }
 
-	public String getNationalCheckDigit() {
-		return nationalCheckDigit;
-	}
+    public String getNationalCheckDigit() {
+        return nationalCheckDigit;
+    }
 
-	public String getIbanNumber() {
-		return ibanNumber;
-	}
+    public String getIbanNumber() {
+        return ibanNumber;
+    }
 
-	@Override
-	public String toString() {
-		return new StringJoiner(", ", getClass().getSimpleName() + "[", "]")
-			.add("ibanNumber=" + ibanNumber)
-			.add("country=" + country)
-			.add("bankCode=" + bankCode)
-			.add("accountNumber=" + accountNumber)
-			.toString();
-	}
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", getClass().getSimpleName() + "[", "]")
+            .add("ibanNumber=" + ibanNumber)
+            .add("country=" + country)
+            .add("bankCode=" + bankCode)
+            .add("accountNumber=" + accountNumber)
+            .toString();
+    }
 }

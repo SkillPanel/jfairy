@@ -5,5 +5,5 @@ package com.devskiller.jfairy;
  */
 interface FairyFactory {
 
-	Fairy createFairy();
+    Fairy createFairy();
 }

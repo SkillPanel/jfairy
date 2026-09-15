@@ -10,37 +10,35 @@ import com.devskiller.jfairy.Fairy
  */
 class PlPassportNumberProviderSpec extends Specification {
 
-	private Fairy fairy
-	private String passportNumber
+    private Fairy fairy
+    private String passportNumber
 
-	def setup() {
-		fairy = Fairy.create(Locale.forLanguageTag("pl"))
-		passportNumber = fairy.person().passportNumber
-	}
+    def setup() {
+        fairy = Fairy.create(Locale.forLanguageTag("pl"))
+        passportNumber = fairy.person().passportNumber
+    }
 
-	def "should generate number with correct length"() {
-		expect:
-			passportNumber.length() == 9
-	}
+    def "should generate number with correct length"() {
+        expect:
+            passportNumber.length() == 9
+    }
 
-	def "should generate number starting with series"() {
-		expect:
-			for (int i = 0; i < 2; i++)
-				passportNumber.charAt(i).isLetter()
-	}
+    def "should generate number starting with series"() {
+        expect:
+            for (int i = 0; i < 2; i++)
+                passportNumber.charAt(i).isLetter()
+    }
 
+    def "should generate number ending with 6 digits"() {
+        expect:
+            for (int i = 8; i > 2; i--) {
+                passportNumber.charAt(i).isDigit()
+            }
+    }
 
-	def "should generate number ending with 6 digits"() {
-		expect:
-			for (int i = 8; i > 2; i--) {
-				passportNumber.charAt(i).isDigit()
-			}
-	}
-
-	def "should generate number with correct checksum"() {
-		expect:
-			PlPassportNumberProvider.isPassportCheckSumValid(passportNumber)
-	}
-
+    def "should generate number with correct checksum"() {
+        expect:
+            PlPassportNumberProvider.isPassportCheckSumValid(passportNumber)
+    }
 
 }

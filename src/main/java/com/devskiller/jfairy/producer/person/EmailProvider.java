@@ -12,28 +12,28 @@ import static com.devskiller.jfairy.producer.util.StringUtils.lowerCase;
 
 public class EmailProvider implements Supplier<String> {
 
-	private final DataMaster dataMaster;
-	private final BaseProducer baseProducer;
-	private final String firstName;
-	private final String lastName;
+    private final DataMaster dataMaster;
+    private final BaseProducer baseProducer;
+    private final String firstName;
+    private final String lastName;
 
-	public EmailProvider(DataMaster dataMaster, BaseProducer baseProducer,
-						 String firstName, String lastName) {
-		this.dataMaster = dataMaster;
-		this.baseProducer = baseProducer;
-		this.firstName = firstName;
-		this.lastName = lastName;
-	}
+    public EmailProvider(DataMaster dataMaster, BaseProducer baseProducer,
+                         String firstName, String lastName) {
+        this.dataMaster = dataMaster;
+        this.baseProducer = baseProducer;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
 
-	@Override
-	public String get() {
-		String prefix = switch (baseProducer.randomBetween(1, 3)) {
-			case 1 -> StringUtils.replace(firstName + lastName, " ", "");
-			case 2 -> StringUtils.replace(firstName + "." + lastName, " ", ".");
-			case 3 -> StringUtils.replace(lastName, " ", "");
-			default -> throw new IllegalStateException("Unexpected value: " + baseProducer.randomBetween(1, 3));
-		};
-		String email = lowerCase(prefix + '@' + dataMaster.getRandomValue(PERSONAL_EMAIL));
-		return latinize(email);
-	}
+    @Override
+    public String get() {
+        String prefix = switch (baseProducer.randomBetween(1, 3)) {
+            case 1 -> StringUtils.replace(firstName + lastName, " ", "");
+            case 2 -> StringUtils.replace(firstName + "." + lastName, " ", ".");
+            case 3 -> StringUtils.replace(lastName, " ", "");
+            default -> throw new IllegalStateException("Unexpected value: " + baseProducer.randomBetween(1, 3));
+        };
+        String email = lowerCase(prefix + '@' + dataMaster.getRandomValue(PERSONAL_EMAIL));
+        return latinize(email);
+    }
 }

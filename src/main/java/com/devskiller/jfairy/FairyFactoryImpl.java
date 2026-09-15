@@ -13,39 +13,39 @@ import com.devskiller.jfairy.producer.text.TextProducerInternal;
 
 class FairyFactoryImpl implements FairyFactory {
 
-	private final TextProducerInternal textProducerInternal;
-	private final BaseProducer baseProducer;
-	private final PersonFactory personFactory;
-	private final IPNumberProducer ipNumberProducer;
-	private final DateProducer dateProducer;
-	private final CreditCardProvider creditCardProvider;
-	private final CompanyFactory companyFactory;
-	private final IBANFactory ibanFactory;
+    private final TextProducerInternal textProducerInternal;
+    private final BaseProducer baseProducer;
+    private final PersonFactory personFactory;
+    private final IPNumberProducer ipNumberProducer;
+    private final DateProducer dateProducer;
+    private final CreditCardProvider creditCardProvider;
+    private final CompanyFactory companyFactory;
+    private final IBANFactory ibanFactory;
 
-	FairyFactoryImpl(TextProducerInternal textProducerInternal,
-	                 BaseProducer baseProducer,
-	                 PersonFactory personFactory,
-	                 IPNumberProducer ipNumberProducer,
-	                 DateProducer dateProducer,
-	                 CreditCardProvider creditCardProvider,
-	                 CompanyFactory companyFactory,
-	                 IBANFactory ibanFactory) {
-		this.textProducerInternal = textProducerInternal;
-		this.baseProducer = baseProducer;
-		this.personFactory = personFactory;
-		this.ipNumberProducer = ipNumberProducer;
-		this.dateProducer = dateProducer;
-		this.creditCardProvider = creditCardProvider;
-		this.companyFactory = companyFactory;
-		this.ibanFactory = ibanFactory;
-	}
+    FairyFactoryImpl(TextProducerInternal textProducerInternal,
+                     BaseProducer baseProducer,
+                     PersonFactory personFactory,
+                     IPNumberProducer ipNumberProducer,
+                     DateProducer dateProducer,
+                     CreditCardProvider creditCardProvider,
+                     CompanyFactory companyFactory,
+                     IBANFactory ibanFactory) {
+        this.textProducerInternal = textProducerInternal;
+        this.baseProducer = baseProducer;
+        this.personFactory = personFactory;
+        this.ipNumberProducer = ipNumberProducer;
+        this.dateProducer = dateProducer;
+        this.creditCardProvider = creditCardProvider;
+        this.companyFactory = companyFactory;
+        this.ibanFactory = ibanFactory;
+    }
 
-	@Override
-	public Fairy createFairy() {
-		TextProducer textProducer = new TextProducer(textProducerInternal, baseProducer);
-		NetworkProducer networkProducer = new NetworkProducer(ipNumberProducer);
+    @Override
+    public Fairy createFairy() {
+        TextProducer textProducer = new TextProducer(textProducerInternal, baseProducer);
+        NetworkProducer networkProducer = new NetworkProducer(ipNumberProducer);
 
-		return new Fairy(textProducer, personFactory, networkProducer, baseProducer,
-		                 dateProducer, creditCardProvider, companyFactory, ibanFactory);
-	}
+        return new Fairy(textProducer, personFactory, networkProducer, baseProducer,
+                         dateProducer, creditCardProvider, companyFactory, ibanFactory);
+    }
 }

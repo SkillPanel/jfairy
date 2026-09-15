@@ -6,14 +6,14 @@ import com.devskiller.jfairy.producer.person.AbstractAddressProvider;
 
 public class SvAddressProvider extends AbstractAddressProvider {
 
-	public SvAddressProvider(DataMaster dataMaster, BaseProducer baseProducer) {
-		super(dataMaster, baseProducer);
-	}
+    public SvAddressProvider(DataMaster dataMaster, BaseProducer baseProducer) {
+        super(dataMaster, baseProducer);
+    }
 
-	@Override
-	public SvAddress get() {
-		return new SvAddress(getStreet(), getStreetNumber(), getApartmentNumber(),
-				getPostalCode(), getCity());
-	}
+    @Override
+    public SvAddress get() {
+        return new SvAddress(getStreet(), getStreetNumber(), getApartmentNumber(),
+                getPostalCode(), getCity());
+    }
 
 }

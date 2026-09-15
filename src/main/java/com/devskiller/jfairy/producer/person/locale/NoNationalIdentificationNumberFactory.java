@@ -10,24 +10,24 @@ import com.devskiller.jfairy.producer.person.Person;
 
 public class NoNationalIdentificationNumberFactory implements NationalIdentificationNumberFactory {
 
-	@Override
-	public NoNationalIdentificationNumberProvider produceNationalIdentificationNumberProvider(NationalIdentificationNumberProperties.Property... properties) {
-		return new NoNationalIdentificationNumberProvider();
-	}
+    @Override
+    public NoNationalIdentificationNumberProvider produceNationalIdentificationNumberProvider(NationalIdentificationNumberProperties.Property... properties) {
+        return new NoNationalIdentificationNumberProvider();
+    }
 
-	public static class NoNationalIdentificationNumberProvider implements NationalIdentificationNumberProvider {
+    public static class NoNationalIdentificationNumberProvider implements NationalIdentificationNumberProvider {
 
-		@Override
-		public NationalIdentificationNumber get() {
-			return new NationalIdentificationNumber("");
-		}
+        @Override
+        public NationalIdentificationNumber get() {
+            return new NationalIdentificationNumber("");
+        }
 
-		@Override
-		public void setIssueDate(LocalDate dateOfBirth) {
-		}
+        @Override
+        public void setIssueDate(LocalDate dateOfBirth) {
+        }
 
-		@Override
-		public void setSex(Person.Sex sex) {
-		}
-	}
+        @Override
+        public void setSex(Person.Sex sex) {
+        }
+    }
 }

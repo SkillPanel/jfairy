@@ -8,25 +8,25 @@ import com.devskiller.jfairy.producer.RandomGenerator
 
 class NetworkSpec extends Specification {
 
-	private InetAddressValidator ipValidator = InetAddressValidator.getInstance()
+    private InetAddressValidator ipValidator = InetAddressValidator.getInstance()
 
-	private IPNumberProducer ipNumber = new IPNumberProducer(new BaseProducer(new RandomGenerator()))
-	private NetworkProducer network = new NetworkProducer(ipNumber)
+    private IPNumberProducer ipNumber = new IPNumberProducer(new BaseProducer(new RandomGenerator()))
+    private NetworkProducer network = new NetworkProducer(ipNumber)
 
-	def "Should generate proper ip number"() {
-		String ip = network.ipAddress()
+    def "Should generate proper ip number"() {
+        String ip = network.ipAddress()
 
-		expect:
-			ip
-			ipValidator.isValid(ip)
+        expect:
+            ip
+            ipValidator.isValid(ip)
 
-	}
+    }
 
-	def "Should generate proper url"() {
-		String url = network.url(true)
+    def "Should generate proper url"() {
+        String url = network.url(true)
 
-		expect:
-			url.startsWith("https://") && url.endsWith(".com")
+        expect:
+            url.startsWith("https://") && url.endsWith(".com")
 
-	}
+    }
 }

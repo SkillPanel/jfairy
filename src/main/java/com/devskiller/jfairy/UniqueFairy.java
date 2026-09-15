@@ -29,50 +29,50 @@ import com.devskiller.jfairy.producer.person.PersonProperties;
  */
 public final class UniqueFairy {
 
-	private final Fairy fairy;
-	private final UniqueEnforcer<Person> personEnforcer;
-	private final UniqueEnforcer<Company> companyEnforcer;
-	private final UniqueEnforcer<IBAN> ibanEnforcer;
-	private final UniqueEnforcer<CreditCard> creditCardEnforcer;
+    private final Fairy fairy;
+    private final UniqueEnforcer<Person> personEnforcer;
+    private final UniqueEnforcer<Company> companyEnforcer;
+    private final UniqueEnforcer<IBAN> ibanEnforcer;
+    private final UniqueEnforcer<CreditCard> creditCardEnforcer;
 
-	UniqueFairy(Fairy fairy, int maxRetries) {
-		this.fairy = fairy;
-		this.personEnforcer = UniqueEnforcer.of(fairy::person, Person::getEmail, maxRetries);
-		this.companyEnforcer = UniqueEnforcer.of(fairy::company, Company::getName, maxRetries);
-		// Lambda needed: fairy::iban is ambiguous (overloaded no-arg and vararg)
-		this.ibanEnforcer = UniqueEnforcer.of(() -> fairy.iban(), IBAN::getIbanNumber, maxRetries);
-		this.creditCardEnforcer = UniqueEnforcer.of(fairy::creditCard, CreditCard::getCardNumber, maxRetries);
-	}
+    UniqueFairy(Fairy fairy, int maxRetries) {
+        this.fairy = fairy;
+        this.personEnforcer = UniqueEnforcer.of(fairy::person, Person::getEmail, maxRetries);
+        this.companyEnforcer = UniqueEnforcer.of(fairy::company, Company::getName, maxRetries);
+        // Lambda needed: fairy::iban is ambiguous (overloaded no-arg and vararg)
+        this.ibanEnforcer = UniqueEnforcer.of(() -> fairy.iban(), IBAN::getIbanNumber, maxRetries);
+        this.creditCardEnforcer = UniqueEnforcer.of(fairy::creditCard, CreditCard::getCardNumber, maxRetries);
+    }
 
-	public Person person(PersonProperties.PersonProperty... personProperties) {
-		if (personProperties.length == 0) {
-			return personEnforcer.next();
-		}
-		return personEnforcer.next(() -> fairy.person(personProperties));
-	}
+    public Person person(PersonProperties.PersonProperty... personProperties) {
+        if (personProperties.length == 0) {
+            return personEnforcer.next();
+        }
+        return personEnforcer.next(() -> fairy.person(personProperties));
+    }
 
-	public Company company(CompanyProperties.CompanyProperty... companyProperties) {
-		if (companyProperties.length == 0) {
-			return companyEnforcer.next();
-		}
-		return companyEnforcer.next(() -> fairy.company(companyProperties));
-	}
+    public Company company(CompanyProperties.CompanyProperty... companyProperties) {
+        if (companyProperties.length == 0) {
+            return companyEnforcer.next();
+        }
+        return companyEnforcer.next(() -> fairy.company(companyProperties));
+    }
 
-	public IBAN iban(IBANProperties.Property... properties) {
-		if (properties.length == 0) {
-			return ibanEnforcer.next();
-		}
-		return ibanEnforcer.next(() -> fairy.iban(properties));
-	}
+    public IBAN iban(IBANProperties.Property... properties) {
+        if (properties.length == 0) {
+            return ibanEnforcer.next();
+        }
+        return ibanEnforcer.next(() -> fairy.iban(properties));
+    }
 
-	public CreditCard creditCard() {
-		return creditCardEnforcer.next();
-	}
+    public CreditCard creditCard() {
+        return creditCardEnforcer.next();
+    }
 
-	public void reset() {
-		personEnforcer.reset();
-		companyEnforcer.reset();
-		ibanEnforcer.reset();
-		creditCardEnforcer.reset();
-	}
+    public void reset() {
+        personEnforcer.reset();
+        companyEnforcer.reset();
+        ibanEnforcer.reset();
+        creditCardEnforcer.reset();
+    }
 }

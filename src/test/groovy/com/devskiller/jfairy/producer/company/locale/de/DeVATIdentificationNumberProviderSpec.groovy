@@ -10,25 +10,25 @@ import com.devskiller.jfairy.producer.RandomGenerator
  */
 class DeVATIdentificationNumberProviderSpec extends Specification {
 
-	private DeVATIdentificationNumberProvider generator = new DeVATIdentificationNumberProvider(new BaseProducer(new RandomGenerator(42)))
+    private DeVATIdentificationNumberProvider generator = new DeVATIdentificationNumberProvider(new BaseProducer(new RandomGenerator(42)))
 
-	@Unroll
-	def "Should validate #vatIdentificationNumber as #valid"() {
-		expect:
-			generator.isValid(vatIdentificationNumber) == valid
-		where:
-			vatIdentificationNumber | valid
-			'999999999'             | true
-			'1234567890'            | false
-			'000000000'             | true
-			'18947440810'           | false
-	}
+    @Unroll
+    def "Should validate #vatIdentificationNumber as #valid"() {
+        expect:
+            generator.isValid(vatIdentificationNumber) == valid
+        where:
+            vatIdentificationNumber | valid
+            '999999999'             | true
+            '1234567890'            | false
+            '000000000'             | true
+            '18947440810'           | false
+    }
 
-	def "Should always generate proper vatIdentificationNumber"() {
-		expect:
-			generator.isValid(generator.get())
-		where:
-			i << (1..100)
-	}
+    def "Should always generate proper vatIdentificationNumber"() {
+        expect:
+            generator.isValid(generator.get())
+        where:
+            i << (1..100)
+    }
 
 }

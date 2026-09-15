@@ -5,14 +5,14 @@ import com.devskiller.jfairy.producer.person.PassportNumberProvider;
 
 public class EnPassportNumberProvider implements PassportNumberProvider {
 
-	private final BaseProducer baseProducer;
+    private final BaseProducer baseProducer;
 
-	public EnPassportNumberProvider(BaseProducer baseProducer) {
-		this.baseProducer = baseProducer;
-	}
+    public EnPassportNumberProvider(BaseProducer baseProducer) {
+        this.baseProducer = baseProducer;
+    }
 
-	@Override
-	public String get() {
-		return baseProducer.randomAlphanumeric(9);
-	}
+    @Override
+    public String get() {
+        return baseProducer.randomAlphanumeric(9);
+    }
 }

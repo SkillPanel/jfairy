@@ -10,20 +10,20 @@ import static com.devskiller.jfairy.producer.util.StringUtils.isNotBlank;
  */
 public class JaAddress extends AbstractAddress {
 
-	private static final String ROOM = "号室";
+    private static final String ROOM = "号室";
 
-	public JaAddress(String street, String streetNumber, String apartmentNumber, String postalCode, String city) {
-		super(street, streetNumber, apartmentNumber, postalCode, city);
-	}
+    public JaAddress(String street, String streetNumber, String apartmentNumber, String postalCode, String city) {
+        super(street, streetNumber, apartmentNumber, postalCode, city);
+    }
 
-	@Override
-	public String getAddressLine1() {
-		return "〒" + postalCode;
-	}
+    @Override
+    public String getAddressLine1() {
+        return "〒" + postalCode;
+    }
 
-	@Override
-	public String getAddressLine2() {
-		String line = city + street + streetNumber;
-		return isNotBlank(apartmentNumber) ? line + " " + apartmentNumber + ROOM : line;
-	}
+    @Override
+    public String getAddressLine2() {
+        String line = city + street + streetNumber;
+        return isNotBlank(apartmentNumber) ? line + " " + apartmentNumber + ROOM : line;
+    }
 }

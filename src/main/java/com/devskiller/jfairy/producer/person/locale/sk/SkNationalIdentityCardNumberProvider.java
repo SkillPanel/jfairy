@@ -16,93 +16,92 @@ import com.devskiller.jfairy.producer.util.StringUtils;
  */
 public class SkNationalIdentityCardNumberProvider implements NationalIdentityCardNumberProvider {
 
-	static final int ISSUING_BEGIN = 2000;
+    static final int ISSUING_BEGIN = 2000;
+    static final int MAX_DIGITS_PART_VALUE = 99999;
+    static final int LETTER_WEIGHT = 45;
 
-	private static final int[] WEIGHTS = new int[]{7, 3, 1, 0, 7, 3, 1, 7, 3};
-	private static final int CHECKSUM_INDEX = 3;
+    private static final int[] WEIGHTS = new int[]{7, 3, 1, 0, 7, 3, 1, 7, 3};
+    private static final int CHECKSUM_INDEX = 3;
 
-	private static final int DIGITS_PART_SIZE = 5;
+    private static final int DIGITS_PART_SIZE = 5;
 
-	static final int MAX_DIGITS_PART_VALUE = 99999;
+    private static final int LETTERS_PART_SIZE = 3;
+    private static final int LETTER_VALUE_MODIFIER = 10;
+    private static final int ALPHABET_SIZE = 26;
 
-	static final int LETTER_WEIGHT = 45;
-	private static final int LETTERS_PART_SIZE = 3;
-	private static final int LETTER_VALUE_MODIFIER = 10;
-	private static final int ALPHABET_SIZE = 26;
+    private static final int BASE_TEN = 10;
 
-	private static final int BASE_TEN = 10;
+    private final DateProducer dateProducer;
+    private final BaseProducer baseProducer;
 
-	private final DateProducer dateProducer;
-	private final BaseProducer baseProducer;
+    public SkNationalIdentityCardNumberProvider(DateProducer dateProducer, BaseProducer baseProducer) {
+        this.dateProducer = dateProducer;
+        this.baseProducer = baseProducer;
+    }
 
-	public SkNationalIdentityCardNumberProvider(DateProducer dateProducer, BaseProducer baseProducer) {
-		this.dateProducer = dateProducer;
-		this.baseProducer = baseProducer;
-	}
+    @Override
+    public String get() {
 
-	@Override
-	public String get() {
+        LocalDate dateTime = dateProducer.randomDateBetweenYearAndNow(ISSUING_BEGIN).toLocalDate();
 
-		LocalDate dateTime = dateProducer.randomDateBetweenYearAndNow(ISSUING_BEGIN).toLocalDate();
+        return get(dateTime);
+    }
 
-		return get(dateTime);
-	}
+    public String get(LocalDate date) {
 
-	public String get(LocalDate date) {
+        if (date.getYear() < ISSUING_BEGIN) {
+            throw new IllegalArgumentException("Slovak ID card was introduced in 2000");
+        }
 
-		if (date.getYear() < ISSUING_BEGIN) {
-			throw new IllegalArgumentException("Slovak ID card was introduced in 2000");
-		}
+        char[] id = new char[WEIGHTS.length];
 
-		char[] id = new char[WEIGHTS.length];
+        fillLettersPart(date.getYear(), id);
+        fillDigitsPart(id);
 
-		fillLettersPart(date.getYear(), id);
-		fillDigitsPart(id);
+        char checksum = calculateChecksum(id);
 
-		char checksum = calculateChecksum(id);
+        id[CHECKSUM_INDEX] = checksum;
 
-		id[CHECKSUM_INDEX] = checksum;
+        return String.copyValueOf(id);
 
-		return String.copyValueOf(id);
+    }
 
-	}
+    public boolean isValid(String id) {
+        int checksum = calculateChecksum(id.toCharArray());
 
-	public boolean isValid(String id) {
-		int checksum = calculateChecksum(id.toCharArray());
+        return id.charAt(CHECKSUM_INDEX) == checksum;
+    }
 
-		return id.charAt(CHECKSUM_INDEX) == checksum;
-	}
+    private char calculateChecksum(char[] id) {
+        int index = 0;
+        int checksum = 0;
 
-	private char calculateChecksum(char[] id) {
-		int index = 0;
-		int checksum = 0;
+        for (int weight : WEIGHTS) {
+            int value = 0;
+            if (index < CHECKSUM_INDEX) {
+                value = id[index] - 'A' + LETTER_VALUE_MODIFIER;
+            } else if (index > CHECKSUM_INDEX) {
+                value = id[index] - '0';
+            }
+            index++;
+            checksum += weight * value;
+        }
 
-		for (int weight : WEIGHTS) {
-			int value = 0;
-			if (index < CHECKSUM_INDEX) {
-				value = id[index] - 'A' + LETTER_VALUE_MODIFIER;
-			} else if (index > CHECKSUM_INDEX) {
-				value = id[index] - '0';
-			}
-			index++;
-			checksum += weight * value;
-		}
+        return String.valueOf(checksum % BASE_TEN).charAt(0);
+    }
 
-		return String.valueOf(checksum % BASE_TEN).charAt(0);
-	}
+    private void fillDigitsPart(char[] id) {
+        String num = String.valueOf(baseProducer.randomInt(MAX_DIGITS_PART_VALUE));
+        char[] digits = StringUtils.leftPad(num, DIGITS_PART_SIZE, '0').toCharArray();
+        System.arraycopy(digits, 0, id, CHECKSUM_INDEX + 1, digits.length);
+    }
 
-	private void fillDigitsPart(char[] id) {
-		String num = String.valueOf(baseProducer.randomInt(MAX_DIGITS_PART_VALUE));
-		char[] digits = StringUtils.leftPad(num, DIGITS_PART_SIZE, '0').toCharArray();
-		System.arraycopy(digits, 0, id, CHECKSUM_INDEX + 1, digits.length);
-	}
-
-	private void fillLettersPart(int year, char[] id) {
-		int maxPrefix = (year - ISSUING_BEGIN) * LETTER_WEIGHT;
-		int range = baseProducer.randomBetween(maxPrefix, maxPrefix + LETTER_WEIGHT);
-		String prefix = AlphaNumberSystem.convertToString(range, ALPHABET_SIZE);
-		char[] charArray = StringUtils.leftPad(prefix, LETTERS_PART_SIZE, 'A').toCharArray();
-		System.arraycopy(charArray, 0, id, 0, charArray.length);
-	}
+    private void fillLettersPart(int year, char[] id) {
+        int maxPrefix = (year - ISSUING_BEGIN) * LETTER_WEIGHT;
+        int range = baseProducer.randomBetween(maxPrefix, maxPrefix + LETTER_WEIGHT);
+        String prefix = AlphaNumberSystem.convertToString(range, ALPHABET_SIZE);
+        char[] charArray = StringUtils.leftPad(prefix, LETTERS_PART_SIZE, 'A').toCharArray();
+        System.arraycopy(charArray, 0, id, 0, charArray.length);
+    }
 
 }

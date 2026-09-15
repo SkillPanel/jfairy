@@ -100,6 +100,13 @@
 		<dep.objenesis.version>3.6</dep.objenesis.version>
 		<dep.junit-jupiter.version>5.14.4</dep.junit-jupiter.version>
 
+		<!-- Static analysis rulesets (shared, kept in build/) -->
+		<dep.checkstyle.version>12.3.1</dep.checkstyle.version>
+		<check.checkstyle.ruleset>${project.basedir}/build/checkstyle-rules.xml</check.checkstyle.ruleset>
+
+		<dep.pmd.version>7.26.0</dep.pmd.version>
+		<check.pmd.ruleset>${project.basedir}/build/pmd-rules.xml</check.pmd.ruleset>
+
 		<!-- Plugin versions (ordered alphabetically) -->
 		<dep.plugin.build-helper.version>3.6.2</dep.plugin.build-helper.version>
 		<dep.plugin.central-publishing.version>0.11.0</dep.plugin.central-publishing.version>
@@ -117,6 +124,7 @@
 		<dep.plugin.jacoco.version>0.8.15</dep.plugin.jacoco.version>
 		<dep.plugin.javadoc.version>3.12.0</dep.plugin.javadoc.version>
 		<dep.plugin.jar.version>3.5.1</dep.plugin.jar.version>
+		<dep.plugin.pmd.version>3.28.0</dep.plugin.pmd.version>
 		<dep.plugin.release.version>3.3.1</dep.plugin.release.version>
 		<dep.plugin.resources.version>3.5.0</dep.plugin.resources.version>
 		<dep.plugin.sortpom.version>4.0.0</dep.plugin.sortpom.version>
@@ -363,19 +371,69 @@
 				<artifactId>maven-checkstyle-plugin</artifactId>
 				<version>${dep.plugin.checkstyle.version}</version>
 				<configuration>
-					<configLocation>${project.basedir}/src/test/resources/team/checkstyle-rules.xml</configLocation>
+					<configLocation>${check.checkstyle.ruleset}</configLocation>
 					<consoleOutput>true</consoleOutput>
 					<failOnViolation>true</failOnViolation>
+					<includes>**/*.java,**/*.groovy</includes>
 					<includeTestSourceDirectory>true</includeTestSourceDirectory>
+					<testSourceDirectories>
+						<testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
+						<testSourceDirectory>${project.basedir}/src/test/groovy</testSourceDirectory>
+					</testSourceDirectories>
 					<logViolationsToConsole>true</logViolationsToConsole>
+					<violationSeverity>warning</violationSeverity>
 				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>com.puppycrawl.tools</groupId>
+						<artifactId>checkstyle</artifactId>
+						<version>${dep.checkstyle.version}</version>
+					</dependency>
+				</dependencies>
 				<executions>
 					<execution>
 						<id>checkstyle-check</id>
 						<goals>
 							<goal>check</goal>
 						</goals>
-						<phase>verify</phase>
+						<phase>test-compile</phase>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-pmd-plugin</artifactId>
+				<version>${dep.plugin.pmd.version}</version>
+				<configuration>
+					<failOnViolation>true</failOnViolation>
+					<printFailingErrors>true</printFailingErrors>
+					<includeTests>true</includeTests>
+					<failurePriority>4</failurePriority>
+					<linkXRef>false</linkXRef>
+					<minimumTokens>50</minimumTokens>
+					<rulesets>
+						<ruleset>${check.pmd.ruleset}</ruleset>
+					</rulesets>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>net.sourceforge.pmd</groupId>
+						<artifactId>pmd-core</artifactId>
+						<version>${dep.pmd.version}</version>
+					</dependency>
+					<dependency>
+						<groupId>net.sourceforge.pmd</groupId>
+						<artifactId>pmd-java</artifactId>
+						<version>${dep.pmd.version}</version>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<id>pmd-check</id>
+						<goals>
+							<goal>check</goal>
+						</goals>
+						<phase>test-compile</phase>
 					</execution>
 				</executions>
 			</plugin>
