@@ -23,12 +23,6 @@ public final class PersonProperties {
     private PersonProperties() {
     }
 
-    public abstract static class PersonProperty {
-
-        public abstract void apply(PersonProvider person, BaseProducer baseProducer);
-
-    }
-
     public static PersonProperty male() {
         return new PersonProperty() {
             @Override
@@ -237,6 +231,12 @@ public final class PersonProperties {
                 personProvider.setJobTitle(jobTitle);
             }
         };
+    }
+
+    public abstract static class PersonProperty {
+
+        public abstract void apply(PersonProvider person, BaseProducer baseProducer);
+
     }
 
 }

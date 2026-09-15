@@ -1,5 +1,7 @@
 package com.devskiller.jfairy.producer.person.locale.ja;
 
+import java.util.Locale;
+
 import com.devskiller.jfairy.data.DataMaster;
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.DateProducer;
@@ -36,7 +38,7 @@ public class JaPersonProvider extends DefaultPersonProvider {
     }
 
     private String randomHandle() {
-        return (baseProducer.randomAlphabetic(HANDLE_LETTER_COUNT) + baseProducer.randomNumeric(HANDLE_DIGIT_COUNT)).toLowerCase();
+        return (baseProducer.randomAlphabetic(HANDLE_LETTER_COUNT) + baseProducer.randomNumeric(HANDLE_DIGIT_COUNT)).toLowerCase(Locale.ROOT);
     }
 
     @Override

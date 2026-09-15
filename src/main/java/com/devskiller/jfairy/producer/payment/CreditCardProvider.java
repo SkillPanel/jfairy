@@ -69,7 +69,7 @@ public class CreditCardProvider implements Supplier<CreditCard> {
             sum += n;
         }
 
-        int checksum = (sum * 9) % 10;
+        int checksum = sum * 9 % 10;
         return creditCardNumber + checksum;
     }
 

@@ -8,6 +8,8 @@ import com.devskiller.jfairy.producer.VATIdentificationNumberProvider;
  */
 public class BrVATIdentificationNumberProvider implements VATIdentificationNumberProvider {
 
+    private static final int[] WEIGHTS = {6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
+
     private final BaseProducer baseProducer;
 
     public BrVATIdentificationNumberProvider(BaseProducer baseProducer) {
@@ -33,8 +35,6 @@ public class BrVATIdentificationNumberProvider implements VATIdentificationNumbe
                 digits[5], digits[6], digits[7], digits[8], digits[9],
                 digits[10], digits[11], d1, d2);
     }
-
-    private static final int[] WEIGHTS = {6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2};
 
     private int calculateCheckDigit(int[] digits, int length) {
         int sum = 0;

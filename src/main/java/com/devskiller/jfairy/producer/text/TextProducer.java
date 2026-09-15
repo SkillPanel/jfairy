@@ -27,7 +27,7 @@ public class TextProducer {
 
     private final BaseProducer baseProducer;
 
-    private int limit = 0;
+    private int limit;
 
     public TextProducer(TextProducerInternal textProducerInternal, BaseProducer baseProducer) {
         this.textProducerInternal = textProducerInternal;

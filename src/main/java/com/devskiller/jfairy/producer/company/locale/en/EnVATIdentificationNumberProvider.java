@@ -21,9 +21,9 @@ public class EnVATIdentificationNumberProvider implements VATIdentificationNumbe
     private static final int SERIAL_NUMBER_LENGTH = 7;
     private static final int SERIAL_NUMBER_INDEX = 3;
     private static final int AREA_NUMBER_LENGTH = 2;
+    private static final Set<Integer> EXCLUDED_NUMBERS = Set.of(7, 8, 9, 17, 18, 19, 28, 29, 41, 47, 49, 69, 70, 79, 89, 96, 97);
 
     private final BaseProducer baseProducer;
-    private static final Set<Integer> EXCLUDED_NUMBERS = Set.of(7, 8, 9, 17, 18, 19, 28, 29, 41, 47, 49, 69, 70, 79, 89, 96, 97);
 
     public EnVATIdentificationNumberProvider(BaseProducer baseProducer) {
         this.baseProducer = baseProducer;

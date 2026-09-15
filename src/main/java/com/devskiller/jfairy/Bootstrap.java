@@ -170,12 +170,12 @@ public final class Bootstrap {
         private RandomGenerator randomGenerator = new RandomGenerator();
         private DataMaster dataMaster;
 
-        private MapBasedDataMaster getDefaultDataMaster(BaseProducer baseProducer) {
-            return new MapBasedDataMaster(baseProducer);
-        }
-
         private Builder() {
 
+        }
+
+        private MapBasedDataMaster getDefaultDataMaster(BaseProducer baseProducer) {
+            return new MapBasedDataMaster(baseProducer);
         }
 
         /**

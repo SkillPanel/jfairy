@@ -57,7 +57,7 @@ public class PlNationalIdentificationNumberProvider implements NationalIdentific
      * <p>
      * @param properties array of properties like sex or birth date
      */
-    public void with(NationalIdentificationNumberProperties.Property[] properties) {
+    private void with(NationalIdentificationNumberProperties.Property[] properties) {
         for (NationalIdentificationNumberProperties.Property property : properties) {
             property.apply(this);
         }
@@ -137,7 +137,7 @@ public class PlNationalIdentificationNumberProvider implements NationalIdentific
             sum += digit * weight;
         }
 
-        int checksum = (sum % TEN);
+        int checksum = sum % TEN;
 
         if (0 == checksum) {
             return 0;

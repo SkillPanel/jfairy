@@ -26,12 +26,6 @@ public final class IBANProperties {
     private IBANProperties() {
     }
 
-    public abstract static class Property {
-
-        public abstract void apply(IBANProvider provider);
-
-    }
-
     public static Property country(final String country) {
         return new Property() {
             @Override
@@ -57,6 +51,12 @@ public final class IBANProperties {
             .map(IbanRegistry::name)
             .findFirst()
             .orElse("PL");
+    }
+
+    public abstract static class Property {
+
+        public abstract void apply(IBANProvider provider);
+
     }
 
 }

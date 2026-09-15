@@ -67,7 +67,7 @@ public enum Country {
     }
 
     public static List<Country> findCountryForLanguage(LanguageCode language) {
-        return Arrays.stream(Country.values())
+        return Arrays.stream(values())
             .filter(country -> List.of(country.languages).contains(language))
             .collect(Collectors.toList());
     }

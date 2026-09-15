@@ -7,11 +7,6 @@ public final class NationalIdentificationNumberProperties {
     private NationalIdentificationNumberProperties() {
     }
 
-    public abstract static class Property {
-
-        public abstract void apply(NationalIdentificationNumberProvider nationalIdentificationNumberProvider);
-    }
-
     public static Property dateOfBirth(final LocalDate dateOfBirth) {
         return new Property() {
             @Override
@@ -28,6 +23,11 @@ public final class NationalIdentificationNumberProperties {
                 nationalIdentificationNumberProvider.setSex(sex);
             }
         };
+    }
+
+    public abstract static class Property {
+
+        public abstract void apply(NationalIdentificationNumberProvider nationalIdentificationNumberProvider);
     }
 
 }

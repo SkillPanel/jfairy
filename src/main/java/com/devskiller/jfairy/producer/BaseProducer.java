@@ -88,16 +88,6 @@ public class BaseProducer {
         return random.nextInt(min, max);
     }
 
-    /**
-     * Returns random int value
-     *
-     * @param max value of the random number to be returned.  Must be positive.
-     * @return random {@code int} value between 0 (inclusive) and {@code max} (inclusive)
-     */
-    public int randomInt(int max) {
-        return randomBetween(0, max);
-    }
-
     //TODO: MZA: Duplication - should be merged into one method when consistent logic will be determined
     public char randomBetween(char min, char max) {
         return (char) randomBetween((int) min, (int) max);
@@ -124,6 +114,16 @@ public class BaseProducer {
      */
     public double randomBetween(double min, double max) {
         return random.nextDouble(min, max);
+    }
+
+    /**
+     * Returns random int value
+     *
+     * @param max value of the random number to be returned.  Must be positive.
+     * @return random {@code int} value between 0 (inclusive) and {@code max} (inclusive)
+     */
+    public int randomInt(int max) {
+        return randomBetween(0, max);
     }
 
     public String randomNumeric(int length) {

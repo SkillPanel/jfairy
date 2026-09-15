@@ -19,11 +19,11 @@ public class ZhVATIdentificationNumberProvider implements VATIdentificationNumbe
 
     @Override
     public String get() {
-        StringBuilder vatBuilder = new StringBuilder();
-        vatBuilder.append(BASE_PRODUCER.randomElement(ZhFairyUtil.PROV_LIST));
-        vatBuilder.append(ZhFairyUtil.getRandomNumStr(BASE_PRODUCER, ZhFairyUtil.CITY_MAX, 2));
-        vatBuilder.append(ZhFairyUtil.getRandomNumStr(BASE_PRODUCER, ZhFairyUtil.DISTRICT_MAX, 2));
-        vatBuilder.append(getChars(9));
+        StringBuilder vatBuilder = new StringBuilder()
+                .append(BASE_PRODUCER.randomElement(ZhFairyUtil.PROV_LIST))
+                .append(ZhFairyUtil.getRandomNumStr(BASE_PRODUCER, ZhFairyUtil.CITY_MAX, 2))
+                .append(ZhFairyUtil.getRandomNumStr(BASE_PRODUCER, ZhFairyUtil.DISTRICT_MAX, 2))
+                .append(getChars(9));
         return vatBuilder.toString();
     }
 

@@ -21,7 +21,6 @@ class FairySpec extends Specification {
         get() >> customDataMaster
     }
 
-
     def "Second person should be different without fairy instance"() {
 
         given:

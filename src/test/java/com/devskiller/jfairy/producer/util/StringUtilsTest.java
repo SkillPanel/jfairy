@@ -23,6 +23,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @DisplayName("StringUtils")
 class StringUtilsTest {
 
+    private static final String MOSS = "Moss";
+
     @Nested
     @DisplayName("isNotBlank")
     class IsNotBlank {
@@ -185,7 +187,7 @@ class StringUtilsTest {
 
         @Test
         void zeroLength_returnsEmpty() {
-            assertEquals("", StringUtils.left("Moss", 0));
+            assertEquals("", StringUtils.left(MOSS, 0));
         }
     }
 
@@ -283,14 +285,14 @@ class StringUtilsTest {
 
         @Test
         void bySpace_returnsCorrectParts() {
-            assertArrayEquals(new String[]{"Moss", "Roy", "Jen"},
+            assertArrayEquals(new String[]{MOSS, "Roy", "Jen"},
                 StringUtils.split("Moss Roy Jen", ' '));
         }
 
         @Test
         @DisplayName("trailing delimiter preserves trailing empty string")
         void trailingDelimiter_preservesTrailingEmpty() {
-            assertArrayEquals(new String[]{"Moss", "Roy", ""},
+            assertArrayEquals(new String[]{MOSS, "Roy", ""},
                 StringUtils.split("Moss Roy ", ' '));
         }
 
@@ -306,12 +308,12 @@ class StringUtilsTest {
 
         @Test
         void multipleElements_joinedWithSpace() {
-            assertEquals("Moss Roy Jen", StringUtils.joinWithSpace(List.of("Moss", "Roy", "Jen")));
+            assertEquals("Moss Roy Jen", StringUtils.joinWithSpace(List.of(MOSS, "Roy", "Jen")));
         }
 
         @Test
         void singleElement_noSpaceAdded() {
-            assertEquals("Moss", StringUtils.joinWithSpace(List.of("Moss")));
+            assertEquals(MOSS, StringUtils.joinWithSpace(List.of(MOSS)));
         }
 
         @Test

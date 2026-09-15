@@ -12,8 +12,6 @@ import com.devskiller.jfairy.producer.BaseProducer;
  */
 public final class ZhFairyUtil {
 
-    private ZhFairyUtil() {}
-
     /**
      * Codes of China provinces
      */
@@ -62,6 +60,8 @@ public final class ZhFairyUtil {
      */
     public static final int DISTRICT_MAX = 12;
 
+    private ZhFairyUtil() {}
+
     /**
      * Get random number from 1 to max in 0 leading string format.
      * @param baseProducer BaseProducer
@@ -71,7 +71,7 @@ public final class ZhFairyUtil {
      */
     public static String getRandomNumStr(BaseProducer baseProducer, int max, int paddingSize) {
         int rndNum = baseProducer.randomBetween(1, max);
-        StringBuilder numStr = new StringBuilder("" + rndNum);
+        StringBuilder numStr = new StringBuilder().append(rndNum);
         while (numStr.length() < paddingSize) {
             numStr.insert(0, "0");
         }

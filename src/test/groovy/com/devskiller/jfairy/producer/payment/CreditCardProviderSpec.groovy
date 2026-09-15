@@ -57,5 +57,4 @@ class CreditCardProviderSpec extends Specification {
             creditCard.expiryDateAsString == "02/09"
     }
 
-
 }

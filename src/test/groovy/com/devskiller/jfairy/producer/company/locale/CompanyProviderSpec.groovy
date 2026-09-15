@@ -33,7 +33,6 @@ class CompanyProviderSpec extends Specification {
             email == "info@mercedesbosch.com"
     }
 
-
     def "should lowercase letters in company email"() {
         given:
             baseProducer.trueOrFalse() >> false
@@ -48,7 +47,6 @@ class CompanyProviderSpec extends Specification {
         then:
             email == "info@google.com"
     }
-
 
     def "should strip dots and remove spaces in company email"() {
         given:

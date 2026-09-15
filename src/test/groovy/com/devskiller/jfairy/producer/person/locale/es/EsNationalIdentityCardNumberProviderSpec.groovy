@@ -47,7 +47,6 @@ class EsNationalIdentityCardNumberProviderSpec extends Specification {
             }
     }
 
-
     def "should generate number with letter after the hyphen"() {
         given:
             char letter = esNationalIdentityCardNumber.charAt(hyphenPos + 1)

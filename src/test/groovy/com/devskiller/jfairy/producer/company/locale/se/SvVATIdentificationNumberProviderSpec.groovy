@@ -18,7 +18,6 @@ class SvVATIdentificationNumberProviderSpec extends Specification {
         vatIdentificationNumber = fairy.company().vatIdentificationNumber
     }
 
-
     def "should generate number with 14 characters"() {
         expect:
             vatIdentificationNumber.length() == VAT_IDENTIFICATION_NUMBER_LENGTH

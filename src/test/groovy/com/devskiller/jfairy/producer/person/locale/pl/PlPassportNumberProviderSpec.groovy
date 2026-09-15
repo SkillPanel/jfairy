@@ -29,7 +29,6 @@ class PlPassportNumberProviderSpec extends Specification {
                 passportNumber.charAt(i).isLetter()
     }
 
-
     def "should generate number ending with 6 digits"() {
         expect:
             for (int i = 8; i > 2; i--) {
@@ -41,6 +40,5 @@ class PlPassportNumberProviderSpec extends Specification {
         expect:
             PlPassportNumberProvider.isPassportCheckSumValid(passportNumber)
     }
-
 
 }

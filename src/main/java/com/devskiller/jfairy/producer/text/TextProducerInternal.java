@@ -147,16 +147,6 @@ public class TextProducerInternal {
         return sentence(words, wordCount);
     }
 
-    /**
-     * Generates a formatted sentence from Latin words.
-     *
-     * @param wordCount number of words in the sentence
-     * @return a formatted Latin sentence
-     */
-    public String latinSentence(int wordCount) {
-        return sentence(latinWords, wordCount);
-    }
-
     private String sentence(List<String> words, int wordCount) {
         String randomWords = rawWords(words, wordCount, WORD_COUNT_PRECISION_IN_SENTENCE);
 
@@ -178,5 +168,15 @@ public class TextProducerInternal {
         }
 
         return result;
+    }
+
+    /**
+     * Generates a formatted sentence from Latin words.
+     *
+     * @param wordCount number of words in the sentence
+     * @return a formatted Latin sentence
+     */
+    public String latinSentence(int wordCount) {
+        return sentence(latinWords, wordCount);
     }
 }

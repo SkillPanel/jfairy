@@ -14,6 +14,10 @@ import com.devskiller.jfairy.producer.util.StringUtils;
  */
 public class PlVATIdentificationNumberProvider implements VATIdentificationNumberProvider {
 
+    public static final int TEN = 10;
+
+    static final int MODULO11 = 11;
+
     private static final Logger LOG = LoggerFactory.getLogger(PlVATIdentificationNumberProvider.class);
 
     // ex 1234563218
@@ -69,8 +73,6 @@ public class PlVATIdentificationNumberProvider implements VATIdentificationNumbe
 
     // 1234563_18
     private static final int CHECKSUM_CHAR_INDEX = 9;
-    static final int MODULO11 = 11;
-    public static final int TEN = 10;
 
     private final BaseProducer baseProducer;
 

@@ -33,12 +33,12 @@ public class ZhNationalIdentityCardNumberProvider implements NationalIdentityCar
 
     @Override
     public String get() {
-        StringBuilder idBuilder = new StringBuilder();
-        idBuilder.append(baseProducer.randomElement(ZhFairyUtil.PROV_LIST));
-        idBuilder.append(ZhFairyUtil.getRandomNumStr(baseProducer, ZhFairyUtil.CITY_MAX, 2));
-        idBuilder.append(ZhFairyUtil.getRandomNumStr(baseProducer, ZhFairyUtil.DISTRICT_MAX, 2));
-        idBuilder.append(getBirthDate());
-        idBuilder.append(ZhFairyUtil.getRandomNumStr(baseProducer, ORDER_MAX, 4));
+        StringBuilder idBuilder = new StringBuilder()
+                .append(baseProducer.randomElement(ZhFairyUtil.PROV_LIST))
+                .append(ZhFairyUtil.getRandomNumStr(baseProducer, ZhFairyUtil.CITY_MAX, 2))
+                .append(ZhFairyUtil.getRandomNumStr(baseProducer, ZhFairyUtil.DISTRICT_MAX, 2))
+                .append(getBirthDate())
+                .append(ZhFairyUtil.getRandomNumStr(baseProducer, ORDER_MAX, 4));
         return idBuilder.toString();
     }
 

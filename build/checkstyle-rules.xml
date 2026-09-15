@@ -4,18 +4,16 @@
     "https://checkstyle.org/dtds/configuration_1_3.dtd">
 
 <module name="Checker">
-    <property name="fileExtensions" value="java, properties, xml"/>
+    <property name="fileExtensions" value="java, groovy, properties, xml"/>
     <property name="tabWidth" value="4"/>
 
     <!-- Excludes all 'module-info.java' files -->
     <module name="BeforeExecutionExclusionFileFilter">
         <property name="fileNamePattern" value="module\-info\.java$"/>
     </module>
-	<!-- module name="FileTabCharacter">
-		<property name="eachLine" value="false"/>
-	</module -->
+    <module name="FileTabCharacter"/>
     <module name="LineLength">
-        <property name="fileExtensions" value="java"/>
+        <property name="fileExtensions" value="java, groovy"/>
         <property name="max" value="200"/>
         <property name="ignorePattern" value="@version|@see|@todo|TODO"/>
     </module>
@@ -40,21 +38,25 @@
     <module name="UniqueProperties"/>
 
     <module name="TreeWalker">
-		<module name="Indentation">
-			<property name="basicOffset" value="4"/>
-			<property name="braceAdjustment" value="0"/>
-			<property name="caseIndent" value="4"/>
-			<property name="throwsIndent" value="4"/>
-			<property name="arrayInitIndent" value="4"/>
-			<property name="lineWrappingIndentation" value="4"/>
-		</module>
+        <module name="Indentation">
+            <property name="basicOffset" value="4"/>
+            <property name="braceAdjustment" value="0"/>
+            <property name="caseIndent" value="4"/>
+            <property name="throwsIndent" value="4"/>
+            <property name="arrayInitIndent" value="4"/>
+            <property name="lineWrappingIndentation" value="4"/>
+        </module>
         <module name="ArrayTypeStyle"/>
         <module name="AvoidNestedBlocks"/>
+        <module name="AvoidStarImport"/>
         <module name="CatchParameterName">
             <property name="format" value="^(ex[a-zA-Z0-9]*)|([a-z][a-zA-Z0-9]+Exception|ignored)$"/>
         </module>
         <module name="ConstantName"/>
-        <!--module name="DeclarationOrder" /-->
+        <module name="CyclomaticComplexity">
+            <property name="switchBlockAsSingleDecisionPoint" value="true"/>
+        </module>
+        <module name="DeclarationOrder"/>
         <module name="EmptyBlock"/>
         <module name="EmptyForInitializerPad"/>
         <module name="EmptyForIteratorPad"/>
@@ -63,21 +65,23 @@
         <module name="EqualsHashCode"/>
         <module name="GenericWhitespace"/>
         <module name="FinalClass"/>
+        <!-- HiddenField disabled: the codebase consistently uses "this.x = x" constructor/setter
+             params named after the field, which is a widely accepted idiom, not a bug risk -->
         <!-- module name="HiddenField"/ -->
         <module name="HideUtilityClassConstructor"/>
         <module name="IllegalImport"/>
         <module name="IllegalInstantiation"/>
-		<module name="ImportOrder">
-			<property name="groups" value="/^(jakarta|java|javafx|javax)\..+/, /^(?!(jakarta|java|javafx|javax|com\.devskiller)\.).+/, com.devskiller"/>
-			<property name="ordered" value="true"/>
-			<property name="separated" value="true"/>
-			<property name="option" value="bottom"/>
-			<property name="staticGroups" value="/^(jakarta|java|javafx|javax)\..+/, /^(?!(jakarta|java|javafx|javax|com\.devskiller)\.).+/, com.devskiller"/>
-			<property name="separatedStaticGroups" value="true"/>
-			<property name="sortStaticImportsAlphabetically" value="true"/>
-		</module>
+        <module name="ImportOrder">
+            <property name="groups" value="/^(jakarta|java|javafx|javax)\..+/, /^(?!(jakarta|java|javafx|javax|com\.devskiller)\.).+/, com.devskiller"/>
+            <property name="ordered" value="true"/>
+            <property name="separated" value="true"/>
+            <property name="option" value="bottom"/>
+            <property name="staticGroups" value="/^(jakarta|java|javafx|javax)\..+/, /^(?!(jakarta|java|javafx|javax|com\.devskiller)\.).+/, com.devskiller"/>
+            <property name="separatedStaticGroups" value="true"/>
+            <property name="sortStaticImportsAlphabetically" value="true"/>
+        </module>
         <module name="InnerAssignment"/>
-        <!--module name="InnerTypeLast" /-->
+        <module name="InnerTypeLast"/>
         <module name="InterfaceIsType"/>
         <module name="JavadocStyle">
             <property name="checkFirstSentence" value="false"/>
@@ -102,16 +106,21 @@
         <module name="MissingOverride"/>
         <module name="MissingSwitchDefault"/>
         <module name="ModifierOrder"/>
+        <module name="MultipleStringLiterals">
+            <property name="allowedDuplicates" value="3"/>
+        </module>
         <module name="MutableException"/>
         <module name="NeedBraces"/>
         <module name="NoClone"/>
         <module name="NoFinalizer"/>
         <module name="NoWhitespaceAfter"/>
         <module name="NoWhitespaceBefore"/>
+        <module name="NPathComplexity"/>
         <module name="OneStatementPerLine"/>
         <module name="OneTopLevelClass"/>
         <module name="OperatorWrap"/>
         <module name="OuterTypeFilename"/>
+        <module name="OverloadMethodsDeclarationOrder"/>
         <module name="PackageName">
             <property name="format" value="^[a-z]+(?:\.[a-z0-9]+)*$"/>
         </module>
@@ -119,6 +128,8 @@
         <module name="ParameterName">
             <property name="format" value="(?:^[a-z][a-zA-Z0-9]*$)"/>
         </module>
+        <!-- ParameterNumber disabled: Person's public 19-arg constructor is a real design smell,
+             but fixing it means a breaking Builder-style refactor of public API, not a ruleset tweak -->
         <!-- module name="ParameterNumber">
             <property name="max" value="10"/>
         </module -->
@@ -134,7 +145,9 @@
         <module name="SuperFinalize"/>
         <module name="SuppressWarningsHolder"/>
         <module name="SuppressionCommentFilter"/>
-        <!--module name="TodoComment" /-->
+        <!-- TodoComment disabled: would force either deleting or immediately resolving the
+             existing, legitimate TODO markers rather than tracking them as backlog items -->
+        <!-- module name="TodoComment"/ -->
         <module name="TypeName"/>
         <!--module name="TypeName">
             <property name="format" value="^([A-Z][a-zA-Z0-9]+IF|I[A-Z][a-zA-Z0-9]+)$"/>
@@ -152,6 +165,9 @@
         <module name="VariableDeclarationUsageDistance">
             <property name="allowedDistance" value="10"/>
         </module>
+        <!-- VisibilityModifier disabled: the Default*Provider/Abstract* base classes deliberately
+             expose protected fields to locale subclasses; enforcing private+accessors here would
+             require a larger, deliberate refactor rather than a ruleset tweak -->
         <!-- module name="VisibilityModifier"/ -->
         <module name="WhitespaceAfter"/>
         <module name="WhitespaceAround">
@@ -170,4 +186,3 @@
     </module>
 
 </module>
-

@@ -47,7 +47,7 @@ public class SvNationalIdentificationNumberProvider implements NationalIdentific
         with(properties);
     }
 
-    public void with(NationalIdentificationNumberProperties.Property[] properties) {
+    private void with(NationalIdentificationNumberProperties.Property[] properties) {
         for (NationalIdentificationNumberProperties.Property property : properties) {
             property.apply(this);
         }

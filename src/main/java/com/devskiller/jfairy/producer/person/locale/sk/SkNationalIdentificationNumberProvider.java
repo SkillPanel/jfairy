@@ -46,7 +46,7 @@ public class SkNationalIdentificationNumberProvider implements NationalIdentific
 
     }
 
-    public void with(NationalIdentificationNumberProperties.Property[] properties) {
+    private void with(NationalIdentificationNumberProperties.Property[] properties) {
         for (NationalIdentificationNumberProperties.Property property : properties) {
             property.apply(this);
         }
@@ -116,7 +116,7 @@ public class SkNationalIdentificationNumberProvider implements NationalIdentific
             sum += digit * weight;
         }
 
-        int checksum = (sum % TEN);
+        int checksum = sum % TEN;
 
         if (0 == checksum) {
             return 0;
