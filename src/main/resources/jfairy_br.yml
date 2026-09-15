@@ -12,14 +12,14 @@ companyEmails: [ info, contato, escritorio, faleconosco ]
 
 text: Este hipertexto, isto é, matriz de textos potencializados em um duplo-devir virtualizante, visa proporcionar uma combinatória proto-semântica de um discurso proposicional a partir de um universo de possíveis. Sua instauração epistemológica é traçada a posteriori pela necessidade de construir-se um conhecimento teórico escamoteado em uma base glossofônica da interioridade da razão, em conssonância com a tex-tualidade apofântica sinteticamente determinável em sua exterioridade do Ser.
 
-telephone_number_formats: [ '##-####-####' ]
+telephoneNumberFormats: [ '##-####-####' ]
 
-postal_code: [ '#####-###' ]
+postalCodes: [ '#####-###' ]
 
-city: [ São Paulo, Rio de Janeiro, Salvador, Brasília, Fortaleza, Belo Horizonte, Manaus, Curitiba, Recife, Porto Alegre, Unaí ]
+cities: [ São Paulo, Rio de Janeiro, Salvador, Brasília, Fortaleza, Belo Horizonte, Manaus, Curitiba, Recife, Porto Alegre, Unaí ]
 
-street: [ Rua Gonçalo de Carvalho, Rua das Pedras, Vieira Souto, Avenida Paulista, Rua XV de Novembro, Avenida Pedro Basso, Rua Marcelino Champagnat, Avenida Júlio Castilhos, Rua Bento Gonçalves, Rua da Aurora, Rua Portugal, Avenida Silvio Carlos Viana, Avenida Dante Michelini, Avenida Getúlio Vargas,  Rua do Mucugê ]
+streets: [ Rua Gonçalo de Carvalho, Rua das Pedras, Vieira Souto, Avenida Paulista, Rua XV de Novembro, Avenida Pedro Basso, Rua Marcelino Champagnat, Avenida Júlio Castilhos, Rua Bento Gonçalves, Rua da Aurora, Rua Portugal, Avenida Silvio Carlos Viana, Avenida Dante Michelini, Avenida Getúlio Vargas,  Rua do Mucugê ]
 
-country: [ 'Brasil' ]
+countries: [ 'Brasil' ]
 
 language: 'BR'

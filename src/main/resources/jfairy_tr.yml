@@ -12,14 +12,14 @@ companyEmails: [ info, destek, satis, hello, merhaba ]
 
 text: Bu bir deneme metnidir. Türkçe dil desteği için oluşturulmuştur. Bu sistem sayesinde rastgele Türkçe veriler üretebilirsiniz. Adresler, isimler, telefon numaraları ve daha fazlası artık jfairy ile mümkün. Teknolojinin getirdiği bu kolaylıklar sayesinde test süreçleriniz daha hızlı ve verimli hale gelecek.
 
-telephone_number_formats: [ '+90 5## ### ## ##' ]
+telephoneNumberFormats: [ '+90 5## ### ## ##' ]
 
-postal_code: [ '#####' ]
+postalCodes: [ '#####' ]
 
-city: [ İstanbul, Ankara, İzmir, Bursa, Antalya, Adana, Konya, Gaziantep, Şanlıurfa, Mersin, Kocaeli, Diyarbakır, Hatay, Manisa, Kayseri, Samsun, Balıkesir, Kahramanmaraş, Van, Aydın ]
+cities: [ İstanbul, Ankara, İzmir, Bursa, Antalya, Adana, Konya, Gaziantep, Şanlıurfa, Mersin, Kocaeli, Diyarbakır, Hatay, Manisa, Kayseri, Samsun, Balıkesir, Kahramanmaraş, Van, Aydın ]
 
-street: [ İstiklal Caddesi, Bağdat Caddesi, Cumhuriyet Caddesi, Atatürk Bulvarı, Vatan Caddesi, Ordu Caddesi, Halaskargazi Caddesi, Abdi İpekçi Caddesi, Nispetiye Caddesi, Barbaros Bulvarı, Turgut Özal Bulvarı, Mevlana Caddesi, Fevzi Çakmak Caddesi, Ziya Gökalp Caddesi, Mithatpaşa Caddesi, Tunalı Hilmi Caddesi, Bahçelievler 7. Cadde, Kenan Evren Bulvarı, Gazipaşa Bulvarı, Talatpaşa Bulvarı ]
+streets: [ İstiklal Caddesi, Bağdat Caddesi, Cumhuriyet Caddesi, Atatürk Bulvarı, Vatan Caddesi, Ordu Caddesi, Halaskargazi Caddesi, Abdi İpekçi Caddesi, Nispetiye Caddesi, Barbaros Bulvarı, Turgut Özal Bulvarı, Mevlana Caddesi, Fevzi Çakmak Caddesi, Ziya Gökalp Caddesi, Mithatpaşa Caddesi, Tunalı Hilmi Caddesi, Bahçelievler 7. Cadde, Kenan Evren Bulvarı, Gazipaşa Bulvarı, Talatpaşa Bulvarı ]
 
-country: [ 'Türkiye' ]
+countries: [ 'Türkiye' ]
 
 language: 'TR'

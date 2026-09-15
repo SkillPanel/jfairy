@@ -12,7 +12,7 @@ public interface PersonProvider extends Supplier<Person> {
 	String FIRST_NAME = "firstNames";
 	String LAST_NAME = "lastNames";
 	String PERSONAL_EMAIL = "personalEmails";
-	String TELEPHONE_NUMBER_FORMATS = "telephone_number_formats";
+	String TELEPHONE_NUMBER_FORMATS = "telephoneNumberFormats";
 	String JOB_TITLE = "jobTitles";
 
 	@Override

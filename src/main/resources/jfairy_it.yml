@@ -12,14 +12,14 @@ companyEmails: [info, segreteria, personale, direzione, amministrazione, magazzi
 
 text: Nel mezzo del cammin di nostra vita mi ritrovai per una selva oscura, ché la diritta via era smarrita. Ahi quanto a dir qual era è cosa dura esta selva selvaggia e aspra e forte che nel pensier rinova la paura! Tant’è amara che poco è più morte; ma per trattar del ben ch’i’ vi trovai, dirò de l’altre cose ch’i’ v’ ho scorte.
 
-telephone_number_formats: ['##-#######', '###-#######']
+telephoneNumberFormats: ['##-#######', '###-#######']
 
-postal_code: ['#####']
+postalCodes: ['#####']
 
-city: [Roma, Milano, Torino, Napoli, Frattamaggiore, Venezia, Porto S. Elpidio, S. Nicola Arcella]
+cities: [Roma, Milano, Torino, Napoli, Frattamaggiore, Venezia, Porto S. Elpidio, S. Nicola Arcella]
 
-street: [Via Roma, P.zza Italia, L.go Augusto, Via G. Matteotti, Piazza G. Cesare, Corso Italia, Corso Mediterraneo, P.zza Aspromonte, Via Caduti di Guerra, Via Miseno, Via Lambro, Via A. Diaz]
+streets: [Via Roma, P.zza Italia, L.go Augusto, Via G. Matteotti, Piazza G. Cesare, Corso Italia, Corso Mediterraneo, P.zza Aspromonte, Via Caduti di Guerra, Via Miseno, Via Lambro, Via A. Diaz]
 
-country: ['Italia', 'Francia', 'Germania', 'Spagna']
+countries: ['Italia', 'Francia', 'Germania', 'Spagna']
 
 language: 'IT'

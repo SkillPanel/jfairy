@@ -5,11 +5,11 @@ import com.devskiller.jfairy.producer.BaseProducer;
 
 public abstract class AbstractAddressProvider implements AddressProvider {
 
-	private static final String POSTAL_CODE_FORMAT = "postal_code";
+	private static final String POSTAL_CODE_FORMAT = "postalCodes";
 
-	private static final String CITY = "city";
+	private static final String CITY = "cities";
 
-	private static final String STREET = "street";
+	private static final String STREET = "streets";
 
 	protected final BaseProducer baseProducer;
 
