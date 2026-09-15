@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
@@ -78,7 +79,7 @@
 	</distributionManagement>
 
 	<properties>
-		<revision>0.8.3-SNAPSHOT</revision>
+		<revision>0.9.0-SNAPSHOT</revision>
 
 		<javaVersion>17</javaVersion>
 
@@ -109,6 +110,7 @@
 		<dep.plugin.enforcer.version>3.6.3</dep.plugin.enforcer.version>
 		<!-- last error-prone version compatible with Java 17; 2.43.0+ requires Java 21 -->
 		<dep.plugin.error-prone.version>2.42.0</dep.plugin.error-prone.version>
+		<dep.plugin.figlet.version>1.0.0</dep.plugin.figlet.version>
 		<dep.plugin.flatten.version>1.8.0</dep.plugin.flatten.version>
 		<dep.plugin.gmavenplus.version>5.1.0</dep.plugin.gmavenplus.version>
 		<dep.plugin.gpg.version>3.2.8</dep.plugin.gpg.version>
@@ -297,6 +299,26 @@
 					</execution>
 				</executions>
 			</plugin>
+
+            <plugin>
+                <groupId>io.github.spannm</groupId>
+                <artifactId>figlet-maven-plugin</artifactId>
+                <version>${dep.plugin.figlet.version}</version>
+                <configuration>
+                    <content><![CDATA[
+                             <lineBreak/><lineBreak/>
+                             <figletFont name="speed">        ${project.name}</figletFont>
+                             <preserveWhitespace>        v${project.version}</preserveWhitespace><lineBreak/>]]>
+                    </content>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>render</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
