@@ -16,7 +16,7 @@ Add the following dependency to your `pom.xml`:
 <dependency>
     <groupId>com.devskiller</groupId>
     <artifactId>jfairy</artifactId>
-    <version>0.8.2</version>
+    <version>0.9.0</version>
 </dependency>
 ```
 
@@ -79,6 +79,7 @@ System.out.println(salesman.getCompanyEmail());
 | Brazilian Portuguese |     `br`     |
 | Slovak               |     `sk`     |
 | Turkish              |     `tr`     |
+| Japanese             |     `ja`     |
 
 ```java
 Fairy enFairy = Fairy.create();

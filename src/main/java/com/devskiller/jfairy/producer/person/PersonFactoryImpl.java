@@ -5,6 +5,8 @@ import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.DateProducer;
 import com.devskiller.jfairy.producer.TimeProvider;
 import com.devskiller.jfairy.producer.company.CompanyFactory;
+import com.devskiller.jfairy.producer.person.locale.ja.JaPersonProvider;
+import com.devskiller.jfairy.producer.util.LanguageCode;
 
 public class PersonFactoryImpl implements PersonFactory {
 
@@ -41,6 +43,11 @@ public class PersonFactoryImpl implements PersonFactory {
 
 	@Override
 	public PersonProvider producePersonProvider(PersonProperties.PersonProperty... personProperties) {
+		if (dataMaster.getLanguage() == LanguageCode.JA) {
+			return new JaPersonProvider(dataMaster, dateProducer, baseProducer, addressProvider,
+					nationalIdentificationNumberFactory, nationalIdentityCardNumberProvider,
+					passportNumberProvider, timeProvider, companyFactory, personProperties);
+		}
 		return new DefaultPersonProvider(dataMaster, dateProducer, baseProducer, addressProvider,
 				nationalIdentificationNumberFactory, nationalIdentityCardNumberProvider,
 				passportNumberProvider, timeProvider, companyFactory, personProperties);

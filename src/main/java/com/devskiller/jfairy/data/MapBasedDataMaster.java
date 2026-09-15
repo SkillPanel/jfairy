@@ -46,9 +46,11 @@ public class MapBasedDataMaster implements DataMaster {
 	@Override
 	@SuppressWarnings("unchecked")
 	public <T> T getValuesOfType(String dataKey, final String type, final Class<T> resultClass) {
-		Map<String, List<T>> data = getData(dataKey, Map.class);
+		Object element = getData(dataKey, Object.class);
 
-		List<T> entries = data.get(type);
+		List<T> entries = element instanceof Map
+			? ((Map<String, List<T>>) element).get(type)
+			: (List<T>) element;
 
 		return baseProducer.randomElement(entries);
 	}

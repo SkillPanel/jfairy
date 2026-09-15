@@ -1,8 +1,11 @@
 package com.devskiller.jfairy.producer.person;
 
 import java.time.LocalDate;
+import java.util.Set;
+import java.util.StringJoiner;
 
 import com.devskiller.jfairy.producer.company.Company;
+import com.devskiller.jfairy.producer.util.LanguageCode;
 
 import static com.devskiller.jfairy.producer.person.Person.Sex.FEMALE;
 import static com.devskiller.jfairy.producer.person.Person.Sex.MALE;
@@ -12,6 +15,11 @@ public class Person {
 	public enum Sex {
 		MALE, FEMALE
 	}
+
+	/**
+	 * Languages whose naming convention places the family name before the given name.
+	 */
+	private static final Set<LanguageCode> FAMILY_NAME_FIRST_LANGUAGES = Set.of(LanguageCode.JA, LanguageCode.ZH);
 
 	private final Address address;
 	private final String firstName;
@@ -88,6 +96,9 @@ public class Person {
 	}
 
 	public String getFullName() {
+		if (nationality != null && FAMILY_NAME_FIRST_LANGUAGES.contains(nationality.getPrimaryLanguage())) {
+			return lastName + " " + firstName;
+		}
 		return firstName + " " + lastName;
 	}
 
@@ -145,5 +156,20 @@ public class Person {
 
 	public Country getNationality() {
 		return nationality;
+	}
+
+	@Override
+	public String toString() {
+		return new StringJoiner(", ", getClass().getSimpleName() + "[", "]")
+			.add("fullName='" + getFullName() + "'")
+			.add("sex=" + sex)
+			.add("dateOfBirth=" + dateOfBirth)
+			.add("email=" + email)
+			.add("telephoneNumber=" + telephoneNumber)
+			.add("address=" + address)
+			.add("company=" + company)
+			.add("jobTitle='" + jobTitle + "'")
+			.add("nationality=" + nationality)
+			.toString();
 	}
 }
