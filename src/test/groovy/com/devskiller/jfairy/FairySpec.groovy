@@ -60,6 +60,27 @@ class FairySpec extends Specification {
         firstPerson.fullName != thirdPerson.fullName
     }
 
+    def "should generate the same #kind for the same random seed"() {
+
+        when:
+            List<String> first = seededValues(locale, generate)
+            List<String> second = seededValues(locale, generate)
+
+        then:
+            first == second
+            first.toSet().size() == first.size()
+
+        where:
+            kind                | locale | generate
+            "BR passport"       | "br"   | { Fairy f -> f.person().passportNumber }
+            "ZH company VAT ID" | "zh"   | { Fairy f -> f.company().vatIdentificationNumber }
+    }
+
+    private static List<String> seededValues(String locale, Closure<String> generate) {
+        Fairy fairy = Fairy.builder().withRandomSeed(10).withLocale(Locale.forLanguageTag(locale)).build()
+        return (1..5).collect { generate(fairy) }
+    }
+
     def "Second person should be different with different random seeds"() {
 
         given:

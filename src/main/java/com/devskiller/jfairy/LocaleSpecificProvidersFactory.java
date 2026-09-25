@@ -204,7 +204,7 @@ final class LocaleSpecificProvidersFactory {
         return new LocaleSpecificProviders(
                 new NoNationalIdentificationNumberFactory(),
                 new ZhNationalIdentityCardNumberProvider(baseProducer),
-                new ZhVATIdentificationNumberProvider(),
+                new ZhVATIdentificationNumberProvider(baseProducer),
                 new ZhAddressProvider(dataMaster, baseProducer),
                 new ZhPassportNumberProvider(baseProducer)
         );
@@ -239,7 +239,7 @@ final class LocaleSpecificProvidersFactory {
                 new BrNationalIdentityCardNumberProvider(baseProducer),
                 new BrVATIdentificationNumberProvider(baseProducer),
                 new BrAddressProvider(dataMaster, baseProducer),
-                new BrPassportNumberProvider()
+                new BrPassportNumberProvider(baseProducer)
         );
     }
 
