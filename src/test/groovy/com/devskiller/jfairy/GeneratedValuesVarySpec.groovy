@@ -5,6 +5,8 @@ import java.lang.reflect.Modifier
 
 import spock.lang.Specification
 
+import com.devskiller.jfairy.producer.util.LanguageCode
+
 /**
  * Generates a sample of objects for every bundled locale, calls each of their getters reflectively (descending into
  * nested jFairy objects) and checks that no getter fails, returns null or an empty string, or always returns the same
@@ -15,7 +17,7 @@ class GeneratedValuesVarySpec extends Specification {
     private static final int SEED = 42
     private static final int SAMPLES = 50
 
-    private static final List<String> LANGUAGES = ['br', 'de', 'en', 'es', 'fr', 'it', 'ja', 'ka', 'pl', 'sk', 'sv', 'tr', 'zh']
+    private static final List<String> LANGUAGES = LanguageCode.values()*.name()*.toLowerCase(Locale.ROOT)
 
     private static final Map<String, Closure> GENERATORS = [
         person    : { Fairy fairy -> fairy.person() },
@@ -32,13 +34,19 @@ class GeneratedValuesVarySpec extends Specification {
         'person.getNationality',
     ] as Set
 
-    // Legitimately null or empty for some samples, or for every sample of a locale that does not support them
+    // Legitimately null or empty for some samples
     private static final Set<String> OPTIONAL = [
         'iban.getNationalCheckDigit',
         'person.getAddress.getApartmentNumber',
         'person.getMiddleName',
         'person.getNationalIdentificationNumber',
     ] as Set
+
+    // Null or empty for every sample of these locales, which do not support them
+    private static final Map<String, Set<String>> UNSUPPORTED = [
+        'iban.getNationalCheckDigit'            : ['br', 'de', 'en', 'ja', 'ka', 'pl', 'sk', 'zh'] as Set,
+        'person.getNationalIdentificationNumber': ['br', 'de', 'en', 'es', 'fr', 'it', 'ja', 'ka', 'tr', 'zh'] as Set,
+    ]
 
     def "every #generator getter varies for #language"() {
         given:
@@ -51,7 +59,7 @@ class GeneratedValuesVarySpec extends Specification {
                 collect(GENERATORS[generator](fairy), generator, valuesByPath, problems)
             }
             valuesByPath.each { path, values ->
-                boolean unsupported = path in OPTIONAL && values.every { it == null || it == '' }
+                boolean unsupported = language in UNSUPPORTED.get(path, [] as Set) && values.every { it == null || it == '' }
                 if (values.size() < 2 && !(path in CONSTANT) && !unsupported) {
                     problems << "${path}: always ${values}".toString()
                 }
