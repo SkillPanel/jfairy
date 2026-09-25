@@ -718,6 +718,51 @@
 				</plugins>
 			</build>
 		</profile>
+		<profile>
+			<!-- Regenerates the pl name blocks from the PESEL registry: ./mvnw -Ppesel initialize -->
+			<id>pesel</id>
+			<properties>
+				<pesel.dataDate>2026-01-20</pesel.dataDate>
+				<pesel.firstNamesMale>https://api.dane.gov.pl/resources/1159669/csv</pesel.firstNamesMale>
+				<pesel.firstNamesFemale>https://api.dane.gov.pl/resources/1159670/csv</pesel.firstNamesFemale>
+				<pesel.lastNamesMale>https://api.dane.gov.pl/resources/1148808/csv</pesel.lastNamesMale>
+				<pesel.lastNamesFemale>https://api.dane.gov.pl/resources/1148811/csv</pesel.lastNamesFemale>
+				<pesel.firstNamesLimit>500</pesel.firstNamesLimit>
+				<pesel.lastNamesLimit>1000</pesel.lastNamesLimit>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.gmavenplus</groupId>
+						<artifactId>gmavenplus-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>pesel-to-yaml</id>
+								<goals>
+									<goal>execute</goal>
+								</goals>
+								<phase>initialize</phase>
+								<configuration>
+									<properties>
+										<property><name>yamlFile</name><value>${project.basedir}/src/main/resources/jfairy_pl.yml</value></property>
+										<property><name>dataDate</name><value>${pesel.dataDate}</value></property>
+										<property><name>firstNamesMale</name><value>${pesel.firstNamesMale}</value></property>
+										<property><name>firstNamesFemale</name><value>${pesel.firstNamesFemale}</value></property>
+										<property><name>lastNamesMale</name><value>${pesel.lastNamesMale}</value></property>
+										<property><name>lastNamesFemale</name><value>${pesel.lastNamesFemale}</value></property>
+										<property><name>firstNamesLimit</name><value>${pesel.firstNamesLimit}</value></property>
+										<property><name>lastNamesLimit</name><value>${pesel.lastNamesLimit}</value></property>
+									</properties>
+									<scripts>
+										<script>${project.basedir}/build/pesel2yaml.groovy</script>
+									</scripts>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
 	</profiles>
 
 </project>
