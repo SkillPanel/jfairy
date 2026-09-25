@@ -35,7 +35,7 @@ class IBANSpec extends Specification {
             )
 
         then:
-            IbanValidator.validate(iban.get().ibanNumber)
+            IbanValidator.isValid(iban.get().ibanNumber)
     }
 
     /**
@@ -51,7 +51,7 @@ class IBANSpec extends Specification {
         when:
             IBANProvider iban = new DefaultIBANProvider(baseProducer, dataMaster)
         then:
-            IbanValidator.validate(iban.get().ibanNumber)
+            IbanValidator.isValid(iban.get().ibanNumber)
     }
 
     def "should be usable directly from Fairy"() {

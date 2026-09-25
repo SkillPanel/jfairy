@@ -9,6 +9,8 @@
  *       ({@code notNull}, {@code isTrue})</li>
  *   <li>{@link com.devskiller.jfairy.producer.util.AlphaNumberSystem} – base-26 encoding
  *       used for identity-card number generation</li>
+ *   <li>{@link com.devskiller.jfairy.producer.util.CheckDigits} – deliberately breaking
+ *       check digits for invalid identifier generation</li>
  * </ul>
  *
  * <p>All classes in this package are <strong>not part of the public API</strong> and may

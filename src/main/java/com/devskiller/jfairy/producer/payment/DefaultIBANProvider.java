@@ -17,6 +17,11 @@ import com.devskiller.jfairy.producer.person.Country;
  */
 public class DefaultIBANProvider implements IBANProvider {
 
+    // Valid IBAN check digits range from 02 to 98; these 97 values are pairwise distinct modulo 97,
+    // so any value in this range other than the valid one fails the mod-97 check.
+    private static final int MIN_CHECK_DIGITS = 2;
+    private static final int MAX_CHECK_DIGITS = 98;
+
     protected final DataMaster dataMaster;
     protected final BaseProducer baseProducer;
     protected String countryCode;
@@ -48,6 +53,30 @@ public class DefaultIBANProvider implements IBANProvider {
                         iban.getCountryCode(),
                         iban.getNationalCheckDigit(),
                         iban.toString());
+    }
+
+    @Override
+    public @Nullable IBAN getInvalid() {
+        IBAN valid = get();
+        if (valid == null) {
+            return null;
+        }
+
+        int validCheckDigits = Integer.parseInt(valid.getCheckDigit());
+        int wrongCheckDigits = baseProducer.randomBetween(MIN_CHECK_DIGITS, MAX_CHECK_DIGITS - 1);
+        if (wrongCheckDigits >= validCheckDigits) {
+            wrongCheckDigits++;
+        }
+        String checkDigits = String.format("%02d", wrongCheckDigits);
+        String ibanNumber = valid.getIbanNumber();
+
+        return new IBAN(valid.getAccountNumber(),
+                        checkDigits,
+                        valid.getBankCode(),
+                        valid.getBban(),
+                        valid.getCountry(),
+                        valid.getNationalCheckDigit(),
+                        ibanNumber.substring(0, 2) + checkDigits + ibanNumber.substring(4));
     }
 
     @Override

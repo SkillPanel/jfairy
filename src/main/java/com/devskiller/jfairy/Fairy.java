@@ -33,10 +33,11 @@ public final class Fairy {
     private final CreditCardProvider creditCardProvider;
     private final CompanyFactory companyFactory;
     private final IBANFactory ibanFactory;
+    private final InvalidFairy invalidFairy;
 
     Fairy(TextProducer textProducer, PersonFactory personFactory, NetworkProducer networkProducer,
           BaseProducer baseProducer, DateProducer dateProducer, CreditCardProvider creditCardProvider,
-          CompanyFactory companyFactory, IBANFactory ibanFactory) {
+          CompanyFactory companyFactory, IBANFactory ibanFactory, InvalidFairy invalidFairy) {
         this.textProducer = textProducer;
         this.personFactory = personFactory;
         this.networkProducer = networkProducer;
@@ -45,6 +46,7 @@ public final class Fairy {
         this.creditCardProvider = creditCardProvider;
         this.companyFactory = companyFactory;
         this.ibanFactory = ibanFactory;
+        this.invalidFairy = invalidFairy;
     }
 
     public static Fairy create() {
@@ -150,5 +152,15 @@ public final class Fairy {
      */
     public UniqueFairy unique(int maxRetries) {
         return new UniqueFairy(this, maxRetries);
+    }
+
+    /**
+     * Returns an {@link InvalidFairy} that generates identifiers failing checksum
+     * validation (PESEL, NIP, IBAN, etc.), for negative testing.
+     *
+     * @return An {@link InvalidFairy} instance
+     */
+    public InvalidFairy invalid() {
+        return invalidFairy;
     }
 }
