@@ -246,6 +246,20 @@
 							</sources>
 						</configuration>
 					</execution>
+					<execution>
+						<id>add-generated-data</id>
+						<goals>
+							<goal>add-resource</goal>
+						</goals>
+						<phase>generate-resources</phase>
+						<configuration>
+							<resources>
+								<resource>
+									<directory>${project.build.directory}/generated-resources/jfairy-data</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 			<plugin>
@@ -305,7 +319,36 @@
 							<goal>compileTests</goal>
 						</goals>
 					</execution>
+					<execution>
+						<id>generate-data-properties</id>
+						<goals>
+							<goal>execute</goal>
+						</goals>
+						<phase>generate-resources</phase>
+						<configuration>
+							<properties>
+								<property>
+									<name>sourceDir</name>
+									<value>${project.basedir}/src/main/resources</value>
+								</property>
+								<property>
+									<name>outputDir</name>
+									<value>${project.build.directory}/generated-resources/jfairy-data</value>
+								</property>
+							</properties>
+							<scripts>
+								<script>${project.basedir}/build/yaml2properties.groovy</script>
+							</scripts>
+						</configuration>
+					</execution>
 				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.snakeyaml</groupId>
+						<artifactId>snakeyaml-engine</artifactId>
+						<version>${dep.snakeyaml-engine.version}</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 
             <plugin>
