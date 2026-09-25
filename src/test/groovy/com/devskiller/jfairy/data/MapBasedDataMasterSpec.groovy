@@ -9,6 +9,7 @@ import spock.lang.Specification
 import com.devskiller.jfairy.producer.BaseProducer
 import com.devskiller.jfairy.producer.RandomGenerator
 import com.devskiller.jfairy.producer.person.PersonProvider
+import com.devskiller.jfairy.producer.util.LanguageCode
 
 class MapBasedDataMasterSpec extends Specification {
 
@@ -61,6 +62,18 @@ class MapBasedDataMasterSpec extends Specification {
 
         then:
             (lastName == "Smith") || (lastName == "Jones")
+    }
+
+    def "bundled company names of '#locale' are plain strings"() {
+        given:
+            MapBasedDataMaster dataMaster = new MapBasedDataMaster(new BaseProducer(new RandomGenerator()))
+            dataMaster.readResources("jfairy_${locale}.yml")
+
+        expect:
+            dataMaster.getStringList('companyNames').every { it instanceof String }
+
+        where:
+            locale << LanguageCode.values()*.name()*.toLowerCase(Locale.ROOT)
     }
 
 }
