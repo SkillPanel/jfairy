@@ -12,7 +12,6 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -33,7 +32,9 @@ import com.devskiller.jfairy.producer.util.ValidateUtils;
  * {@link DataMaster} backed by flat {@code .properties} resources (generated at build time from the bundled YAML files).
  * <p>
  * A value is either a scalar ({@code language=PL}), a comma-separated list ({@code cities=A,B}) or, for data split by
- * type, one list per type ({@code firstNames.male=A,B}). List elements are trimmed and empty ones skipped. Keys are
+ * type, one list per type ({@code firstNames.male=A,B}). List elements are trimmed and empty ones skipped. A list
+ * element may carry a weight, {@code Nowak*98387}, making it picked proportionally more often by
+ * {@link #getRandomValue} and {@link #getValuesOfType}; an element without a weight counts as 1. Keys are
  * case-insensitive.
  */
 public class MapBasedDataMaster implements DataMaster {
@@ -41,16 +42,20 @@ public class MapBasedDataMaster implements DataMaster {
     public static final String LANGUAGE_TAG = "language";
 
     private static final Logger LOG = LoggerFactory.getLogger(MapBasedDataMaster.class);
-    private static final String LIST_SEPARATOR = ",";
     private static final char TYPE_SEPARATOR = '.';
     private static final String PROPERTIES_EXTENSION = ".properties";
     private static final String LEGACY_YAML_EXTENSION = ".yml";
 
     private final BaseProducer baseProducer;
     private final Map<String, String> dataSource = new HashMap<>();
+    // Resource each key was last read from, to name it in errors
+    private final Map<String, URL> origins = new HashMap<>();
     // Every value split once when resources are read, so lookups never write and a created Fairy may be shared between
     // threads. readResources itself is not thread-safe: it is only meant to be called while bootstrapping.
-    private Map<String, List<String>> lists = Map.of();
+    private Map<String, WeightedList> lists = Map.of();
+    // A value that is not a valid list only fails when used as one: .properties cannot tell a list from a scalar such
+    // as text, which may legitimately contain '*'
+    private Map<String, IllegalArgumentException> invalidLists = Map.of();
 
     public MapBasedDataMaster(BaseProducer baseProducer) {
         this.baseProducer = baseProducer;
@@ -65,10 +70,7 @@ public class MapBasedDataMaster implements DataMaster {
      */
     @Override
     public List<String> getStringList(String key) {
-        getData(key);
-        List<String> list = lists.get(normalize(key));
-        ValidateUtils.isTrue(!list.isEmpty(), "No values for key: %s", key);
-        return list;
+        return list(key).values();
     }
 
     /**
@@ -77,7 +79,7 @@ public class MapBasedDataMaster implements DataMaster {
      */
     @Override
     public <T> T getValuesOfType(String dataKey, final String type, final Class<T> resultClass) {
-        String value = baseProducer.randomElement(getValues(dataKey, type));
+        String value = typedList(dataKey, type).pick(baseProducer);
         return convert(value, resultClass, dataKey, type);
     }
 
@@ -95,7 +97,7 @@ public class MapBasedDataMaster implements DataMaster {
 
     @Override
     public String getRandomValue(String key) {
-        return baseProducer.randomElement(getStringList(key));
+        return list(key).pick(baseProducer);
     }
 
     @Override
@@ -134,22 +136,53 @@ public class MapBasedDataMaster implements DataMaster {
         List<URL> urls = Collections.list(resources);
         Collections.reverse(urls);
         for (URL url : urls) {
-            appendData(load(url));
+            appendData(load(url), url);
         }
-        lists = splitAll(dataSource);
+        splitAll();
     }
 
     /**
-     * Returns the list stored under {@code dataKey.type} or, when the data is not split by type, under {@code dataKey}.
+     * Returns the values stored under {@code dataKey.type} or, when the data is not split by type, under {@code dataKey}.
      */
     List<String> getValues(String dataKey, String type) {
+        return typedList(dataKey, type).values();
+    }
+
+    /**
+     * Returns the elements of {@code key} as written, weights included.
+     */
+    List<String> getElements(String key) {
+        return list(key).elements();
+    }
+
+    /**
+     * Returns the elements of {@code dataKey.type}, or of {@code dataKey} when not split by type, as written.
+     */
+    List<String> getElements(String dataKey, String type) {
+        return typedList(dataKey, type).elements();
+    }
+
+    private WeightedList typedList(String dataKey, String type) {
         ValidateUtils.notNull(dataKey, "key cannot be null");
         String typedKey = dataKey + TYPE_SEPARATOR + type;
         if (dataSource.containsKey(normalize(typedKey))) {
-            return getStringList(typedKey);
+            return list(typedKey);
         }
         ValidateUtils.isTrue(dataSource.containsKey(normalize(dataKey)), "No such key: %s nor %s", typedKey, dataKey);
-        return getStringList(dataKey);
+        return list(dataKey);
+    }
+
+    private WeightedList list(String key) {
+        getData(key);
+        String normalized = normalize(key);
+        IllegalArgumentException invalid = invalidLists.get(normalized);
+        if (invalid != null) {
+            throw new IllegalArgumentException(
+                String.format("%s: key '%s': %s", origins.get(normalized), key, invalid.getMessage()), invalid);
+        }
+        WeightedList list = lists.get(normalized);
+        ValidateUtils.isTrue(!list.isEmpty(), "No values for key: %s", key);
+        return list;
     }
 
     int size() {
@@ -168,7 +201,7 @@ public class MapBasedDataMaster implements DataMaster {
      * ({@code lastNames}) replaces the whole root, so it also drops the existing {@code lastNames.male} list. A typed
      * key over a flat list keeps the flat list for the other types.
      */
-    private void appendData(Properties data) {
+    private void appendData(Properties data, URL url) {
         for (String key : data.stringPropertyNames()) {
             String normalized = normalize(key);
             if (normalized.indexOf(TYPE_SEPARATOR) < 0) {
@@ -177,16 +210,23 @@ public class MapBasedDataMaster implements DataMaster {
         }
         for (String key : data.stringPropertyNames()) {
             dataSource.put(normalize(key), data.getProperty(key));
+            origins.put(normalize(key), url);
         }
+        origins.keySet().retainAll(dataSource.keySet());
     }
 
-    private static Map<String, List<String>> splitAll(Map<String, String> data) {
-        Map<String, List<String>> result = new HashMap<>();
-        data.forEach((key, value) -> result.put(key, Arrays.stream(value.split(LIST_SEPARATOR))
-            .map(String::strip)
-            .filter(element -> !element.isEmpty())
-            .toList()));
-        return Collections.unmodifiableMap(result);
+    private void splitAll() {
+        Map<String, WeightedList> parsed = new HashMap<>();
+        Map<String, IllegalArgumentException> invalid = new HashMap<>();
+        dataSource.forEach((key, value) -> {
+            try {
+                parsed.put(key, WeightedList.parse(value));
+            } catch (IllegalArgumentException ex) {
+                invalid.put(key, ex);
+            }
+        });
+        lists = Collections.unmodifiableMap(parsed);
+        invalidLists = Collections.unmodifiableMap(invalid);
     }
 
     private static <T> T convert(String value, Class<T> resultClass, String dataKey, String type) {
