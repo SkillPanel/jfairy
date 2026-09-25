@@ -47,7 +47,8 @@ public class MapBasedDataMaster implements DataMaster {
 
     private final BaseProducer baseProducer;
     private final Map<String, String> dataSource = new HashMap<>();
-    // Every value split once when resources are read, so lookups never write (a Fairy may be shared between threads)
+    // Every value split once when resources are read, so lookups never write and a created Fairy may be shared between
+    // threads. readResources itself is not thread-safe: it is only meant to be called while bootstrapping.
     private Map<String, List<String>> lists = Map.of();
 
     public MapBasedDataMaster(BaseProducer baseProducer) {
