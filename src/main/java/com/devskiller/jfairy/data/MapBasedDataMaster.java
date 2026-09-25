@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
+import java.util.TreeSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -211,6 +212,12 @@ public class MapBasedDataMaster implements DataMaster {
         Properties properties = new Properties();
         try (Reader reader = new InputStreamReader(url.openStream(), StandardCharsets.UTF_8)) {
             properties.load(reader);
+        }
+        // Keys are case-insensitive, so which of two such keys won would depend on hash order
+        Map<String, String> seen = new HashMap<>();
+        for (String key : new TreeSet<>(properties.stringPropertyNames())) {
+            String previous = seen.put(normalize(key), key);
+            ValidateUtils.isTrue(previous == null, "%s: keys '%s' and '%s' differ only in case", url, previous, key);
         }
         return properties;
     }

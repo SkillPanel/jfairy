@@ -55,12 +55,24 @@ String propertyLine(String key, String value) {
     writer.toString().readLines().find { !it.startsWith('#') }
 }
 
+// MapBasedDataMaster reads keys case-insensitively, so such keys would silently shadow each other
+void checkNoCaseDuplicates(String file, String prefix, Collection keys) {
+    Map<String, String> seen = [:]
+    keys.each { rawKey ->
+        String key = "${prefix}${rawKey}"
+        String other = seen.put(key.toLowerCase(Locale.ROOT), key)
+        check(other == null, file, key, "differs from '${other}' only in case")
+    }
+}
+
 Map<String, String> flatten(String file, Map document) {
     Map<String, String> flat = new TreeMap<>()
+    checkNoCaseDuplicates(file, '', document.keySet())
     document.each { rawKey, value ->
         String key = rawKey as String
         check(!key.contains('.'), file, key, "key must not contain '.'")
         if (value instanceof Map) {
+            checkNoCaseDuplicates(file, "${key}.", (value as Map).keySet())
             (value as Map).each { rawSubKey, subValue ->
                 String subKey = rawSubKey as String
                 String nestedKey = "${key}.${subKey}"

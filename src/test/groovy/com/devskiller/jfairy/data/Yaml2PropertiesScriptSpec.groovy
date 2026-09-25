@@ -74,14 +74,16 @@ middle: m
             ex.message.contains(expectedMessagePart)
 
         where:
-            problem                        | yaml                                  | expectedMessagePart
-            'a mapping inside a list'      | 'companyNames: [ACME, Foo; bar: VÚB]' | 'companyNames'
-            'a comma inside an element'    | "cities: ['A, B']"                    | "','"
-            'an empty list'                | 'cities: []'                          | 'must not be empty'
-            'an empty element'             | "cities: [A, '']"                     | 'non-empty'
-            'nesting deeper than one map'  | 'firstNames: {male: {x: [A]}}'        | 'firstNames.male'
-            'a dot in a key'               | 'a.b: [x]'                            | "'.'"
-            'a duplicate key'              | 'cities: [A]\ncities: [B]'            | 'cities'
+            problem                           | yaml                                  | expectedMessagePart
+            'a mapping inside a list'         | 'companyNames: [ACME, Foo; bar: VÚB]' | 'companyNames'
+            'a comma inside an element'       | "cities: ['A, B']"                    | "','"
+            'an empty list'                   | 'cities: []'                          | 'must not be empty'
+            'an empty element'                | "cities: [A, '']"                     | 'non-empty'
+            'nesting deeper than one map'     | 'firstNames: {male: {x: [A]}}'        | 'firstNames.male'
+            'a dot in a key'                  | 'a.b: [x]'                            | "'.'"
+            'a duplicate key'                 | 'cities: [A]\ncities: [B]'            | 'cities'
+            'keys differing only in case'     | 'Cities: [A]\ncities: [B]'            | "key 'cities': differs from 'Cities' only in case"
+            'sub-keys differing only in case' | 'cc: {Visa: [4], VISA: [5]}'          | "key 'cc.VISA': differs from 'cc.Visa' only in case"
     }
 
     private Properties convert(String fileName, String yaml) {

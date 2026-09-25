@@ -128,6 +128,15 @@ class MapBasedDataMasterSpec extends Specification {
             ex.message == "No such key: streets.male nor streets"
     }
 
+    def "rejects keys of one file that differ only in case"() {
+        when:
+            readCustom('Cities=Springfield\ncities=Shelbyville\n')
+
+        then:
+            IllegalArgumentException ex = thrown()
+            ex.message.endsWith("custom.properties: keys 'Cities' and 'cities' differ only in case")
+    }
+
     def "a flat list replaces the base typed lists as a whole"() {
         given:
             dataMaster.readResources("datamaster/base.properties")
