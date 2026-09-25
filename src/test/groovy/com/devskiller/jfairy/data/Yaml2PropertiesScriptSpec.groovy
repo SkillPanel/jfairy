@@ -65,6 +65,14 @@ middle: m
             lines == ['alpha=a', 'middle=m', 'zeta=z']
     }
 
+    def "passes weighted elements through unchanged"() {
+        when:
+            Properties properties = convert('jfairy_xx.yml', 'lastNames: {male: [Nowak*98387, Kowalski*66589, Adamiec]}\n')
+
+        then:
+            properties == ['lastNames.male': 'Nowak*98387,Kowalski*66589,Adamiec']
+    }
+
     def "fails on #problem"() {
         when:
             convert('jfairy_xx.yml', yaml)
@@ -92,6 +100,13 @@ middle: m
             'a control character'             | 'cities: ["A\\tB"]'                   | 'control character'
             'a semicolon'                     | 'cities: [A;B]'                       | "';'"
             'a trailing colon'                | "cities: ['A:']"                      | "end with ':'"
+            'a zero weight'                   | 'cities: [A*0]'                       | 'weight must be a positive integer: [A*0]'
+            'a negative weight'               | "cities: ['A*-1']"                    | 'weight must be a positive integer'
+            'a non-numeric weight'            | 'cities: [A*x]'                       | 'weight must be a positive integer'
+            'two weights'                     | 'cities: [A*1*2]'                     | 'weight must be a positive integer'
+            'a weight without a value'        | "cities: ['*5']"                      | 'must be non-empty'
+            'a value repeated with weights'   | 'cities: [A*5, A*3]'                  | 'repeats [A]'
+            'whitespace before the weight'    | "cities: ['A *5']"                    | 'surrounding whitespace'
     }
 
     private Properties convert(String fileName, String yaml) {

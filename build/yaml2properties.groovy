@@ -9,6 +9,7 @@
  *   scalar        key=value
  *   list          key=a,b,c
  *   map of lists  key.subKey=a,b,c
+ * A list element may carry a weight, value*weight, which is copied unchanged.
  * Anything else fails the build, naming the file and key. Keys are sorted and no timestamp is written,
  * so the output is reproducible.
  */
@@ -41,12 +42,25 @@ String joinList(String file, String key, List values) {
     Set<String> seen = [] as Set
     values.collect { element ->
         String text = scalar(file, key, element)
-        check(!text.isEmpty() && !text.contains(',') && !text.contains('\n'), file, key,
-            "list element must be non-empty and contain neither ',' nor a newline: [${text}]")
-        checkElementText(file, key, text)
-        check(seen.add(text), file, key, "list element repeats [${text}]")
+        check(!text.contains(',') && !text.contains('\n'), file, key,
+            "list element must contain neither ',' nor a newline: [${text}]")
+        String value = valueOf(file, key, text)
+        check(!value.isEmpty(), file, key, "list element must be non-empty: [${text}]")
+        checkElementText(file, key, value)
+        check(seen.add(value), file, key, "list element repeats [${value}]")
         text
     }.join(',')
+}
+
+// An element is 'value' or 'value*weight'; the weight is a positive integer that fits in a long
+String valueOf(String file, String key, String text) {
+    int separator = text.indexOf('*')
+    if (separator < 0) {
+        return text
+    }
+    check(text.substring(separator + 1) ==~ /[1-9][0-9]{0,17}/, file, key,
+        "list element weight must be a positive integer: [${text}]")
+    text.substring(0, separator)
 }
 
 // Catches leftovers of scraped data, e.g. 'Potsdam; Grube' or 'Kategórie:'
