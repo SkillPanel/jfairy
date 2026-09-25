@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -43,7 +44,8 @@ public class MapBasedDataMaster implements DataMaster {
 
     private final BaseProducer baseProducer;
     private final Map<String, String> dataSource = new HashMap<>();
-    private final Map<String, List<String>> listCache = new HashMap<>();
+    // Every value split once when resources are read, so lookups never write (a Fairy may be shared between threads)
+    private Map<String, List<String>> lists = Map.of();
 
     public MapBasedDataMaster(BaseProducer baseProducer) {
         this.baseProducer = baseProducer;
@@ -58,8 +60,8 @@ public class MapBasedDataMaster implements DataMaster {
      */
     @Override
     public List<String> getStringList(String key) {
-        String value = getData(key);
-        return listCache.computeIfAbsent(normalize(key), k -> List.of(value.split(LIST_SEPARATOR, -1)));
+        getData(key);
+        return lists.get(normalize(key));
     }
 
     @Override
@@ -116,7 +118,7 @@ public class MapBasedDataMaster implements DataMaster {
         while (resources.hasMoreElements()) {
             appendData(load(resources.nextElement()));
         }
-        listCache.clear();
+        lists = splitAll(dataSource);
     }
 
     /**
@@ -151,6 +153,12 @@ public class MapBasedDataMaster implements DataMaster {
         for (String key : data.stringPropertyNames()) {
             dataSource.put(normalize(key), data.getProperty(key));
         }
+    }
+
+    private static Map<String, List<String>> splitAll(Map<String, String> data) {
+        Map<String, List<String>> result = new HashMap<>();
+        data.forEach((key, value) -> result.put(key, List.of(value.split(LIST_SEPARATOR, -1))));
+        return Collections.unmodifiableMap(result);
     }
 
     private static Properties load(URL url) throws IOException {

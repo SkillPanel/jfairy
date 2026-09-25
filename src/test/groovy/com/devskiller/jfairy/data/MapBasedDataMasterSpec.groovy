@@ -4,6 +4,10 @@
 
 package com.devskiller.jfairy.data
 
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
+import java.util.concurrent.Future
+
 import spock.lang.Specification
 
 import com.devskiller.jfairy.producer.BaseProducer
@@ -93,6 +97,32 @@ class MapBasedDataMasterSpec extends Specification {
         then:
             IllegalArgumentException ex = thrown()
             ex.message == "File datamaster/missing.properties was not found on classpath"
+    }
+
+    def "can be read from many threads at once"() {
+        given:
+            List<String> keys = ['alphabet', 'cities', 'companyEmails', 'companyNames', 'companySuffixes', 'countries', 'domains',
+                                 'firstNames.female', 'firstNames.male', 'lastNames', 'personalEmails', 'postalCodes', 'streets',
+                                 'telephoneNumberFormats', 'text']
+            List<MapBasedDataMaster> dataMasters = (1..20).collect {
+                MapBasedDataMaster master = new MapBasedDataMaster(new BaseProducer(new RandomGenerator()))
+                master.readResources("jfairy.properties")
+                master.readResources("jfairy_de.properties")
+                master
+            }
+            ExecutorService pool = Executors.newFixedThreadPool(16)
+
+        when:
+            List<Future<?>> futures = dataMasters.collectMany { master ->
+                (1..16).collect { pool.submit({ keys.each { master.getStringList(it) } } as Runnable) }
+            }
+            futures*.get()
+
+        then:
+            noExceptionThrown()
+
+        cleanup:
+            pool.shutdownNow()
     }
 
     def "bundled company names of '#locale' are plain strings"() {
