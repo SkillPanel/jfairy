@@ -38,12 +38,24 @@ String scalar(String file, String key, Object value) {
 
 String joinList(String file, String key, List values) {
     check(!values.isEmpty(), file, key, 'list must not be empty')
+    Set<String> seen = [] as Set
     values.collect { element ->
         String text = scalar(file, key, element)
         check(!text.isEmpty() && !text.contains(',') && !text.contains('\n'), file, key,
             "list element must be non-empty and contain neither ',' nor a newline: [${text}]")
+        checkElementText(file, key, text)
+        check(seen.add(text), file, key, "list element repeats [${text}]")
         text
     }.join(',')
+}
+
+// Catches leftovers of scraped data, e.g. 'Potsdam; Grube' or 'Kategórie:'
+void checkElementText(String file, String key, String text) {
+    check(text == text.strip(), file, key, "list element must not have surrounding whitespace: [${text}]")
+    check(!(text =~ /\s\s/), file, key, "list element must not contain consecutive whitespace: [${text}]")
+    check(!(text =~ /\p{Cntrl}/), file, key, "list element must not contain a control character: [${text}]")
+    check(!text.contains(';'), file, key, "list element must not contain ';': [${text}]")
+    check(!text.endsWith(':'), file, key, "list element must not end with ':': [${text}]")
 }
 
 String propertyLine(String key, String value) {

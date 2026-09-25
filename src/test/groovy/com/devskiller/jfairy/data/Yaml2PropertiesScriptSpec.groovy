@@ -84,6 +84,14 @@ middle: m
             'a duplicate key'                 | 'cities: [A]\ncities: [B]'            | 'cities'
             'keys differing only in case'     | 'Cities: [A]\ncities: [B]'            | "key 'cities': differs from 'Cities' only in case"
             'sub-keys differing only in case' | 'cc: {Visa: [4], VISA: [5]}'          | "key 'cc.VISA': differs from 'cc.Visa' only in case"
+            'a repeated element'              | 'cities: [A, B, A]'                   | "repeats [A]"
+            'a repeated nested element'       | 'firstNames: {male: [A, A]}'          | "key 'firstNames.male': list element repeats [A]"
+            'leading whitespace'              | "cities: [' A']"                      | 'surrounding whitespace'
+            'trailing whitespace'             | "cities: ['A ']"                      | 'surrounding whitespace'
+            'a run of whitespace'             | 'cities: [A  B]'                      | 'consecutive whitespace'
+            'a control character'             | 'cities: ["A\\tB"]'                   | 'control character'
+            'a semicolon'                     | 'cities: [A;B]'                       | "';'"
+            'a trailing colon'                | "cities: ['A:']"                      | "end with ':'"
     }
 
     private Properties convert(String fileName, String yaml) {
