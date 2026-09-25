@@ -135,11 +135,6 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.snakeyaml</groupId>
-			<artifactId>snakeyaml-engine</artifactId>
-			<version>${dep.snakeyaml-engine.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.jspecify</groupId>
 			<artifactId>jspecify</artifactId>
 			<version>${dep.jspecify.version}</version>
@@ -165,6 +160,12 @@
 					<artifactId>commons-logging</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.snakeyaml</groupId>
+			<artifactId>snakeyaml-engine</artifactId>
+			<version>${dep.snakeyaml-engine.version}</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -207,6 +208,16 @@
 	<build>
 
 		<defaultGoal>clean verify</defaultGoal>
+
+		<resources>
+			<resource>
+				<directory>${project.basedir}/src/main/resources</directory>
+				<excludes>
+					<!-- YAML is the source format; the jar ships the .properties generated from it -->
+					<exclude>*.yml</exclude>
+				</excludes>
+			</resource>
+		</resources>
 
 		<pluginManagement>
 			<plugins>

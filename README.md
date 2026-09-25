@@ -90,6 +90,24 @@ Fairy brFairy = Fairy.create(Locale.forLanguageTag("br"));
 // Brazilian version
 ```
 
+## Custom data
+
+The bundled data is maintained as YAML in the repository and ships in the jar as `.properties` files
+(`jfairy.properties` plus `jfairy_<language>.properties`). To add or replace data, put a file with the same name
+on your classpath. Every key it defines replaces the bundled one as a whole:
+
+```properties
+# src/test/resources/jfairy_en.properties
+cities=Springfield,Shelbyville
+firstNames.male=Homer,Bart
+firstNames.female=Marge,Lisa
+```
+
+Lists are comma-separated; data split by sex uses `.male` / `.female` sub-keys. Files are read as UTF-8.
+With `Fairy.builder().withFilePrefix("mydata")` jFairy reads `mydata.properties` and `mydata_<language>.properties` instead.
+
+> **Upgrading from 0.9.x:** custom `.yml` data files are no longer read. Convert them to `.properties` as shown above.
+
 ## Unique values
 
 ```java

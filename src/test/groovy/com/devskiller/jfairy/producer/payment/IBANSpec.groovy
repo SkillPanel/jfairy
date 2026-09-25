@@ -17,7 +17,7 @@ class IBANSpec extends Specification {
     def setup() {
         baseProducer = new BaseProducer(new RandomGenerator())
         dataMaster = new MapBasedDataMaster(baseProducer)
-        dataMaster.readResources("jfairy_pl.yml")
+        dataMaster.readResources("jfairy_pl.properties")
     }
 
     /**
