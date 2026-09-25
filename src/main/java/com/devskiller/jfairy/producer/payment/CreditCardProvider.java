@@ -33,8 +33,8 @@ public class CreditCardProvider implements Supplier<CreditCard> {
     }
 
     private String generateNumber() {
-        // Object.class keeps custom DataMaster implementations that still return an Integer working
-        String stringPrefix = String.valueOf(dataMaster.getValuesOfType(DATA_KEY, CARD_VENDOR, Object.class));
+        Integer prefix = dataMaster.getValuesOfType(DATA_KEY, CARD_VENDOR, Integer.class);
+        String stringPrefix = String.valueOf(prefix);
         StringBuilder builder = new StringBuilder(stringPrefix);
         builder.append("#".repeat(Math.max(0, 15 - stringPrefix.length())));
         return completeNumber(baseProducer.numerify(builder.toString()));

@@ -7,17 +7,19 @@ package com.devskiller.jfairy.data;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
-import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +32,8 @@ import com.devskiller.jfairy.producer.util.ValidateUtils;
  * {@link DataMaster} backed by flat {@code .properties} resources (generated at build time from the bundled YAML files).
  * <p>
  * A value is either a scalar ({@code language=PL}), a comma-separated list ({@code cities=A,B}) or, for data split by
- * type, one list per type ({@code firstNames.male=A,B}). Keys are case-insensitive.
+ * type, one list per type ({@code firstNames.male=A,B}). List elements are trimmed and empty ones skipped. Keys are
+ * case-insensitive.
  */
 public class MapBasedDataMaster implements DataMaster {
 
@@ -61,12 +64,19 @@ public class MapBasedDataMaster implements DataMaster {
     @Override
     public List<String> getStringList(String key) {
         getData(key);
-        return lists.get(normalize(key));
+        List<String> list = lists.get(normalize(key));
+        ValidateUtils.isTrue(!list.isEmpty(), "No values for key: %s", key);
+        return list;
     }
 
+    /**
+     * Picks a random value of {@code dataKey}/{@code type} and returns it as {@code resultClass}: values are strings,
+     * so any other class must have a public static {@code valueOf(String)} (e.g. {@code Integer}, an enum).
+     */
     @Override
     public <T> T getValuesOfType(String dataKey, final String type, final Class<T> resultClass) {
-        return resultClass.cast(baseProducer.randomElement(getValues(dataKey, type)));
+        String value = baseProducer.randomElement(getValues(dataKey, type));
+        return convert(value, resultClass, dataKey, type);
     }
 
     /**
@@ -131,8 +141,13 @@ public class MapBasedDataMaster implements DataMaster {
      * Returns the list stored under {@code dataKey.type} or, when the data is not split by type, under {@code dataKey}.
      */
     List<String> getValues(String dataKey, String type) {
+        ValidateUtils.notNull(dataKey, "key cannot be null");
         String typedKey = dataKey + TYPE_SEPARATOR + type;
-        return dataSource.containsKey(normalize(typedKey)) ? getStringList(typedKey) : getStringList(dataKey);
+        if (dataSource.containsKey(normalize(typedKey))) {
+            return getStringList(typedKey);
+        }
+        ValidateUtils.isTrue(dataSource.containsKey(normalize(dataKey)), "No such key: %s nor %s", typedKey, dataKey);
+        return getStringList(dataKey);
     }
 
     int size() {
@@ -147,15 +162,17 @@ public class MapBasedDataMaster implements DataMaster {
     }
 
     /**
-     * Merges one resource: every root key it defines ({@code lastNames} for {@code lastNames.male}) replaces the
-     * existing root key as a whole, so e.g. a flat {@code lastNames} list drops the base {@code lastNames.male} list.
+     * Merges one resource: a typed key ({@code lastNames.male}) replaces only that type, while a flat key
+     * ({@code lastNames}) replaces the whole root, so it also drops the existing {@code lastNames.male} list. A typed
+     * key over a flat list keeps the flat list for the other types.
      */
     private void appendData(Properties data) {
-        Set<String> roots = new HashSet<>();
         for (String key : data.stringPropertyNames()) {
-            roots.add(rootOf(normalize(key)));
+            String normalized = normalize(key);
+            if (normalized.indexOf(TYPE_SEPARATOR) < 0) {
+                dataSource.keySet().removeIf(existing -> rootOf(existing).equals(normalized));
+            }
         }
-        dataSource.keySet().removeIf(key -> roots.contains(rootOf(key)));
         for (String key : data.stringPropertyNames()) {
             dataSource.put(normalize(key), data.getProperty(key));
         }
@@ -163,8 +180,30 @@ public class MapBasedDataMaster implements DataMaster {
 
     private static Map<String, List<String>> splitAll(Map<String, String> data) {
         Map<String, List<String>> result = new HashMap<>();
-        data.forEach((key, value) -> result.put(key, List.of(value.split(LIST_SEPARATOR, -1))));
+        data.forEach((key, value) -> result.put(key, Arrays.stream(value.split(LIST_SEPARATOR))
+            .map(String::strip)
+            .filter(element -> !element.isEmpty())
+            .toList()));
         return Collections.unmodifiableMap(result);
+    }
+
+    private static <T> T convert(String value, Class<T> resultClass, String dataKey, String type) {
+        if (resultClass.isInstance(value)) {
+            return resultClass.cast(value);
+        }
+        IllegalArgumentException failure = new IllegalArgumentException(String.format(
+            "Cannot convert '%s' (key %s, type %s) to %s", value, dataKey, type, resultClass.getName()));
+        try {
+            Method valueOf = resultClass.getMethod("valueOf", String.class);
+            if (Modifier.isStatic(valueOf.getModifiers()) && resultClass.isAssignableFrom(valueOf.getReturnType())) {
+                return resultClass.cast(valueOf.invoke(null, value));
+            }
+        } catch (InvocationTargetException ex) {
+            failure.initCause(ex.getCause());
+        } catch (ReflectiveOperationException ex) {
+            failure.initCause(ex);
+        }
+        throw failure;
     }
 
     private static Properties load(URL url) throws IOException {

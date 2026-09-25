@@ -94,16 +94,17 @@ Fairy brFairy = Fairy.create(Locale.forLanguageTag("br"));
 
 The bundled data is maintained as YAML in the repository and ships in the jar as `.properties` files
 (`jfairy.properties` plus `jfairy_<language>.properties`). To add or replace data, put a file with the same name
-on your classpath. Every key it defines replaces the bundled one as a whole:
+on your classpath. Every key it defines replaces the bundled one, and keys it leaves out keep the bundled data:
 
 ```properties
 # src/test/resources/jfairy_en.properties
-cities=Springfield,Shelbyville
+cities=Springfield, Shelbyville
 firstNames.male=Homer,Bart
-firstNames.female=Marge,Lisa
 ```
 
-Lists are comma-separated; data split by sex uses `.male` / `.female` sub-keys. Files are read as UTF-8.
+Lists are comma-separated; spaces around elements are trimmed and empty elements skipped. Data split by sex uses
+`.male` / `.female` sub-keys: overriding one (as above) keeps the bundled female names, while a plain key
+(`lastNames=Simpson`) replaces the list for every sex. Files are read as UTF-8.
 With `Fairy.builder().withFilePrefix("mydata")` jFairy reads `mydata.properties` and `mydata_<language>.properties` instead.
 
 > **Upgrading from 0.9.x:** custom `.yml` data files are no longer read. Convert them to `.properties` as shown above.

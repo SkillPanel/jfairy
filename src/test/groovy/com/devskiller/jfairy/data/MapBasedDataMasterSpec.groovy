@@ -51,7 +51,84 @@ class MapBasedDataMasterSpec extends Specification {
             dataMaster.getStringList("cities") == ["Springfield", "Shelbyville"]
     }
 
-    def "a file replaces every root key it defines, so a flat list hides the base gendered lists"() {
+    def "trims list elements and skips empty ones"() {
+        when:
+            readCustom('cities=Springfield, Shelbyville ,\n')
+
+        then:
+            dataMaster.getStringList("cities") == ["Springfield", "Shelbyville"]
+    }
+
+    def "rejects a list without any value"() {
+        given:
+            readCustom('domains= , \n')
+
+        when:
+            dataMaster.getRandomValue("domains")
+
+        then:
+            IllegalArgumentException ex = thrown()
+            ex.message == "No values for key: domains"
+    }
+
+    def "converts the picked value to the requested class"() {
+        given:
+            dataMaster.readResources("jfairy.properties")
+
+        expect:
+            dataMaster.getValuesOfType("creditCardPrefixes", "Visa", Integer.class) == 4
+            dataMaster.getValuesOfType("creditCardPrefixes", "Visa", Object.class) == "4"
+    }
+
+    def "reports a value that cannot be converted to the requested class"() {
+        given:
+            dataMaster.readResources("datamaster/base.properties")
+
+        when:
+            dataMaster.getValuesOfType(PersonProvider.FIRST_NAME, "male", Integer.class)
+
+        then:
+            IllegalArgumentException ex = thrown()
+            ex.message == "Cannot convert 'John' (key firstNames, type male) to java.lang.Integer"
+    }
+
+    def "a typed key replaces only its own type"() {
+        given:
+            dataMaster.readResources("datamaster/base.properties")
+
+        when:
+            readCustom('firstNames.male=Homer\n')
+
+        then:
+            dataMaster.getValues(PersonProvider.FIRST_NAME, "male") == ["Homer"]
+            dataMaster.getValues(PersonProvider.FIRST_NAME, "female") == ["Jane"]
+    }
+
+    def "a typed key over a flat list keeps the flat list for the other types"() {
+        given:
+            dataMaster.readResources("datamaster/flat-override.properties")
+
+        when:
+            readCustom('lastNames.female=Anna\n')
+
+        then:
+            dataMaster.getValues(PersonProvider.LAST_NAME, "female") == ["Anna"]
+            dataMaster.getValues(PersonProvider.LAST_NAME, "male") == ["Kowalski", "Nowak"]
+    }
+
+    def "names both keys when neither the typed nor the flat list exists"() {
+        given:
+            dataMaster.readResources("datamaster/base.properties")
+
+        when:
+            dataMaster.getValues("streets", "male")
+
+        then:
+            IllegalArgumentException ex = thrown()
+            ex.message == "No such key: streets.male nor streets"
+    }
+
+    def "a flat list replaces the base typed lists as a whole"() {
         given:
             dataMaster.readResources("datamaster/base.properties")
             assert dataMaster.getValues(PersonProvider.LAST_NAME, "male") == ["Smith"]
@@ -159,5 +236,13 @@ class MapBasedDataMasterSpec extends Specification {
 
         where:
             locale << LanguageCode.values()*.name()*.toLowerCase(Locale.ROOT)
+    }
+
+    private void readCustom(String content) {
+        Path dir = Files.createTempDirectory(tempDir, 'custom')
+        Files.writeString(dir.resolve('custom.properties'), content)
+        new URLClassLoader([dir.toUri().toURL()] as URL[], (ClassLoader) null).withCloseable {
+            dataMaster.readResources('custom.properties', it)
+        }
     }
 }
