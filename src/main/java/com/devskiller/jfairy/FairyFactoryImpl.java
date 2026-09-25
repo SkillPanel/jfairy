@@ -21,6 +21,7 @@ class FairyFactoryImpl implements FairyFactory {
     private final CreditCardProvider creditCardProvider;
     private final CompanyFactory companyFactory;
     private final IBANFactory ibanFactory;
+    private final InvalidFairy invalidFairy;
 
     FairyFactoryImpl(TextProducerInternal textProducerInternal,
                      BaseProducer baseProducer,
@@ -29,7 +30,8 @@ class FairyFactoryImpl implements FairyFactory {
                      DateProducer dateProducer,
                      CreditCardProvider creditCardProvider,
                      CompanyFactory companyFactory,
-                     IBANFactory ibanFactory) {
+                     IBANFactory ibanFactory,
+                     InvalidFairy invalidFairy) {
         this.textProducerInternal = textProducerInternal;
         this.baseProducer = baseProducer;
         this.personFactory = personFactory;
@@ -38,6 +40,7 @@ class FairyFactoryImpl implements FairyFactory {
         this.creditCardProvider = creditCardProvider;
         this.companyFactory = companyFactory;
         this.ibanFactory = ibanFactory;
+        this.invalidFairy = invalidFairy;
     }
 
     @Override
@@ -46,6 +49,6 @@ class FairyFactoryImpl implements FairyFactory {
         NetworkProducer networkProducer = new NetworkProducer(ipNumberProducer);
 
         return new Fairy(textProducer, personFactory, networkProducer, baseProducer,
-                         dateProducer, creditCardProvider, companyFactory, ibanFactory);
+                         dateProducer, creditCardProvider, companyFactory, ibanFactory, invalidFairy);
     }
 }

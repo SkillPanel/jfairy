@@ -85,6 +85,12 @@ public final class Bootstrap {
 
         IBANFactory ibanFactory = new IBANFactoryImpl(baseProducer, dataMaster);
 
+        InvalidFairy invalidFairy = new InvalidFairy(
+                localeProviders.nationalIdentificationNumberFactory(),
+                localeProviders.vatIdentificationNumberProvider(),
+                ibanFactory
+        );
+
         // Create other producers
         CreditCardProvider creditCardProvider = new CreditCardProvider(dataMaster, baseProducer, dateProducer);
         TextProducerInternal textProducerInternal = new TextProducerInternal(dataMaster, baseProducer);
@@ -94,7 +100,7 @@ public final class Bootstrap {
         FairyFactory fairyFactory = new FairyFactoryImpl(
                 textProducerInternal, baseProducer, personFactory,
                 ipNumberProducer, dateProducer, creditCardProvider,
-                companyFactory, ibanFactory
+                companyFactory, ibanFactory, invalidFairy
         );
 
         LOG.trace("Fairy components initialized");
