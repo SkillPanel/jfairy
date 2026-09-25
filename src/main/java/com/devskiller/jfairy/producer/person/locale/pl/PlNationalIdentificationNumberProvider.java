@@ -111,7 +111,7 @@ public class PlNationalIdentificationNumberProvider implements NationalIdentific
      */
     @Override
     public void setIssueDate(LocalDate issueDate) {
-        ValidateUtils.isTrue(issueDate.getYear() >= BEGIN_YEAR && issueDate.getYear() <= END_YEAR,
+        ValidateUtils.isTrue(issueDate == null || issueDate.getYear() >= BEGIN_YEAR && issueDate.getYear() <= END_YEAR,
             "PESEL supports birth dates from %d to %d, got: %s", BEGIN_YEAR, END_YEAR, issueDate);
         this.issueDate = issueDate;
     }

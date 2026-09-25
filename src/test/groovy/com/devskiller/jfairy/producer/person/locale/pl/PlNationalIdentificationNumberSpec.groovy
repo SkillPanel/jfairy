@@ -55,6 +55,8 @@ class PlNationalIdentificationNumberSpec extends Specification {
             "1800-01-31" | "008131"
             "2100-11-01" | "005101"
             "2199-01-11" | "994111"
+            "1800-01-01" | "008101"
+            "2299-12-31" | "997231"
     }
 
     @Unroll
@@ -65,9 +67,22 @@ class PlNationalIdentificationNumberSpec extends Specification {
 
         then:
             IllegalArgumentException ex = thrown()
-            ex.message.contains("1800")
+            ex.message == "PESEL supports birth dates from 1800 to 2299, got: " + date
 
         where:
-            date << ["1799-12-31", "1701-01-01", "1700-01-01", "2300-01-01"]
+            date << ["1799-12-31", "1700-01-01", "2300-01-01"]
+    }
+
+    def "should fall back to a random birth date when none is given"() {
+
+        given:
+            dateGenerator.randomDateInThePast(_) >> LocalDate.parse("2020-05-17").atStartOfDay()
+
+        when:
+            NationalIdentificationNumber nationalIdentificationNumber = new PlNationalIdentificationNumberProvider(
+                    dateGenerator, randomGenerator, dateOfBirth(null)).get()
+
+        then:
+            nationalIdentificationNumber.getValue().startsWith("202517")
     }
 }
