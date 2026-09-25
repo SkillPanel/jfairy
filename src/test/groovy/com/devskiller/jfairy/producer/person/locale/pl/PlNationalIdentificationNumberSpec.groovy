@@ -56,4 +56,18 @@ class PlNationalIdentificationNumberSpec extends Specification {
             "2100-11-01" | "005101"
             "2199-01-11" | "994111"
     }
+
+    @Unroll
+    def "should reject birth date #date outside PESEL range"() {
+
+        when:
+            new PlNationalIdentificationNumberProvider(dateGenerator, randomGenerator, dateOfBirth(LocalDate.parse(date)))
+
+        then:
+            IllegalArgumentException ex = thrown()
+            ex.message.contains("1800")
+
+        where:
+            date << ["1799-12-31", "1701-01-01", "1700-01-01", "2300-01-01"]
+    }
 }
