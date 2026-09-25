@@ -61,12 +61,23 @@ class IBANSpec extends Specification {
             number.startsWith('PL')
     }
 
-    def "should generate the same iban for the same seed"() {
+    def "should generate the same ibans for the same seed: #kind"() {
         when:
-            String first = Fairy.builder().withRandomSeed(42).build().iban(IBANProperties.country("PL")).ibanNumber
-            String second = Fairy.builder().withRandomSeed(42).build().iban(IBANProperties.country("PL")).ibanNumber
+            List<String> first = seededIbans(generate)
+            List<String> second = seededIbans(generate)
         then:
             first == second
+            first.toSet().size() == first.size()
+        where:
+            kind              | generate
+            "valid, PL"       | { Fairy f -> f.iban(IBANProperties.country("PL")) }
+            "valid, default"  | { Fairy f -> f.iban() }
+            "invalid, PL"     | { Fairy f -> f.invalid().iban(IBANProperties.country("PL")) }
+    }
+
+    private static List<String> seededIbans(Closure<IBAN> generate) {
+        Fairy fairy = Fairy.builder().withRandomSeed(42).withLocale(Locale.forLanguageTag("pl")).build()
+        return (1..5).collect { generate(fairy).ibanNumber }
     }
 
     def "should ignore countries not supporting iban"() {

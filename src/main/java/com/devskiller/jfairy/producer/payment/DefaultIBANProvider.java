@@ -44,8 +44,8 @@ public class DefaultIBANProvider implements IBANProvider {
         if (reg == null) {
             return null;
         }
-        // RandomIban uses its own unseeded Random by default; derive a seed from our generator
-        // so the result stays deterministic under Fairy.builder().withRandomSeed(...).
+        // Without a seed RandomIban falls back to ThreadLocalRandom, which cannot be seeded; derive
+        // a seed from our generator so the result stays deterministic under withRandomSeed(...).
         Iban iban = RandomIban.builder()
                 .country(reg)
                 .seed(baseProducer.randomBetween(Long.MIN_VALUE, Long.MAX_VALUE))
