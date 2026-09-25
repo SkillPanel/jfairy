@@ -41,9 +41,9 @@ class BundledDataEquivalenceSpec extends Specification {
 
     private static boolean hasSameData(MapBasedDataMaster dataMaster, String key, Object value) {
         if (value instanceof Map) {
-            value.each { type, list -> assert dataMaster.getValues(key, type as String) == list*.toString() }
+            value.each { type, list -> assert dataMaster.getElements(key, type as String) == list*.toString() }
         } else if (value instanceof List) {
-            assert dataMaster.getStringList(key) == value*.toString()
+            assert dataMaster.getElements(key) == value*.toString()
         } else {
             assert dataMaster.getString(key) == value.toString()
         }
