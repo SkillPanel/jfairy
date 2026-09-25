@@ -24,7 +24,8 @@ public interface DataMaster {
     String getString(String key);
 
     /**
-     * Returns a list of strings associated with the given key.
+     * Returns the values of the list associated with the given key, without their weights. Picking from this list
+     * yourself is uniform; use {@link #getRandomValue(String)} for a pick that honours weights.
      *
      * @param key the unique identifier for the data entries
      * @return a list of string values found for the key
@@ -48,7 +49,8 @@ public interface DataMaster {
     <T> T getValuesOfType(String dataKey, String type, Class<T> resultClass);
 
     /**
-     * Selects a random string value from the entries associated with the given key.
+     * Selects a random value from the entries associated with the given key, honouring their weights if the list has
+     * any.
      *
      * @param key the unique identifier for the data list
      * @return a randomly selected string value

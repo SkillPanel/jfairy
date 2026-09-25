@@ -80,6 +80,75 @@ class MapBasedDataMasterSpec extends Specification {
             dataMaster.getValuesOfType("creditCardPrefixes", "Visa", Object.class) == "4"
     }
 
+    def "returns list values without their weights"() {
+        when:
+            readCustom('lastNames=Nowak*98387, Kowalski*66589, Adamiec\n')
+
+        then:
+            dataMaster.getStringList('lastNames') == ['Nowak', 'Kowalski', 'Adamiec']
+            dataMaster.getElements('lastNames') == ['Nowak*98387', 'Kowalski*66589', 'Adamiec']
+    }
+
+    def "picks weighted values in proportion to their weights"() {
+        given:
+            MapBasedDataMaster seeded = new MapBasedDataMaster(new BaseProducer(new RandomGenerator(42)))
+            readCustom(seeded, 'names=A*1,B*9\n')
+
+        when:
+            int picksOfB = (1..10_000).count { seeded.getRandomValue('names') == 'B' }
+
+        then:
+            picksOfB >= 8_500
+            picksOfB <= 9_500
+    }
+
+    def "converts a weighted value to the requested class"() {
+        when:
+            readCustom('creditCardPrefixes.Visa=4*3\n')
+
+        then:
+            dataMaster.getValuesOfType('creditCardPrefixes', 'Visa', Integer.class) == 4
+    }
+
+    def "a typed custom key with weights replaces only its own type"() {
+        given:
+            dataMaster.readResources("datamaster/base.properties")
+
+        when:
+            readCustom('firstNames.male=Homer*3,Bart\n')
+
+        then:
+            dataMaster.getValues(PersonProvider.FIRST_NAME, "male") == ["Homer", "Bart"]
+            dataMaster.getElements(PersonProvider.FIRST_NAME, "male") == ["Homer*3", "Bart"]
+            dataMaster.getValues(PersonProvider.FIRST_NAME, "female") == ["Jane"]
+    }
+
+    def "reports a malformed weight on #access, naming the file and the key"() {
+        given:
+            readCustom('lastNames=Adamiec,Nowak*0\n')
+
+        when:
+            accessor(dataMaster)
+
+        then:
+            IllegalArgumentException ex = thrown()
+            ex.message.endsWith("custom.properties: key 'lastNames': Element 'Nowak*0' must have a positive integer weight")
+
+        where:
+            access              | accessor
+            'getStringList'     | { MapBasedDataMaster it -> it.getStringList('lastNames') }
+            'getRandomValue'    | { MapBasedDataMaster it -> it.getRandomValue('lastNames') }
+            'getValuesOfType'   | { MapBasedDataMaster it -> it.getValuesOfType('lastNames', 'male', String) }
+    }
+
+    def "a scalar containing an asterisk stays readable"() {
+        when:
+            readCustom('text=Hello *world*, how are you?\n')
+
+        then:
+            dataMaster.getString('text') == 'Hello *world*, how are you?'
+    }
+
     def "reports a value that cannot be converted to the requested class"() {
         given:
             dataMaster.readResources("datamaster/base.properties")
@@ -248,10 +317,14 @@ class MapBasedDataMasterSpec extends Specification {
     }
 
     private void readCustom(String content) {
+        readCustom(dataMaster, content)
+    }
+
+    private void readCustom(MapBasedDataMaster master, String content) {
         Path dir = Files.createTempDirectory(tempDir, 'custom')
         Files.writeString(dir.resolve('custom.properties'), content)
         new URLClassLoader([dir.toUri().toURL()] as URL[], (ClassLoader) null).withCloseable {
-            dataMaster.readResources('custom.properties', it)
+            master.readResources('custom.properties', it)
         }
     }
 }

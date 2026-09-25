@@ -105,6 +105,12 @@ firstNames.male=Homer,Bart
 Lists are comma-separated; spaces around elements are trimmed and empty elements skipped. Data split by sex uses
 `.male` / `.female` sub-keys: overriding one (as above) keeps the bundled female names, while a plain key
 (`lastNames=Simpson`) replaces the list for every sex. Files are read as UTF-8.
+
+A list element may carry a weight to be picked more often: with `lastNames=Nowak*98387,Kowalski*66589,Adamiec`,
+Nowak comes up about 98387 times as often as Adamiec, since an element without a weight counts as 1. Weights are
+positive whole numbers, relative within one list, and a list without any weight is picked uniformly. A malformed
+weight fails when the key is first used, naming the file and the key.
+
 With `Fairy.builder().withFilePrefix("mydata")` jFairy reads `mydata.properties` and `mydata_<language>.properties` instead.
 
 > **Upgrading from 0.9.x:** custom `.yml` data files are no longer read. Convert them to `.properties` as shown above.
