@@ -106,6 +106,30 @@ UniqueEnforcer<Person> unique = UniqueEnforcer.of(fairy::person, Person::getFull
 Person p = unique.next();
 ```
 
+## Invalid identifiers
+
+For negative tests of your validators, `fairy.invalid()` generates identifiers that keep a valid
+format but fail checksum validation:
+
+```java
+InvalidFairy invalid = Fairy.create(Locale.forLanguageTag("pl")).invalid();
+String pesel = invalid.nationalIdentificationNumber(); // wrong check digit
+String nip = invalid.vatIdentificationNumber();        // wrong check digit
+IBAN iban = invalid.iban();                            // wrong check digits
+
+// the embedded birth date and sex are kept
+String malePesel = invalid.nationalIdentificationNumber(
+    NationalIdentificationNumberProperties.dateOfBirth(LocalDate.of(1990, 5, 17)),
+    NationalIdentificationNumberProperties.sex(Person.Sex.MALE));
+
+// combine with a person
+Person person = fairy.person(PersonProperties.withNationalIdentificationNumber(pesel));
+```
+
+National identification and VAT numbers are currently supported for the Polish locale
+(PESEL, NIP); other locales throw `UnsupportedOperationException`. IBANs work for every
+country that has them.
+
 ## Thread safety
 
 `Fairy` objects are not designed for concurrent use by multiple threads.

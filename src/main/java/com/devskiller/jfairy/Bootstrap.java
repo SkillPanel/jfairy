@@ -94,7 +94,9 @@ public final class Bootstrap {
         FairyFactory fairyFactory = new FairyFactoryImpl(
                 textProducerInternal, baseProducer, personFactory,
                 ipNumberProducer, dateProducer, creditCardProvider,
-                companyFactory, ibanFactory
+                companyFactory, ibanFactory,
+                localeProviders.nationalIdentificationNumberFactory(),
+                localeProviders.vatIdentificationNumberProvider()
         );
 
         LOG.trace("Fairy components initialized");

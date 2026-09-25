@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.VATIdentificationNumberProvider;
+import com.devskiller.jfairy.producer.util.CheckDigits;
 import com.devskiller.jfairy.producer.util.StringUtils;
 
 /**
@@ -91,6 +92,11 @@ public class PlVATIdentificationNumberProvider implements VATIdentificationNumbe
             // numbers with checkSum == 10 are invalid
         } while (checkSum == TEN);
         return number + checkSum;
+    }
+
+    @Override
+    public String getInvalid() {
+        return CheckDigits.replaceLastDigit(get(), baseProducer);
     }
 
     private String generateNumber() {

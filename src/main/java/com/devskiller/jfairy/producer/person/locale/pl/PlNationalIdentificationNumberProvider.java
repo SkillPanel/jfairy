@@ -9,6 +9,7 @@ import com.devskiller.jfairy.producer.person.NationalIdentificationNumber;
 import com.devskiller.jfairy.producer.person.NationalIdentificationNumberProperties;
 import com.devskiller.jfairy.producer.person.NationalIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.person.Person;
+import com.devskiller.jfairy.producer.util.CheckDigits;
 
 /**
  * Polish National Identification Number (known as PESEL - Powszechny Elektroniczny System Ewidencji Ludności)
@@ -79,6 +80,16 @@ public class PlNationalIdentificationNumberProvider implements NationalIdentific
         }
 
         return new NationalIdentificationNumber(generate());
+    }
+
+    /**
+     * Generates a PESEL with the requested birth date and sex but a wrong check digit
+     * <p>
+     * @return a new NationalIdentificationNumber instance that fails checksum validation
+     */
+    @Override
+    public NationalIdentificationNumber getInvalid() {
+        return new NationalIdentificationNumber(CheckDigits.replaceLastDigit(get().getValue(), baseProducer));
     }
 
     private String generate() {
