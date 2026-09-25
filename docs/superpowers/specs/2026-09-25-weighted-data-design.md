@@ -49,7 +49,10 @@ All changes are inside `MapBasedDataMaster`. The `DataMaster` interface is uncha
 - `getStringList` returns bare values without weights. Its javadoc states that picking from that list yourself is
   uniform. `JaCompanyProvider`, its only direct caller, is unaffected.
 - A malformed weight in a custom file (`Nowak*0`, `Nowak*x`, `A*1*2`) throws `IllegalArgumentException` naming the
-  file and the key while `Fairy` is being created, like the existing case-only key clash.
+  file and the key the first time that key is used as a list (`getStringList`, `getRandomValue`,
+  `getValuesOfType`), whichever element is picked. It cannot fail while `Fairy` is being created: `.properties` does
+  not tell a list from a scalar, and a scalar such as `text` may legitimately contain `*`. `getString` never fails
+  on weights.
 
 ## 3. `pl` data from PESEL
 
@@ -69,13 +72,15 @@ Observed in the 2026-01-20 data:
 Design:
 
 - `build/pesel2yaml.groovy`, JDK only, in the style of `yaml2properties.groovy`. It needs the network and runs about
-  once a year, so it is not part of the normal build: a Maven profile (`./mvnw -Ppesel generate-resources`) runs it
-  through the existing gmavenplus plugin. The CSV URLs are parameters, and the script header documents the source
+  once a year, so it is not part of the normal build: a Maven profile runs it
+  through the existing gmavenplus plugin, bound to `initialize` so the YAML is rewritten before `yaml2properties`
+  runs: `./mvnw -Ppesel initialize`. The CSV URLs are parameters, and the script header documents the source
   datasets.
 - Processing:
-  - title-case with the `pl` locale, including after a hyphen (`WIŚNIEWSKI` → `Wiśniewski`, `NOWAK-KOWALSKA` →
-    `Nowak-Kowalska`);
-  - drop values that are not only letters, hyphen, space or apostrophe (e.g. `BRAK DANYCH`);
+  - title-case with the `pl` locale, including after a hyphen or an apostrophe (`WIŚNIEWSKI` → `Wiśniewski`,
+    `NOWAK-KOWALSKA` → `Nowak-Kowalska`);
+  - keep only letters, optionally joined by a hyphen or an apostrophe. That drops junk such as `BRAK DANYCH`; no
+    name within the limits contains a space;
   - sort by count descending and keep the top N.
 - Limits: 1000 last names and 500 first names per sex.
 - The script replaces only the `firstNames` and `lastNames` blocks of `jfairy_pl.yml` and leaves the rest of the file
@@ -83,7 +88,7 @@ Design:
   naming the source, the data date, the licence and the regenerate command:
 
   ```yaml
-  # PESEL registry (dane.gov.pl, CC0), state as of 2026-01-20; regenerate with ./mvnw -Ppesel generate-resources
+  # PESEL registry (dane.gov.pl, CC0), state as of 2026-01-20; regenerate with ./mvnw -Ppesel initialize
   lastNames:
       male:
       - Nowak*98387
@@ -101,7 +106,8 @@ Design:
     `B`;
   - distribution sanity: 10,000 seeded picks from `[A*1, B*9]` give `B` a share between 85% and 95%;
   - `getValuesOfType` with `Integer.class` on `4*3` returns `4`;
-  - a custom file with `Nowak*0` fails in `readResources`, naming the file and the key.
+  - a custom file with `Nowak*0` fails on the first use of that key, naming the file and the key, while a custom
+    `text` containing `*` stays readable.
 - Unweighted lists: the seeded snapshots for `de`, `fr`, `ja` and `ka` pass unchanged. Only `pl` snapshots are
   updated.
 - A spec for `pesel2yaml.groovy` on small CSV fixtures in a temporary directory, without network: title-casing
