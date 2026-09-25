@@ -44,7 +44,12 @@ public class DefaultIBANProvider implements IBANProvider {
         if (reg == null) {
             return null;
         }
-        Iban iban = RandomIban.of(countryCode);
+        // RandomIban uses its own unseeded Random by default; derive a seed from our generator
+        // so the result stays deterministic under Fairy.builder().withRandomSeed(...).
+        Iban iban = RandomIban.builder()
+                .country(reg)
+                .seed(baseProducer.randomBetween(Long.MIN_VALUE, Long.MAX_VALUE))
+                .build();
 
         return new IBAN(iban.getAccountNumber(),
                         iban.getCheckDigits(),
