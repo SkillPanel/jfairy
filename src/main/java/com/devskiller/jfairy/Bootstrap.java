@@ -31,7 +31,7 @@ import com.devskiller.jfairy.producer.text.TextProducerInternal;
  * <li><tt>locale</tt>: Specifies the locale for the random data file.</li>
  * <li><tt>filePrefix</tt>: Specifies the file prefix.
  * (So if you specify "jfairy" here and English for Locale, the data file will be
- * "jfairy_en.yml" under the classpath.)
+ * "jfairy_en.properties" under the classpath.)
  * </li>
  * <li><tt>random</tt>: The Random object to use.</li>
  * <li><tt>randomSeed</tt>: A specific random seed to use. Use this if you want the resulting
@@ -51,6 +51,7 @@ public final class Bootstrap {
     private static final Logger LOG = LoggerFactory.getLogger(Bootstrap.class);
 
     private static final String DATA_FILE_PREFIX = "jfairy";
+    private static final String DATA_FILE_EXTENSION = ".properties";
 
     private Bootstrap() {
     }
@@ -109,8 +110,8 @@ public final class Bootstrap {
 
     private static void fillDefaultDataMaster(MapBasedDataMaster dataMaster, Locale locale, String filePrefix) {
         try {
-            String baseFile = filePrefix + ".yml";
-            String localeFile = filePrefix + "_" + locale.getLanguage() + ".yml";
+            String baseFile = filePrefix + DATA_FILE_EXTENSION;
+            String localeFile = filePrefix + "_" + locale.getLanguage() + DATA_FILE_EXTENSION;
 
             LOG.debug("Loading data resources: {}, {}", baseFile, localeFile);
 
@@ -132,7 +133,7 @@ public final class Bootstrap {
     }
 
     /**
-     * Use this factory method to create dataset containing default jfairy.yml and jfairy_{langCode}.yml files
+     * Use this factory method to create dataset containing default jfairy.properties and jfairy_{langCode}.properties files
      * merged with custom files with the same name
      *
      * @return Fairy instance
@@ -142,7 +143,7 @@ public final class Bootstrap {
     }
 
     /**
-     * Use this factory method to create dataset containing default jfairy.yml and jfairy_{langCode}.yml files
+     * Use this factory method to create dataset containing default jfairy.properties and jfairy_{langCode}.properties files
      * merged with custom files with the same name
      *
      * @param locale will be used to assess langCode for data file
@@ -156,7 +157,7 @@ public final class Bootstrap {
      * Use this factory method to create your own dataset overriding bundled one
      *
      * @param locale         will be used to assess langCode for data file
-     * @param dataFilePrefix prefix of the data file - final pattern will be jfairy.yml and dataFilePrefix_{langCode}.yml
+     * @param dataFilePrefix prefix of the data file - final pattern will be dataFilePrefix.properties and dataFilePrefix_{langCode}.properties
      * @return Fairy instance
      */
     public static Fairy create(Locale locale, String dataFilePrefix) {
@@ -198,7 +199,7 @@ public final class Bootstrap {
         /**
          * Sets the data file prefix for the resulting Fairy.
          *
-         * @param filePrefix The prefix of the file (such as "jfairy" for "jfairy_en.yml").
+         * @param filePrefix The prefix of the file (such as "jfairy" for "jfairy_en.properties").
          * @return the same Builder (for chaining).
          */
         public Builder withFilePrefix(String filePrefix) {

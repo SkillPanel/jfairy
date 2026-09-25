@@ -135,11 +135,6 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.snakeyaml</groupId>
-			<artifactId>snakeyaml-engine</artifactId>
-			<version>${dep.snakeyaml-engine.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>org.jspecify</groupId>
 			<artifactId>jspecify</artifactId>
 			<version>${dep.jspecify.version}</version>
@@ -165,6 +160,12 @@
 					<artifactId>commons-logging</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.snakeyaml</groupId>
+			<artifactId>snakeyaml-engine</artifactId>
+			<version>${dep.snakeyaml-engine.version}</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -208,6 +209,16 @@
 
 		<defaultGoal>clean verify</defaultGoal>
 
+		<resources>
+			<resource>
+				<directory>${project.basedir}/src/main/resources</directory>
+				<excludes>
+					<!-- YAML is the source format; the jar ships the .properties generated from it -->
+					<exclude>*.yml</exclude>
+				</excludes>
+			</resource>
+		</resources>
+
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -244,6 +255,20 @@
 							<sources>
 								<source>${project.basedir}/src/test/java</source>
 							</sources>
+						</configuration>
+					</execution>
+					<execution>
+						<id>add-generated-data</id>
+						<goals>
+							<goal>add-resource</goal>
+						</goals>
+						<phase>generate-resources</phase>
+						<configuration>
+							<resources>
+								<resource>
+									<directory>${project.build.directory}/generated-resources/jfairy-data</directory>
+								</resource>
+							</resources>
 						</configuration>
 					</execution>
 				</executions>
@@ -305,7 +330,36 @@
 							<goal>compileTests</goal>
 						</goals>
 					</execution>
+					<execution>
+						<id>generate-data-properties</id>
+						<goals>
+							<goal>execute</goal>
+						</goals>
+						<phase>generate-resources</phase>
+						<configuration>
+							<properties>
+								<property>
+									<name>sourceDir</name>
+									<value>${project.basedir}/src/main/resources</value>
+								</property>
+								<property>
+									<name>outputDir</name>
+									<value>${project.build.directory}/generated-resources/jfairy-data</value>
+								</property>
+							</properties>
+							<scripts>
+								<script>${project.basedir}/build/yaml2properties.groovy</script>
+							</scripts>
+						</configuration>
+					</execution>
 				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>org.snakeyaml</groupId>
+						<artifactId>snakeyaml-engine</artifactId>
+						<version>${dep.snakeyaml-engine.version}</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 
             <plugin>

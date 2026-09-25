@@ -27,7 +27,7 @@ class CreditCardProviderSpec extends Specification {
         baseProducer = new BaseProducer(new RandomGenerator())
         dataMaster = new MapBasedDataMaster(baseProducer)
         dateProducer = Mock(DateProducer)
-        dataMaster.readResources("jfairy.yml")
+        dataMaster.readResources("jfairy.properties")
         creditCardProvider = new CreditCardProvider(dataMaster, baseProducer, dateProducer)
     }
 
