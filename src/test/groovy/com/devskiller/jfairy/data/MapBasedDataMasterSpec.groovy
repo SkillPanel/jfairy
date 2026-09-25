@@ -4,11 +4,14 @@
 
 package com.devskiller.jfairy.data
 
+import java.nio.file.Files
+import java.nio.file.Path
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.Future
 
 import spock.lang.Specification
+import spock.lang.TempDir
 
 import com.devskiller.jfairy.producer.BaseProducer
 import com.devskiller.jfairy.producer.RandomGenerator
@@ -18,6 +21,9 @@ import com.devskiller.jfairy.producer.util.LanguageCode
 class MapBasedDataMasterSpec extends Specification {
 
     private MapBasedDataMaster dataMaster = new MapBasedDataMaster(new BaseProducer(new RandomGenerator()))
+
+    @TempDir
+    Path tempDir
 
     def "should read first names"() {
         when:
@@ -97,6 +103,25 @@ class MapBasedDataMasterSpec extends Specification {
         then:
             IllegalArgumentException ex = thrown()
             ex.message == "File datamaster/missing.properties was not found on classpath"
+    }
+
+    def "a same-named file earlier on the classpath overrides the later one"() {
+        given:
+            Path first = Files.createDirectory(tempDir.resolve('first'))
+            Path second = Files.createDirectory(tempDir.resolve('second'))
+            Files.writeString(first.resolve('custom.properties'), 'cities=Springfield\n')
+            Files.writeString(second.resolve('custom.properties'), 'cities=New York,Boston\ndomains=com\n')
+            URLClassLoader classLoader = new URLClassLoader([first.toUri().toURL(), second.toUri().toURL()] as URL[], (ClassLoader) null)
+
+        when:
+            dataMaster.readResources("custom.properties", classLoader)
+
+        then:
+            dataMaster.getStringList("cities") == ["Springfield"]
+            dataMaster.getStringList("domains") == ["com"]
+
+        cleanup:
+            classLoader?.close()
     }
 
     def "can be read from many threads at once"() {

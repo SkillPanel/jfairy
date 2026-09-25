@@ -98,7 +98,10 @@ public class MapBasedDataMaster implements DataMaster {
 
     //fixme - should be package-private
     public void readResources(String path) throws IOException {
-        ClassLoader classLoader = getClass().getClassLoader();
+        readResources(path, getClass().getClassLoader());
+    }
+
+    void readResources(String path, ClassLoader classLoader) throws IOException {
         Enumeration<URL> resources = classLoader.getResources(path);
         String legacyYamlPath = legacyYamlPath(path);
         boolean legacyYamlPresent = legacyYamlPath != null && classLoader.getResource(legacyYamlPath) != null;
@@ -115,8 +118,11 @@ public class MapBasedDataMaster implements DataMaster {
             LOG.warn("Ignoring {} on classpath: YAML data files are no longer supported, use {} instead", legacyYamlPath, path);
         }
 
-        while (resources.hasMoreElements()) {
-            appendData(load(resources.nextElement()));
+        // Applied last-to-first, so a file earlier on the classpath (e.g. the user's own) overrides the bundled one
+        List<URL> urls = Collections.list(resources);
+        Collections.reverse(urls);
+        for (URL url : urls) {
+            appendData(load(url));
         }
         lists = splitAll(dataSource);
     }
