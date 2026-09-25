@@ -16,7 +16,7 @@ public interface IBANProvider extends Supplier<IBAN> {
      */
     default @Nullable IBAN getInvalid() {
         throw new UnsupportedOperationException(
-            "Invalid IBANs are not supported by " + getClass().getSimpleName());
+            "Invalid IBANs are not supported by " + getClass().getName());
     }
 
     void fillCountryCode();

@@ -9,6 +9,7 @@ import com.devskiller.jfairy.producer.person.NationalIdentificationNumber;
 import com.devskiller.jfairy.producer.person.NationalIdentificationNumberProperties;
 import com.devskiller.jfairy.producer.person.NationalIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.person.Person;
+import com.devskiller.jfairy.producer.util.CheckDigits;
 
 import static java.lang.String.format;
 
@@ -64,6 +65,11 @@ public class SvNationalIdentificationNumberProvider implements NationalIdentific
         }
 
         return new NationalIdentificationNumber(generate());
+    }
+
+    @Override
+    public NationalIdentificationNumber getInvalid() {
+        return new NationalIdentificationNumber(CheckDigits.replaceLastDigit(get().getValue(), baseProducer));
     }
 
     private String generate() {

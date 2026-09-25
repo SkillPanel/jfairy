@@ -5,10 +5,16 @@ import java.time.LocalDate
 import de.speedbanking.iban.IbanValidator
 import spock.lang.Specification
 
+import com.devskiller.jfairy.producer.VATIdentificationNumberProvider
 import com.devskiller.jfairy.producer.company.locale.pl.PlVATIdentificationNumberProvider
+import com.devskiller.jfairy.producer.company.locale.sk.SkVATIdentificationNumberProvider
+import com.devskiller.jfairy.producer.company.locale.sv.SvVATIdentificationNumberProvider
 import com.devskiller.jfairy.producer.payment.IBANProperties
 import com.devskiller.jfairy.producer.person.Person
+import com.devskiller.jfairy.producer.person.PersonProperties
 import com.devskiller.jfairy.producer.person.locale.pl.PlNationalIdentificationNumberProvider
+import com.devskiller.jfairy.producer.person.locale.sk.SkNationalIdentificationNumberProvider
+import com.devskiller.jfairy.producer.person.locale.sv.SvNationalIdentificationNumberProvider
 
 import static com.devskiller.jfairy.producer.person.NationalIdentificationNumberProperties.dateOfBirth
 import static com.devskiller.jfairy.producer.person.NationalIdentificationNumberProperties.sex
@@ -35,6 +41,75 @@ class InvalidFairySpec extends Specification {
             number.startsWith("990101")
             Character.digit(number.charAt(9), 10) % 2 == 1
             !PlNationalIdentificationNumberProvider.isValid(number)
+    }
+
+    def "should build person whose birth date and sex match the invalid PESEL"() {
+        given:
+            def birthDate = LocalDate.of(1990, 5, 17)
+            def pesel = plFairy.invalid().nationalIdentificationNumber(dateOfBirth(birthDate), sex(Person.Sex.FEMALE))
+        when:
+            def person = plFairy.person(PersonProperties.female(), PersonProperties.withDateOfBirth(birthDate),
+                PersonProperties.withNationalIdentificationNumber(pesel))
+        then:
+            person.nationalIdentificationNumber == pesel
+            person.dateOfBirth == birthDate
+            person.female
+            pesel.startsWith("900517")
+    }
+
+    def "should generate Slovak national identification number with wrong check digit"() {
+        when:
+            def numbers = (1..SAMPLES).collect {
+                Fairy.create(Locale.forLanguageTag("sk")).invalid().nationalIdentificationNumber()
+            }
+        then:
+            numbers.every { it ==~ /\d{11}/ }
+            numbers.every { !SkNationalIdentificationNumberProvider.isValid(it) }
+    }
+
+    def "should generate Swedish personal identity number with wrong check digit"() {
+        when:
+            def numbers = (1..SAMPLES).collect {
+                Fairy.create(Locale.forLanguageTag("sv")).invalid().nationalIdentificationNumber()
+            }
+        then:
+            numbers.every { it ==~ /\d{6}-\d{4}/ }
+            numbers.every { !SvNationalIdentificationNumberProvider.isValid(it) }
+    }
+
+    def "should generate Slovak VAT identification number with wrong check digit"() {
+        when:
+            def numbers = (1..SAMPLES).collect {
+                Fairy.create(Locale.forLanguageTag("sk")).invalid().vatIdentificationNumber()
+            }
+        then:
+            numbers.every { it ==~ /\d{10}/ }
+            numbers.every { !SkVATIdentificationNumberProvider.isValid(it) }
+    }
+
+    def "should generate Swedish VAT identification number with wrong check digit"() {
+        when:
+            def numbers = (1..SAMPLES).collect {
+                Fairy.create(Locale.forLanguageTag("sv")).invalid().vatIdentificationNumber()
+            }
+        then:
+            numbers.every { it ==~ /SE\d{10}01/ }
+            numbers.every { !SvVATIdentificationNumberProvider.isValid(it) }
+    }
+
+    def "should name the provider class when invalid numbers are not supported"() {
+        given:
+            def provider = new VATIdentificationNumberProvider() {
+                @Override
+                String get() {
+                    return "123"
+                }
+            }
+        when:
+            provider.getInvalid()
+        then:
+            def e = thrown(UnsupportedOperationException)
+            e.message.endsWith(provider.getClass().getName())
     }
 
     def "should reject invalid national identification number for locale without checksum"() {

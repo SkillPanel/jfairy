@@ -20,10 +20,10 @@ public interface VATIdentificationNumberProvider extends Supplier<String> {
      * Generates a number in the valid format but with a wrong check digit, for negative testing.
      *
      * @return a VAT identification number that fails checksum validation
-     * @throws UnsupportedOperationException if the locale has no checksum-based number
+     * @throws UnsupportedOperationException if invalid numbers are not implemented for this locale
      */
     default String getInvalid() {
         throw new UnsupportedOperationException(
-            "Invalid VAT identification numbers are not supported by " + getClass().getSimpleName());
+            "Invalid VAT identification numbers are not supported by " + getClass().getName());
     }
 }

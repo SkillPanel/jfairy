@@ -8,6 +8,7 @@ import com.devskiller.jfairy.producer.DateProducer;
 import com.devskiller.jfairy.producer.VATIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.person.NationalIdentificationNumberFactory;
 import com.devskiller.jfairy.producer.person.NationalIdentificationNumberProvider;
+import com.devskiller.jfairy.producer.util.CheckDigits;
 import com.devskiller.jfairy.producer.util.StringUtils;
 
 import static com.devskiller.jfairy.producer.person.NationalIdentificationNumberProperties.dateOfBirth;
@@ -24,6 +25,8 @@ public class SvVATIdentificationNumberProvider implements VATIdentificationNumbe
     private static final int SOLE_TRADER_UPPER_AGE_LIMIT = 16;
     private static final int SOLE_TRADER_LOWER_AGE_LIMIT = 100;
     private static final String SE = "SE";
+    // SE + organization number (check digit last) + "01"
+    private static final int CHECK_DIGIT_OFFSET_FROM_END = 3;
 
     private final BaseProducer baseProducer;
     private final DateProducer dateProducer;
@@ -49,6 +52,12 @@ public class SvVATIdentificationNumberProvider implements VATIdentificationNumbe
         String organizationNumber = organizationNumberWithoutChecksum + calculateChecksum(organizationNumberWithoutChecksum);
 
         return SE + organizationNumber + "01";
+    }
+
+    @Override
+    public String getInvalid() {
+        String valid = get();
+        return CheckDigits.replaceDigitAt(valid, valid.length() - CHECK_DIGIT_OFFSET_FROM_END, baseProducer);
     }
 
     private String generateVatNumberForSoleTrader() {

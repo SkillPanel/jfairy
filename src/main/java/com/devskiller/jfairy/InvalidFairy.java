@@ -16,13 +16,17 @@ import com.devskiller.jfairy.producer.person.NationalIdentificationNumberPropert
  * and sex) and differs only in its check digit(s), so it exercises checksum validation
  * rather than format parsing.</p>
  *
- * <p>Methods throw {@link UnsupportedOperationException} when the current locale has
- * no checksum-based variant of the requested identifier.</p>
+ * <p>Methods throw {@link UnsupportedOperationException} when invalid values of the
+ * requested identifier are not implemented for the current locale.</p>
  *
  * <pre>{@code
  * InvalidFairy invalid = fairy.invalid();
- * String pesel = invalid.nationalIdentificationNumber();
- * Person person = fairy.person(PersonProperties.withNationalIdentificationNumber(pesel));
+ * String nip = invalid.vatIdentificationNumber();
+ *
+ * // keep the person consistent with the birth date and sex encoded in the number
+ * LocalDate birthDate = LocalDate.of(1990, 5, 17);
+ * String pesel = invalid.nationalIdentificationNumber(dateOfBirth(birthDate), sex(Person.Sex.FEMALE));
+ * Person person = fairy.person(female(), withDateOfBirth(birthDate), withNationalIdentificationNumber(pesel));
  * }</pre>
  */
 public final class InvalidFairy {

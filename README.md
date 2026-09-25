@@ -112,22 +112,31 @@ For negative tests of your validators, `fairy.invalid()` generates identifiers t
 format but fail checksum validation:
 
 ```java
-InvalidFairy invalid = Fairy.create(Locale.forLanguageTag("pl")).invalid();
+Fairy fairy = Fairy.create(Locale.forLanguageTag("pl"));
+InvalidFairy invalid = fairy.invalid();
+
 String pesel = invalid.nationalIdentificationNumber(); // wrong check digit
 String nip = invalid.vatIdentificationNumber();        // wrong check digit
 IBAN iban = invalid.iban();                            // wrong check digits
-
-// the embedded birth date and sex are kept
-String malePesel = invalid.nationalIdentificationNumber(
-    NationalIdentificationNumberProperties.dateOfBirth(LocalDate.of(1990, 5, 17)),
-    NationalIdentificationNumberProperties.sex(Person.Sex.MALE));
-
-// combine with a person
-Person person = fairy.person(PersonProperties.withNationalIdentificationNumber(pesel));
 ```
 
-National identification and VAT numbers are currently supported for the Polish locale
-(PESEL, NIP); other locales throw `UnsupportedOperationException`. IBANs work for every
+To get a person with an invalid PESEL, pass the same birth date and sex to the number and to
+the person, so that only the checksum is wrong:
+
+```java
+LocalDate birthDate = LocalDate.of(1990, 5, 17);
+String pesel = invalid.nationalIdentificationNumber(
+    NationalIdentificationNumberProperties.dateOfBirth(birthDate),
+    NationalIdentificationNumberProperties.sex(Person.Sex.FEMALE));
+
+Person person = fairy.person(
+    PersonProperties.female(),
+    PersonProperties.withDateOfBirth(birthDate),
+    PersonProperties.withNationalIdentificationNumber(pesel));
+```
+
+Invalid national identification and VAT numbers are implemented for the Polish, Slovak and
+Swedish locales; other locales throw `UnsupportedOperationException`. IBANs work for every
 country that has them.
 
 ## Thread safety
