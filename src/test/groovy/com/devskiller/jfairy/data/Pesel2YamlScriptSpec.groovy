@@ -43,7 +43,7 @@ firstNames:
 lastNames:
     male:
     - Nowak*98387
-    - Kowalski*66589
+    - Wiśniewski*70000
     female:
     - Nowak-Kowalska*10
     - O'Brien*5
@@ -75,6 +75,19 @@ cities: [Kraków]
 
         then:
             Files.readString(yaml, StandardCharsets.UTF_8) == EXPECTED
+    }
+
+    def "keeps comments and keys of any spelling that follow a name block"() {
+        given:
+            Path yaml = write('jfairy_pl.yml', YAML.replace('cities: [Kraków]\n',
+                '# cities scraped from somewhere\ncompany_names: [K]\ncities: [Kraków]\n'))
+
+        when:
+            run(yaml)
+
+        then:
+            Files.readString(yaml, StandardCharsets.UTF_8) == EXPECTED.replace('cities: [Kraków]\n',
+                '# cities scraped from somewhere\ncompany_names: [K]\ncities: [Kraków]\n')
     }
 
     def "fails instead of writing an empty block when a source has no usable rows"() {
@@ -111,7 +124,7 @@ cities: [Kraków]
             firstNamesMale  : csv('IMIĘ_PIERWSZE,PŁEĆ,LICZBA_WYSTĄPIEŃ\r\nPIOTR,MĘŻCZYZNA,682516\r\n'
                 + 'BRAK DANYCH,MĘŻCZYZNA,900000\r\nKRZYSZTOF,MĘŻCZYZNA,631898\r\nTOMASZ,MĘŻCZYZNA,533217\r\n'),
             firstNamesFemale: csv('IMIĘ_PIERWSZE,PŁEĆ,LICZBA_WYSTĄPIEŃ\r\nANNA,KOBIETA,1000\r\nMARIA,KOBIETA,2000\r\n'),
-            lastNamesMale   : csv('Nazwisko aktualne,Liczba\r\nKOWALSKI,66589\r\nNOWAK,98387\r\nWIŚNIEWSKI,53079\r\n'),
+            lastNamesMale   : csv('Nazwisko aktualne,Liczba\r\nKOWALSKI,66589\r\nNOWAK,98387\r\nWIŚNIEWSKI,70000\r\n'),
             lastNamesFemale : csv("Nazwisko aktualne,Liczba\r\nNOWAK-KOWALSKA,10\r\nO'BRIEN,5\r\nŻÓŁĆ1,7\r\n"),
         ]
         variables.putAll(overrides)

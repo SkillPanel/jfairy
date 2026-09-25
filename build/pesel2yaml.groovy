@@ -80,9 +80,9 @@ String replaceBlocks(String yaml, String header, List<String> blocks) {
         if (line.startsWith(MARKER)) {
             return
         }
-        def topLevelKey = line =~ /^([A-Za-z][A-Za-z0-9]*):/
-        if (topLevelKey.find()) {
-            skipping = topLevelKey.group(1) in NAME_KEYS
+        // Any unindented line other than the closing brace of a flow block starts a new entry or comment
+        if (line ==~ /^[^\s}\]].*/) {
+            skipping = NAME_KEYS.any { line.startsWith("${it}:") }
             if (skipping && !replaced) {
                 kept << header
                 kept.addAll(blocks)
