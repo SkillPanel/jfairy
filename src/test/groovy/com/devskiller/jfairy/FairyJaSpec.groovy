@@ -38,7 +38,7 @@ class FairyJaSpec extends Specification {
         when:
         Person person = fairy.person()
         then:
-        person.address.addressLine2 == '宇部中央区2-27-11'
+        person.address.addressLine2 == '宇部外堀通り2-27-11'
     }
 
     def "Should create Japanese city"() {

@@ -16,7 +16,7 @@ class FairyDeSpec extends Specification {
         when:
             Person person = fairy.person()
         then:
-            person.fullName == 'Timo Höfling' // well, that's german enough...
+            person.fullName == 'Gottwaldt Höfling' // well, that's german enough...
     }
 
     def "Should create German city"() {
