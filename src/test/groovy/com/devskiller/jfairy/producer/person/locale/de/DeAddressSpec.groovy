@@ -38,7 +38,7 @@ class DeAddressSpec extends Specification {
 
     def "should generate random city"() {
         expect:
-            address.city == 'Sitzenroda'
+            address.city == 'Lindern'
     }
 
     def "should return addressLine1 in de locale format"() {
@@ -48,12 +48,12 @@ class DeAddressSpec extends Specification {
 
     def "should return addressLine2 in de locale format"() {
         expect:
-            address.addressLine2 == '00322 Sitzenroda'
+            address.addressLine2 == '00322 Lindern'
     }
 
     def "should return address in de locale format"() {
         expect:
-            address.toString() == "Thomas-Müntzer-Hof 58${System.lineSeparator()}00322 Sitzenroda"
+            address.toString() == "Thomas-Müntzer-Hof 58${System.lineSeparator()}00322 Lindern"
     }
 
 }
