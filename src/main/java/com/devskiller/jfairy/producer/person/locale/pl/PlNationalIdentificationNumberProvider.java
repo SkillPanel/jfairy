@@ -10,6 +10,7 @@ import com.devskiller.jfairy.producer.person.NationalIdentificationNumberPropert
 import com.devskiller.jfairy.producer.person.NationalIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.person.Person;
 import com.devskiller.jfairy.producer.util.CheckDigits;
+import com.devskiller.jfairy.producer.util.ValidateUtils;
 
 /**
  * Polish National Identification Number (known as PESEL - Powszechny Elektroniczny System Ewidencji Ludności)
@@ -26,6 +27,7 @@ public class PlNationalIdentificationNumberProvider implements NationalIdentific
     private static final int[] PERIOD_WEIGHTS = {80, 0, 20, 40, 60};
     private static final int PERIOD_FACTOR = 100;
     private static final int BEGIN_YEAR = 1800;
+    private static final int END_YEAR = BEGIN_YEAR + PERIOD_WEIGHTS.length * PERIOD_FACTOR - 1;
 
     private static final int[] WEIGHTS = {1, 3, 7, 9, 1, 3, 7, 9, 1, 3};
     private static final int MAX_SERIAL_NUMBER = 999;
@@ -104,8 +106,13 @@ public class PlNationalIdentificationNumberProvider implements NationalIdentific
         return nationalIdentificationNumber + calculateChecksum(nationalIdentificationNumber);
     }
 
+    /**
+     * @throws IllegalArgumentException if the year is outside the range PESEL can encode (1800-2299)
+     */
     @Override
     public void setIssueDate(LocalDate issueDate) {
+        ValidateUtils.isTrue(issueDate == null || issueDate.getYear() >= BEGIN_YEAR && issueDate.getYear() <= END_YEAR,
+            "PESEL supports birth dates from %d to %d, got: %s", BEGIN_YEAR, END_YEAR, issueDate);
         this.issueDate = issueDate;
     }
 

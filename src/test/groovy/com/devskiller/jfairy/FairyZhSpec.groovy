@@ -22,7 +22,7 @@ class FairyZhSpec extends Specification {
         when:
         Person person = fairy.person()
         then:
-        person.fullName == '钱 国富'
+        person.fullName == '孙 泽民'
     }
 
     def "Should create Chinese id card"() {
@@ -43,14 +43,14 @@ class FairyZhSpec extends Specification {
         when:
         Person person = fairy.person()
         then:
-        person.address.addressLine1 == '上海市外环西路124号'
+        person.address.addressLine1 == '南京市江海大道98号'
     }
 
     def "Should create Chinese city"() {
         when:
         Person person = fairy.person()
         then:
-        person.address.city == '上海'
+        person.address.city == '南京'
     }
 
     /********************

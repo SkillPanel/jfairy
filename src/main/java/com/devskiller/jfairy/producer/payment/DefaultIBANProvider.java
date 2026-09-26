@@ -44,7 +44,12 @@ public class DefaultIBANProvider implements IBANProvider {
         if (reg == null) {
             return null;
         }
-        Iban iban = RandomIban.of(countryCode);
+        // Without a seed RandomIban falls back to ThreadLocalRandom, which cannot be seeded; derive
+        // a seed from our generator so the result stays deterministic under withRandomSeed(...).
+        Iban iban = RandomIban.builder()
+                .country(reg)
+                .seed(baseProducer.randomBetween(Long.MIN_VALUE, Long.MAX_VALUE))
+                .build();
 
         return new IBAN(iban.getAccountNumber(),
                         iban.getCheckDigits(),

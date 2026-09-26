@@ -1,7 +1,6 @@
 package com.devskiller.jfairy.producer.company.locale.zh;
 
 import com.devskiller.jfairy.producer.BaseProducer;
-import com.devskiller.jfairy.producer.RandomGenerator;
 import com.devskiller.jfairy.producer.VATIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.util.ZhFairyUtil;
 
@@ -15,20 +14,24 @@ import com.devskiller.jfairy.producer.util.ZhFairyUtil;
  */
 public class ZhVATIdentificationNumberProvider implements VATIdentificationNumberProvider {
 
-    private static final BaseProducer BASE_PRODUCER = new BaseProducer(new RandomGenerator());
+    private final BaseProducer baseProducer;
+
+    public ZhVATIdentificationNumberProvider(BaseProducer baseProducer) {
+        this.baseProducer = baseProducer;
+    }
 
     @Override
     public String get() {
         StringBuilder vatBuilder = new StringBuilder()
-                .append(BASE_PRODUCER.randomElement(ZhFairyUtil.PROV_LIST))
-                .append(ZhFairyUtil.getRandomNumStr(BASE_PRODUCER, ZhFairyUtil.CITY_MAX, 2))
-                .append(ZhFairyUtil.getRandomNumStr(BASE_PRODUCER, ZhFairyUtil.DISTRICT_MAX, 2))
+                .append(baseProducer.randomElement(ZhFairyUtil.PROV_LIST))
+                .append(ZhFairyUtil.getRandomNumStr(baseProducer, ZhFairyUtil.CITY_MAX, 2))
+                .append(ZhFairyUtil.getRandomNumStr(baseProducer, ZhFairyUtil.DISTRICT_MAX, 2))
                 .append(getChars(9));
         return vatBuilder.toString();
     }
 
     private char getChar() {
-        int rndNum = BASE_PRODUCER.randomBetween(0, 35);
+        int rndNum = baseProducer.randomBetween(0, 35);
         if (rndNum < 10) {
             return (char) (49 + rndNum);
         } else {
