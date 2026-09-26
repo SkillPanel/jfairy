@@ -14,7 +14,7 @@ class FairyKaSpec extends Specification {
         when:
         Person person = fairy.person()
         then:
-        person.fullName == 'ბაადურ აბრამიძე'  // Baadur Abramidze
+        person.fullName == 'ბაადურ ჯინჯიხაშვილი'  // Baadur Jinjikhashvili
     }
 
     def "Should create Georgian street"() {

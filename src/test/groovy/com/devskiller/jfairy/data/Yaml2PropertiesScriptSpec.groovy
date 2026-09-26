@@ -84,6 +84,17 @@ middle: m
             'a duplicate key'                 | 'cities: [A]\ncities: [B]'            | 'cities'
             'keys differing only in case'     | 'Cities: [A]\ncities: [B]'            | "key 'cities': differs from 'Cities' only in case"
             'sub-keys differing only in case' | 'cc: {Visa: [4], VISA: [5]}'          | "key 'cc.VISA': differs from 'cc.Visa' only in case"
+            'a repeated element'              | 'cities: [A, B, A]'                   | "list element [A] repeats [A]"
+            'a repeated nested element'       | 'firstNames: {male: [A, A]}'          | "key 'firstNames.male': list element [A] repeats [A]"
+            'elements differing only in case' | 'cities: [Real, real]'                | "list element [real] repeats [Real]"
+            'leading whitespace'              | "cities: [' A']"                      | 'surrounding whitespace'
+            'trailing whitespace'             | "cities: ['A ']"                      | 'surrounding whitespace'
+            'a run of whitespace'             | 'cities: [A  B]'                      | 'consecutive whitespace'
+            'a control character'             | 'cities: ["A\\tB"]'                   | 'control or invisible formatting character: [A\\u0009B]'
+            'a newline'                       | 'cities: ["A\\nB"]'                   | 'control or invisible formatting character: [A\\u000aB]'
+            'a left-to-right mark'            | 'cities: ["A\\u200e"]'                | 'control or invisible formatting character: [A\\u200e]'
+            'a semicolon'                     | 'cities: [A;B]'                       | "';'"
+            'a trailing colon'                | "cities: ['A:']"                      | "end with ':'"
     }
 
     private Properties convert(String fileName, String yaml) {
