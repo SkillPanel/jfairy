@@ -36,6 +36,12 @@ String scalar(String file, String key, Object value) {
     value.toString()
 }
 
+// MapBasedDataMaster and the list dedup checks below compare case-insensitively, so this
+// records `text` under its lowercased form and returns whatever was previously seen there
+String recordCaseInsensitive(Map<String, String> seen, String text) {
+    seen.put(text.toLowerCase(Locale.ROOT), text)
+}
+
 String joinList(String file, String key, List values) {
     check(!values.isEmpty(), file, key, 'list must not be empty')
     Map<String, String> seen = [:]
@@ -43,7 +49,7 @@ String joinList(String file, String key, List values) {
         String text = scalar(file, key, element)
         check(!text.isEmpty() && !text.contains(','), file, key, "list element must be non-empty and must not contain ',': [${text}]")
         checkElementText(file, key, text)
-        String other = seen.put(text.toLowerCase(Locale.ROOT), text)
+        String other = recordCaseInsensitive(seen, text)
         check(other == null, file, key, "list element [${text}] repeats [${other}]")
         text
     }.join(',')
@@ -52,7 +58,8 @@ String joinList(String file, String key, List values) {
 // Catches leftovers of scraped data, e.g. 'Potsdam; Grube', 'Kategórie:' or an invisible left-to-right mark
 void checkElementText(String file, String key, String text) {
     check(text == text.strip(), file, key, "list element must not have surrounding whitespace: [${text}]")
-    check(!(text =~ /\s\s/), file, key, "list element must not contain consecutive whitespace: [${text}]")
+    // (?U) makes \s Unicode-aware, catching runs of Unicode spaces (e.g. U+2003) that plain \s misses
+    check(!(text =~ /(?U)\s\s/), file, key, "list element must not contain consecutive whitespace: [${text}]")
     check(!(text =~ /[\p{Cc}\p{Cf}]/), file, key,
         "list element must not contain a control or invisible formatting character: [${text.replaceAll(/[\p{Cc}\p{Cf}]/) { String.format('\\u%04x', (int) it.charAt(0)) }}]")
     check(!text.contains(';'), file, key, "list element must not contain ';': [${text}]")
@@ -73,7 +80,7 @@ void checkNoCaseDuplicates(String file, String prefix, Collection keys) {
     Map<String, String> seen = [:]
     keys.each { rawKey ->
         String key = "${prefix}${rawKey}"
-        String other = seen.put(key.toLowerCase(Locale.ROOT), key)
+        String other = recordCaseInsensitive(seen, key)
         check(other == null, file, key, "differs from '${other}' only in case")
     }
 }
