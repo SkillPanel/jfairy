@@ -107,4 +107,11 @@ class IBANSpec extends Specification {
         then:
             number.startsWith('SE')
     }
+
+    def "should not randomly pick a country without iban support for a multi-country language"() {
+        when:
+            List<IBAN> ibans = (1..50).collect { Fairy.create(new Locale('en')).iban() }
+        then:
+            ibans.every { it != null }
+    }
 }
