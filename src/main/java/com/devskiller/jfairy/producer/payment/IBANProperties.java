@@ -20,7 +20,7 @@ public final class IBANProperties {
         COUNTRIES.put(LanguageCode.IT, IbanRegistry.IT);
         COUNTRIES.put(LanguageCode.DE, IbanRegistry.DE);
         COUNTRIES.put(LanguageCode.SK, IbanRegistry.SK);
-        COUNTRIES.put(LanguageCode.SV, IbanRegistry.SV);
+        COUNTRIES.put(LanguageCode.SV, IbanRegistry.SE);
     }
 
     private IBANProperties() {

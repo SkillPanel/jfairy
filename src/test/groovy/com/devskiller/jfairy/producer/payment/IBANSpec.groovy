@@ -94,6 +94,13 @@ class IBANSpec extends Specification {
             number.startsWith('DE')
     }
 
+    def "should set proper country for Swedish language property"() {
+        when:
+            String number = Fairy.create().iban(IBANProperties.language("SV")).ibanNumber
+        then:
+            number.startsWith('SE')
+    }
+
     def "should set proper country for according to selected language"() {
         when:
             String number = Fairy.create(new Locale('SV')).iban().ibanNumber
