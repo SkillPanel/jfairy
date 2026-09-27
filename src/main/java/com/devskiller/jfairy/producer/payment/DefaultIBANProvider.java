@@ -1,7 +1,7 @@
 package com.devskiller.jfairy.producer.payment;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 import de.speedbanking.iban.Iban;
 import de.speedbanking.iban.IbanRegistry;
@@ -87,11 +87,15 @@ public class DefaultIBANProvider implements IBANProvider {
     @Override
     public void fillCountryCode() {
         if (countryCode == null) {
-            List<Country> countries = Country.findCountryForLanguage(dataMaster.getLanguage());
-            Country country = baseProducer.randomElement(countries);
-
-            IbanRegistry r = IbanRegistry.getByCode(country.getCode());
-            countryCode = Optional.ofNullable(r).map(IbanRegistry::name).orElse(null);
+            // Country.findCountryForLanguage() returns every country speaking the language, most of
+            // which have no IBAN (e.g. US, AU for English); restrict the pick to ones that do so a
+            // supported language doesn't randomly yield a null IBAN.
+            List<Country> countries = Country.findCountryForLanguage(dataMaster.getLanguage()).stream()
+                .filter(country -> IbanRegistry.getByCode(country.getCode()) != null)
+                .collect(Collectors.toList());
+            if (!countries.isEmpty()) {
+                countryCode = baseProducer.randomElement(countries).getCode();
+            }
         }
     }
 
