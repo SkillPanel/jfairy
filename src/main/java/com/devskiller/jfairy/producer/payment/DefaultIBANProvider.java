@@ -68,12 +68,13 @@ public class DefaultIBANProvider implements IBANProvider {
         }
 
         int validCheckDigits = Integer.parseInt(valid.getCheckDigit());
+        // Pick uniformly from [MIN_CHECK_DIGITS, MAX_CHECK_DIGITS] \ {validCheckDigits} by drawing from
+        // the 96 remaining values and shifting past the valid one if we land on or above it.
         int wrongCheckDigits = baseProducer.randomBetween(MIN_CHECK_DIGITS, MAX_CHECK_DIGITS - 1);
         if (wrongCheckDigits >= validCheckDigits) {
             wrongCheckDigits++;
         }
         String checkDigits = String.format("%02d", wrongCheckDigits);
-        String ibanNumber = valid.getIbanNumber();
 
         return new IBAN(valid.getAccountNumber(),
                         checkDigits,
@@ -81,7 +82,7 @@ public class DefaultIBANProvider implements IBANProvider {
                         valid.getBban(),
                         valid.getCountry(),
                         valid.getNationalCheckDigit(),
-                        ibanNumber.substring(0, 2) + checkDigits + ibanNumber.substring(4));
+                        valid.getCountry() + checkDigits + valid.getBban());
     }
 
     @Override
