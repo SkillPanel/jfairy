@@ -108,10 +108,25 @@ class IBANSpec extends Specification {
             number.startsWith('SE')
     }
 
-    def "should not randomly pick a country without iban support for a multi-country language"() {
+    def "should resolve the iban-supporting country for language #language, ignoring countries without iban support"() {
         when:
-            List<IBAN> ibans = (1..50).collect { Fairy.create(new Locale('en')).iban() }
+            Fairy fairy = Fairy.create(new Locale(language))
+            List<IBAN> ibans = (1..50).collect { fairy.iban() }
         then:
-            ibans.every { it != null }
+            ibans.every { country == null ? it == null : it.country == country }
+        where:
+            language | country
+            "br"     | "BR"
+            "de"     | "DE"
+            "en"     | "GB" // multi-country language: also spoken in AU, US, CA, none of which support IBAN
+            "es"     | "ES"
+            "fr"     | "FR" // multi-country language: also spoken in CA, which does not support IBAN
+            "it"     | "IT"
+            "ja"     | null // no IBAN-supporting country speaks Japanese
+            "ka"     | "GE"
+            "pl"     | "PL"
+            "sk"     | "SK"
+            "sv"     | "SE"
+            "tr"     | "TR"
     }
 }

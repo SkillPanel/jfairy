@@ -6,8 +6,8 @@ import org.jspecify.annotations.Nullable;
 
 /**
  * Generates {@link IBAN} instances for a country fixed via {@link #setCountry(String)}, or otherwise
- * one resolved at random from the countries speaking the current {@link com.devskiller.jfairy.data.DataMaster}
- * language.
+ * one resolved at random from the IBAN-supporting countries that speak the current
+ * {@link com.devskiller.jfairy.data.DataMaster} language.
  */
 public interface IBANProvider extends Supplier<IBAN> {
 
@@ -15,7 +15,8 @@ public interface IBANProvider extends Supplier<IBAN> {
      * Generates a random, valid IBAN for the country set via {@link #setCountry(String)}, or a
      * randomly resolved one if none was set.
      *
-     * @return a valid {@link IBAN}, or {@code null} if the resolved country has no IBAN
+     * @return a valid {@link IBAN}, or {@code null} if the current language has no IBAN-supporting
+     *         country, or {@link #setCountry(String)} was called with an unknown code
      */
     @Override
     @Nullable IBAN get();
@@ -40,7 +41,7 @@ public interface IBANProvider extends Supplier<IBAN> {
     /**
      * Fixes the country to generate IBANs for, overriding random resolution.
      *
-     * @param country the ISO 3166-1 alpha-2 country code, e.g. {@code "PL"}
+     * @param country the uppercase ISO 3166-1 alpha-2 country code, e.g. {@code "PL"}
      */
     void setCountry(String country);
 

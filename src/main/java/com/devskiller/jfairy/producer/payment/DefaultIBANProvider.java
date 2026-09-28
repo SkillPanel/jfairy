@@ -1,7 +1,6 @@
 package com.devskiller.jfairy.producer.payment;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import de.speedbanking.iban.Iban;
 import de.speedbanking.iban.IbanRegistry;
@@ -13,7 +12,7 @@ import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.person.Country;
 
 /**
- * ALPHA: Under development
+ * Default {@link IBANProvider} implementation.
  */
 public class DefaultIBANProvider implements IBANProvider {
 
@@ -93,7 +92,7 @@ public class DefaultIBANProvider implements IBANProvider {
             // supported language doesn't randomly yield a null IBAN.
             List<Country> countries = Country.findCountryForLanguage(dataMaster.getLanguage()).stream()
                 .filter(country -> IbanRegistry.getByCode(country.getCode()) != null)
-                .collect(Collectors.toList());
+                .toList();
             if (!countries.isEmpty()) {
                 countryCode = baseProducer.randomElement(countries).getCode();
             }
