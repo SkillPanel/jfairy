@@ -22,12 +22,10 @@ public class ZhVATIdentificationNumberProvider implements VATIdentificationNumbe
 
     @Override
     public String get() {
-        StringBuilder vatBuilder = new StringBuilder()
-                .append(baseProducer.randomElement(ZhFairyUtil.PROV_LIST))
-                .append(ZhFairyUtil.getRandomNumStr(baseProducer, ZhFairyUtil.CITY_MAX, 2))
-                .append(ZhFairyUtil.getRandomNumStr(baseProducer, ZhFairyUtil.DISTRICT_MAX, 2))
-                .append(getChars(9));
-        return vatBuilder.toString();
+        return baseProducer.randomElement(ZhFairyUtil.PROV_LIST)
+                + ZhFairyUtil.getRandomNumStr(baseProducer, ZhFairyUtil.CITY_MAX, 2)
+                + ZhFairyUtil.getRandomNumStr(baseProducer, ZhFairyUtil.DISTRICT_MAX, 2)
+                + getChars(9);
     }
 
     private char getChar() {

@@ -101,10 +101,12 @@
 		<dep.junit-jupiter.version>5.14.4</dep.junit-jupiter.version>
 
 		<!-- Static analysis rulesets (shared, kept in build/) -->
+		<!-- checkstyle 13.0.0+ requires JDK 21 to run
+             stay on the last JDK-17-compatible release -->
 		<dep.checkstyle.version>12.3.1</dep.checkstyle.version>
 		<check.checkstyle.ruleset>${project.basedir}/build/checkstyle-rules.xml</check.checkstyle.ruleset>
 
-		<dep.pmd.version>7.26.0</dep.pmd.version>
+		<dep.pmd.version>7.28.0</dep.pmd.version>
 		<check.pmd.ruleset>${project.basedir}/build/pmd-rules.xml</check.pmd.ruleset>
 
 		<!-- Plugin versions (ordered alphabetically) -->
