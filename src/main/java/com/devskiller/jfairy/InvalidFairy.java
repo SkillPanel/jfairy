@@ -44,6 +44,8 @@ public final class InvalidFairy {
     }
 
     /**
+     * Returns a national identification number with a wrong check digit.
+     *
      * @param properties desired number features, e.g. date of birth and sex
      * @return a national identification number with a wrong check digit
      */
@@ -54,6 +56,8 @@ public final class InvalidFairy {
     }
 
     /**
+     * Returns a VAT identification number (e.g. NIP) with a wrong check digit.
+     *
      * @return a VAT identification number (e.g. NIP) with a wrong check digit
      */
     public String vatIdentificationNumber() {
@@ -61,6 +65,8 @@ public final class InvalidFairy {
     }
 
     /**
+     * Returns an IBAN with wrong check digits, or {@code null} if the country has no IBAN.
+     *
      * @param properties desired IBAN features, e.g. country
      * @return an IBAN with wrong check digits, or {@code null} if the country has no IBAN
      *         (same as {@link Fairy#iban(IBANProperties.Property...)})
