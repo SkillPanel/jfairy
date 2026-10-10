@@ -6,7 +6,7 @@ import static com.devskiller.jfairy.producer.util.StringUtils.isNotBlank;
  * An address format typical for European countries but the UK and ex-Soviet union.
  */
 public abstract class ContinentalAddress extends AbstractAddress {
-    public ContinentalAddress(String street, String streetNumber, String apartmentNumber, String postalCode, String city) {
+    protected ContinentalAddress(String street, String streetNumber, String apartmentNumber, String postalCode, String city) {
         super(street, streetNumber, apartmentNumber, postalCode, city);
     }
 

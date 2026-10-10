@@ -72,7 +72,9 @@ class FairyFrSpec extends Specification {
                             int n = Integer.parseInt(digits)
                             if (i % 2 != 0) {
                                     n *= 2
-                                    if (n > 9) n -= 9
+                                    if (n > 9) {
+                                            n -= 9
+                                    }
                             }
                             sum += n
                     }

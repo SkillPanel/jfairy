@@ -12,7 +12,7 @@ import com.devskiller.jfairy.producer.VATIdentificationNumberProvider;
  */
 public class DeVATIdentificationNumberProvider implements VATIdentificationNumberProvider {
 
-    private static final String VALID_NUMBER_PATTERN = "^[0-9]{9}$";
+    private static final String VALID_NUMBER_PATTERN = "^\\d{9}$";
 
     private final BaseProducer baseProducer;
 

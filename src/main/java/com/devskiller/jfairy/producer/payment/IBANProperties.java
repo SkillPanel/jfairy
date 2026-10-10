@@ -1,6 +1,6 @@
 package com.devskiller.jfairy.producer.payment;
 
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 import de.speedbanking.iban.IbanRegistry;
@@ -9,7 +9,7 @@ import com.devskiller.jfairy.producer.util.LanguageCode;
 
 public final class IBANProperties {
 
-    private static final Map<LanguageCode, IbanRegistry> COUNTRIES = new HashMap<>();
+    private static final Map<LanguageCode, IbanRegistry> COUNTRIES = new EnumMap<>(LanguageCode.class);
 
     static {
         COUNTRIES.put(LanguageCode.PL, IbanRegistry.PL);

@@ -42,7 +42,9 @@ class TrNationalIdentityCardNumberProviderSpec extends Specification {
             int oddSum = digits[0] + digits[2] + digits[4] + digits[6] + digits[8]
             int evenSum = digits[1] + digits[3] + digits[5] + digits[7]
             int d10 = ((oddSum * 7) - evenSum) % 10
-            if (d10 < 0) d10 += 10
+            if (d10 < 0) {
+                d10 += 10
+            }
             assert digits[9] == d10
             assert digits[10] == (digits[0..9].sum() % 10)
         }
