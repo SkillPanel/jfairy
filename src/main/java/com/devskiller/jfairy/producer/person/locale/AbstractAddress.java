@@ -12,7 +12,7 @@ public abstract class AbstractAddress implements Address {
     protected final String postalCode;
     protected final String city;
 
-    public AbstractAddress(String street, String streetNumber, String apartmentNumber, String postalCode, String city) {
+    protected AbstractAddress(String street, String streetNumber, String apartmentNumber, String postalCode, String city) {
         this.street = street;
         this.streetNumber = streetNumber;
         this.postalCode = postalCode;
@@ -44,12 +44,6 @@ public abstract class AbstractAddress implements Address {
     public String getCity() {
         return city;
     }
-
-    @Override
-    public abstract String getAddressLine1();
-
-    @Override
-    public abstract String getAddressLine2();
 
     @Override
     public String toString() {

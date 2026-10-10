@@ -14,7 +14,7 @@ public class DeNationalIdentityCardNumberProvider implements NationalIdentityCar
 
     private static final String[] ID_CARD_TYPE_LETTERS = {"L", "M", "N", "P", "R", "T", "V", "W", "X", "Y"};
 
-    private static final String VALID_NUMBER_PATTERN = "^[LMNPRTVWXY][0-9]{8}$";
+    private static final String VALID_NUMBER_PATTERN = "^[LMNPRTVWXY]\\d{8}$";
 
     private final BaseProducer baseProducer;
 

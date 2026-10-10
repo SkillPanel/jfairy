@@ -15,7 +15,7 @@ public abstract class AbstractAddressProvider implements AddressProvider {
 
     protected final DataMaster dataMaster;
 
-    public AbstractAddressProvider(DataMaster dataMaster, BaseProducer baseProducer) {
+    protected AbstractAddressProvider(DataMaster dataMaster, BaseProducer baseProducer) {
         this.baseProducer = baseProducer;
         this.dataMaster = dataMaster;
     }
