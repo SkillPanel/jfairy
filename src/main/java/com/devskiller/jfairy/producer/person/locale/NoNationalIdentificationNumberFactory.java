@@ -24,10 +24,12 @@ public class NoNationalIdentificationNumberFactory implements NationalIdentifica
 
         @Override
         public void setIssueDate(LocalDate dateOfBirth) {
+            // nothing to configure, the number is always empty
         }
 
         @Override
         public void setSex(Person.Sex sex) {
+            // nothing to configure, the number is always empty
         }
     }
 }

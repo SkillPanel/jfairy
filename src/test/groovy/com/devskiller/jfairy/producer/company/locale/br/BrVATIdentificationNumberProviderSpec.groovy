@@ -1,6 +1,5 @@
 package com.devskiller.jfairy.producer.company.locale.br
 
-import com.devskiller.jfairy.Bootstrap
 import com.devskiller.jfairy.Fairy
 import spock.lang.Specification
 

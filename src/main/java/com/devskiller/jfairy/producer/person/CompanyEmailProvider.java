@@ -21,7 +21,7 @@ public class CompanyEmailProvider implements Supplier<String> {
 
     @Override
     public String get() {
-        String email = lowerCase(firstName + '.' + lastName + '@' + company.getDomain()).replaceAll(" ", ".");
+        String email = lowerCase(firstName + '.' + lastName + '@' + company.getDomain()).replace(" ", ".");
         return latinize(email);
     }
 }

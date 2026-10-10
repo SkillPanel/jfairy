@@ -124,7 +124,7 @@ public class PlVATIdentificationNumberProvider implements VATIdentificationNumbe
 
     private static String normalizeNip(String value) {
         if (value.length() == FORMATTED_NIP_LENGTH) {
-            return value.replaceAll("-", "");
+            return value.replace("-", "");
         }
         return value;
     }

@@ -16,7 +16,7 @@ import com.devskiller.jfairy.producer.person.NationalIdentityCardNumberProvider;
  */
 public class EsNationalIdentityCardNumberProvider implements NationalIdentityCardNumberProvider {
 
-    private static final String REGEX_DNI = "^\\d{8}([-]?)[A-Z]$";
+    private static final String REGEX_DNI = "^\\d{8}-?[A-Z]$";
 
     private final BaseProducer baseProducer;
     private final Pattern regexDni;

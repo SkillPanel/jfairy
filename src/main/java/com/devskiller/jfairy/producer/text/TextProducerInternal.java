@@ -27,11 +27,11 @@ import static com.devskiller.jfairy.producer.util.StringUtils.uncapitalize;
  */
 public class TextProducerInternal {
 
-    private static final String LOREM_IPSUM = "loremIpsum";
+    private static final String LOREM_IPSUM_KEY = "loremIpsum";
 
-    private static final String TEXT = "text";
+    private static final String TEXT_KEY = "text";
 
-    private static final String ALPHABET = "alphabet";
+    private static final String ALPHABET_KEY = "alphabet";
 
     private static final int WORD_COUNT_PRECISION_IN_SENTENCE = 6;
 
@@ -51,11 +51,11 @@ public class TextProducerInternal {
 
     public TextProducerInternal(DataMaster dataMaster, BaseProducer baseProducer) {
         this.baseProducer = baseProducer;
-        loremIpsum = dataMaster.getString(LOREM_IPSUM);
-        text = dataMaster.getString(TEXT);
+        loremIpsum = dataMaster.getString(LOREM_IPSUM_KEY);
+        text = dataMaster.getString(TEXT_KEY);
         words = new ArrayList<>(Arrays.asList(split(text, ' ')));
         latinWords = new ArrayList<>(Arrays.asList(split(loremIpsum, ' ')));
-        alphabet = dataMaster.getString(ALPHABET);
+        alphabet = dataMaster.getString(ALPHABET_KEY);
         maxAlphabetIndex = alphabet.length() - 1;
     }
 

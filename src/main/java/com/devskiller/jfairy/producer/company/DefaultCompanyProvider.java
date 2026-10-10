@@ -74,7 +74,7 @@ public class DefaultCompanyProvider implements CompanyProvider {
 
         String host = latinize(strip(deleteWhitespace(name.toLowerCase(Locale.ROOT)), ".").replace("/", ""));
         int len1 = host.length();
-        host = escapeNonAscii(host).replaceAll("\\\\u", "");
+        host = escapeNonAscii(host).replace("\\u", "");
         int len2 = host.length();
         if (len2 > len1 && len2 > 10) {
             host = host.substring(0, 10);
