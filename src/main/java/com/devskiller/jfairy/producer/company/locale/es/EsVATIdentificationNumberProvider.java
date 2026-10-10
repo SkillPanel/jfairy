@@ -14,7 +14,7 @@ import com.devskiller.jfairy.producer.person.Country;
  */
 public class EsVATIdentificationNumberProvider implements VATIdentificationNumberProvider {
 
-    private static final String REGEX_CIF = "^[A-Z][0-9]{2}[0-9]{5}([KPQSABEH]|[0-9]|[A-Z])$";
+    private static final String REGEX_CIF = "^[A-Z][0-9]{7}[0-9A-Z]$";
 
     private final BaseProducer baseProducer;
 
