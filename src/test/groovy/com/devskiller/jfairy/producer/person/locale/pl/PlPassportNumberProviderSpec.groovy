@@ -25,15 +25,12 @@ class PlPassportNumberProviderSpec extends Specification {
 
     def "should generate number starting with series"() {
         expect:
-            for (int i = 0; i < 2; i++)
-                passportNumber.charAt(i).isLetter()
+            passportNumber.toCharArray()[0..1].every { Character.isLetter(it) }
     }
 
     def "should generate number ending with 6 digits"() {
         expect:
-            for (int i = 8; i > 2; i--) {
-                passportNumber.charAt(i).isDigit()
-            }
+            passportNumber.toCharArray()[3..8].every { Character.isDigit(it) }
     }
 
     def "should generate number with correct checksum"() {
