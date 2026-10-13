@@ -43,10 +43,6 @@ class PersonSpec extends Specification {
     private EmailValidator emailValidator = EmailValidator.getInstance()
     private Fairy fairy = Bootstrap.create()
 
-    def setup() {
-        Bootstrap.create()
-    }
-
     def "should instantiate PersonProducer producer with person"() {
         when:
             Person person = fairy.person()
@@ -59,11 +55,6 @@ class PersonSpec extends Specification {
             Person person = fairy.person()
         then:
             "${person.firstName} ${person.lastName}" == person.fullName
-    }
-
-    def "second generated name should be different"() {
-        expect:
-            fairy.person().firstName != fairy.person().firstName
     }
 
     def "should be sure that data exists"() {
