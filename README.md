@@ -76,7 +76,7 @@ System.out.println(salesman.getCompanyEmail());
 | Chinese              |     `zh`     |
 | Georgian             |     `ka`     |
 | Italian              |     `it`     |
-| Brazilian Portuguese |     `br`     |
+| Brazilian Portuguese |     `pt`     |
 | Slovak               |     `sk`     |
 | Turkish              |     `tr`     |
 | Japanese             |     `ja`     |
@@ -86,9 +86,12 @@ Fairy enFairy = Fairy.create();
 // Locale.ENGLISH is default
 Fairy plFairy = Fairy.create(Locale.forLanguageTag("pl"));
 // Polish version
-Fairy brFairy = Fairy.create(Locale.forLanguageTag("br"));
+Fairy brFairy = Fairy.create(Locale.forLanguageTag("pt-BR"));
 // Brazilian version
 ```
+
+Locales are matched by language only, so `de-AT` gets the German data and any Portuguese locale the
+Brazilian data. The former tag `br` (actually the code for Breton) is deprecated and logs a warning.
 
 ## Custom data
 

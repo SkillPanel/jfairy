@@ -5,6 +5,7 @@ import spock.lang.Specification
 import com.devskiller.jfairy.data.MapBasedDataMaster
 import com.devskiller.jfairy.producer.BaseProducer
 import com.devskiller.jfairy.producer.DateProducer
+import com.devskiller.jfairy.producer.person.locale.br.BrAddressProvider
 import com.devskiller.jfairy.producer.person.locale.de.DeAddressProvider
 import com.devskiller.jfairy.producer.person.locale.en.EnAddressProvider
 import com.devskiller.jfairy.producer.person.locale.es.EsAddressProvider
@@ -39,6 +40,7 @@ class FairyModuleSpec extends Specification {
             "sv"   | SvAddressProvider.class
             "ka"   | KaAddressProvider.class
             "zh"   | ZhAddressProvider.class
+            "pt"   | BrAddressProvider.class
     }
 
     def "should fall back to English providers for unknown locale"() {
