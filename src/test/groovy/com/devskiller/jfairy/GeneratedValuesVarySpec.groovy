@@ -28,7 +28,6 @@ class GeneratedValuesVarySpec extends Specification {
 
     // Fixed for a locale by design
     private static final Set<String> CONSTANT = [
-        'creditCard.getVendor',
         'iban.getCountry',
         'person.getAddress.getApartmentMark',
         'person.getNationality',

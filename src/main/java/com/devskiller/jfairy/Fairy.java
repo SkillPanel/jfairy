@@ -15,6 +15,7 @@ import com.devskiller.jfairy.producer.company.CompanyProperties;
 import com.devskiller.jfairy.producer.net.NetworkProducer;
 import com.devskiller.jfairy.producer.payment.CreditCard;
 import com.devskiller.jfairy.producer.payment.CreditCardProvider;
+import com.devskiller.jfairy.producer.payment.CreditCardVendor;
 import com.devskiller.jfairy.producer.payment.IBAN;
 import com.devskiller.jfairy.producer.payment.IBANFactory;
 import com.devskiller.jfairy.producer.payment.IBANProperties;
@@ -126,8 +127,24 @@ public final class Fairy {
         return ibanFactory.produceIBANProvider(properties).get();
     }
 
+    /**
+     * Generates a credit card of a random {@link CreditCardVendor vendor}.
+     *
+     * @return a credit card with a valid number
+     */
     public CreditCard creditCard() {
         return creditCardProvider.get();
+    }
+
+    /**
+     * Generates a credit card of the given vendor.
+     *
+     * @param vendor the card vendor
+     * @return a credit card with a valid number
+     * @since 0.10.0
+     */
+    public CreditCard creditCard(CreditCardVendor vendor) {
+        return creditCardProvider.get(vendor);
     }
 
     public NetworkProducer networkProducer() {
