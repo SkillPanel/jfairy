@@ -11,10 +11,9 @@ import com.devskiller.jfairy.producer.DateProducer;
 public class CreditCardProvider implements Supplier<CreditCard> {
 
     private static final Period DEFAULT_VALIDITY = Period.ofMonths(36);
-    private static final String DATA_KEY = "creditCardPrefixes";
-    private static final String CARD_VENDOR = "Visa";
+    private static final String DATA_KEY         = "creditCardPrefixes";
 
-    private final DataMaster dataMaster;
+    private final DataMaster   dataMaster;
     private final BaseProducer baseProducer;
     private final DateProducer dateProducer;
 
@@ -24,53 +23,70 @@ public class CreditCardProvider implements Supplier<CreditCard> {
         this.dateProducer = dateProducer;
     }
 
+    /**
+     * Generates a credit card of a random vendor.
+     *
+     * @return a credit card with a valid number
+     */
     @Override
     public CreditCard get() {
-        String randomNumber = generateNumber();
-
-        LocalDateTime expiryDate = dateProducer.randomDateBetweenNowAndFuturePeriod(DEFAULT_VALIDITY);
-        return new CreditCard(CARD_VENDOR, randomNumber, baseProducer.numerify("###"), expiryDate);
-    }
-
-    private String generateNumber() {
-        Integer prefix = dataMaster.getValuesOfType(DATA_KEY, CARD_VENDOR, Integer.class);
-        String stringPrefix = String.valueOf(prefix);
-        StringBuilder builder = new StringBuilder(stringPrefix);
-        builder.append("#".repeat(Math.max(0, 15 - stringPrefix.length())));
-        return completeNumber(baseProducer.numerify(builder.toString()));
+        return get(baseProducer.randomElement(CreditCardVendor.class));
     }
 
     /**
-     * Completes a credit card number by calculating and appending a checksum digit.
-     * <p>
-     * Uses a variation of the Luhn algorithm where every second digit is doubled.
-     * If doubling results in a number greater than 9, the digits are summed.
+     * Generates a credit card of the given vendor.
      *
-     * @param creditCardNumber the partial credit card number to complete
-     * @return the full credit card number including the checksum digit
+     * @param vendor the card vendor
+     * @return a credit card with a valid number
+     * @since 0.10.0
+     */
+    public CreditCard get(CreditCardVendor vendor) {
+        String number = generateNumber(vendor);
+        String cvv = baseProducer.numerify("#".repeat(vendor.getCvvLength()));
+        LocalDateTime expiryDate = dateProducer.randomDateBetweenNowAndFuturePeriod(DEFAULT_VALIDITY);
+        return new CreditCard(vendor.getDisplayName(), number, cvv, expiryDate);
+    }
+
+    /**
+     * Generates a card number from a random prefix of the vendor, random digits and a Luhn check digit.
+     *
+     * @param vendor the card vendor
+     * @return the complete card number
+     */
+    private String generateNumber(CreditCardVendor vendor) {
+        String prefix = dataMaster.getValuesOfType(DATA_KEY, vendor.getDataKey(), String.class);
+        String pattern = prefix + "#".repeat(Math.max(0, vendor.getNumberLength() - 1 - prefix.length()));
+        return completeNumber(baseProducer.numerify(pattern));
+    }
+
+    /**
+     * Completes a credit card number by appending its Luhn check digit.
+     * <p>
+     * Starting with the rightmost digit, every second digit is doubled, and 9 is subtracted from results above 9.
+     * The check digit brings the sum of all digits to a multiple of 10.
+     *
+     * @param creditCardNumber the card number without its check digit
+     * @return the full credit card number including the check digit
      * @throws IllegalArgumentException if the input contains non-digit characters
      */
-    private String completeNumber(String creditCardNumber) {
+    private static String completeNumber(String creditCardNumber) {
         int sum = 0;
-        for (int i = 0; i < creditCardNumber.length(); i++) {
+        boolean doubled = true;
+        for (int i = creditCardNumber.length() - 1; i >= 0; i--) {
             int n = Character.digit(creditCardNumber.charAt(i), 10);
-
             if (n == -1) {
                 throw new IllegalArgumentException("Invalid character in credit card number");
             }
-
-            if (i % 2 == 0) {
+            if (doubled) {
                 n *= 2;
                 if (n > 9) {
-                    // For n > 9 (e.g., 10-18), digit sum is equivalent to n - 9
                     n -= 9;
                 }
             }
             sum += n;
+            doubled = !doubled;
         }
-
-        int checksum = sum * 9 % 10;
-        return creditCardNumber + checksum;
+        return creditCardNumber + (10 - sum % 10) % 10;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.devskiller.jfairy
 
+import com.devskiller.jfairy.producer.payment.CreditCardVendor
 import com.devskiller.jfairy.producer.person.PersonProperties
 import spock.lang.Specification
 
@@ -68,6 +69,16 @@ class UniqueFairySpec extends Specification {
             def numbers = cards.collect { it.cardNumber }
         then:
             numbers.toSet().size() == 10
+    }
+
+    def "should generate unique credit cards of a given vendor"() {
+        given:
+            def unique = fairy.unique()
+        when:
+            def cards = (1..10).collect { unique.creditCard(CreditCardVendor.JCB) }
+        then:
+            cards.every { it.vendor == "JCB" }
+            cards*.cardNumber.toSet().size() == 10
     }
 
     def "should reset all trackers"() {
