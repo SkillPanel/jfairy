@@ -43,11 +43,37 @@ class CompanySpec extends Specification {
             company.vatIdentificationNumber
     }
 
+    def "should generate valid domains and emails for locale #locale"() {
+        given:
+            Fairy fairy = Fairy.builder().withRandomSeed(42).withLocale(Locale.forLanguageTag(locale)).build()
+        when:
+            List<Company> companies = (1..500).collect { fairy.company() }
+        then:
+            companies.every { domainValidator.isValid(it.domain) && emailValidator.isValid(it.email) }
+        where:
+            locale << ["br", "de", "en", "es", "fr", "it", "ja", "ka", "pl", "sk", "sv", "tr", "zh"]
+    }
+
     def "withName should create company with specific name"() {
         when:
             Company company = fairy.company(withName("Specific Name"))
         then:
             company.name == "Specific Name"
+    }
+
+    def "domain should drop company suffix and punctuation of #name"() {
+        given:
+            Fairy fairy = Fairy.builder().withLocale(Locale.forLanguageTag(locale)).build()
+        when:
+            Company company = fairy.company(withName(name))
+        then:
+            company.domain.startsWith(host + ".")
+        where:
+            name                       | locale | host
+            "Alvenor GmbH & Co. KG"    | "de"   | "alvenor"
+            "Müller & Söhne GmbH"      | "de"   | "mullersohne"
+            "Pérez Hermanos S.L.N.E."  | "es"   | "perezhermanos"
+            "Dupont-Martin SARL"       | "fr"   | "dupontmartin"
     }
 
     def "withDomain should create company with specific domain"() {

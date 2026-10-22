@@ -1,15 +1,14 @@
 package com.devskiller.jfairy.producer.company;
 
+import java.util.Comparator;
 import java.util.Locale;
 
 import com.devskiller.jfairy.data.DataMaster;
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.VATIdentificationNumberProvider;
 
-import static com.devskiller.jfairy.producer.util.StringUtils.deleteWhitespace;
 import static com.devskiller.jfairy.producer.util.StringUtils.escapeNonAscii;
 import static com.devskiller.jfairy.producer.util.StringUtils.latinize;
-import static com.devskiller.jfairy.producer.util.StringUtils.strip;
 
 public class DefaultCompanyProvider implements CompanyProvider {
 
@@ -59,8 +58,9 @@ public class DefaultCompanyProvider implements CompanyProvider {
     }
 
     /**
-     * In case of the illegal hostname characters in company name
-     * and truncate it if it is too long (length &gt; 10) after escape
+     * Derives the domain from the company name. A trailing company suffix such as "GmbH &amp; Co. KG"
+     * is dropped, and characters that are not allowed in a hostname are removed. Non-ASCII characters
+     * are escaped and the result is truncated if it is too long (length &gt; 10) after escape.
      * <p>
      * It is compatible with other non-latin language and will not change the original result for latin language.
      * <p>
@@ -72,7 +72,7 @@ public class DefaultCompanyProvider implements CompanyProvider {
             return;
         }
 
-        String host = latinize(strip(deleteWhitespace(name.toLowerCase(Locale.ROOT)), ".").replace("/", ""));
+        String host = latinize(removeSuffix(name).toLowerCase(Locale.ROOT)).replaceAll("[\\p{ASCII}&&[^a-z0-9]]", "");
         int len1 = host.length();
         host = escapeNonAscii(host).replace("\\u", "");
         int len2 = host.length();
@@ -81,6 +81,20 @@ public class DefaultCompanyProvider implements CompanyProvider {
         }
 
         domain = host + "." + dataMaster.getRandomValue(DOMAIN);
+    }
+
+    /**
+     * Removes the longest company suffix the given name ends with, if any.
+     *
+     * @param companyName the company name
+     * @return the company name without its suffix
+     */
+    private String removeSuffix(String companyName) {
+        return dataMaster.getStringList(COMPANY_SUFFIX).stream()
+            .filter(suffix -> companyName.endsWith(" " + suffix))
+            .max(Comparator.comparingInt(String::length))
+            .map(suffix -> companyName.substring(0, companyName.length() - suffix.length() - 1))
+            .orElse(companyName);
     }
 
     @Override
