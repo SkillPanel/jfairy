@@ -17,7 +17,7 @@ class GeneratedValuesVarySpec extends Specification {
     private static final int SEED = 42
     private static final int SAMPLES = 50
 
-    private static final List<String> LANGUAGES = LanguageCode.values()*.name()*.toLowerCase(Locale.ROOT)
+    private static final List<String> LANGUAGES = LanguageCode.values()*.isoLanguage
 
     private static final Map<String, Closure> GENERATORS = [
         person    : { Fairy fairy -> fairy.person() },
@@ -28,7 +28,6 @@ class GeneratedValuesVarySpec extends Specification {
 
     // Fixed for a locale by design
     private static final Set<String> CONSTANT = [
-        'creditCard.getVendor',
         'iban.getCountry',
         'person.getAddress.getApartmentMark',
         'person.getNationality',
@@ -44,8 +43,8 @@ class GeneratedValuesVarySpec extends Specification {
 
     // Null or empty for every sample of these locales, which do not support them
     private static final Map<String, Set<String>> UNSUPPORTED = [
-        'iban.getNationalCheckDigit'            : ['br', 'de', 'en', 'ja', 'ka', 'pl', 'sk', 'zh'] as Set,
-        'person.getNationalIdentificationNumber': ['br', 'de', 'en', 'es', 'fr', 'it', 'ja', 'ka', 'tr', 'zh'] as Set,
+        'iban.getNationalCheckDigit'            : ['de', 'en', 'ja', 'ka', 'pl', 'pt', 'sk', 'zh'] as Set,
+        'person.getNationalIdentificationNumber': ['de', 'en', 'es', 'fr', 'it', 'ja', 'ka', 'pt', 'tr', 'zh'] as Set,
     ]
 
     def "every #generator getter varies for #language"() {

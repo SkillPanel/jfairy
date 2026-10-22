@@ -71,9 +71,19 @@ class FairySpec extends Specification {
             first.toSet().size() == first.size()
 
         where:
-            kind                | locale | generate
-            "BR passport"       | "br"   | { Fairy f -> f.person().passportNumber }
-            "ZH company VAT ID" | "zh"   | { Fairy f -> f.company().vatIdentificationNumber }
+            kind                | locale  | generate
+            "BR passport"       | "pt-BR" | { Fairy f -> f.person().passportNumber }
+            "ZH company VAT ID" | "zh"    | { Fairy f -> f.company().vatIdentificationNumber }
+    }
+
+    def "should load Brazilian data for language tag #tag"() {
+        given:
+            Closure<String> postalCode = { Fairy f -> f.person().address.postalCode }
+        expect:
+            seededValues(tag, postalCode).every { it ==~ /\d{5}-\d{3}/ }
+            seededValues(tag, postalCode) == seededValues("br", postalCode)
+        where:
+            tag << ["pt", "pt-BR"]
     }
 
     private static List<String> seededValues(String locale, Closure<String> generate) {

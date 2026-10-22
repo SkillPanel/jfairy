@@ -1,8 +1,8 @@
 # jFairy by Devskiller
 
-[](https://github.com/SkillPanel/jfairy/actions/workflows/build.yml)
-[](https://central.sonatype.com/artifact/com.devskiller/jfairy)
-[](https://javadoc.io/doc/com.devskiller/jfairy)
+[![Build](https://github.com/SkillPanel/jfairy/actions/workflows/build.yml/badge.svg)](https://github.com/SkillPanel/jfairy/actions/workflows/build.yml)
+[![Maven Central](https://img.shields.io/maven-central/v/com.devskiller/jfairy)](https://central.sonatype.com/artifact/com.devskiller/jfairy)
+[![Javadoc](https://javadoc.io/badge2/com.devskiller/jfairy/javadoc.svg)](https://javadoc.io/doc/com.devskiller/jfairy)
 
 Java fake data generator. According to Wikipedia:
 
@@ -76,7 +76,7 @@ System.out.println(salesman.getCompanyEmail());
 | Chinese              |     `zh`     |
 | Georgian             |     `ka`     |
 | Italian              |     `it`     |
-| Brazilian Portuguese |     `br`     |
+| Brazilian Portuguese |     `pt`     |
 | Slovak               |     `sk`     |
 | Turkish              |     `tr`     |
 | Japanese             |     `ja`     |
@@ -86,9 +86,12 @@ Fairy enFairy = Fairy.create();
 // Locale.ENGLISH is default
 Fairy plFairy = Fairy.create(Locale.forLanguageTag("pl"));
 // Polish version
-Fairy brFairy = Fairy.create(Locale.forLanguageTag("br"));
+Fairy brFairy = Fairy.create(Locale.forLanguageTag("pt-BR"));
 // Brazilian version
 ```
+
+Locales are matched by language only, so `de-AT` gets the German data and any Portuguese locale the
+Brazilian data. The former tag `br` (actually the code for Breton) is deprecated and logs a warning.
 
 ## Custom data
 

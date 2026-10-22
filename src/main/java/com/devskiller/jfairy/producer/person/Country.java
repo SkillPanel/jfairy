@@ -50,7 +50,7 @@ public enum Country {
      * @throws IllegalStateException if no languages are associated with the country
      */
     public Locale getPrimaryLocale() {
-        return new Locale(getPrimaryLanguage().name().toLowerCase(Locale.ROOT), code);
+        return new Locale(getPrimaryLanguage().getIsoLanguage(), code);
     }
 
     /**

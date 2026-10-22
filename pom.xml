@@ -92,7 +92,7 @@
 		<dep.snakeyaml-engine.version>3.2</dep.snakeyaml-engine.version>
 		<dep.jspecify.version>1.0.1</dep.jspecify.version>
 		<dep.slf4j.version>2.0.20</dep.slf4j.version>
-		<dep.iban-commons.version>1.8.11</dep.iban-commons.version>
+		<dep.iban-commons.version>1.8.12</dep.iban-commons.version>
 		<dep.commons-validator.version>1.11.0</dep.commons-validator.version>
 		<dep.spock.version>2.5-groovy-6.0</dep.spock.version>
 		<dep.groovy.version>6.0.0</dep.groovy.version>
@@ -111,7 +111,7 @@
 
 		<!-- Plugin versions (ordered alphabetically) -->
 		<dep.plugin.build-helper.version>3.6.2</dep.plugin.build-helper.version>
-		<dep.plugin.central-publishing.version>0.11.0</dep.plugin.central-publishing.version>
+		<dep.plugin.central-publishing.version>0.12.0</dep.plugin.central-publishing.version>
 		<dep.plugin.checkstyle.version>3.6.0</dep.plugin.checkstyle.version>
 		<dep.plugin.compiler.version>3.16.0</dep.plugin.compiler.version>
 		<dep.plugin.coveralls.version>4.3.0</dep.plugin.coveralls.version>
