@@ -5,7 +5,7 @@ import spock.lang.Specification
 
 class BrNationalIdentityCardNumberProviderSpec extends Specification {
 
-    private Fairy fairy = Fairy.create(Locale.forLanguageTag("br"))
+    private Fairy fairy = Fairy.create(Locale.forLanguageTag("pt-BR"))
 
     def "Should generate CPF with correct format"() {
         when:

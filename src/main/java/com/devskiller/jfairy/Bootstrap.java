@@ -22,6 +22,7 @@ import com.devskiller.jfairy.producer.payment.IBANFactoryImpl;
 import com.devskiller.jfairy.producer.person.PersonFactory;
 import com.devskiller.jfairy.producer.person.PersonFactoryImpl;
 import com.devskiller.jfairy.producer.text.TextProducerInternal;
+import com.devskiller.jfairy.producer.util.LanguageCode;
 
 /**
  * <p>
@@ -111,7 +112,7 @@ public final class Bootstrap {
     private static void fillDefaultDataMaster(MapBasedDataMaster dataMaster, Locale locale, String filePrefix) {
         try {
             String baseFile = filePrefix + DATA_FILE_EXTENSION;
-            String localeFile = filePrefix + "_" + locale.getLanguage() + DATA_FILE_EXTENSION;
+            String localeFile = filePrefix + "_" + dataFileSuffix(locale) + DATA_FILE_EXTENSION;
 
             LOG.debug("Loading data resources: {}, {}", baseFile, localeFile);
 
@@ -121,6 +122,19 @@ public final class Bootstrap {
             LOG.error("Failed to load data resources for locale {}", locale);
             throw new IllegalStateException(ex);
         }
+    }
+
+    /**
+     * Returns the data file suffix for a locale: that of a supported language, otherwise the locale's own language,
+     * so custom data files for further languages keep working.
+     *
+     * @param locale the requested locale
+     * @return the data file suffix, e.g. {@code br} for {@code pt-BR}
+     */
+    private static String dataFileSuffix(Locale locale) {
+        return LanguageCode.forLocale(locale)
+            .map(code -> code.name().toLowerCase(Locale.ROOT))
+            .orElseGet(locale::getLanguage);
     }
 
     /**

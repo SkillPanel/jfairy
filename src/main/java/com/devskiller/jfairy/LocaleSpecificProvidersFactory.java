@@ -77,12 +77,13 @@ final class LocaleSpecificProvidersFactory {
                                                             DataMaster dataMaster,
                                                             BaseProducer baseProducer,
                                                             DateProducer dateProducer) {
-        LanguageCode code;
-        try {
-            code = LanguageCode.valueOf(locale.getLanguage().toUpperCase(Locale.ROOT));
-        } catch (IllegalArgumentException ex) {
+        LanguageCode code = LanguageCode.forLocale(locale).orElse(null);
+        if (code == null) {
             LOG.warn("Unknown locale {}", locale);
             code = LanguageCode.EN;
+        } else if (!code.getIsoLanguage().equals(locale.getLanguage())) {
+            String isoLanguage = code.getIsoLanguage();
+            LOG.warn("Locale {} is deprecated, use {} instead", locale, isoLanguage);
         }
 
         return switch (code) {

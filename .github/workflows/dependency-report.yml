@@ -1,0 +1,32 @@
+name: Dependency Report
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Set up JDK 17
+        uses: actions/setup-java@v6
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+      # report only: versions-maven-plugin never fails the build, it just lists
+      # what is outdated in the workflow summary, no pull requests or issues
+      - name: Report outdated dependencies and plugins
+        run: |
+          {
+            echo "## Outdated dependencies and plugins"
+            echo
+            echo '```text'
+            ./mvnw --batch-mode versions:display-dependency-updates versions:display-plugin-updates
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"

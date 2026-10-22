@@ -5,7 +5,7 @@ import spock.lang.Specification
 
 class BrVATIdentificationNumberProviderSpec extends Specification {
 
-    private Fairy fairy = Fairy.create(Locale.forLanguageTag("br"))
+    private Fairy fairy = Fairy.create(Locale.forLanguageTag("pt-BR"))
 
     def "Should generate CNPJ with correct format"() {
         when:
