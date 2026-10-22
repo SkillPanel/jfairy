@@ -10,6 +10,7 @@ import com.devskiller.jfairy.producer.company.DefaultCompanyProvider
 
 import static com.devskiller.jfairy.producer.company.CompanyProvider.COMPANY_EMAIL
 import static com.devskiller.jfairy.producer.company.CompanyProvider.COMPANY_NAME
+import static com.devskiller.jfairy.producer.company.CompanyProvider.COMPANY_SUFFIX
 import static com.devskiller.jfairy.producer.company.CompanyProvider.DOMAIN
 
 class CompanyProviderSpec extends Specification {
@@ -17,6 +18,10 @@ class CompanyProviderSpec extends Specification {
     private BaseProducer baseProducer = Mock(BaseProducer)
     private DataMaster dataMaster = Mock(DataMaster)
     private VATIdentificationNumberProvider vatIdentificationNumberProvider = Mock(VATIdentificationNumberProvider)
+
+    def setup() {
+        dataMaster.getStringList(COMPANY_SUFFIX) >> []
+    }
 
     def "should remove slashes in company email"() {
         given:
