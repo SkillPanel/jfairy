@@ -3,6 +3,8 @@
 [![Build](https://github.com/SkillPanel/jfairy/actions/workflows/build.yml/badge.svg)](https://github.com/SkillPanel/jfairy/actions/workflows/build.yml)
 [![Maven Central](https://img.shields.io/maven-central/v/com.devskiller/jfairy)](https://central.sonatype.com/artifact/com.devskiller/jfairy)
 [![Javadoc](https://javadoc.io/badge2/com.devskiller/jfairy/javadoc.svg)](https://javadoc.io/doc/com.devskiller/jfairy)
+[![Java](https://img.shields.io/badge/Java-17%2B-blue)](https://openjdk.org/projects/jdk/17/)
+[![License](https://img.shields.io/github/license/SkillPanel/jfairy)](LICENSE)
 
 Java fake data generator. According to Wikipedia:
 
@@ -28,39 +30,33 @@ Add the following dependency to your `pom.xml`:
 Fairy fairy = Fairy.create();
 Person person = fairy.person();
 
-System.out.println(person.getFirstName());
-// Chloe
-System.out.println(person.getLastName());
-// Barker
-System.out.println(person.getEmail());
-// barker@yahoo.com
-System.out.println(person.getTelephoneNumber());
-// 690-950-802
-System.out.println(person.getJobTitle());
-// Software Developer
+String name = person.getFullName();          // Camila Rosa
+String email = person.getEmail();            // camila.rosa@yahoo.com
+String phone = person.getTelephoneNumber();  // 786-828-8553
+String city = person.getAddress().getCity(); // Miami
+String job = person.getJobTitle();           // DevOps Engineer
+```
 
-Person adultMale = fairy.person(PersonProperties.male(), PersonProperties.minAge(21));
-System.out.println(adultMale.isMale());
-// true
-System.out.println(adultMale.getDateOfBirth());
-// at least 21 years earlier
+Properties narrow down what gets generated:
+
+```java
+Person adult = fairy.person(PersonProperties.male(), PersonProperties.minAge(21));
+
+boolean male = adult.isMale(); // true
+int age = adult.getAge();      // 21 or older
 ```
 
 ### Creating related objects
 
 ```java
-Fairy fairy = Fairy.create();
+Fairy fairy = Fairy.create(Locale.GERMAN);
 Company company = fairy.company();
-System.out.println(company.getName());
-// Robuten Associates
-System.out.println(company.getUrl());
-// http://www.robuteniaassociates.com
+String companyName = company.getName(); // Kaplooie Sprengtechnik AG
+String url = company.getUrl();          // http://www.kaplooiesprengtechnik.net
 
-Person salesman = fairy.person(PersonProperties.withCompany(company));
-System.out.println(salesman.getFullName());
-// Juan Camacho
-System.out.println(salesman.getCompanyEmail());
-// juan.camacho@robuteniaassociates.com
+Person employee = fairy.person(PersonProperties.withCompany(company));
+String name = employee.getFullName();             // Blanka Hohn
+String companyEmail = employee.getCompanyEmail(); // blanka.hohn@kaplooiesprengtechnik.net
 ```
 
 ## Supported locales
@@ -173,10 +169,6 @@ country that has them.
 It is recommended to create a separate `Fairy` instance for each thread.
 
 While some methods might appear safe, the underlying `Random` implementation can lead to contention and poor performance. Creating dedicated instances ensures both thread safety and optimal execution speed.
-
-## JUnit 5 Extension
-
-If you use JUnit 5, check out [jfairy-junit-extension](https://github.com/SkillPanel/jfairy-junit-extension) — an extension that allows injecting jFairy-generated objects directly into test method parameters.
 
 ## Building
 
