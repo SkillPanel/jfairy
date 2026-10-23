@@ -6,12 +6,14 @@ import de.speedbanking.iban.IbanValidator
 import spock.lang.Specification
 
 import com.devskiller.jfairy.producer.VATIdentificationNumberProvider
+import com.devskiller.jfairy.producer.company.locale.it.ItVATIdentificationNumberProvider
 import com.devskiller.jfairy.producer.company.locale.pl.PlVATIdentificationNumberProvider
 import com.devskiller.jfairy.producer.company.locale.sk.SkVATIdentificationNumberProvider
 import com.devskiller.jfairy.producer.company.locale.sv.SvVATIdentificationNumberProvider
 import com.devskiller.jfairy.producer.payment.IBANProperties
 import com.devskiller.jfairy.producer.person.Person
 import com.devskiller.jfairy.producer.person.PersonProperties
+import com.devskiller.jfairy.producer.person.locale.it.ItNationalIdentificationNumberProvider
 import com.devskiller.jfairy.producer.person.locale.pl.PlNationalIdentificationNumberProvider
 import com.devskiller.jfairy.producer.person.locale.sk.SkNationalIdentificationNumberProvider
 import com.devskiller.jfairy.producer.person.locale.sv.SvNationalIdentificationNumberProvider
@@ -75,6 +77,26 @@ class InvalidFairySpec extends Specification {
         then:
             numbers.every { it ==~ /\d{6}-\d{4}/ }
             numbers.every { !SvNationalIdentificationNumberProvider.isValid(it) }
+    }
+
+    def "should generate Italian tax code with wrong check letter"() {
+        given:
+            def itFairy = Fairy.create(Locale.ITALIAN)
+        when:
+            def taxCodes = (1..SAMPLES).collect { itFairy.invalid().nationalIdentificationNumber() }
+        then:
+            taxCodes.every { it ==~ /[A-Z]{6}\d{2}[A-Z]\d{2}[A-Z]\d{3}[A-Z]/ }
+            taxCodes.every { !ItNationalIdentificationNumberProvider.isValid(it) }
+    }
+
+    def "should generate Italian VAT identification number with wrong check digit"() {
+        given:
+            def itFairy = Fairy.create(Locale.ITALIAN)
+        when:
+            def numbers = (1..SAMPLES).collect { itFairy.invalid().vatIdentificationNumber() }
+        then:
+            numbers.every { it ==~ /\d{11}/ }
+            numbers.every { !ItVATIdentificationNumberProvider.isValid(it) }
     }
 
     def "should generate Slovak VAT identification number with wrong check digit"() {
