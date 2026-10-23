@@ -13,6 +13,7 @@ import com.devskiller.jfairy.producer.company.locale.de.DeVATIdentificationNumbe
 import com.devskiller.jfairy.producer.company.locale.en.EnVATIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.company.locale.es.EsVATIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.company.locale.fr.FrVATIdentificationNumberProvider;
+import com.devskiller.jfairy.producer.company.locale.it.ItVATIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.company.locale.ja.JaVATIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.company.locale.ka.KaVATIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.company.locale.pl.PlVATIdentificationNumberProvider;
@@ -37,6 +38,7 @@ import com.devskiller.jfairy.producer.person.locale.es.EsPassportNumberProvider;
 import com.devskiller.jfairy.producer.person.locale.fr.FrAddressProvider;
 import com.devskiller.jfairy.producer.person.locale.fr.FrNationalIdentityCardNumberProvider;
 import com.devskiller.jfairy.producer.person.locale.fr.FrPassportNumberProvider;
+import com.devskiller.jfairy.producer.person.locale.it.ItNationalIdentificationNumberFactory;
 import com.devskiller.jfairy.producer.person.locale.ja.JaAddressProvider;
 import com.devskiller.jfairy.producer.person.locale.ja.JaNationalIdentityCardNumberProvider;
 import com.devskiller.jfairy.producer.person.locale.ja.JaPassportNumberProvider;
@@ -91,7 +93,7 @@ final class LocaleSpecificProvidersFactory {
             case EN -> createEnProviders(dataMaster, baseProducer);
             case ES -> createEsProviders(dataMaster, baseProducer);
             case FR -> createFrProviders(dataMaster, baseProducer);
-            case IT -> createItProviders(dataMaster, baseProducer);
+            case IT -> createItProviders(dataMaster, baseProducer, dateProducer);
             case SK -> createSkProviders(dataMaster, baseProducer, dateProducer);
             case SV -> createSvProviders(dataMaster, baseProducer, dateProducer);
             case ZH -> createZhProviders(dataMaster, baseProducer);
@@ -159,21 +161,23 @@ final class LocaleSpecificProvidersFactory {
     /**
      * Creates providers for Italian locale.
      * <p>
-     * Note: Currently uses English fallbacks.
+     * Note: Identity card, address and passport still use English fallbacks.
      *
      * @param dataMaster   data source
      * @param baseProducer base producer
+     * @param dateProducer date producer
      * @return Italian specific providers
      */
     private static LocaleSpecificProviders createItProviders(DataMaster dataMaster,
-                                                             BaseProducer baseProducer) {
+                                                             BaseProducer baseProducer,
+                                                             DateProducer dateProducer) {
         return new LocaleSpecificProviders(
-            new NoNationalIdentificationNumberFactory(),
-            new EnNationalIdentityCardNumberProvider(baseProducer),
-            new EnVATIdentificationNumberProvider(baseProducer),
-            new EnAddressProvider(dataMaster, baseProducer),
-            new EnPassportNumberProvider(baseProducer)
-    );
+                new ItNationalIdentificationNumberFactory(dataMaster, baseProducer, dateProducer),
+                new EnNationalIdentityCardNumberProvider(baseProducer),
+                new ItVATIdentificationNumberProvider(baseProducer),
+                new EnAddressProvider(dataMaster, baseProducer),
+                new EnPassportNumberProvider(baseProducer)
+        );
     }
 
     private static LocaleSpecificProviders createEsProviders(DataMaster dataMaster,

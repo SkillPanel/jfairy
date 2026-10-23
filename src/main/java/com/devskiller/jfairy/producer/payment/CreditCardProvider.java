@@ -7,6 +7,7 @@ import java.util.function.Supplier;
 import com.devskiller.jfairy.data.DataMaster;
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.DateProducer;
+import com.devskiller.jfairy.producer.util.CheckDigits;
 
 public class CreditCardProvider implements Supplier<CreditCard> {
 
@@ -56,37 +57,7 @@ public class CreditCardProvider implements Supplier<CreditCard> {
     private String generateNumber(CreditCardVendor vendor) {
         String prefix = dataMaster.getValuesOfType(DATA_KEY, vendor.getDataKey(), String.class);
         String pattern = prefix + "#".repeat(Math.max(0, vendor.getNumberLength() - 1 - prefix.length()));
-        return completeNumber(baseProducer.numerify(pattern));
+        String number = baseProducer.numerify(pattern);
+        return number + CheckDigits.luhnDigit(number);
     }
-
-    /**
-     * Completes a credit card number by appending its Luhn check digit.
-     * <p>
-     * Starting with the rightmost digit, every second digit is doubled, and 9 is subtracted from results above 9.
-     * The check digit brings the sum of all digits to a multiple of 10.
-     *
-     * @param creditCardNumber the card number without its check digit
-     * @return the full credit card number including the check digit
-     * @throws IllegalArgumentException if the input contains non-digit characters
-     */
-    private static String completeNumber(String creditCardNumber) {
-        int sum = 0;
-        boolean doubled = true;
-        for (int i = creditCardNumber.length() - 1; i >= 0; i--) {
-            int n = Character.digit(creditCardNumber.charAt(i), 10);
-            if (n == -1) {
-                throw new IllegalArgumentException("Invalid character in credit card number");
-            }
-            if (doubled) {
-                n *= 2;
-                if (n > 9) {
-                    n -= 9;
-                }
-            }
-            sum += n;
-            doubled = !doubled;
-        }
-        return creditCardNumber + (10 - sum % 10) % 10;
-    }
-
 }

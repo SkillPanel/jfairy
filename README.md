@@ -159,8 +159,12 @@ Person person = fairy.person(
     PersonProperties.withNationalIdentificationNumber(pesel));
 ```
 
-Invalid national identification and VAT numbers are implemented for the Polish, Slovak and
-Swedish locales; other locales throw `UnsupportedOperationException`. IBANs work for every
+The Italian tax code (Codice Fiscale) is derived from the holder's name as well, so pass
+`NationalIdentificationNumberProperties.firstName(...)` and `lastName(...)` too and use the same
+names for the person.
+
+Invalid national identification and VAT numbers are implemented for the Italian, Polish, Slovak
+and Swedish locales; other locales throw `UnsupportedOperationException`. IBANs work for every
 country that has them.
 
 ## Thread safety
