@@ -6,7 +6,7 @@ import spock.lang.Specification
 
 class BrAddressSpec extends Specification {
 
-    private Fairy fairy = Fairy.create(Locale.forLanguageTag("br"))
+    private Fairy fairy = Fairy.create(Locale.forLanguageTag("pt-BR"))
 
     def "Should generate Brazilian address"() {
         when:

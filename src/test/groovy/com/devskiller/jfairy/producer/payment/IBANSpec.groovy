@@ -116,7 +116,6 @@ class IBANSpec extends Specification {
             ibans.every { country == null ? it == null : it.country == country }
         where:
             language | country
-            "br"     | "BR"
             "de"     | "DE"
             "en"     | "GB" // multi-country language: also spoken in AU, US, CA, none of which support IBAN
             "es"     | "ES"
@@ -125,6 +124,7 @@ class IBANSpec extends Specification {
             "ja"     | null // no IBAN-supporting country speaks Japanese
             "ka"     | "GE"
             "pl"     | "PL"
+            "pt"     | "BR"
             "sk"     | "SK"
             "sv"     | "SE"
             "tr"     | "TR"
