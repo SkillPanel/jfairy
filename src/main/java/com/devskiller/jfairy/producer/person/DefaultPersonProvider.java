@@ -246,7 +246,9 @@ public class DefaultPersonProvider implements PersonProvider {
         }
         nationalIdentificationNumber = nationalIdentificationNumberFactory.produceNationalIdentificationNumberProvider(
             NationalIdentificationNumberProperties.dateOfBirth(dateOfBirth),
-            NationalIdentificationNumberProperties.sex(sex)).get().getValue();
+            NationalIdentificationNumberProperties.sex(sex),
+            NationalIdentificationNumberProperties.firstName(middleName.isEmpty() ? firstName : firstName + " " + middleName),
+            NationalIdentificationNumberProperties.lastName(lastName)).get().getValue();
     }
 
     @Override

@@ -22,4 +22,24 @@ public interface NationalIdentificationNumberProvider extends Supplier<NationalI
     void setIssueDate(LocalDate dateOfBirth);
 
     void setSex(Person.Sex sex);
+
+    /**
+     * Sets the holder's first name. Ignored by locales whose number does not depend on the name.
+     *
+     * @param firstName the holder's first name
+     * @since 0.10.0
+     */
+    default void setFirstName(String firstName) {
+        // most numbers do not encode the name
+    }
+
+    /**
+     * Sets the holder's last name. Ignored by locales whose number does not depend on the name.
+     *
+     * @param lastName the holder's last name
+     * @since 0.10.0
+     */
+    default void setLastName(String lastName) {
+        // most numbers do not encode the name
+    }
 }
