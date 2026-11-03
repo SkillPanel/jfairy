@@ -13,8 +13,7 @@ import com.devskiller.jfairy.producer.TimeProvider;
 import com.devskiller.jfairy.producer.company.Company;
 import com.devskiller.jfairy.producer.company.CompanyFactory;
 
-import static com.devskiller.jfairy.producer.util.StringUtils.latinize;
-import static com.devskiller.jfairy.producer.util.StringUtils.lowerCase;
+import static com.devskiller.jfairy.producer.util.StringUtils.toLoginName;
 
 public class DefaultPersonProvider implements PersonProvider {
 
@@ -160,9 +159,9 @@ public class DefaultPersonProvider implements PersonProvider {
             return;
         }
         if (baseProducer.trueOrFalse()) {
-            username = lowerCase(latinize(firstName.substring(0, 1) + lastName));
+            username = toLoginName(firstName.substring(0, 1) + lastName);
         } else {
-            username = lowerCase(latinize(firstName + lastName.substring(0, 1)));
+            username = toLoginName(firstName + lastName.substring(0, 1));
         }
     }
 

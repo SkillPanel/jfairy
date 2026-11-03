@@ -6,6 +6,7 @@ import com.devskiller.jfairy.producer.company.Company;
 
 import static com.devskiller.jfairy.producer.util.StringUtils.latinize;
 import static com.devskiller.jfairy.producer.util.StringUtils.lowerCase;
+import static com.devskiller.jfairy.producer.util.StringUtils.toLoginName;
 
 public class CompanyEmailProvider implements Supplier<String> {
 
@@ -21,7 +22,7 @@ public class CompanyEmailProvider implements Supplier<String> {
 
     @Override
     public String get() {
-        String email = lowerCase(firstName + '.' + lastName + '@' + company.getDomain()).replace(" ", ".");
-        return latinize(email);
+        String localPart = (firstName + '.' + lastName).replace(" ", ".");
+        return toLoginName(localPart) + '@' + latinize(lowerCase(company.getDomain()));
     }
 }

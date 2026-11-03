@@ -283,6 +283,13 @@ class PersonSpec extends Specification {
             person.username == "specificusername"
     }
 
+    def "should remove apostrophes and spaces from username"() {
+        when:
+            Person person = fairy.person(withFirstName("Marco"), withLastName("D'Angelo de Luca"))
+        then:
+            person.username ==~ /[a-z]+/
+    }
+
     def "withTelephoneNumber should create person with specific telephoneNumber"() {
         when:
             Person person = fairy.person(withTelephoneNumber("01234556789"))
