@@ -38,7 +38,10 @@ import com.devskiller.jfairy.producer.person.locale.es.EsPassportNumberProvider;
 import com.devskiller.jfairy.producer.person.locale.fr.FrAddressProvider;
 import com.devskiller.jfairy.producer.person.locale.fr.FrNationalIdentityCardNumberProvider;
 import com.devskiller.jfairy.producer.person.locale.fr.FrPassportNumberProvider;
+import com.devskiller.jfairy.producer.person.locale.it.ItAddressProvider;
 import com.devskiller.jfairy.producer.person.locale.it.ItNationalIdentificationNumberFactory;
+import com.devskiller.jfairy.producer.person.locale.it.ItNationalIdentityCardNumberProvider;
+import com.devskiller.jfairy.producer.person.locale.it.ItPassportNumberProvider;
 import com.devskiller.jfairy.producer.person.locale.ja.JaAddressProvider;
 import com.devskiller.jfairy.producer.person.locale.ja.JaNationalIdentityCardNumberProvider;
 import com.devskiller.jfairy.producer.person.locale.ja.JaPassportNumberProvider;
@@ -160,8 +163,6 @@ final class LocaleSpecificProvidersFactory {
 
     /**
      * Creates providers for Italian locale.
-     * <p>
-     * Note: Identity card, address and passport still use English fallbacks.
      *
      * @param dataMaster   data source
      * @param baseProducer base producer
@@ -173,10 +174,10 @@ final class LocaleSpecificProvidersFactory {
                                                              DateProducer dateProducer) {
         return new LocaleSpecificProviders(
                 new ItNationalIdentificationNumberFactory(dataMaster, baseProducer, dateProducer),
-                new EnNationalIdentityCardNumberProvider(baseProducer),
+                new ItNationalIdentityCardNumberProvider(baseProducer),
                 new ItVATIdentificationNumberProvider(baseProducer),
-                new EnAddressProvider(dataMaster, baseProducer),
-                new EnPassportNumberProvider(baseProducer)
+                new ItAddressProvider(dataMaster, baseProducer),
+                new ItPassportNumberProvider(baseProducer)
         );
     }
 
