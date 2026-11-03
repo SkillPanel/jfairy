@@ -9,6 +9,7 @@ import com.devskiller.jfairy.producer.util.StringUtils;
 import static com.devskiller.jfairy.producer.person.PersonProvider.PERSONAL_EMAIL;
 import static com.devskiller.jfairy.producer.util.StringUtils.latinize;
 import static com.devskiller.jfairy.producer.util.StringUtils.lowerCase;
+import static com.devskiller.jfairy.producer.util.StringUtils.toLoginName;
 
 public class EmailProvider implements Supplier<String> {
 
@@ -33,7 +34,7 @@ public class EmailProvider implements Supplier<String> {
             case 3 -> StringUtils.replace(lastName, " ", "");
             default -> throw new IllegalStateException("Unexpected value: " + baseProducer.randomBetween(1, 3));
         };
-        String email = lowerCase(prefix + '@' + dataMaster.getRandomValue(PERSONAL_EMAIL));
-        return latinize(email);
+        String domain = dataMaster.getRandomValue(PERSONAL_EMAIL);
+        return toLoginName(prefix) + '@' + latinize(lowerCase(domain));
     }
 }

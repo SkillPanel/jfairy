@@ -41,4 +41,16 @@ class CompanyEmailProviderSpec extends Specification {
         then:
             email == "thiess.weissmann@companymail.com"
     }
+
+    def "should remove apostrophes from company email"() {
+        given:
+            Company company = new Company(null, "companymail.com", null, null)
+            CompanyEmailProvider companyEmailProvider = new CompanyEmailProvider("Marco", "D'Angelo", company)
+
+        when:
+            String email = companyEmailProvider.get()
+
+        then:
+            email == "marco.dangelo@companymail.com"
+    }
 }

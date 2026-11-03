@@ -260,6 +260,38 @@ class StringUtilsTest {
     }
 
     @Nested
+    @DisplayName("toLoginName")
+    class ToLoginName {
+
+        @ParameterizedTest(name = "''{0}'' → ''{1}''")
+        @CsvSource(delimiter = '|', value = {
+            "Moss                | moss",
+            "Marco.D'Angelo      | marco.dangelo",
+            "mDe Luca            | mdeluca",
+            "Jean-Luc.Picard     | jean-luc.picard",
+            "Réynhölm            | reynholm",
+            "Straße              | strasse",
+            "Roy2000             | roy2000",
+            "roy..trenneman      | roy.trenneman",
+            "roy.'.trenneman     | roy.trenneman",
+            "roy.jr.             | roy.jr",
+            "-.roy.-             | roy",
+            "ნინო                | ნინო",
+            "王伟                | 王伟",
+        })
+        void normalizesName(String input, String expected) {
+            assertEquals(expected, StringUtils.toLoginName(input));
+        }
+
+        // only possible for names passed in by the caller, the bundled data has none
+        @ParameterizedTest(name = "''{0}'' → ''''")
+        @ValueSource(strings = {"", " ", "'", ".", "' . -"})
+        void noUsableCharacter_returnsEmpty(String input) {
+            assertEquals("", StringUtils.toLoginName(input));
+        }
+    }
+
+    @Nested
     @DisplayName("escapeNonAscii")
     class EscapeNonAscii {
 

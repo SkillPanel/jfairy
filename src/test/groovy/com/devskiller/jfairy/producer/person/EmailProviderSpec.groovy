@@ -75,4 +75,34 @@ class EmailProviderSpec extends Specification {
         then:
             email == "thiess.weissmann@mail.com"
     }
+
+    def "should remove apostrophes and spaces from email, variant #variant"() {
+        given:
+            baseProducer.randomBetween(1, 3) >> variant
+            EmailProvider emailProvider = new EmailProvider(dataMaster, baseProducer, "Marco", "D'Angelo de Luca")
+
+        when:
+            String email = emailProvider.get()
+
+        then:
+            email == expected
+
+        where:
+            variant | expected
+            1       | "marcodangelodeluca@mail.com"
+            2       | "marco.dangelo.de.luca@mail.com"
+            3       | "dangelodeluca@mail.com"
+    }
+
+    def "should keep names in non-latin scripts in email"() {
+        given:
+            baseProducer.randomBetween(1, 3) >> 3
+            EmailProvider emailProvider = new EmailProvider(dataMaster, baseProducer, "ნინო", "ბაგრატიონი დავითაშვილი")
+
+        when:
+            String email = emailProvider.get()
+
+        then:
+            email == "ბაგრატიონიდავითაშვილი@mail.com"
+    }
 }

@@ -3,6 +3,7 @@ package com.devskiller.jfairy.producer.util;
 import java.text.Normalizer;
 import java.util.List;
 import java.util.Locale;
+import java.util.regex.Pattern;
 
 import org.jspecify.annotations.Nullable;
 
@@ -24,6 +25,10 @@ import org.jspecify.annotations.Nullable;
  * @since 2026/03/14
  */
 public final class StringUtils {
+
+    private static final Pattern LOGIN_DISALLOWED_ASCII = Pattern.compile("[\\p{ASCII}&&[^a-z0-9.\\-]]");
+    private static final Pattern REPEATED_DOTS          = Pattern.compile("\\.{2,}");
+    private static final Pattern EDGE_DOTS_AND_HYPHENS  = Pattern.compile("^[.\\-]+|[.\\-]+$");
 
     /** Prevent instantiation of this utility class. */
     private StringUtils() {
@@ -356,6 +361,26 @@ public final class StringUtils {
         }
 
         return sb.toString();
+    }
+
+    /**
+     * Turns a name into the local part of an email address or a username.
+     *
+     * <p>Converts the name to lower case and {@linkplain #latinize(String) latinizes} it, then
+     * removes ASCII characters other than letters, digits, dots and hyphens, such as spaces and
+     * apostrophes. Repeated dots are collapsed, and dots and hyphens at either end are removed.
+     * Non-ASCII characters that survive latinization are kept, so names in other scripts, such as
+     * Georgian or Chinese, do not end up empty.
+     *
+     * <p>Example: {@code toLoginName("Marco.D'Angelo")} returns {@code "marco.dangelo"}.
+     *
+     * @param s the string to process; must not be {@code null}
+     * @return the login name, empty if {@code s} contains no usable character
+     */
+    public static String toLoginName(String s) {
+        String result = LOGIN_DISALLOWED_ASCII.matcher(latinize(lowerCase(s))).replaceAll("");
+        result = REPEATED_DOTS.matcher(result).replaceAll(".");
+        return EDGE_DOTS_AND_HYPHENS.matcher(result).replaceAll("");
     }
 
     // -------------------------------------------------------------------------
