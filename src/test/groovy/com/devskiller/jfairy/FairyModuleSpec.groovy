@@ -10,6 +10,7 @@ import com.devskiller.jfairy.producer.person.locale.de.DeAddressProvider
 import com.devskiller.jfairy.producer.person.locale.en.EnAddressProvider
 import com.devskiller.jfairy.producer.person.locale.es.EsAddressProvider
 import com.devskiller.jfairy.producer.person.locale.fr.FrAddressProvider
+import com.devskiller.jfairy.producer.person.locale.it.ItAddressProvider
 import com.devskiller.jfairy.producer.person.locale.ka.KaAddressProvider
 import com.devskiller.jfairy.producer.person.locale.pl.PlAddressProvider
 import com.devskiller.jfairy.producer.person.locale.sv.SvAddressProvider
@@ -35,7 +36,7 @@ class FairyModuleSpec extends Specification {
             "pl"   | PlAddressProvider.class
             "es"   | EsAddressProvider.class
             "fr"   | FrAddressProvider.class
-            "it"   | EnAddressProvider.class
+            "it"   | ItAddressProvider.class
             "de"   | DeAddressProvider.class
             "sv"   | SvAddressProvider.class
             "ka"   | KaAddressProvider.class

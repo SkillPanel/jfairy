@@ -16,9 +16,9 @@ telephoneNumberFormats: ['##-#######', '###-#######']
 
 postalCodes: ['#####']
 
-cities: [Roma, Milano, Torino, Napoli, Frattamaggiore, Venezia, Porto S. Elpidio, S. Nicola Arcella]
+cities: [Roma, Milano, Napoli, Torino, Palermo, Genova, Bologna, Firenze, Bari, Catania, Venezia, Verona, Messina, Padova, Trieste, Brescia, Parma, Taranto, Prato, Modena, Reggio Calabria, Reggio Emilia, Perugia, Ravenna, Livorno, Cagliari, Foggia, Rimini, Salerno, Ferrara, Sassari, Latina, Monza, Siracusa, Pescara, Bergamo, Trento, Vicenza, Terni, Bolzano, Novara, Piacenza, Ancona, Andria, Udine, Arezzo, Cesena, Lecce, La Spezia, Pesaro, Como, Pisa, Lucca, Brindisi, Treviso, Varese, Asti, Caserta, Cremona, Pavia, Potenza, Matera, Aosta, Campobasso, L'Aquila, Frattamaggiore, Porto Sant'Elpidio, San Nicola Arcella]
 
-streets: [Via Roma, P.zza Italia, L.go Augusto, Via G. Matteotti, Piazza G. Cesare, Corso Italia, Corso Mediterraneo, P.zza Aspromonte, Via Caduti di Guerra, Via Miseno, Via Lambro, Via A. Diaz]
+streets: [Via Roma, Piazza Italia, Largo Augusto, Via Giacomo Matteotti, Piazza Giulio Cesare, Corso Italia, Corso Mediterraneo, Piazza Aspromonte, Via Caduti di Guerra, Via Miseno, Via Lambro, Via Armando Diaz, Via Giuseppe Garibaldi, Via Giuseppe Mazzini, Corso Vittorio Emanuele II, Via Dante Alighieri, Via Camillo Cavour, Piazza del Duomo, Via Giuseppe Verdi, Via Alessandro Manzoni, Via XX Settembre, Via IV Novembre, Via Antonio Gramsci, Via della Repubblica, Via della Libertà, Via Nazionale, Via Umberto I, Via Vittorio Veneto, Via Leonardo da Vinci, Via Galileo Galilei, Via Guglielmo Marconi, Via San Francesco, Via del Mare, Via dei Mille, Via Cesare Battisti, Via Nazario Sauro, Via Trieste, Via Trento, Via Milano, Via Napoli, Viale Europa, Viale dei Pini, Viale della Vittoria, Piazza Garibaldi, Piazza della Libertà, Piazza San Marco, Corso Garibaldi, Corso Umberto I, Vicolo Stretto, Lungomare Colombo]
 
 countries: ['Italia', 'Francia', 'Germania', 'Spagna']
 
