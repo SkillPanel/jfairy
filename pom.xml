@@ -79,7 +79,7 @@
 	</distributionManagement>
 
 	<properties>
-		<revision>0.10.0-SNAPSHOT</revision>
+		<revision>0.10.1-SNAPSHOT</revision>
 
 		<javaVersion>17</javaVersion>
 
