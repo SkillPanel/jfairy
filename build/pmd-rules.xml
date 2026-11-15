@@ -9,9 +9,13 @@
     </description>
 
     <rule ref="category/java/bestpractices.xml/ArrayIsStoredDirectly" />
+    <rule ref="category/java/bestpractices.xml/AvoidPrintStackTrace" />
+    <rule ref="category/java/bestpractices.xml/AvoidReassigningParameters" />
     <rule ref="category/java/bestpractices.xml/CheckResultSet" />
+    <rule ref="category/java/bestpractices.xml/ConstantsInInterface" />
     <rule ref="category/java/bestpractices.xml/ForLoopCanBeForeach" />
     <rule ref="category/java/bestpractices.xml/GuardLogStatement" />
+    <rule ref="category/java/bestpractices.xml/LiteralsFirstInComparisons" />
     <rule ref="category/java/bestpractices.xml/LooseCoupling" />
     <rule ref="category/java/bestpractices.xml/MethodReturnsInternalArray" />
     <rule ref="category/java/bestpractices.xml/MissingOverride" />
@@ -19,7 +23,8 @@
     <rule ref="category/java/bestpractices.xml/OneDeclarationPerLine" />
     <rule ref="category/java/bestpractices.xml/PreserveStackTrace" />
     <rule ref="category/java/bestpractices.xml/PrimitiveWrapperInstantiation" />
-    <rule ref="category/java/bestpractices.xml/ReplaceVectorWithList" />
+    <rule ref="category/java/bestpractices.xml/ReplaceJavaUtilVector" />
+    <rule ref="category/java/bestpractices.xml/SimplifiableTestAssertion" />
     <rule ref="category/java/bestpractices.xml/UnusedAssignment" />
     <rule ref="category/java/bestpractices.xml/UnusedFormalParameter" />
     <rule ref="category/java/bestpractices.xml/UnusedLocalVariable" />
@@ -63,11 +68,13 @@
         </properties>
     </rule>
     <rule ref="category/java/codestyle.xml/PackageCase" />
+    <rule ref="category/java/codestyle.xml/PrematureDeclaration" />
     <rule ref="category/java/codestyle.xml/TooManyStaticImports">
         <properties>
             <property name="maximumStaticImports" value="15" />
         </properties>
     </rule>
+    <rule ref="category/java/codestyle.xml/UnnecessaryBoxing" />
     <rule ref="category/java/codestyle.xml/UnnecessaryCast" />
     <rule ref="category/java/codestyle.xml/UnnecessaryFullyQualifiedName" />
     <rule ref="category/java/codestyle.xml/UnnecessaryImport" />
@@ -80,10 +87,15 @@
     <rule ref="category/java/codestyle.xml/VariableCanBeInlined" />
 
     <rule ref="category/java/design.xml/AvoidDeeplyNestedIfStmts" />
+    <rule ref="category/java/design.xml/AvoidRethrowingException" />
     <rule ref="category/java/design.xml/AvoidThrowingNewInstanceOfSameException" />
+    <rule ref="category/java/design.xml/AvoidThrowingNullPointerException" />
+    <rule ref="category/java/design.xml/AvoidThrowingRawExceptionTypes" />
     <rule ref="category/java/design.xml/CollapsibleIfStatements" />
+    <rule ref="category/java/design.xml/FinalFieldCouldBeStatic" />
     <rule ref="category/java/design.xml/ImmutableField" />
     <rule ref="category/java/design.xml/InstantiableUtilityClass" />
+    <rule ref="category/java/design.xml/LogicInversion" />
     <rule ref="category/java/design.xml/SimplifiedTernary" />
     <rule ref="category/java/design.xml/SimplifyBooleanReturns" />
     <rule ref="category/java/design.xml/SimplifyConditional" />
@@ -93,12 +105,13 @@
     <rule ref="category/java/errorprone.xml/AssignmentInOperand">
         <properties>
             <property name="allowIncrementDecrement" value="true" />
+            <property name="allowWhile" value="true" />
         </properties>
     </rule>
     <rule ref="category/java/errorprone.xml/AvoidBranchingStatementAsLastInLoop" />
     <rule ref="category/java/errorprone.xml/AvoidCatchingGenericException">
         <properties>
-            <property name="typesThatShouldNotBeCaught" value="java.lang.Throwable" />
+            <property name="typesThatShouldNotBeCaught" value="java.lang.NullPointerException,java.lang.Throwable" />
         </properties>
     </rule>
     <rule ref="category/java/errorprone.xml/AvoidDecimalLiteralsInBigDecimalConstructor" />
@@ -106,15 +119,19 @@
     <rule ref="category/java/errorprone.xml/AvoidUsingOctalValues" />
     <rule ref="category/java/errorprone.xml/BrokenNullCheck" />
     <rule ref="category/java/errorprone.xml/ClassCastExceptionWithToArray" />
+    <rule ref="category/java/errorprone.xml/CloneMethodMustImplementCloneable" />
     <rule ref="category/java/errorprone.xml/CloseResource" />
     <rule ref="category/java/errorprone.xml/CompareObjectsWithEquals" />
     <rule ref="category/java/errorprone.xml/ConstructorCallsOverridableMethod" />
     <rule ref="category/java/errorprone.xml/DoNotTerminateVM" />
     <rule ref="category/java/errorprone.xml/DontUseFloatTypeForLoopIndices" />
     <rule ref="category/java/errorprone.xml/EmptyCatchBlock" />
+    <rule ref="category/java/errorprone.xml/EqualsNull" />
     <rule ref="category/java/errorprone.xml/ImplicitSwitchFallThrough" />
     <rule ref="category/java/errorprone.xml/JumbledIncrementer" />
     <rule ref="category/java/errorprone.xml/MisplacedNullCheck" />
+    <rule ref="category/java/errorprone.xml/MissingStaticMethodInNonInstantiatableClass" />
+    <rule ref="category/java/errorprone.xml/NonSerializableClass" />
     <rule ref="category/java/errorprone.xml/NullAssignment" />
     <rule ref="category/java/errorprone.xml/OverrideBothEqualsAndHashcode" />
     <rule ref="category/java/errorprone.xml/ProperCloneImplementation" />
@@ -130,11 +147,14 @@
     <rule ref="category/java/errorprone.xml/UseEqualsToCompareStrings" />
     <rule ref="category/java/errorprone.xml/UseLocaleWithCaseConversions" />
 
+    <rule ref="category/java/multithreading.xml/AvoidSynchronizedAtMethodLevel" />
     <rule ref="category/java/multithreading.xml/AvoidThreadGroup" />
     <rule ref="category/java/multithreading.xml/DontCallThreadRun" />
     <rule ref="category/java/multithreading.xml/DoubleCheckedLocking" />
+    <rule ref="category/java/multithreading.xml/UnsynchronizedStaticFormatter" />
 
     <rule ref="category/java/performance.xml/AppendCharacterWithChar" />
+    <rule ref="category/java/performance.xml/AvoidCalendarDateCreation" />
     <rule ref="category/java/performance.xml/BigIntegerInstantiation" />
     <rule ref="category/java/performance.xml/ConsecutiveAppendsShouldReuse" />
     <rule ref="category/java/performance.xml/InefficientEmptyStringCheck" />
@@ -143,9 +163,9 @@
     <rule ref="category/java/performance.xml/RedundantFieldInitializer" />
     <rule ref="category/java/performance.xml/StringInstantiation" />
     <rule ref="category/java/performance.xml/StringToString" />
-    <rule ref="category/java/performance.xml/UseArrayListInsteadOfVector" />
     <rule ref="category/java/performance.xml/UseArraysAsList" />
     <rule ref="category/java/performance.xml/UseIndexOfChar" />
     <rule ref="category/java/performance.xml/UseStringBufferForStringAppends" />
+    <rule ref="category/java/performance.xml/UseStringBufferLength" />
 
 </ruleset>

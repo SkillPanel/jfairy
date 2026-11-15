@@ -18,8 +18,8 @@ class AlphaNumberSystemTest {
         List<Character> alphabet = AlphaNumberSystem.generateAlphabetList();
 
         assertEquals(26, alphabet.size(), "Alphabet should have 26 characters");
-        assertEquals(Character.valueOf('A'), alphabet.get(0));
-        assertEquals(Character.valueOf('Z'), alphabet.get(25));
+        assertEquals('A', alphabet.get(0));
+        assertEquals('Z', alphabet.get(25));
     }
 
     @DisplayName("Should return an immutable list")

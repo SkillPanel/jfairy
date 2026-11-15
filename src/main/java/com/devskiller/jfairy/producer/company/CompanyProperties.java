@@ -1,5 +1,6 @@
 package com.devskiller.jfairy.producer.company;
 
+@SuppressWarnings("PMD.MissingStaticMethodInNonInstantiatableClass") // namespace for CompanyProperty
 public final class CompanyProperties {
 
     private CompanyProperties() {

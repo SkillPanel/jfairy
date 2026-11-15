@@ -321,8 +321,8 @@ class StringUtilsTest {
                 StringUtils.split("Moss Roy Jen", ' '));
         }
 
-        @Test
         @DisplayName("trailing delimiter preserves trailing empty string")
+        @Test
         void trailingDelimiter_preservesTrailingEmpty() {
             assertArrayEquals(new String[]{MOSS, "Roy", ""},
                 StringUtils.split("Moss Roy ", ' '));
