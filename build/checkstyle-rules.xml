@@ -22,6 +22,12 @@
         <property name="format" value="\n{3,}"/>
         <property name="message" value="Do not leave more than one open line."/>
     </module>
+    <module name="RegexpMultiline">
+        <property name="format"
+                  value="@(?:Parameterized)?Test(?:\s*\(.*?\))?\s+(?:@[a-zA-Z]+(?:\s*\(.*?\))?\s+)*@DisplayName" />
+        <property name="message"
+                  value="Annotation order violation: @DisplayName must come BEFORE @Test/@ParameterizedTest" />
+    </module>
     <module name="RegexpSingleline">
         <property name="format" value="\s+$"/>
         <property name="minimum" value="0"/>
@@ -83,6 +89,8 @@
         <module name="InnerAssignment"/>
         <module name="InnerTypeLast"/>
         <module name="InterfaceIsType"/>
+        <module name="JavadocContentLocation"/>
+        <module name="JavadocMissingLeadingAsterisk"/>
         <module name="JavadocStyle">
             <property name="checkFirstSentence" value="false"/>
         </module>
