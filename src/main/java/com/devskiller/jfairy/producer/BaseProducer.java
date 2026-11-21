@@ -88,7 +88,13 @@ public class BaseProducer {
         return random.nextInt(min, max);
     }
 
-    //TODO: MZA: Duplication - should be merged into one method when consistent logic will be determined
+    /**
+     * Returns random char value
+     *
+     * @param min lowest char to be returned
+     * @param max highest char to be returned
+     * @return random {@code char} value between {@code min} (inclusive) and {@code max} (inclusive)
+     */
     public char randomBetween(char min, char max) {
         return (char) randomBetween((int) min, (int) max);
     }
