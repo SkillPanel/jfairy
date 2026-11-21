@@ -107,7 +107,13 @@ public class PlVATIdentificationNumberProvider implements VATIdentificationNumbe
         return prefix + number;
     }
 
-    // TODO: Move to separate module
+    /**
+     * Checks whether the given string is a valid Polish VAT identification number (NIP).
+     * Both the plain and the dash-formatted notation are accepted.
+     *
+     * @param nip the number to check
+     * @return {@code true} if the number has ten digits and its check digit matches
+     */
     public static boolean isValid(String nip) {
         String normalizedNip = normalizeNip(nip);
         if (normalizedNip.length() != NIP_LENGTH) {

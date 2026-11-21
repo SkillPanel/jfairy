@@ -1,7 +1,7 @@
 package com.devskiller.jfairy.producer.net;
 
 /**
- * TODO: Add emails
+ * Produces network related values such as IP addresses and URLs.
  */
 public class NetworkProducer {
 
