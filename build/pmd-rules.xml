@@ -33,7 +33,8 @@
     <rule ref="category/java/bestpractices.xml/UseCollectionIsEmpty" />
     <rule ref="category/java/bestpractices.xml/UseStandardCharsets" />
     <rule ref="category/java/bestpractices.xml/UseTryWithResources" />
-    <!-- rule ref="category/java/bestpractices.xml/UseVarargs" /--> <!-- too many false positives on array-mutating helper methods -->
+    <!-- UseVarargs disabled: mostly false positives on array-mutating helper methods -->
+    <!-- rule ref="category/java/bestpractices.xml/UseVarargs" /-->
 
     <rule ref="category/java/codestyle.xml/AvoidDollarSigns" />
     <rule ref="category/java/codestyle.xml/ClassNamingConventions">

@@ -24,9 +24,9 @@
     </module>
     <module name="RegexpMultiline">
         <property name="format"
-                  value="@(?:Parameterized)?Test(?:\s*\(.*?\))?\s+(?:@[a-zA-Z]+(?:\s*\(.*?\))?\s+)*@DisplayName" />
+                  value="@(?:Parameterized)?Test(?:\s*\(.*?\))?\s+(?:@[a-zA-Z]+(?:\s*\(.*?\))?\s+)*@DisplayName"/>
         <property name="message"
-                  value="Annotation order violation: @DisplayName must come BEFORE @Test/@ParameterizedTest" />
+                  value="Annotation order violation: @DisplayName must come BEFORE @Test/@ParameterizedTest"/>
     </module>
     <module name="RegexpSingleline">
         <property name="format" value="\s+$"/>
@@ -40,6 +40,10 @@
     <!-- Excludes all 'module-info.java' files -->
     <module name="BeforeExecutionExclusionFileFilter">
         <property name="fileNamePattern" value="module\-info\.java$"/>
+    </module>
+    <module name="SuppressionSingleFilter">
+        <property name="checks" value="JavadocMethod|MissingJavadocMethod|MissingJavadocType"/>
+        <property name="files" value="[\\/]src[\\/]test[\\/]"/>
     </module>
     <module name="SuppressWarningsFilter"/>
 
@@ -63,8 +67,9 @@
         <module name="EqualsHashCode"/>
         <module name="FinalClass"/>
         <module name="GenericWhitespace"/>
-        <!-- HiddenField disabled: the codebase consistently uses "this.x = x" constructor/setter
-             params named after the field, which is a widely accepted idiom, not a bug risk -->
+        <!-- HiddenField disabled: the codebase consistently uses "this.x = x"
+             constructor/setter params named after the field, which is a widely accepted idiom,
+             not a bug risk -->
         <!-- module name="HiddenField"/ -->
         <module name="HideUtilityClassConstructor"/>
         <module name="IllegalImport"/>
@@ -89,7 +94,17 @@
         <module name="InnerAssignment"/>
         <module name="InnerTypeLast"/>
         <module name="InterfaceIsType"/>
+        <module name="InvalidJavadocPosition"/>
+        <module name="JavadocBlockTagLocation"/>
         <module name="JavadocContentLocation"/>
+        <module name="JavadocMethod">
+            <property name="accessModifiers" value="public, protected"/>
+            <property name="allowMissingParamTags" value="false"/>
+            <property name="allowMissingReturnTag" value="false"/>
+            <property name="validateThrows" value="false"/>
+            <!-- annotation elements describe themselves, no @return needed -->
+            <property name="tokens" value="METHOD_DEF, CTOR_DEF, COMPACT_CTOR_DEF"/>
+        </module>
         <module name="JavadocMissingLeadingAsterisk"/>
         <module name="JavadocStyle">
             <property name="checkFirstSentence" value="false"/>
@@ -102,7 +117,7 @@
             <property name="format" value="(^[a-z][a-zA-Z0-9]*$)|(^[ijk]$)"/>
         </module>
         <module name="MemberName">
-            <property name="format" value="^[a-z][a-zA-Z0-9]*$" />
+            <property name="format" value="^[a-z][a-zA-Z0-9]*$"/>
         </module>
         <module name="MethodLength">
             <property name="max" value="100"/>
@@ -111,16 +126,31 @@
         <module name="MethodName"/>
         <module name="MethodParamPad"/>
         <module name="MissingDeprecated"/>
+        <!-- MissingJavadocMethod disabled: most public producer methods are
+             self-explanatory, documenting them is a separate effort -->
+        <!-- module name="MissingJavadocMethod">
+            <property name="scope" value="protected"/>
+            <property name="minLineCount" value="-1"/>
+            <property name="tokens" value="METHOD_DEF, CTOR_DEF, ANNOTATION_FIELD_DEF, COMPACT_CTOR_DEF"/>
+        </module -->
+        <module name="MissingJavadocPackage"/>
+        <!-- MissingJavadocType disabled: see MissingJavadocMethod -->
+        <!-- module name="MissingJavadocType">
+            <property name="scope" value="protected"/>
+        </module -->
         <module name="MissingOverride"/>
         <module name="MissingSwitchDefault"/>
         <module name="ModifierOrder"/>
-        <module name="MultipleStringLiterals">
+        <!-- MultipleStringLiterals disabled: extracting constants only to avoid duplicate
+             literals rarely improves readability -->
+        <!-- module name="MultipleStringLiterals">
             <property name="allowedDuplicates" value="3"/>
-        </module>
+        </module -->
         <module name="MutableException"/>
         <module name="NeedBraces"/>
         <module name="NoClone"/>
         <module name="NoFinalizer"/>
+        <module name="NonEmptyAtclauseDescription"/>
         <module name="NoWhitespaceAfter"/>
         <module name="NoWhitespaceBefore"/>
         <module name="NPathComplexity"/>
@@ -136,8 +166,9 @@
         <module name="ParameterName">
             <property name="format" value="(?:^[a-z][a-zA-Z0-9]*$)"/>
         </module>
-        <!-- ParameterNumber disabled: Person's public 19-arg constructor is a real design smell,
-             but fixing it means a breaking Builder-style refactor of public API, not a ruleset tweak -->
+        <!-- ParameterNumber disabled: Person's public 19-arg constructor is a real
+             design smell, but fixing it means a breaking Builder-style refactor of public API,
+             not a ruleset tweak -->
         <!-- module name="ParameterNumber">
             <property name="max" value="10"/>
         </module -->
@@ -156,16 +187,18 @@
         <module name="SuperClone"/>
         <module name="SuperFinalize"/>
         <module name="SuppressWarningsHolder"/>
-        <!-- TodoComment disabled: would force either deleting or immediately resolving the
-             existing, legitimate TODO markers rather than tracking them as backlog items -->
+        <!-- TodoComment disabled: would force either deleting or immediately
+             resolving the existing, legitimate TODO markers rather than tracking them as
+             backlog items -->
         <!-- module name="TodoComment"/ -->
         <module name="TypecastParenPad"/>
         <module name="TypeName"/>
-        <!--module name="TypeName">
+        <!-- interface names are not forced to carry an I/IF prefix -->
+        <!-- module name="TypeName">
             <property name="format" value="^([A-Z][a-zA-Z0-9]+IF|I[A-Z][a-zA-Z0-9]+)$"/>
             <property name="tokens" value="INTERFACE_DEF"/>
             <message key="name.invalidPattern" value="Interface name ''{0}'' must match pattern ''{1}''."/>
-        </module-->
+        </module -->
         <module name="TypeName">
             <property name="format" value="^[A-Z][a-zA-Z0-9]+$"/>
             <property name="tokens" value="CLASS_DEF"/>
@@ -176,9 +209,10 @@
         <module name="VariableDeclarationUsageDistance">
             <property name="allowedDistance" value="10"/>
         </module>
-        <!-- VisibilityModifier disabled: the Default*Provider/Abstract* base classes deliberately
-             expose protected fields to locale subclasses; enforcing private+accessors here would
-             require a larger, deliberate refactor rather than a ruleset tweak -->
+        <!-- VisibilityModifier disabled: the Default*Provider/Abstract* base
+             classes deliberately expose protected fields to locale subclasses; enforcing
+             private+accessors here would require a larger, deliberate refactor rather than
+             a ruleset tweak -->
         <!-- module name="VisibilityModifier"/ -->
         <module name="WhitespaceAfter"/>
         <module name="WhitespaceAround">

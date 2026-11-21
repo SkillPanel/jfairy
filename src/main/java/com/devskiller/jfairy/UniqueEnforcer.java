@@ -55,6 +55,9 @@ public final class UniqueEnforcer<T> {
     /**
      * Generate a unique value using a custom supplier, tracking uniqueness
      * in the same seen-set as {@link #next()}.
+     *
+     * @param generator supplier of candidate values
+     * @return a value whose key has not been seen before
      */
     public T next(Supplier<T> generator) {
         for (int i = 0; i < maxRetries; i++) {
