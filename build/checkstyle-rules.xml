@@ -187,10 +187,7 @@
         <module name="SuperClone"/>
         <module name="SuperFinalize"/>
         <module name="SuppressWarningsHolder"/>
-        <!-- TodoComment disabled: would force either deleting or immediately
-             resolving the existing, legitimate TODO markers rather than tracking them as
-             backlog items -->
-        <!-- module name="TodoComment"/ -->
+        <module name="TodoComment"/>
         <module name="TypecastParenPad"/>
         <module name="TypeName"/>
         <!-- interface names are not forced to carry an I/IF prefix -->
