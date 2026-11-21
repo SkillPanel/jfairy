@@ -1,9 +1,9 @@
 package com.devskiller.jfairy.producer.person.locale.it;
 
-import java.util.regex.Pattern;
-
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.person.NationalIdentityCardNumberProvider;
+
+import java.util.regex.Pattern;
 
 /**
  * Italian electronic identity card number (Carta d'identità elettronica, CIE).

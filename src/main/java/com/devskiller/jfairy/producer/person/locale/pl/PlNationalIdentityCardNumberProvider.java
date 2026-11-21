@@ -1,6 +1,6 @@
 package com.devskiller.jfairy.producer.person.locale.pl;
 
-import java.time.LocalDate;
+import static com.devskiller.jfairy.producer.util.StringUtils.leftPad;
 
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.DateProducer;
@@ -8,7 +8,7 @@ import com.devskiller.jfairy.producer.person.NationalIdentityCardNumberProvider;
 import com.devskiller.jfairy.producer.util.AlphaNumberSystem;
 import com.devskiller.jfairy.producer.util.ValidateUtils;
 
-import static com.devskiller.jfairy.producer.util.StringUtils.leftPad;
+import java.time.LocalDate;
 
 /**
  * Polish Identity Card Number

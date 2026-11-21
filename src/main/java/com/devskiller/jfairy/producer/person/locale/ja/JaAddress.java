@@ -1,8 +1,8 @@
 package com.devskiller.jfairy.producer.person.locale.ja;
 
-import com.devskiller.jfairy.producer.person.locale.AbstractAddress;
-
 import static com.devskiller.jfairy.producer.util.StringUtils.isNotBlank;
+
+import com.devskiller.jfairy.producer.person.locale.AbstractAddress;
 
 /**
  * Japanese address, formatted in the conventional order:

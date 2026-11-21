@@ -1,10 +1,10 @@
 package com.devskiller.jfairy.producer.company.locale.it;
 
-import java.util.regex.Pattern;
-
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.VATIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.util.CheckDigits;
+
+import java.util.regex.Pattern;
 
 /**
  * Italian VAT identification number (Partita IVA).

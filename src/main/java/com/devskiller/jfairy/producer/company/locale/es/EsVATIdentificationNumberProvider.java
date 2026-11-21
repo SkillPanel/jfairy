@@ -1,11 +1,11 @@
 package com.devskiller.jfairy.producer.company.locale.es;
 
-import java.util.Locale;
-import java.util.regex.Pattern;
-
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.VATIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.person.Country;
+
+import java.util.Locale;
+import java.util.regex.Pattern;
 
 /**
  * Spanish VAT Identification Number (known as Número de Identificación Fiscal (for freelancers) or Código de Identificación Fiscal (for companies)  in Spain)

@@ -1,15 +1,15 @@
 package com.devskiller.jfairy.producer.person;
 
-import java.util.function.Supplier;
+import static com.devskiller.jfairy.producer.person.PersonProvider.PERSONAL_EMAIL;
+import static com.devskiller.jfairy.producer.util.StringUtils.latinize;
+import static com.devskiller.jfairy.producer.util.StringUtils.lowerCase;
+import static com.devskiller.jfairy.producer.util.StringUtils.toLoginName;
 
 import com.devskiller.jfairy.data.DataMaster;
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.util.StringUtils;
 
-import static com.devskiller.jfairy.producer.person.PersonProvider.PERSONAL_EMAIL;
-import static com.devskiller.jfairy.producer.util.StringUtils.latinize;
-import static com.devskiller.jfairy.producer.util.StringUtils.lowerCase;
-import static com.devskiller.jfairy.producer.util.StringUtils.toLoginName;
+import java.util.function.Supplier;
 
 public class EmailProvider implements Supplier<String> {
 

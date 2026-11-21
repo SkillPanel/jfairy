@@ -1,10 +1,10 @@
 package com.devskiller.jfairy.producer.person;
 
-import java.time.LocalDate;
-import java.util.Optional;
-
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.company.Company;
+
+import java.time.LocalDate;
+import java.util.Optional;
 
 /**
  * Static factory for creating {@link PersonProperty} instances to customize person generation.

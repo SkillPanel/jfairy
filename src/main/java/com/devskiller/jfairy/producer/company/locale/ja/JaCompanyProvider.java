@@ -1,12 +1,12 @@
 package com.devskiller.jfairy.producer.company.locale.ja;
 
-import java.util.List;
-
 import com.devskiller.jfairy.data.DataMaster;
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.VATIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.company.CompanyProperties;
 import com.devskiller.jfairy.producer.company.DefaultCompanyProvider;
+
+import java.util.List;
 
 /**
  * Japanese company provider. The default {@link DefaultCompanyProvider#generateDomain()} escapes every

@@ -1,7 +1,6 @@
 package com.devskiller.jfairy.producer.person.locale.sv;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import static java.lang.String.format;
 
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.DateProducer;
@@ -11,7 +10,8 @@ import com.devskiller.jfairy.producer.person.NationalIdentificationNumberProvide
 import com.devskiller.jfairy.producer.person.Person;
 import com.devskiller.jfairy.producer.util.CheckDigits;
 
-import static java.lang.String.format;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Swedish National Identification Number (known as Personal Identity Number or Personnummer in sweden)

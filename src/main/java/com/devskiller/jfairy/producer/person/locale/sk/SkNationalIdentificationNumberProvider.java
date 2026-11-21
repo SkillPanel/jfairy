@@ -1,7 +1,6 @@
 package com.devskiller.jfairy.producer.person.locale.sk;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import static java.lang.String.format;
 
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.DateProducer;
@@ -12,7 +11,8 @@ import com.devskiller.jfairy.producer.person.Person;
 import com.devskiller.jfairy.producer.util.CheckDigits;
 import com.devskiller.jfairy.producer.util.ValidateUtils;
 
-import static java.lang.String.format;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Slovak National Identification Number (known as Rodne cislo)

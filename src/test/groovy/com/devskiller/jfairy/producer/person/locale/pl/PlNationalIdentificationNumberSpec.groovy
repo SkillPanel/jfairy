@@ -1,18 +1,19 @@
 package com.devskiller.jfairy.producer.person.locale.pl
 
-import java.time.LocalDate
+import static com.devskiller.jfairy.producer.person.NationalIdentificationNumberProperties.dateOfBirth
+import static com.devskiller.jfairy.producer.person.NationalIdentificationNumberProperties.sex
 
-import spock.lang.Specification
-import spock.lang.Unroll
+import static PlNationalIdentificationNumberProvider.isValid
 
 import com.devskiller.jfairy.producer.BaseProducer
 import com.devskiller.jfairy.producer.DateProducer
 import com.devskiller.jfairy.producer.person.NationalIdentificationNumber
 import com.devskiller.jfairy.producer.person.Person
 
-import static PlNationalIdentificationNumberProvider.isValid
-import static com.devskiller.jfairy.producer.person.NationalIdentificationNumberProperties.dateOfBirth
-import static com.devskiller.jfairy.producer.person.NationalIdentificationNumberProperties.sex
+import spock.lang.Specification
+import spock.lang.Unroll
+
+import java.time.LocalDate
 
 class PlNationalIdentificationNumberSpec extends Specification {
 

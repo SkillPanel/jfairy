@@ -1,11 +1,11 @@
 package com.devskiller.jfairy.producer.person
 
-import spock.lang.Specification
+import static com.devskiller.jfairy.producer.person.PersonProvider.PERSONAL_EMAIL
 
 import com.devskiller.jfairy.data.DataMaster
 import com.devskiller.jfairy.producer.BaseProducer
 
-import static com.devskiller.jfairy.producer.person.PersonProvider.PERSONAL_EMAIL
+import spock.lang.Specification
 
 class EmailProviderSpec extends Specification {
 

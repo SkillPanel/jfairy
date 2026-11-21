@@ -1,10 +1,10 @@
 package com.devskiller.jfairy.producer.company.locale.en;
 
-import java.util.Set;
-
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.VATIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.util.StringUtils;
+
+import java.util.Set;
 
 /**
  * American VAT Identification Number (known as Employer Identification Number or EIN in the United States)

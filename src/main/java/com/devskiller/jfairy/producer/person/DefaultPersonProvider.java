@@ -1,10 +1,6 @@
 package com.devskiller.jfairy.producer.person;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.temporal.ChronoUnit;
-import java.util.List;
+import static com.devskiller.jfairy.producer.util.StringUtils.toLoginName;
 
 import com.devskiller.jfairy.data.DataMaster;
 import com.devskiller.jfairy.producer.BaseProducer;
@@ -13,7 +9,11 @@ import com.devskiller.jfairy.producer.TimeProvider;
 import com.devskiller.jfairy.producer.company.Company;
 import com.devskiller.jfairy.producer.company.CompanyFactory;
 
-import static com.devskiller.jfairy.producer.util.StringUtils.toLoginName;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
 
 public class DefaultPersonProvider implements PersonProvider {
 

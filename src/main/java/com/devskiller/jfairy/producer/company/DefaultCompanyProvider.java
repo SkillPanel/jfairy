@@ -1,14 +1,14 @@
 package com.devskiller.jfairy.producer.company;
 
-import java.util.Comparator;
-import java.util.Locale;
+import static com.devskiller.jfairy.producer.util.StringUtils.escapeNonAscii;
+import static com.devskiller.jfairy.producer.util.StringUtils.latinize;
 
 import com.devskiller.jfairy.data.DataMaster;
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.VATIdentificationNumberProvider;
 
-import static com.devskiller.jfairy.producer.util.StringUtils.escapeNonAscii;
-import static com.devskiller.jfairy.producer.util.StringUtils.latinize;
+import java.util.Comparator;
+import java.util.Locale;
 
 public class DefaultCompanyProvider implements CompanyProvider {
 

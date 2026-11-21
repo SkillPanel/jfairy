@@ -1,18 +1,5 @@
 package com.devskiller.jfairy.producer.person
 
-import java.time.LocalDate
-import java.time.Period
-
-import org.apache.commons.validator.routines.EmailValidator
-import spock.lang.Ignore
-import spock.lang.Specification
-
-import com.devskiller.jfairy.Bootstrap
-import com.devskiller.jfairy.Fairy
-import com.devskiller.jfairy.producer.company.Company
-import com.devskiller.jfairy.producer.person.locale.en.EnAddress
-import com.devskiller.jfairy.producer.util.LanguageCode
-
 import static com.devskiller.jfairy.producer.person.PersonProperties.ageBetween
 import static com.devskiller.jfairy.producer.person.PersonProperties.female
 import static com.devskiller.jfairy.producer.person.PersonProperties.male
@@ -37,6 +24,19 @@ import static com.devskiller.jfairy.producer.person.PersonProperties.withPasspor
 import static com.devskiller.jfairy.producer.person.PersonProperties.withPassword
 import static com.devskiller.jfairy.producer.person.PersonProperties.withTelephoneNumber
 import static com.devskiller.jfairy.producer.person.PersonProperties.withUsername
+
+import com.devskiller.jfairy.Bootstrap
+import com.devskiller.jfairy.Fairy
+import com.devskiller.jfairy.producer.company.Company
+import com.devskiller.jfairy.producer.person.locale.en.EnAddress
+import com.devskiller.jfairy.producer.util.LanguageCode
+
+import org.apache.commons.validator.routines.EmailValidator
+import spock.lang.Ignore
+import spock.lang.Specification
+
+import java.time.LocalDate
+import java.time.Period
 
 class PersonSpec extends Specification {
 

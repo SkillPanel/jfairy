@@ -75,12 +75,12 @@
         <module name="IllegalImport"/>
         <module name="IllegalInstantiation"/>
         <module name="ImportOrder">
-            <property name="groups" value="/^(jakarta|java|javafx|javax)\..+/, /^(?!(jakarta|java|javafx|javax|com\.devskiller)\.).+/, com.devskiller"/>
+            <property name="groups" value="/^(?:com\.devskiller)\..+/,/^(?!(?:jakarta|javaf?x?)\.).+/,jakarta,java,javafx,javax"/>
             <property name="ordered" value="true"/>
+            <property name="option" value="top"/>
             <property name="separated" value="true"/>
-            <property name="option" value="bottom"/>
-            <property name="staticGroups" value="/^(jakarta|java|javafx|javax)\..+/, /^(?!(jakarta|java|javafx|javax|com\.devskiller)\.).+/, com.devskiller"/>
             <property name="separatedStaticGroups" value="true"/>
+            <property name="staticGroups" value="/^(?:com\.devskiller)\..+/,/^(?!(?:jakarta|javaf?x?)\.).+/,jakarta,java,javafx,javax"/>
             <property name="sortStaticImportsAlphabetically" value="true"/>
         </module>
         <module name="Indentation">
@@ -196,11 +196,6 @@
             <property name="tokens" value="INTERFACE_DEF"/>
             <message key="name.invalidPattern" value="Interface name ''{0}'' must match pattern ''{1}''."/>
         </module -->
-        <module name="TypeName">
-            <property name="format" value="^[A-Z][a-zA-Z0-9]+$"/>
-            <property name="tokens" value="CLASS_DEF"/>
-            <message key="name.invalidPattern" value="Class name ''{0}'' must match pattern ''{1}''."/>
-        </module>
         <module name="UnusedImports"/>
         <module name="UpperEll"/>
         <module name="VariableDeclarationUsageDistance">
@@ -220,7 +215,7 @@
             <property name="allowEmptyTypes" value="true"/>
         </module>
 
-        <module name="SuppressionCommentFilter"/>
+        <module name="SuppressWithNearbyCommentFilter"/>
     </module>
 
 </module>

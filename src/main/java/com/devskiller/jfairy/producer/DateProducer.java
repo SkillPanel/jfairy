@@ -3,17 +3,17 @@
  */
 package com.devskiller.jfairy.producer;
 
+import static java.time.temporal.TemporalAdjusters.firstDayOfYear;
+import static java.time.temporal.TemporalAdjusters.lastDayOfYear;
+
+import com.devskiller.jfairy.producer.util.ValidateUtils;
+
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.time.Period;
 import java.time.ZoneOffset;
-
-import com.devskiller.jfairy.producer.util.ValidateUtils;
-
-import static java.time.temporal.TemporalAdjusters.firstDayOfYear;
-import static java.time.temporal.TemporalAdjusters.lastDayOfYear;
 
 public class DateProducer {
 

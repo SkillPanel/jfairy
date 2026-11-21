@@ -1,9 +1,7 @@
 package com.devskiller.jfairy
 
-import java.time.LocalDate
-
-import de.speedbanking.iban.IbanValidator
-import spock.lang.Specification
+import static com.devskiller.jfairy.producer.person.NationalIdentificationNumberProperties.dateOfBirth
+import static com.devskiller.jfairy.producer.person.NationalIdentificationNumberProperties.sex
 
 import com.devskiller.jfairy.producer.VATIdentificationNumberProvider
 import com.devskiller.jfairy.producer.company.locale.it.ItVATIdentificationNumberProvider
@@ -18,8 +16,10 @@ import com.devskiller.jfairy.producer.person.locale.pl.PlNationalIdentificationN
 import com.devskiller.jfairy.producer.person.locale.sk.SkNationalIdentificationNumberProvider
 import com.devskiller.jfairy.producer.person.locale.sv.SvNationalIdentificationNumberProvider
 
-import static com.devskiller.jfairy.producer.person.NationalIdentificationNumberProperties.dateOfBirth
-import static com.devskiller.jfairy.producer.person.NationalIdentificationNumberProperties.sex
+import de.speedbanking.iban.IbanValidator
+import spock.lang.Specification
+
+import java.time.LocalDate
 
 class InvalidFairySpec extends Specification {
 

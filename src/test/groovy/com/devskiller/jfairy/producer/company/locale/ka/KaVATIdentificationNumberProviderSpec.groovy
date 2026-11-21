@@ -1,9 +1,9 @@
 package com.devskiller.jfairy.producer.company.locale.ka
 
-import spock.lang.Specification
-
 import com.devskiller.jfairy.producer.BaseProducer
 import com.devskiller.jfairy.producer.RandomGenerator
+
+import spock.lang.Specification
 
 class KaVATIdentificationNumberProviderSpec extends Specification {
 

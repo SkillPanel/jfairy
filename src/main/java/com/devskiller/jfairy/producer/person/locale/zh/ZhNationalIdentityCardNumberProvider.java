@@ -1,13 +1,13 @@
 package com.devskiller.jfairy.producer.person.locale.zh;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.DateProducer;
 import com.devskiller.jfairy.producer.TimeProvider;
 import com.devskiller.jfairy.producer.person.NationalIdentityCardNumberProvider;
 import com.devskiller.jfairy.producer.util.ZhFairyUtil;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * Chinese National Identity Card Number, total 18 digits
