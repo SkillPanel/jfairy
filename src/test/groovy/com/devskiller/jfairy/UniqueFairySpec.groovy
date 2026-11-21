@@ -1,8 +1,9 @@
 package com.devskiller.jfairy
 
+import spock.lang.Specification
+
 import com.devskiller.jfairy.producer.payment.CreditCardVendor
 import com.devskiller.jfairy.producer.person.PersonProperties
-import spock.lang.Specification
 
 class UniqueFairySpec extends Specification {
 

@@ -1,7 +1,8 @@
 package com.devskiller.jfairy.producer.company.locale.br
 
-import com.devskiller.jfairy.Fairy
 import spock.lang.Specification
+
+import com.devskiller.jfairy.Fairy
 
 class BrVATIdentificationNumberProviderSpec extends Specification {
 
