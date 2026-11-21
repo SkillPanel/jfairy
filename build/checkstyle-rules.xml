@@ -75,12 +75,12 @@
         <module name="IllegalImport"/>
         <module name="IllegalInstantiation"/>
         <module name="ImportOrder">
-            <property name="groups" value="/^(jakarta|java|javafx|javax)\..+/, /^(?!(jakarta|java|javafx|javax|com\.devskiller)\.).+/, com.devskiller"/>
+            <property name="groups" value="/^(?:com\.devskiller)\..+/,/^(?!(?:jakarta|javaf?x?)\.).+/,jakarta,java,javafx,javax"/>
             <property name="ordered" value="true"/>
+            <property name="option" value="top"/>
             <property name="separated" value="true"/>
-            <property name="option" value="bottom"/>
-            <property name="staticGroups" value="/^(jakarta|java|javafx|javax)\..+/, /^(?!(jakarta|java|javafx|javax|com\.devskiller)\.).+/, com.devskiller"/>
             <property name="separatedStaticGroups" value="true"/>
+            <property name="staticGroups" value="/^(?:com\.devskiller)\..+/,/^(?!(?:jakarta|javaf?x?)\.).+/,jakarta,java,javafx,javax"/>
             <property name="sortStaticImportsAlphabetically" value="true"/>
         </module>
         <module name="Indentation">

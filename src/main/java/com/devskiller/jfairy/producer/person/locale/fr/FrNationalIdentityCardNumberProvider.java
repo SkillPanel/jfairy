@@ -1,10 +1,10 @@
 package com.devskiller.jfairy.producer.person.locale.fr;
 
-import java.time.Year;
-import java.time.ZoneId;
-
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.person.NationalIdentityCardNumberProvider;
+
+import java.time.Year;
+import java.time.ZoneId;
 
 /**
  * Provider for French National Identity Card numbers (Carte Nationale

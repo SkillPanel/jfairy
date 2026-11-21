@@ -1,11 +1,11 @@
 package com.devskiller.jfairy.producer.person.locale.ka;
 
-import java.util.Locale;
-import java.util.function.Supplier;
-
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.person.Country;
 import com.devskiller.jfairy.producer.person.NationalIdentityCardNumberProvider;
+
+import java.util.Locale;
+import java.util.function.Supplier;
 
 public class KaNationalIdentityCardNumberProvider implements NationalIdentityCardNumberProvider {
 

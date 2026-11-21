@@ -1,10 +1,11 @@
 package com.devskiller.jfairy
 
-import java.util.function.Supplier
-import spock.lang.Specification
-
 import com.devskiller.jfairy.data.DataMaster
 import com.devskiller.jfairy.producer.person.Person
+
+import spock.lang.Specification
+
+import java.util.function.Supplier
 
 class FairySpec extends Specification {
 

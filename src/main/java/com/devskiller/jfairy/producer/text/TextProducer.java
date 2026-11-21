@@ -3,13 +3,13 @@
  */
 package com.devskiller.jfairy.producer.text;
 
-import java.util.ArrayList;
-import java.util.List;
+import static com.devskiller.jfairy.producer.util.StringUtils.joinWithSpace;
+import static com.devskiller.jfairy.producer.util.StringUtils.left;
 
 import com.devskiller.jfairy.producer.BaseProducer;
 
-import static com.devskiller.jfairy.producer.util.StringUtils.joinWithSpace;
-import static com.devskiller.jfairy.producer.util.StringUtils.left;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TextProducer {
 

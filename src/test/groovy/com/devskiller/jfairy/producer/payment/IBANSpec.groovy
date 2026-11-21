@@ -1,13 +1,13 @@
 package com.devskiller.jfairy.producer.payment
 
-import de.speedbanking.iban.IbanValidator
-import spock.lang.Specification
-
 import com.devskiller.jfairy.Fairy
 import com.devskiller.jfairy.data.DataMaster
 import com.devskiller.jfairy.data.MapBasedDataMaster
 import com.devskiller.jfairy.producer.BaseProducer
 import com.devskiller.jfairy.producer.RandomGenerator
+
+import de.speedbanking.iban.IbanValidator
+import spock.lang.Specification
 
 class IBANSpec extends Specification {
 

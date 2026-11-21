@@ -1,11 +1,11 @@
 package com.devskiller.jfairy.producer.person;
 
+import com.devskiller.jfairy.producer.util.LanguageCode;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
-
-import com.devskiller.jfairy.producer.util.LanguageCode;
 
 public enum Country {
     Poland("PL", LanguageCode.PL),

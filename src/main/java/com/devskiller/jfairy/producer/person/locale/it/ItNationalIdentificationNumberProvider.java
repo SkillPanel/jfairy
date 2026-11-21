@@ -1,9 +1,8 @@
 package com.devskiller.jfairy.producer.person.locale.it;
 
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Locale;
-import java.util.regex.Pattern;
+import static com.devskiller.jfairy.producer.person.PersonProvider.FIRST_NAME;
+import static com.devskiller.jfairy.producer.person.PersonProvider.LAST_NAME;
+import static com.devskiller.jfairy.producer.util.StringUtils.latinize;
 
 import com.devskiller.jfairy.data.DataMaster;
 import com.devskiller.jfairy.producer.BaseProducer;
@@ -14,9 +13,10 @@ import com.devskiller.jfairy.producer.person.NationalIdentificationNumberProvide
 import com.devskiller.jfairy.producer.person.Person;
 import com.devskiller.jfairy.producer.util.CheckDigits;
 
-import static com.devskiller.jfairy.producer.person.PersonProvider.FIRST_NAME;
-import static com.devskiller.jfairy.producer.person.PersonProvider.LAST_NAME;
-import static com.devskiller.jfairy.producer.util.StringUtils.latinize;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Locale;
+import java.util.regex.Pattern;
 
 /**
  * Italian tax code of a natural person (Codice Fiscale).

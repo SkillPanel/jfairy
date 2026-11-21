@@ -3,12 +3,12 @@
  */
 package com.devskiller.jfairy.producer
 
+import spock.lang.Specification
+import spock.lang.Unroll
+
 import java.time.LocalDateTime
 import java.time.OffsetDateTime
 import java.time.Period
-
-import spock.lang.Specification
-import spock.lang.Unroll
 
 class DateProducerSpec extends Specification {
 

@@ -1,18 +1,18 @@
 package com.devskiller.jfairy.producer
 
-import org.apache.commons.validator.routines.DomainValidator
-import org.apache.commons.validator.routines.EmailValidator
-import org.apache.commons.validator.routines.UrlValidator
-import spock.lang.Specification
+import static com.devskiller.jfairy.producer.company.CompanyProperties.CompanyProperty.withDomain
+import static com.devskiller.jfairy.producer.company.CompanyProperties.CompanyProperty.withEmail
+import static com.devskiller.jfairy.producer.company.CompanyProperties.CompanyProperty.withName
+import static com.devskiller.jfairy.producer.company.CompanyProperties.CompanyProperty.withVatIdentificationNumber
 
 import com.devskiller.jfairy.Bootstrap
 import com.devskiller.jfairy.Fairy
 import com.devskiller.jfairy.producer.company.Company
 
-import static com.devskiller.jfairy.producer.company.CompanyProperties.CompanyProperty.withDomain
-import static com.devskiller.jfairy.producer.company.CompanyProperties.CompanyProperty.withEmail
-import static com.devskiller.jfairy.producer.company.CompanyProperties.CompanyProperty.withName
-import static com.devskiller.jfairy.producer.company.CompanyProperties.CompanyProperty.withVatIdentificationNumber
+import org.apache.commons.validator.routines.DomainValidator
+import org.apache.commons.validator.routines.EmailValidator
+import org.apache.commons.validator.routines.UrlValidator
+import spock.lang.Specification
 
 /**
  * @author Codearte

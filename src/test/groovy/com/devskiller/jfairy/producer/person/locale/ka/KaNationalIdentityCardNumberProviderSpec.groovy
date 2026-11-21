@@ -1,9 +1,9 @@
 package com.devskiller.jfairy.producer.person.locale.ka
 
-import spock.lang.Specification
-
 import com.devskiller.jfairy.producer.BaseProducer
 import com.devskiller.jfairy.producer.RandomGenerator
+
+import spock.lang.Specification
 
 class KaNationalIdentityCardNumberProviderSpec extends Specification {
     private KaNationalIdentityCardNumberProvider provider

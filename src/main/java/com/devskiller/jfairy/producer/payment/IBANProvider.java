@@ -1,8 +1,8 @@
 package com.devskiller.jfairy.producer.payment;
 
-import java.util.function.Supplier;
-
 import org.jspecify.annotations.Nullable;
+
+import java.util.function.Supplier;
 
 /**
  * Generates {@link IBAN} instances for a country fixed via {@link #setCountry(String)}, or otherwise

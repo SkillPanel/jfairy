@@ -4,6 +4,13 @@
 
 package com.devskiller.jfairy.data;
 
+import com.devskiller.jfairy.producer.BaseProducer;
+import com.devskiller.jfairy.producer.util.LanguageCode;
+import com.devskiller.jfairy.producer.util.ValidateUtils;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
@@ -20,13 +27,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import java.util.TreeSet;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.devskiller.jfairy.producer.BaseProducer;
-import com.devskiller.jfairy.producer.util.LanguageCode;
-import com.devskiller.jfairy.producer.util.ValidateUtils;
 
 /**
  * {@link DataMaster} backed by flat {@code .properties} resources (generated at build time from the bundled YAML files).

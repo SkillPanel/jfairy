@@ -1,11 +1,11 @@
 package com.devskiller.jfairy.producer.payment;
 
-import java.util.EnumMap;
-import java.util.Map;
+import com.devskiller.jfairy.producer.util.LanguageCode;
 
 import de.speedbanking.iban.IbanRegistry;
 
-import com.devskiller.jfairy.producer.util.LanguageCode;
+import java.util.EnumMap;
+import java.util.Map;
 
 public final class IBANProperties {
 

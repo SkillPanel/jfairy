@@ -1,10 +1,10 @@
 package com.devskiller.jfairy.producer.net
 
-import org.apache.commons.validator.routines.InetAddressValidator
-import spock.lang.Specification
-
 import com.devskiller.jfairy.producer.BaseProducer
 import com.devskiller.jfairy.producer.RandomGenerator
+
+import org.apache.commons.validator.routines.InetAddressValidator
+import spock.lang.Specification
 
 class NetworkSpec extends Specification {
 

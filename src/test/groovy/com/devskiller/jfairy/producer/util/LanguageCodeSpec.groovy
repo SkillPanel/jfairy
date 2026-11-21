@@ -1,8 +1,8 @@
 package com.devskiller.jfairy.producer.util
 
-import spock.lang.Specification
-
 import com.devskiller.jfairy.producer.person.Country
+
+import spock.lang.Specification
 
 class LanguageCodeSpec extends Specification {
 

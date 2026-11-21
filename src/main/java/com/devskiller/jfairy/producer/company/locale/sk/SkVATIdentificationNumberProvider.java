@@ -1,12 +1,12 @@
 package com.devskiller.jfairy.producer.company.locale.sk;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.VATIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.util.CheckDigits;
 import com.devskiller.jfairy.producer.util.StringUtils;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Slovak VAT Identification Number (known as NIP)

@@ -1,13 +1,13 @@
 package com.devskiller.jfairy.producer.person.locale.pl;
 
+import com.devskiller.jfairy.producer.BaseProducer;
+import com.devskiller.jfairy.producer.person.PassportNumberProvider;
+import com.devskiller.jfairy.producer.util.AlphaNumberSystem;
+
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
-
-import com.devskiller.jfairy.producer.BaseProducer;
-import com.devskiller.jfairy.producer.person.PassportNumberProvider;
-import com.devskiller.jfairy.producer.util.AlphaNumberSystem;
 
 /**
  * Provider for Polish passport numbers.

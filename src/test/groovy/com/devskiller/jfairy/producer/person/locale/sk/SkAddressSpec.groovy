@@ -1,9 +1,9 @@
 package com.devskiller.jfairy.producer.person.locale.sk
 
-import spock.lang.Specification
-
 import com.devskiller.jfairy.Fairy
 import com.devskiller.jfairy.producer.person.Address
+
+import spock.lang.Specification
 
 class SkAddressSpec extends Specification {
 

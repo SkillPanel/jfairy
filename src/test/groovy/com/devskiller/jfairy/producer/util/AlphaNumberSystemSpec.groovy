@@ -4,10 +4,10 @@
 
 package com.devskiller.jfairy.producer.util
 
+import static AlphaNumberSystem.convertToString
+
 import spock.lang.Specification
 import spock.lang.Unroll
-
-import static AlphaNumberSystem.convertToString
 
 /**
  * @author mariuszs

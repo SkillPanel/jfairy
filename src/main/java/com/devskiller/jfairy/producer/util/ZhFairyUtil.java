@@ -1,8 +1,8 @@
 package com.devskiller.jfairy.producer.util;
 
-import java.util.List;
-
 import com.devskiller.jfairy.producer.BaseProducer;
+
+import java.util.List;
 
 /**
  * com.devskiller.jfairy.producer.util.ZhFairyUtil

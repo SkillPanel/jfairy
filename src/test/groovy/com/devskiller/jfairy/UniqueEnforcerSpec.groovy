@@ -1,11 +1,11 @@
 package com.devskiller.jfairy
 
-import java.util.function.Supplier
+import com.devskiller.jfairy.producer.company.Company
+import com.devskiller.jfairy.producer.person.Person
 
 import spock.lang.Specification
 
-import com.devskiller.jfairy.producer.company.Company
-import com.devskiller.jfairy.producer.person.Person
+import java.util.function.Supplier
 
 class UniqueEnforcerSpec extends Specification {
 

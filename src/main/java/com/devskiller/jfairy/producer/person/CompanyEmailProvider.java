@@ -1,12 +1,12 @@
 package com.devskiller.jfairy.producer.person;
 
-import java.util.function.Supplier;
-
-import com.devskiller.jfairy.producer.company.Company;
-
 import static com.devskiller.jfairy.producer.util.StringUtils.latinize;
 import static com.devskiller.jfairy.producer.util.StringUtils.lowerCase;
 import static com.devskiller.jfairy.producer.util.StringUtils.toLoginName;
+
+import com.devskiller.jfairy.producer.company.Company;
+
+import java.util.function.Supplier;
 
 public class CompanyEmailProvider implements Supplier<String> {
 

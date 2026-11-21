@@ -1,9 +1,9 @@
 package com.devskiller.jfairy.producer.person;
 
+import com.devskiller.jfairy.producer.company.Company;
+
 import java.time.LocalDate;
 import java.util.function.Supplier;
-
-import com.devskiller.jfairy.producer.company.Company;
 
 public interface PersonProvider extends Supplier<Person> {
 
