@@ -196,11 +196,6 @@
             <property name="tokens" value="INTERFACE_DEF"/>
             <message key="name.invalidPattern" value="Interface name ''{0}'' must match pattern ''{1}''."/>
         </module -->
-        <module name="TypeName">
-            <property name="format" value="^[A-Z][a-zA-Z0-9]+$"/>
-            <property name="tokens" value="CLASS_DEF"/>
-            <message key="name.invalidPattern" value="Class name ''{0}'' must match pattern ''{1}''."/>
-        </module>
         <module name="UnusedImports"/>
         <module name="UpperEll"/>
         <module name="VariableDeclarationUsageDistance">
