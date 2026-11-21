@@ -1,13 +1,13 @@
 package com.devskiller.jfairy;
 
-import org.jspecify.annotations.Nullable;
-
 import com.devskiller.jfairy.producer.VATIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.payment.IBAN;
 import com.devskiller.jfairy.producer.payment.IBANFactory;
 import com.devskiller.jfairy.producer.payment.IBANProperties;
 import com.devskiller.jfairy.producer.person.NationalIdentificationNumberFactory;
 import com.devskiller.jfairy.producer.person.NationalIdentificationNumberProperties;
+
+import org.jspecify.annotations.Nullable;
 
 /**
  * Generates identifiers that look right but fail checksum validation, for negative testing.

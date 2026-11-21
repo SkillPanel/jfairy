@@ -4,16 +4,16 @@
 
 package com.devskiller.jfairy.producer.person.locale.pl
 
-import java.time.LocalDate
-
-import spock.lang.Specification
+import static PlNationalIdentityCardNumberProvider.ISSUING_BEGIN
+import static PlNationalIdentityCardNumberProvider.LETTER_WEIGHT
+import static PlNationalIdentityCardNumberProvider.MAX_DIGITS_PART_VALUE
 
 import com.devskiller.jfairy.producer.BaseProducer
 import com.devskiller.jfairy.producer.DateProducer
 
-import static PlNationalIdentityCardNumberProvider.ISSUING_BEGIN
-import static PlNationalIdentityCardNumberProvider.LETTER_WEIGHT
-import static PlNationalIdentityCardNumberProvider.MAX_DIGITS_PART_VALUE
+import spock.lang.Specification
+
+import java.time.LocalDate
 
 /**
  * @author mariuszs

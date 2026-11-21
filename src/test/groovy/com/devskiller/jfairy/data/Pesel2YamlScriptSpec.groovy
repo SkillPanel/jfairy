@@ -1,12 +1,12 @@
 package com.devskiller.jfairy.data
 
+import spock.lang.Specification
+import spock.lang.TempDir
+
 import java.nio.charset.StandardCharsets
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
-
-import spock.lang.Specification
-import spock.lang.TempDir
 
 /**
  * Runs build/pesel2yaml.groovy against small CSV fixtures, without network access.

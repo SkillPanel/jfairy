@@ -1,8 +1,8 @@
 package com.devskiller.jfairy.data;
 
-import java.util.List;
-
 import com.devskiller.jfairy.producer.util.LanguageCode;
+
+import java.util.List;
 
 /**
  * Providing access to localized data used by producers.

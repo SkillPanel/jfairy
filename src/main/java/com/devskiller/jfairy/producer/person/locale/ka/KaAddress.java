@@ -1,8 +1,8 @@
 package com.devskiller.jfairy.producer.person.locale.ka;
 
-import com.devskiller.jfairy.producer.person.locale.AbstractAddress;
-
 import static com.devskiller.jfairy.producer.util.StringUtils.isNotBlank;
+
+import com.devskiller.jfairy.producer.person.locale.AbstractAddress;
 
 public class KaAddress extends AbstractAddress {
     public KaAddress(String street, String streetNumber, String apartmentNumber, String postalCode, String city) {

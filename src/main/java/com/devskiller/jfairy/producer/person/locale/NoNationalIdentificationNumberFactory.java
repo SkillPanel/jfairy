@@ -1,12 +1,12 @@
 package com.devskiller.jfairy.producer.person.locale;
 
-import java.time.LocalDate;
-
 import com.devskiller.jfairy.producer.person.NationalIdentificationNumber;
 import com.devskiller.jfairy.producer.person.NationalIdentificationNumberFactory;
 import com.devskiller.jfairy.producer.person.NationalIdentificationNumberProperties;
 import com.devskiller.jfairy.producer.person.NationalIdentificationNumberProvider;
 import com.devskiller.jfairy.producer.person.Person;
+
+import java.time.LocalDate;
 
 public class NoNationalIdentificationNumberFactory implements NationalIdentificationNumberFactory {
 

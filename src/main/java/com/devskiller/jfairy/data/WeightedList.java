@@ -1,13 +1,13 @@
 package com.devskiller.jfairy.data;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import com.devskiller.jfairy.producer.BaseProducer;
+import com.devskiller.jfairy.producer.util.ValidateUtils;
 
 import org.jspecify.annotations.Nullable;
 
-import com.devskiller.jfairy.producer.BaseProducer;
-import com.devskiller.jfairy.producer.util.ValidateUtils;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * One data list, split once from its comma-separated value. An element is {@code value} or {@code value*weight},

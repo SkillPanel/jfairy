@@ -1,11 +1,11 @@
 package com.devskiller.jfairy
 
-import java.lang.reflect.Method
-import java.lang.reflect.Modifier
+import com.devskiller.jfairy.producer.util.LanguageCode
 
 import spock.lang.Specification
 
-import com.devskiller.jfairy.producer.util.LanguageCode
+import java.lang.reflect.Method
+import java.lang.reflect.Modifier
 
 /**
  * Generates a sample of objects for every bundled locale, calls each of their getters reflectively (descending into

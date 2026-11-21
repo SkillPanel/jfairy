@@ -1,8 +1,8 @@
 package com.devskiller.jfairy.producer.person
 
-import spock.lang.Specification
-
 import com.devskiller.jfairy.producer.company.Company
+
+import spock.lang.Specification
 
 class CompanyEmailProviderSpec extends Specification {
 

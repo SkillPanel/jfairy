@@ -1,10 +1,10 @@
 package com.devskiller.jfairy.producer.person.locale.en;
 
-import java.util.List;
-
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.person.NationalIdentityCardNumberProvider;
 import com.devskiller.jfairy.producer.util.StringUtils;
+
+import java.util.List;
 
 /**
  * English National Identity Card Number (known as Social Security Number)

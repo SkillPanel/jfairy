@@ -1,16 +1,16 @@
 package com.devskiller.jfairy.data
 
-import java.nio.charset.StandardCharsets
-import java.nio.file.Files
-import java.nio.file.Path
-import java.nio.file.Paths
+import com.devskiller.jfairy.producer.BaseProducer
+import com.devskiller.jfairy.producer.RandomGenerator
 
 import org.snakeyaml.engine.v2.api.Load
 import org.snakeyaml.engine.v2.api.LoadSettings
 import spock.lang.Specification
 
-import com.devskiller.jfairy.producer.BaseProducer
-import com.devskiller.jfairy.producer.RandomGenerator
+import java.nio.charset.StandardCharsets
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.Paths
 
 /**
  * Guards the build-time YAML to .properties conversion: for the base file and every locale, the generated

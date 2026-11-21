@@ -1,16 +1,16 @@
 package com.devskiller.jfairy.producer.payment
 
-import java.time.LocalDateTime
-
-import org.apache.commons.validator.routines.CreditCardValidator
-import org.apache.commons.validator.routines.CreditCardValidator.CreditCardRange
-import spock.lang.Specification
-
 import com.devskiller.jfairy.data.DataMaster
 import com.devskiller.jfairy.data.MapBasedDataMaster
 import com.devskiller.jfairy.producer.BaseProducer
 import com.devskiller.jfairy.producer.DateProducer
 import com.devskiller.jfairy.producer.RandomGenerator
+
+import org.apache.commons.validator.routines.CreditCardValidator
+import org.apache.commons.validator.routines.CreditCardValidator.CreditCardRange
+import spock.lang.Specification
+
+import java.time.LocalDateTime
 
 /**
  * @author jkubrynski@gmail.com

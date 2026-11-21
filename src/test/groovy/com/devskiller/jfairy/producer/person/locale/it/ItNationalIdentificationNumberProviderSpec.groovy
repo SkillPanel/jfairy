@@ -1,9 +1,10 @@
 package com.devskiller.jfairy.producer.person.locale.it
 
-import java.time.LocalDate
-
-import spock.lang.Specification
-import spock.lang.Unroll
+import static com.devskiller.jfairy.producer.person.NationalIdentificationNumberProperties.dateOfBirth
+import static com.devskiller.jfairy.producer.person.NationalIdentificationNumberProperties.firstName
+import static com.devskiller.jfairy.producer.person.NationalIdentificationNumberProperties.lastName
+import static com.devskiller.jfairy.producer.person.NationalIdentificationNumberProperties.sex
+import static com.devskiller.jfairy.producer.person.locale.it.ItNationalIdentificationNumberProvider.isValid
 
 import com.devskiller.jfairy.Fairy
 import com.devskiller.jfairy.data.DataMaster
@@ -11,11 +12,10 @@ import com.devskiller.jfairy.producer.BaseProducer
 import com.devskiller.jfairy.producer.DateProducer
 import com.devskiller.jfairy.producer.person.Person
 
-import static com.devskiller.jfairy.producer.person.NationalIdentificationNumberProperties.dateOfBirth
-import static com.devskiller.jfairy.producer.person.NationalIdentificationNumberProperties.firstName
-import static com.devskiller.jfairy.producer.person.NationalIdentificationNumberProperties.lastName
-import static com.devskiller.jfairy.producer.person.NationalIdentificationNumberProperties.sex
-import static com.devskiller.jfairy.producer.person.locale.it.ItNationalIdentificationNumberProvider.isValid
+import spock.lang.Specification
+import spock.lang.Unroll
+
+import java.time.LocalDate
 
 class ItNationalIdentificationNumberProviderSpec extends Specification {
 

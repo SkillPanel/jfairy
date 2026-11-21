@@ -1,9 +1,9 @@
 package com.devskiller.jfairy
 
-import spock.lang.Specification
-
 import com.devskiller.jfairy.producer.company.Company
 import com.devskiller.jfairy.producer.person.Person
+
+import spock.lang.Specification
 
 class FairyJaSpec extends Specification {
     private final int SEED = 1

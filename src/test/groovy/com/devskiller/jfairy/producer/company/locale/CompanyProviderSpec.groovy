@@ -1,6 +1,9 @@
 package com.devskiller.jfairy.producer.company.locale
 
-import spock.lang.Specification
+import static com.devskiller.jfairy.producer.company.CompanyProvider.COMPANY_EMAIL
+import static com.devskiller.jfairy.producer.company.CompanyProvider.COMPANY_NAME
+import static com.devskiller.jfairy.producer.company.CompanyProvider.COMPANY_SUFFIX
+import static com.devskiller.jfairy.producer.company.CompanyProvider.DOMAIN
 
 import com.devskiller.jfairy.data.DataMaster
 import com.devskiller.jfairy.producer.BaseProducer
@@ -8,10 +11,7 @@ import com.devskiller.jfairy.producer.VATIdentificationNumberProvider
 import com.devskiller.jfairy.producer.company.CompanyProvider
 import com.devskiller.jfairy.producer.company.DefaultCompanyProvider
 
-import static com.devskiller.jfairy.producer.company.CompanyProvider.COMPANY_EMAIL
-import static com.devskiller.jfairy.producer.company.CompanyProvider.COMPANY_NAME
-import static com.devskiller.jfairy.producer.company.CompanyProvider.COMPANY_SUFFIX
-import static com.devskiller.jfairy.producer.company.CompanyProvider.DOMAIN
+import spock.lang.Specification
 
 class CompanyProviderSpec extends Specification {
 

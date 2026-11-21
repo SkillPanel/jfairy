@@ -1,7 +1,7 @@
 package com.devskiller.jfairy.producer.company.locale.sv;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
+import static com.devskiller.jfairy.producer.person.NationalIdentificationNumberProperties.dateOfBirth;
+import static com.devskiller.jfairy.producer.person.locale.sv.SvNationalIdentificationNumberProvider.calculateChecksum;
 
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.DateProducer;
@@ -11,8 +11,8 @@ import com.devskiller.jfairy.producer.person.NationalIdentificationNumberProvide
 import com.devskiller.jfairy.producer.util.CheckDigits;
 import com.devskiller.jfairy.producer.util.StringUtils;
 
-import static com.devskiller.jfairy.producer.person.NationalIdentificationNumberProperties.dateOfBirth;
-import static com.devskiller.jfairy.producer.person.locale.sv.SvNationalIdentificationNumberProvider.calculateChecksum;
+import java.time.LocalDate;
+import java.time.ZoneId;
 
 /**
  * Swedish VAT Identification Number (known as Momsnummer in Sweden)

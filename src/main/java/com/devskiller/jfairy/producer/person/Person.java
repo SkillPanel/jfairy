@@ -1,14 +1,14 @@
 package com.devskiller.jfairy.producer.person;
 
-import java.time.LocalDate;
-import java.util.Set;
-import java.util.StringJoiner;
+import static com.devskiller.jfairy.producer.person.Person.Sex.FEMALE;
+import static com.devskiller.jfairy.producer.person.Person.Sex.MALE;
 
 import com.devskiller.jfairy.producer.company.Company;
 import com.devskiller.jfairy.producer.util.LanguageCode;
 
-import static com.devskiller.jfairy.producer.person.Person.Sex.FEMALE;
-import static com.devskiller.jfairy.producer.person.Person.Sex.MALE;
+import java.time.LocalDate;
+import java.util.Set;
+import java.util.StringJoiner;
 
 public class Person {
 

@@ -4,19 +4,19 @@
 
 package com.devskiller.jfairy.data
 
+import com.devskiller.jfairy.producer.BaseProducer
+import com.devskiller.jfairy.producer.RandomGenerator
+import com.devskiller.jfairy.producer.person.PersonProvider
+import com.devskiller.jfairy.producer.util.LanguageCode
+
+import spock.lang.Specification
+import spock.lang.TempDir
+
 import java.nio.file.Files
 import java.nio.file.Path
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.Future
-
-import spock.lang.Specification
-import spock.lang.TempDir
-
-import com.devskiller.jfairy.producer.BaseProducer
-import com.devskiller.jfairy.producer.RandomGenerator
-import com.devskiller.jfairy.producer.person.PersonProvider
-import com.devskiller.jfairy.producer.util.LanguageCode
 
 class MapBasedDataMasterSpec extends Specification {
 

@@ -1,12 +1,12 @@
 package com.devskiller.jfairy.producer.person.locale.sk;
 
-import java.time.LocalDate;
-
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.DateProducer;
 import com.devskiller.jfairy.producer.person.NationalIdentityCardNumberProvider;
 import com.devskiller.jfairy.producer.util.AlphaNumberSystem;
 import com.devskiller.jfairy.producer.util.StringUtils;
+
+import java.time.LocalDate;
 
 /**
  * Slovak Identity Card Number

@@ -1,8 +1,8 @@
 package com.devskiller.jfairy.data
 
-import spock.lang.Specification
-
 import com.devskiller.jfairy.producer.BaseProducer
+
+import spock.lang.Specification
 
 class WeightedListSpec extends Specification {
 

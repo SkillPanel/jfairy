@@ -1,11 +1,11 @@
 package com.devskiller.jfairy.producer.person.locale.es;
 
-import java.util.Locale;
-import java.util.regex.Pattern;
-
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.person.Country;
 import com.devskiller.jfairy.producer.person.NationalIdentityCardNumberProvider;
+
+import java.util.Locale;
+import java.util.regex.Pattern;
 
 /**
  * Spanish National Identity Card Number (known as Documento Nacional de Identidad or DNI)

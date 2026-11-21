@@ -1,11 +1,11 @@
 package com.devskiller.jfairy.producer.util;
 
+import org.jspecify.annotations.Nullable;
+
 import java.text.Normalizer;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Pattern;
-
-import org.jspecify.annotations.Nullable;
 
 /**
  * Utility class providing string manipulation helpers used throughout jFairy.

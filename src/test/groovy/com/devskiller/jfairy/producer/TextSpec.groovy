@@ -1,9 +1,9 @@
 package com.devskiller.jfairy.producer
 
-import spock.lang.Specification
-
 import com.devskiller.jfairy.Fairy
 import com.devskiller.jfairy.producer.text.TextProducer
+
+import spock.lang.Specification
 
 class TextSpec extends Specification {
 

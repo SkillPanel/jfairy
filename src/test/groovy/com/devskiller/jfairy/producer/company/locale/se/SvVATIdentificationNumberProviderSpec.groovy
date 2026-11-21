@@ -1,10 +1,10 @@
 package com.devskiller.jfairy.producer.company.locale.se
 
-import spock.lang.Specification
+import static com.devskiller.jfairy.producer.company.locale.sv.SvVATIdentificationNumberProvider.isValid
 
 import com.devskiller.jfairy.Fairy
 
-import static com.devskiller.jfairy.producer.company.locale.sv.SvVATIdentificationNumberProvider.isValid
+import spock.lang.Specification
 
 class SvVATIdentificationNumberProviderSpec extends Specification {
 

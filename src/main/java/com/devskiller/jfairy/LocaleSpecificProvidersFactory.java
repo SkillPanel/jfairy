@@ -1,10 +1,5 @@
 package com.devskiller.jfairy;
 
-import java.util.Locale;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.devskiller.jfairy.data.DataMaster;
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.DateProducer;
@@ -67,6 +62,11 @@ import com.devskiller.jfairy.producer.person.locale.zh.ZhAddressProvider;
 import com.devskiller.jfairy.producer.person.locale.zh.ZhNationalIdentityCardNumberProvider;
 import com.devskiller.jfairy.producer.person.locale.zh.ZhPassportNumberProvider;
 import com.devskiller.jfairy.producer.util.LanguageCode;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Locale;
 
 /**
  * Factory for creating locale-specific provider implementations

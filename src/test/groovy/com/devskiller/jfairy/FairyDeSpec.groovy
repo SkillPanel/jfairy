@@ -1,8 +1,8 @@
 package com.devskiller.jfairy
 
-import spock.lang.Specification
-
 import com.devskiller.jfairy.producer.person.Person
+
+import spock.lang.Specification
 
 /**
  * @author Roland Weisleder

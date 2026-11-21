@@ -1,15 +1,15 @@
 package com.devskiller.jfairy.producer.payment;
 
-import java.util.List;
+import com.devskiller.jfairy.data.DataMaster;
+import com.devskiller.jfairy.producer.BaseProducer;
+import com.devskiller.jfairy.producer.person.Country;
 
 import de.speedbanking.iban.Iban;
 import de.speedbanking.iban.IbanRegistry;
 import de.speedbanking.iban.RandomIban;
 import org.jspecify.annotations.Nullable;
 
-import com.devskiller.jfairy.data.DataMaster;
-import com.devskiller.jfairy.producer.BaseProducer;
-import com.devskiller.jfairy.producer.person.Country;
+import java.util.List;
 
 /**
  * Default {@link IBANProvider} implementation.

@@ -3,18 +3,18 @@
  */
 package com.devskiller.jfairy.producer.text;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import com.devskiller.jfairy.data.DataMaster;
-import com.devskiller.jfairy.producer.BaseProducer;
-
 import static com.devskiller.jfairy.producer.util.StringUtils.capitalize;
 import static com.devskiller.jfairy.producer.util.StringUtils.joinWithSpace;
 import static com.devskiller.jfairy.producer.util.StringUtils.replaceChars;
 import static com.devskiller.jfairy.producer.util.StringUtils.split;
 import static com.devskiller.jfairy.producer.util.StringUtils.uncapitalize;
+
+import com.devskiller.jfairy.data.DataMaster;
+import com.devskiller.jfairy.producer.BaseProducer;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Internal component for generating and formatting random text, sentences, and words.

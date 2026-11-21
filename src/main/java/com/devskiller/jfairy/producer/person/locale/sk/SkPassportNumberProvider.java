@@ -1,13 +1,13 @@
 package com.devskiller.jfairy.producer.person.locale.sk;
 
+import com.devskiller.jfairy.producer.BaseProducer;
+import com.devskiller.jfairy.producer.person.PassportNumberProvider;
+import com.devskiller.jfairy.producer.util.AlphaNumberSystem;
+
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.devskiller.jfairy.producer.BaseProducer;
-import com.devskiller.jfairy.producer.person.PassportNumberProvider;
-import com.devskiller.jfairy.producer.util.AlphaNumberSystem;
 
 /**
  * Slovak Passport Number Provider.

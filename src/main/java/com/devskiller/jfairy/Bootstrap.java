@@ -1,12 +1,5 @@
 package com.devskiller.jfairy;
 
-import java.io.IOException;
-import java.util.Locale;
-import java.util.function.Supplier;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.devskiller.jfairy.data.DataMaster;
 import com.devskiller.jfairy.data.MapBasedDataMaster;
 import com.devskiller.jfairy.producer.BaseProducer;
@@ -23,6 +16,13 @@ import com.devskiller.jfairy.producer.person.PersonFactory;
 import com.devskiller.jfairy.producer.person.PersonFactoryImpl;
 import com.devskiller.jfairy.producer.text.TextProducerInternal;
 import com.devskiller.jfairy.producer.util.LanguageCode;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.util.Locale;
+import java.util.function.Supplier;
 
 /**
  * <p>

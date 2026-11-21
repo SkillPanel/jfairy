@@ -3,9 +3,6 @@
  */
 package com.devskiller.jfairy;
 
-import java.util.Locale;
-import java.util.function.Supplier;
-
 import com.devskiller.jfairy.data.DataMaster;
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.DateProducer;
@@ -23,6 +20,9 @@ import com.devskiller.jfairy.producer.person.Person;
 import com.devskiller.jfairy.producer.person.PersonFactory;
 import com.devskiller.jfairy.producer.person.PersonProperties;
 import com.devskiller.jfairy.producer.text.TextProducer;
+
+import java.util.Locale;
+import java.util.function.Supplier;
 
 public final class Fairy {
 

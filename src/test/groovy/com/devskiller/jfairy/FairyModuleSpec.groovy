@@ -1,7 +1,5 @@
 package com.devskiller.jfairy
 
-import spock.lang.Specification
-
 import com.devskiller.jfairy.data.MapBasedDataMaster
 import com.devskiller.jfairy.producer.BaseProducer
 import com.devskiller.jfairy.producer.DateProducer
@@ -15,6 +13,8 @@ import com.devskiller.jfairy.producer.person.locale.ka.KaAddressProvider
 import com.devskiller.jfairy.producer.person.locale.pl.PlAddressProvider
 import com.devskiller.jfairy.producer.person.locale.sv.SvAddressProvider
 import com.devskiller.jfairy.producer.person.locale.zh.ZhAddressProvider
+
+import spock.lang.Specification
 
 class FairyModuleSpec extends Specification {
 

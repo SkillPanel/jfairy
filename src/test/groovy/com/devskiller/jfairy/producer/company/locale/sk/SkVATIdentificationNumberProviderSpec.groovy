@@ -1,10 +1,10 @@
 package com.devskiller.jfairy.producer.company.locale.sk
 
-import spock.lang.Specification
-import spock.lang.Unroll
-
 import com.devskiller.jfairy.producer.BaseProducer
 import com.devskiller.jfairy.producer.RandomGenerator
+
+import spock.lang.Specification
+import spock.lang.Unroll
 
 class SkVATIdentificationNumberProviderSpec extends Specification {
 

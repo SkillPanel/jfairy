@@ -1,11 +1,11 @@
 package com.devskiller.jfairy.producer.person.locale.ka
 
-import spock.lang.Specification
+import static java.lang.System.lineSeparator
 
 import com.devskiller.jfairy.Fairy
 import com.devskiller.jfairy.producer.person.Address
 
-import static java.lang.System.lineSeparator
+import spock.lang.Specification
 
 class KaAddressSpec extends Specification {
     private final int SEED = 8

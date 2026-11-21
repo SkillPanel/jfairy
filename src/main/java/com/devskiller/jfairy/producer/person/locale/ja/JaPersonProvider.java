@@ -1,7 +1,5 @@
 package com.devskiller.jfairy.producer.person.locale.ja;
 
-import java.util.Locale;
-
 import com.devskiller.jfairy.data.DataMaster;
 import com.devskiller.jfairy.producer.BaseProducer;
 import com.devskiller.jfairy.producer.DateProducer;
@@ -13,6 +11,8 @@ import com.devskiller.jfairy.producer.person.NationalIdentificationNumberFactory
 import com.devskiller.jfairy.producer.person.NationalIdentityCardNumberProvider;
 import com.devskiller.jfairy.producer.person.PassportNumberProvider;
 import com.devskiller.jfairy.producer.person.PersonProperties;
+
+import java.util.Locale;
 
 /**
  * Japanese person provider. The default {@code generateEmail()}/{@code generateUsername()}/
