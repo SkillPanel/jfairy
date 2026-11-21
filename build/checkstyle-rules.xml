@@ -215,7 +215,7 @@
             <property name="allowEmptyTypes" value="true"/>
         </module>
 
-        <module name="SuppressionCommentFilter"/>
+        <module name="SuppressWithNearbyCommentFilter"/>
     </module>
 
 </module>
