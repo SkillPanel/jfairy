@@ -1,7 +1,8 @@
 package com.devskiller.jfairy.producer.person.locale.br
 
-import com.devskiller.jfairy.Fairy
 import spock.lang.Specification
+
+import com.devskiller.jfairy.Fairy
 
 class BrNationalIdentityCardNumberProviderSpec extends Specification {
 

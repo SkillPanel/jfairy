@@ -1,8 +1,9 @@
 package com.devskiller.jfairy.producer.person.locale.tr
 
+import spock.lang.Specification
+
 import com.devskiller.jfairy.producer.BaseProducer
 import com.devskiller.jfairy.producer.RandomGenerator
-import spock.lang.Specification
 
 class TrNationalIdentityCardNumberProviderSpec extends Specification {
 

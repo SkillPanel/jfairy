@@ -27,15 +27,15 @@ import static com.devskiller.jfairy.producer.person.PersonProperties.withCompany
 import static com.devskiller.jfairy.producer.person.PersonProperties.withDateOfBirth
 import static com.devskiller.jfairy.producer.person.PersonProperties.withEmail
 import static com.devskiller.jfairy.producer.person.PersonProperties.withFirstName
+import static com.devskiller.jfairy.producer.person.PersonProperties.withJobTitle
 import static com.devskiller.jfairy.producer.person.PersonProperties.withLastName
 import static com.devskiller.jfairy.producer.person.PersonProperties.withMiddleName
+import static com.devskiller.jfairy.producer.person.PersonProperties.withMobileTelephoneNumber
 import static com.devskiller.jfairy.producer.person.PersonProperties.withNationalIdentificationNumber
 import static com.devskiller.jfairy.producer.person.PersonProperties.withNationalIdentityCardNumber
-import static com.devskiller.jfairy.producer.person.PersonProperties.withJobTitle
 import static com.devskiller.jfairy.producer.person.PersonProperties.withPassportNumber
 import static com.devskiller.jfairy.producer.person.PersonProperties.withPassword
 import static com.devskiller.jfairy.producer.person.PersonProperties.withTelephoneNumber
-import static com.devskiller.jfairy.producer.person.PersonProperties.withMobileTelephoneNumber
 import static com.devskiller.jfairy.producer.person.PersonProperties.withUsername
 
 class PersonSpec extends Specification {
