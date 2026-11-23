@@ -11,7 +11,7 @@
  *   map of lists  key.subKey=a,b,c
  * A list element may carry a weight, value*weight, which is copied unchanged.
  * Anything else fails the build, naming the file and key. Keys are sorted and no timestamp is written,
- * so the output is reproducible.
+ * and lines always end in LF, so the output is reproducible across platforms.
  */
 
 import java.nio.charset.StandardCharsets
@@ -144,5 +144,7 @@ for (Path yamlFile : yamlFiles) {
 
     Map<String, String> flat = flatten(file, document as Map)
     Path out = target.resolve(file.replaceFirst(/\.yml$/, '.properties'))
-    Files.write(out, flat.collect { key, value -> propertyLine(key, value) }, StandardCharsets.UTF_8)
+    // always LF, Files.write(Path, Iterable) would use the platform line separator (CRLF on Windows)
+    Files.writeString(out, flat.collect { key, value -> propertyLine(key, value) + '\n' }.join(''), StandardCharsets.UTF_8)
 }
+
