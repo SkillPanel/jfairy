@@ -16,7 +16,7 @@ permissions:
   contents: read
 
 jobs:
-  build:
+  verify:
     strategy:
       fail-fast: false
       matrix:
@@ -34,3 +34,14 @@ jobs:
         # bash on Windows too, so ./mvnw works on both runners
         shell: bash
         run: ./mvnw --batch-mode verify
+
+  # single check named "build" for branch protection, independent of the matrix;
+  # always() so that a failed matrix job fails this one instead of skipping it,
+  # since a skipped required check would count as passed
+  build:
+    needs: verify
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check matrix result
+        run: test "${{ needs.verify.result }}" = success
