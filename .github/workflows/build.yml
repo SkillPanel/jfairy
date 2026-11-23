@@ -17,7 +17,11 @@ permissions:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest, windows-latest ]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v7
       - name: Set up JDK 17
@@ -27,4 +31,6 @@ jobs:
           distribution: 'temurin'
           cache: maven
       - name: Build and test
+        # bash on Windows too, so ./mvnw works on both runners
+        shell: bash
         run: ./mvnw --batch-mode verify
