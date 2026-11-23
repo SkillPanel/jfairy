@@ -1,0 +1,6 @@
+# LF everywhere, also on Windows checkouts with core.autocrlf=true,
+# as Checkstyle rejects CRLF line endings
+* text=auto eol=lf
+
+# committed with CRLF, keep it untouched
+*.cmd -text
