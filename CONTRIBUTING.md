@@ -2,7 +2,7 @@
 
 We welcome contributions! Here's how to get started.
 
-## Getting Started
+## <picture><source media="(prefers-color-scheme: dark)" srcset=".github/icons/rocket-dark.svg"><img src=".github/icons/rocket.svg" height="20" alt=""></picture> Getting Started
 
 1. Fork the repository
 2. Clone your fork: `git clone https://github.com/YOUR_USERNAME/jfairy.git`
@@ -11,12 +11,12 @@ We welcome contributions! Here's how to get started.
 5. Run tests: `./mvnw test`
 6. Push and open a Pull Request
 
-## Requirements
+## <picture><source media="(prefers-color-scheme: dark)" srcset=".github/icons/stack-2-dark.svg"><img src=".github/icons/stack-2.svg" height="20" alt=""></picture> Requirements
 
 - Java 17+
 - Maven 4 (included via `./mvnw` wrapper)
 
-## Adding a New Locale
+## <picture><source media="(prefers-color-scheme: dark)" srcset=".github/icons/world-dark.svg"><img src=".github/icons/world.svg" height="20" alt=""></picture> Adding a New Locale
 
 1. Create `src/main/resources/jfairy_XX.yml` with names, cities, streets, etc.
 2. Add provider classes in `src/main/java/.../producer/person/locale/xx/`
@@ -30,7 +30,7 @@ We welcome contributions! Here's how to get started.
 
 See existing locales (e.g., `br`, `sk`) for reference.
 
-## Guidelines
+## <picture><source media="(prefers-color-scheme: dark)" srcset=".github/icons/list-check-dark.svg"><img src=".github/icons/list-check.svg" height="20" alt=""></picture> Guidelines
 
 - Follow existing code style
 - Write tests for new functionality
@@ -38,7 +38,7 @@ See existing locales (e.g., `br`, `sk`) for reference.
 - Keep commits focused — one logical change per commit
 - Use [Conventional Commits](https://www.conventionalcommits.org/) format
 
-## Running Tests
+## <picture><source media="(prefers-color-scheme: dark)" srcset=".github/icons/flask-dark.svg"><img src=".github/icons/flask.svg" height="20" alt=""></picture> Running Tests
 
 ```bash
 ./mvnw test
