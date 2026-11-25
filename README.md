@@ -10,7 +10,7 @@ Java fake data generator. According to Wikipedia:
 
 > Fairyland, in folklore, is the fabulous land or abode of fairies or fays.
 
-## Installation
+## <picture><source media="(prefers-color-scheme: dark)" srcset=".github/icons/package-dark.svg"><img src=".github/icons/package.svg" height="20" alt=""></picture> Installation
 
 Add the following dependency to your `pom.xml`:
 
@@ -22,7 +22,7 @@ Add the following dependency to your `pom.xml`:
 </dependency>
 ```
 
-## Usage
+## <picture><source media="(prefers-color-scheme: dark)" srcset=".github/icons/code-dark.svg"><img src=".github/icons/code.svg" height="20" alt=""></picture> Usage
 
 ### Creating simple objects
 
@@ -59,23 +59,23 @@ String name = employee.getFullName();             // Blanka Hohn
 String companyEmail = employee.getCompanyEmail(); // blanka.hohn@kaplooiesprengtechnik.net
 ```
 
-## Supported locales
+## <picture><source media="(prefers-color-scheme: dark)" srcset=".github/icons/world-dark.svg"><img src=".github/icons/world.svg" height="20" alt=""></picture> Supported locales
 
-| Locale               | Language tag |
-|:---------------------|:------------:|
-| English (default)    |     `en`     |
-| Polish               |     `pl`     |
-| German               |     `de`     |
-| French               |     `fr`     |
-| Spanish              |     `es`     |
-| Swedish              |     `sv`     |
-| Chinese              |     `zh`     |
-| Georgian             |     `ka`     |
-| Italian              |     `it`     |
-| Brazilian Portuguese |     `pt`     |
-| Slovak               |     `sk`     |
-| Turkish              |     `tr`     |
-| Japanese             |     `ja`     |
+| Locale                                                                                      | Language tag |
+|:--------------------------------------------------------------------------------------------|:------------:|
+| <picture><img src=".github/flags/us.svg" height="12" alt=""></picture> English (default)    |     `en`     |
+| <picture><img src=".github/flags/pl.svg" height="12" alt=""></picture> Polish               |     `pl`     |
+| <picture><img src=".github/flags/de.svg" height="12" alt=""></picture> German               |     `de`     |
+| <picture><img src=".github/flags/fr.svg" height="12" alt=""></picture> French               |     `fr`     |
+| <picture><img src=".github/flags/es.svg" height="12" alt=""></picture> Spanish              |     `es`     |
+| <picture><img src=".github/flags/se.svg" height="12" alt=""></picture> Swedish              |     `sv`     |
+| <picture><img src=".github/flags/cn.svg" height="12" alt=""></picture> Chinese              |     `zh`     |
+| <picture><img src=".github/flags/ge.svg" height="12" alt=""></picture> Georgian             |     `ka`     |
+| <picture><img src=".github/flags/it.svg" height="12" alt=""></picture> Italian              |     `it`     |
+| <picture><img src=".github/flags/br.svg" height="12" alt=""></picture> Brazilian Portuguese |     `pt`     |
+| <picture><img src=".github/flags/sk.svg" height="12" alt=""></picture> Slovak               |     `sk`     |
+| <picture><img src=".github/flags/tr.svg" height="12" alt=""></picture> Turkish              |     `tr`     |
+| <picture><img src=".github/flags/jp.svg" height="12" alt=""></picture> Japanese             |     `ja`     |
 
 ```java
 Fairy enFairy = Fairy.create();
@@ -89,7 +89,7 @@ Fairy brFairy = Fairy.create(Locale.forLanguageTag("pt-BR"));
 Locales are matched by language only, so `de-AT` gets the German data and any Portuguese locale the
 Brazilian data. The former tag `br` (actually the code for Breton) is deprecated and logs a warning.
 
-## Custom data
+## <picture><source media="(prefers-color-scheme: dark)" srcset=".github/icons/file-settings-dark.svg"><img src=".github/icons/file-settings.svg" height="20" alt=""></picture> Custom data
 
 The bundled data is maintained as YAML in the repository and ships in the jar as `.properties` files
 (`jfairy.properties` plus `jfairy_<language>.properties`). To add or replace data, put a file with the same name
@@ -114,7 +114,7 @@ With `Fairy.builder().withFilePrefix("mydata")` jFairy reads `mydata.properties`
 
 > **Upgrading from 0.9.x:** custom `.yml` data files are no longer read. Convert them to `.properties` as shown above.
 
-## Unique values
+## <picture><source media="(prefers-color-scheme: dark)" srcset=".github/icons/fingerprint-dark.svg"><img src=".github/icons/fingerprint.svg" height="20" alt=""></picture> Unique values
 
 ```java
 UniqueFairy unique = fairy.unique();
@@ -130,7 +130,7 @@ UniqueEnforcer<Person> unique = UniqueEnforcer.of(fairy::person, Person::getFull
 Person p = unique.next();
 ```
 
-## Invalid identifiers
+## <picture><source media="(prefers-color-scheme: dark)" srcset=".github/icons/id-dark.svg"><img src=".github/icons/id.svg" height="20" alt=""></picture> Invalid identifiers
 
 For negative tests of your validators, `fairy.invalid()` generates identifiers that keep a valid
 format but fail checksum validation:
@@ -168,14 +168,14 @@ Invalid national identification and VAT numbers are implemented for the Italian,
 and Swedish locales; other locales throw `UnsupportedOperationException`. IBANs work for every
 country that has them.
 
-## Thread safety
+## <picture><source media="(prefers-color-scheme: dark)" srcset=".github/icons/lock-dark.svg"><img src=".github/icons/lock.svg" height="20" alt=""></picture> Thread safety
 
 `Fairy` objects are not designed for concurrent use by multiple threads.
 It is recommended to create a separate `Fairy` instance for each thread.
 
 While some methods might appear safe, the underlying `Random` implementation can lead to contention and poor performance. Creating dedicated instances ensures both thread safety and optimal execution speed.
 
-## Building
+## <picture><source media="(prefers-color-scheme: dark)" srcset=".github/icons/hammer-dark.svg"><img src=".github/icons/hammer.svg" height="20" alt=""></picture> Building
 
 This project uses Maven and can be built using the provided wrapper:
 
